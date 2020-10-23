@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">BEECINEMA</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/mdb.min.css}">
+</head>
+<body class="fixed-sn white-skin">
+<!-- Main Navigation -->
+<header>
+
+    <!-- Sidebar navigation -->
+    <div id="slide-out" class="side-nav sn-bg-4 fixed">
+        <ul class="custom-scrollbar">
+
+            <!-- Logo -->
+            <li class="logo-sn waves-effect py-3">
+                <div class="text-center">
+                    <a href="#" class="pl-0"><img th:src="@{/img/logo80x160noBG.png}"></a>
+                </div>
+            </li>
+
+            <!-- Search Form -->
+
+            <!-- Side navigation links -->
+            <li>
+                <ul class="collapsible collapsible-accordion">
+
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-tachometer-alt"></i>Dashboards<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="../dashboards/v-1.html" class="waves-effect">Version 1</a>
+                                </li>
+                                <li>
+                                    <a href="../dashboards/v-2.html" class="waves-effect">Version 2</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>User<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/user/show-use}" class="waves-effect">Danh sách User</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/user/add-user}"class="waves-effect">Thêm User</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/user/update-user}" class="waves-effect">Cập nhật User</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-film"></i>Movie<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/movie/show-movie}" class="waves-effect">Danh sách Movie</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/movie/add-movie}" class="waves-effect">Thêm Movie</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/movie/update-movie}" class="waves-effect">Cập nhật Movie</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Movie Type<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/movie-type/show-movie-type}" class="waves-effect">Danh sách Movie Type</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/movie-type/add-movie-type}" class="waves-effect">Thêm Movie Type</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/movie-type/update-movie-type}" class="waves-effect">Cập nhật Movie Type</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-globe"></i>Nation<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/nation/show-nation}" class="waves-effect">Danh sách Nation</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/nation/add-nation}" class="waves-effect">Thêm Nation</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/nation/update-nation}" class="waves-effect">Cập nhật Nation</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-comment"></i>Comment<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/comment/show-comment}" class="waves-effect">Danh sách Comment</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/comment/add-comment}" class="waves-effect">Thêm Comment</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/comment/update-comment}" class="waves-effect">Cập nhật Comment</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Age<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/age/show-age}" class="waves-effect">Danh sách Age</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/age/add-age}" class="waves-effect">Thêm Age</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/age/update-age}" class="waves-effect">Cập nhật Age</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-user"></i>Profile<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/profile/update-profile}" class="waves-effect">Cập nhật tài khoản</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Event<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/event/show-event}" class="waves-effect">Danh sách Event</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/event/add-event}" class="waves-effect">Thêm Event</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/event/update-event}" class="waves-effect">Cập nhật Event</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Permission<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/permission/show-permission}" class="waves-effect">Danh sách Permission</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/permissiont/add-permission}" class="waves-effect">Thêm Permission</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/permission/update-permission}" class="waves-effect">Cập nhật Permission</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Room<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/room/show-room}" class="waves-effect">Danh sách Room</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/room/add-room}" class="waves-effect">Thêm Room</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/room/update-room}" class="waves-effect">Cập nhật Room</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Screenings<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/screenings/show-screenings}" class="waves-effect">Danh sách Screenings</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/screenings/add-screenings}" class="waves-effect">Thêm Screenings</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/screenings/update-screenings}" class="waves-effect">Cập nhật Screenings</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Showtime<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/showtime/update-showtime}" class="waves-effect">Danh sách Showtime</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/showtime/update-showtime}" class="waves-effect">Thêm Showtime</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/showtime/update-showtime}" class="waves-effect">Cập nhật Showtime</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Seat<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/seat/show-seat}" class="waves-effect">Danh sách Seat</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/seat/add-seat}" class="waves-effect">Thêm Seat</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/seat/update-seat}" class="waves-effect">Cập nhật Seat</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Row Seat<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/row-seat/show-row-seat}" class="waves-effect">Danh sách Row Seat</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/row-seat/add-row-seat}" class="waves-effect">Thêm Row Seat</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/row-seat/update-row-seat}" class="waves-effect">Cập nhật Row Seat</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-image"></i>Seat Type<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a th:href="@{/admin/seat-type/show-seat-type}" class="waves-effect">Danh sách Seat Type</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/seat-type/add-seat-type}" class="waves-effect">Thêm Seat Type</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/admin/seat-type/update-seat-type}" class="waves-effect">Cập nhật Seat Type</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+
+
+
+                </ul>
+            </li>
+            <!-- Side navigation links -->
+
+        </ul>
+        <div class="sidenav-bg mask-strong"></div>
+    </div>
+    <!-- Sidebar navigation -->
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
+
+        <!-- SideNav slide-out button -->
+        <div class="float-left">
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-dn mr-auto">
+            <p class="font-weight-bold">Tài Khoản</p>
+        </div>
+
+        <!-- Navbar links -->
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Tài Khoản</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#">Log Out</a>
+                    <a class="dropdown-item" href="../profile/update-profile.html">My account</a>
+                </div>
+            </li>
+
+        </ul>
+        <!-- Navbar links -->
+
+    </nav>
+    <!-- Navbar -->
+
+</header>
+<!-- Main Navigation -->
+
+<section layout:fragment="content" style="min-height: 90vh;">
+    <p>This is filled by the content template.</p>
+</section>
+
+<footer class="page-footer pt-0 mt-5">
+
+    <!-- Copyright -->
+    <div class="footer-copyright py-3 text-center">
+        <div class="container-fluid">
+            © 2020 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> BeeCinema.com </a>
+
+        </div>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+
+<th:block layout:fragment="optional" />
+
+<!-- JQuery -->
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
+<!-- Custom scripts -->
+<script>
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
+
+    var container = document.querySelector('.custom-scrollbar');
+    var ps = new PerfectScrollbar(container, {
+        wheelSpeed: 2,
+        wheelPropagation: true,
+        minScrollbarLength: 20
+    });
+
+    // Material Select Initialization
+    $(document).ready(function () {
+        $('.mdb-select').materialSelect();
+    });
+
+</script>
+</body>
+</html>

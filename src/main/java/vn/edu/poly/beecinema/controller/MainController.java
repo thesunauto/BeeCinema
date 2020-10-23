@@ -14,7 +14,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String userHomePage(Model model) {
-        return "client/UserHomePage";
+        return "admin/layout";
     }
 
     @RequestMapping("/login")
