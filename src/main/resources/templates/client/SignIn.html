@@ -25,23 +25,23 @@
             <div class="card-body px-5">
 
               <!-- Login form -->
-              <form>
+              <form th:action="@{/login}" method="post">
                 <p class="h5 text-center mb-4">Sign in</p>
 
                 <div class="md-form">
-                  <i class="fas fa-envelope prefix"></i>
-                  <input type="text" id="defaultForm-email" class="form-control">
-                  <label for="defaultForm-email">Your email</label>
+                  <i class="fas fa-user prefix"></i>
+                  <input type="text" id="defaultForm-email" class="form-control" name="username">
+                  <label for="defaultForm-email">Your username</label>
                 </div>
 
                 <div class="md-form">
                   <i class="fas fa-lock prefix"></i>
-                  <input type="password" id="defaultForm-pass" class="form-control">
+                  <input type="password" id="defaultForm-pass" class="form-control" name="password">
                   <label for="defaultForm-pass">Your password</label>
                 </div>
 
                 <div class="text-center mt-4">
-                  <button class="btn btn-default">Login</button>
+                  <button type="submit" class="btn btn-default">Login</button>
                 </div>
               </form>
               <!-- Login form -->
