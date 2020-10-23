@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{employee/layout}">
+
+<head>
+
+  <title>Đặt vé</title>
+
+</head>
+
+<body>
+
+
+ <main layout:fragment="content">
+   <!-- Mega menu -->
+   <div class="container">
+
+     <!-- Navbar -->
+     <nav class="navbar navbar-expand-lg navbar-dark primary-color mt-5">
+
+       <!-- Navbar brand -->
+       <a class="font-weight-bold white-text mr-4" href="#">Chức năng</a>
+
+       <!-- Collapse button -->
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+               aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span
+               class="navbar-toggler-icon"></span></button>
+
+       <!-- Collapsible content -->
+       <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+         <!-- Links -->
+         <ul class="navbar-nav mr-auto">
+
+           <li class="nav-item active">
+
+             <a class="nav-link">Bán vé</a>
+
+           </li>
+
+           <li class="nav-item ">
+
+             <a class="nav-link no-caret">Xuất vé online</a>
+
+           </li>
+
+         </ul>
+         <!-- Links -->
+
+         <!-- Search form -->
+         <form class="search-form" role="search">
+
+           <div class="form-group md-form my-0 waves-light">
+
+             <input type="text" class="form-control" placeholder="Search">
+
+           </div>
+
+         </form>
+
+       </div>
+       <!-- Collapsible content -->
+
+     </nav>
+     <!-- Navbar -->
+     <div class="row pt-4">
+
+       <!-- Content -->
+       <div class="col-lg-12">
+
+         <!-- Products Grid -->
+         <section class="section pt-4 mb-4">
+
+
+           <!-- Section small products -->
+           <section>
+
+             <!-- Grid row -->
+             <div class="row">
+
+               <!-- Grid column -->
+               <div class="col-md-12">
+
+                 <!-- Grid row -->
+                 <div class="row">
+
+                   <!-- Grid column -->
+                   <div class="col-lg-6 col-md-6 mb-4">
+
+                     <!-- Card -->
+                     <div class="card card-ecommerce">
+
+                       <!-- Grid row -->
+                       <div class="row">
+
+                         <!-- Grid column -->
+                         <div class="col-6 d-flex align-items-center">
+
+                           <!-- Card image -->
+                           <div class="view overlay zoom">
+
+                             <img th:src="@{/img/images/poster_rom_osxp.jpg}" class="img-fluid" alt="">
+
+                             <a>
+
+                               <div class="mask rgba-white-slight"></div>
+
+                             </a>
+
+                           </div>
+
+                           <!-- Card image -->
+                         </div>
+
+                         <!-- Grid column -->
+                         <div class="col-6 pl-0">
+
+                           <!-- Card content -->
+                           <div class="card-body">
+
+                             <!-- Category & Title -->
+                             <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">RÒM</a></strong>
+                             </h5>
+
+                             <span class="badge badge-danger mb-2">Thể loại: Hành động</span><br>
+                             <hr>
+
+                             <!-- Rating -->
+                             <span><strong>Thời lượng phim:</strong> 1h19 phút</span>
+                             <span><strong>Director:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Writer:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Cốt truyện:</strong> Movie story revolves around the life, fate of street
+                              children, homeless, specializing in selling lottery results every afternoon.</span>
+                             <hr>
+                             <!-- Card footer -->
+                             <button class="btn btn-danger btn-rounded btn-sm float-right mb-3 waves-effect"> đặt
+                               vé</button>
+
+                           </div>
+                           <!-- Card content -->
+
+                         </div>
+
+                       </div>
+
+                     </div>
+                     <!-- Card -->
+
+                   </div>
+                   <!-- Grid column -->
+                   <!-- Grid column -->
+                   <div class="col-lg-6 col-md-6 mb-4">
+
+                     <!-- Card -->
+                     <div class="card card-ecommerce">
+
+                       <!-- Grid row -->
+                       <div class="row">
+
+                         <!-- Grid column -->
+                         <div class="col-6 d-flex align-items-center">
+
+                           <!-- Card image -->
+                           <div class="view overlay zoom">
+
+                             <img th:src="@{/img/images/poster_rom_osxp.jpg}" class="img-fluid" alt="">
+
+                             <a>
+
+                               <div class="mask rgba-white-slight"></div>
+
+                             </a>
+
+                           </div>
+
+                           <!-- Card image -->
+                         </div>
+
+                         <!-- Grid column -->
+                         <div class="col-6 pl-0">
+
+                           <!-- Card content -->
+                           <div class="card-body">
+
+                             <!-- Category & Title -->
+                             <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">RÒM</a></strong>
+                             </h5>
+
+                             <span class="badge badge-danger mb-2">Thể loại: Hành động</span><br>
+                             <hr>
+
+                             <!-- Rating -->
+                             <span><strong>Thời lượng phim:</strong> 1h19 phút</span>
+                             <span><strong>Director:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Writer:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Cốt truyện:</strong> Movie story revolves around the life, fate of street
+                              children, homeless, specializing in selling lottery results every afternoon.</span>
+                             <hr>
+                             <!-- Card footer -->
+                             <button class="btn btn-danger btn-rounded btn-sm float-right mb-3 waves-effect"> đặt
+                               vé</button>
+
+                           </div>
+                           <!-- Card content -->
+
+                         </div>
+
+                       </div>
+
+                     </div>
+                     <!-- Card -->
+
+                   </div>
+                   <!-- Grid column -->
+
+
+                 </div>
+                 <!-- Grid row -->
+                 <!-- Grid row -->
+                 <div class="row">
+
+                   <!-- Grid column -->
+                   <div class="col-lg-6 col-md-6 mb-4">
+
+                     <!-- Card -->
+                     <div class="card card-ecommerce">
+
+                       <!-- Grid row -->
+                       <div class="row">
+
+                         <!-- Grid column -->
+                         <div class="col-6 d-flex align-items-center">
+
+                           <!-- Card image -->
+                           <div class="view overlay zoom">
+
+                             <img th:src="@{/img/images/poster_rom_osxp.jpg}" class="img-fluid" alt="">
+
+                             <a>
+
+                               <div class="mask rgba-white-slight"></div>
+
+                             </a>
+
+                           </div>
+
+                           <!-- Card image -->
+                         </div>
+
+                         <!-- Grid column -->
+                         <div class="col-6 pl-0">
+
+                           <!-- Card content -->
+                           <div class="card-body">
+
+                             <!-- Category & Title -->
+                             <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">RÒM</a></strong>
+                             </h5>
+
+                             <span class="badge badge-danger mb-2">Thể loại: Hành động</span><br>
+                             <hr>
+
+                             <!-- Rating -->
+                             <span><strong>Thời lượng phim:</strong> 1h19 phút</span>
+                             <span><strong>Director:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Writer:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Cốt truyện:</strong> Movie story revolves around the life, fate of street
+                              children, homeless, specializing in selling lottery results every afternoon.</span>
+                             <hr>
+                             <!-- Card footer -->
+                             <button class="btn btn-danger btn-rounded btn-sm float-right mb-3 waves-effect"> đặt
+                               vé</button>
+
+                           </div>
+                           <!-- Card content -->
+
+                         </div>
+
+                       </div>
+
+                     </div>
+                     <!-- Card -->
+
+                   </div>
+                   <!-- Grid column -->
+                   <!-- Grid column -->
+                   <div class="col-lg-6 col-md-6 mb-4">
+
+                     <!-- Card -->
+                     <div class="card card-ecommerce">
+
+                       <!-- Grid row -->
+                       <div class="row">
+
+                         <!-- Grid column -->
+                         <div class="col-6 d-flex align-items-center">
+
+                           <!-- Card image -->
+                           <div class="view overlay zoom">
+
+                             <img th:src="@{/img/images/poster_rom_osxp.jpg}" class="img-fluid" alt="">
+
+                             <a>
+
+                               <div class="mask rgba-white-slight"></div>
+
+                             </a>
+
+                           </div>
+
+                           <!-- Card image -->
+                         </div>
+
+                         <!-- Grid column -->
+                         <div class="col-6 pl-0">
+
+                           <!-- Card content -->
+                           <div class="card-body">
+
+                             <!-- Category & Title -->
+                             <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">RÒM</a></strong>
+                             </h5>
+
+                             <span class="badge badge-danger mb-2">Thể loại: Hành động</span><br>
+                             <hr>
+
+                             <!-- Rating -->
+                             <span><strong>Thời lượng phim:</strong> 1h19 phút</span>
+                             <span><strong>Director:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Writer:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Cốt truyện:</strong> Movie story revolves around the life, fate of street
+                              children, homeless, specializing in selling lottery results every afternoon.</span>
+                             <hr>
+                             <!-- Card footer -->
+                             <button class="btn btn-danger btn-rounded btn-sm float-right mb-3 waves-effect"> đặt
+                               vé</button>
+
+                           </div>
+                           <!-- Card content -->
+
+                         </div>
+
+                       </div>
+
+                     </div>
+                     <!-- Card -->
+
+                   </div>
+                   <!-- Grid column -->
+
+
+                 </div>
+                 <!-- Grid row -->
+                 <!-- Grid row -->
+                 <div class="row">
+
+                   <!-- Grid column -->
+                   <div class="col-lg-6 col-md-6 mb-4">
+
+                     <!-- Card -->
+                     <div class="card card-ecommerce">
+
+                       <!-- Grid row -->
+                       <div class="row">
+
+                         <!-- Grid column -->
+                         <div class="col-6 d-flex align-items-center">
+
+                           <!-- Card image -->
+                           <div class="view overlay zoom">
+
+                             <img th:src="@{/img/images/poster_rom_osxp.jpg}" class="img-fluid" alt="">
+
+                             <a>
+
+                               <div class="mask rgba-white-slight"></div>
+
+                             </a>
+
+                           </div>
+
+                           <!-- Card image -->
+                         </div>
+
+                         <!-- Grid column -->
+                         <div class="col-6 pl-0">
+
+                           <!-- Card content -->
+                           <div class="card-body">
+
+                             <!-- Category & Title -->
+                             <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">RÒM</a></strong>
+                             </h5>
+
+                             <span class="badge badge-danger mb-2">Thể loại: Hành động</span><br>
+                             <hr>
+
+                             <!-- Rating -->
+                             <span><strong>Thời lượng phim:</strong> 1h19 phút</span>
+                             <span><strong>Director:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Writer:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Cốt truyện:</strong> Movie story revolves around the life, fate of street
+                              children, homeless, specializing in selling lottery results every afternoon.</span>
+                             <hr>
+                             <!-- Card footer -->
+                             <button class="btn btn-danger btn-rounded btn-sm float-right mb-3 waves-effect"> đặt
+                               vé</button>
+
+                           </div>
+                           <!-- Card content -->
+
+                         </div>
+
+                       </div>
+
+                     </div>
+                     <!-- Card -->
+
+                   </div>
+                   <!-- Grid column -->
+                   <!-- Grid column -->
+                   <div class="col-lg-6 col-md-6 mb-4">
+
+                     <!-- Card -->
+                     <div class="card card-ecommerce">
+
+                       <!-- Grid row -->
+                       <div class="row">
+
+                         <!-- Grid column -->
+                         <div class="col-6 d-flex align-items-center">
+
+                           <!-- Card image -->
+                           <div class="view overlay zoom">
+
+                             <img th:src="@{/img/images/poster_rom_osxp.jpg}" class="img-fluid" alt="">
+
+                             <a>
+
+                               <div class="mask rgba-white-slight"></div>
+
+                             </a>
+
+                           </div>
+
+                           <!-- Card image -->
+                         </div>
+
+                         <!-- Grid column -->
+                         <div class="col-6 pl-0">
+
+                           <!-- Card content -->
+                           <div class="card-body">
+
+                             <!-- Category & Title -->
+                             <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">RÒM</a></strong>
+                             </h5>
+
+                             <span class="badge badge-danger mb-2">Thể loại: Hành động</span><br>
+                             <hr>
+
+                             <!-- Rating -->
+                             <span><strong>Thời lượng phim:</strong> 1h19 phút</span>
+                             <span><strong>Director:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Writer:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Cốt truyện:</strong> Movie story revolves around the life, fate of street
+                              children, homeless, specializing in selling lottery results every afternoon.</span>
+                             <hr>
+                             <!-- Card footer -->
+                             <button class="btn btn-danger btn-rounded btn-sm float-right mb-3 waves-effect"> đặt
+                               vé</button>
+
+                           </div>
+                           <!-- Card content -->
+
+                         </div>
+
+                       </div>
+
+                     </div>
+                     <!-- Card -->
+
+                   </div>
+                   <!-- Grid column -->
+
+
+                 </div>
+                 <!-- Grid row -->
+                 <!-- Grid row -->
+                 <div class="row">
+
+                   <!-- Grid column -->
+                   <div class="col-lg-6 col-md-6 mb-4">
+
+                     <!-- Card -->
+                     <div class="card card-ecommerce">
+
+                       <!-- Grid row -->
+                       <div class="row">
+
+                         <!-- Grid column -->
+                         <div class="col-6 d-flex align-items-center">
+
+                           <!-- Card image -->
+                           <div class="view overlay zoom">
+
+                             <img th:src="@{/img/images/poster_rom_osxp.jpg}" class="img-fluid" alt="">
+
+                             <a>
+
+                               <div class="mask rgba-white-slight"></div>
+
+                             </a>
+
+                           </div>
+
+                           <!-- Card image -->
+                         </div>
+
+                         <!-- Grid column -->
+                         <div class="col-6 pl-0">
+
+                           <!-- Card content -->
+                           <div class="card-body">
+
+                             <!-- Category & Title -->
+                             <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">RÒM</a></strong>
+                             </h5>
+
+                             <span class="badge badge-danger mb-2">Thể loại: Hành động</span><br>
+                             <hr>
+
+                             <!-- Rating -->
+                             <span><strong>Thời lượng phim:</strong> 1h19 phút</span>
+                             <span><strong>Director:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Writer:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Cốt truyện:</strong> Movie story revolves around the life, fate of street
+                              children, homeless, specializing in selling lottery results every afternoon.</span>
+                             <hr>
+                             <!-- Card footer -->
+                             <button class="btn btn-danger btn-rounded btn-sm float-right mb-3 waves-effect"> đặt
+                               vé</button>
+
+                           </div>
+                           <!-- Card content -->
+
+                         </div>
+
+                       </div>
+
+                     </div>
+                     <!-- Card -->
+
+                   </div>
+                   <!-- Grid column -->
+                   <!-- Grid column -->
+                   <div class="col-lg-6 col-md-6 mb-4">
+
+                     <!-- Card -->
+                     <div class="card card-ecommerce">
+
+                       <!-- Grid row -->
+                       <div class="row">
+
+                         <!-- Grid column -->
+                         <div class="col-6 d-flex align-items-center">
+
+                           <!-- Card image -->
+                           <div class="view overlay zoom">
+
+                             <img th:src="@{/img/images/poster_rom_osxp.jpg}" class="img-fluid" alt="">
+
+                             <a>
+
+                               <div class="mask rgba-white-slight"></div>
+
+                             </a>
+
+                           </div>
+
+                           <!-- Card image -->
+                         </div>
+
+                         <!-- Grid column -->
+                         <div class="col-6 pl-0">
+
+                           <!-- Card content -->
+                           <div class="card-body">
+
+                             <!-- Category & Title -->
+                             <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">RÒM</a></strong>
+                             </h5>
+
+                             <span class="badge badge-danger mb-2">Thể loại: Hành động</span><br>
+                             <hr>
+
+                             <!-- Rating -->
+                             <span><strong>Thời lượng phim:</strong> 1h19 phút</span>
+                             <span><strong>Director:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Writer:</strong> Tran Thanh Huy</span><br>
+                             <span><strong>Cốt truyện:</strong> Movie story revolves around the life, fate of street
+                              children, homeless, specializing in selling lottery results every afternoon.</span>
+                             <hr>
+                             <!-- Card footer -->
+                             <button class="btn btn-danger btn-rounded btn-sm float-right mb-3 waves-effect"> đặt
+                               vé</button>
+
+                           </div>
+                           <!-- Card content -->
+
+                         </div>
+
+                       </div>
+
+                     </div>
+                     <!-- Card -->
+
+                   </div>
+                   <!-- Grid column -->
+
+
+                 </div>
+                 <!-- Grid row -->
+
+               </div>
+               <!-- Grid column -->
+
+             </div>
+             <!-- Grid row -->
+
+           </section>
+
+
+
+         </section>
+         <!-- Products Grid -->
+
+       </div>
+       <!-- Content -->
+
+     </div>
+   </div>
+   <!-- Mega menu -->
+
+ </main>
+
+
+</body>
+
+</html>

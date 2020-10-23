@@ -1,246 +1,67 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{client/layout}">
 
 <head>
-  <!-- Required meta tags always come first -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <link rel="shortcut icon" href="../img/icon/favicon.ico" type="image/x-icon" />
-  <title>Bee Cinema</title>
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.11.2/css/all.css}">
-  <!-- Bootstrap core CSS -->
-  <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link th:href="@{/css/mdb.css}" rel="stylesheet">
-
-  <style>
-    html,
-    body,
-    header,
-    .view {
-      height: 100%;
-    }
-
-    /* @media (max-width: 740px) {
-
-      html,
-      body,
-      header,
-      .view {
-        height: 815px;
-      }
-    }
-
-    @media (min-width: 800px) and (max-width: 850px) {
-
-      html,
-      body,
-      header,
-      .view {
-        height: 650px;
-      }
-    } */
-
-   .intro-2 {
-      background: url("../img/images/bkg_cinema.png")no-repeat center center;
-      background-size: cover;
-    }
-
-    /* .top-nav-collapse {
-      background-color: #3f51b5 !important;
-    }
-
-    .navbar:not(.top-nav-collapse) {
-      background: transparent !important;
-    } */
-
-    /* @media (max-width: 768px) {
-      .navbar:not(.top-nav-collapse) {
-        background: #3f51b5 !important;
-      }
-    }
-
-    @media (min-width: 800px) and (max-width: 850px) {
-      .navbar:not(.top-nav-collapse) {
-        background: #3f51b5 !important;
-      }
-    } */
-
-    .card {
-      background-color: rgba(229, 228, 255, 0.2);
-    }
-
-    .md-form label {
-      color: #ffffff;
-    }
-
-    h6 {
-      line-height: 1.7;
-    }
-
-
-    .card {
-      margin-top: 30px;
-      /*margin-bottom: -45px;*/
-
-    }
-
-    .md-form input[type=text]:focus:not([readonly]),
-    .md-form input[type=password]:focus:not([readonly]) {
-      border-bottom: 1px solid #8EDEF8;
-      box-shadow: 0 1px 0 0 #8EDEF8;
-    }
-
-    .md-form input[type=text]:focus:not([readonly])+label,
-    .md-form input[type=password]:focus:not([readonly])+label {
-      color: #8EDEF8;
-    }
-
-    .md-form .form-control {
-      color: #fff;
-    }
-    #Search::placeholder {
-      color: #ff9800;
-      opacity: 0.5;
-    }
-
-  </style>
-
+  <title>Sign in</title>
 </head>
 
-<body>
+<body th:style="'background-image:url(' + @{/img/images/bkg.jpg} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
 
+<main layout:fragment="content">
+  <div class="container-fluid">
 
-  <!--Main Navigation-->
-  <header>
-    <nav class="p-0 px-5 m-0 navbar navbar-expand-lg navbar-dark rgba-yellow-slight" style="border-bottom: 1px solid rgb(122, 119, 119);">
-      <a class="navbar-brand" href="#">
-        <img src="../img/icon/logo80x160noBG.png" height="60" alt="mdb logo">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
-        aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse " id="navbarSupportedContent-555">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item px-1 dropdown">
-            <a class="nav-link dropdown-toggle font-weight-bolder amber-text h5 m-0" id="navbarDropdownMenuLink-555"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Movies
-            </a>
-            <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item px-1">
-            <a class="nav-link amber-text font-weight-bolder h5 m-0" href="#">Events</a>
-          </li>
-          <li class="nav-item px-1">
-            <a class="nav-link amber-text font-weight-bolder h5 m-0" href="#">About us</a>
-          </li>
-          <li class="nav-item px-1">
-            <a class="nav-link amber-text font-weight-bolder h5 m-0" href="#">FAQ</a>
-          </li>
-          <li class="nav-item px-1">
-            <a class="nav-link amber-text font-weight-bolder h5 m-0" href="#">
-              Contact
-            </a>
-          </li>
+    <!-- Section: Blog v.2 -->
+    <section class="text-center my-5 wow fadeIn rgba-black-strong white-text p-5 rounded" data-wow-delay="0.3s">
 
-        </ul>
-        <ul class="navbar-nav ml-auto nav-flex-icons">
-          <li class="nav-item px-3">
-            <div class="input-group md-form my-0 form-sm form-2 pl-0">
-              <input class="form-control my-0 py-1 orange-text" id="Search" type="text" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <span class="input-group-text amber lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
-                    aria-hidden="true"></i></span>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item px-1 avatar dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0"
-                alt="avatar image">
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
-              aria-labelledby="navbarDropdownMenuLink-55">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+      <!-- Grid row -->
+      <div class="row">
 
-    <!--Intro Section-->
-    <section class="view intro-2">
-      <div class="mask rgba-stylish-strong mb-0 h-100 d-flex justify-content-center align-items-center">
-        <div class="container">
-          <div class="row">
-            <div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-lg-5">
+        <div class="col-12">
+          <!--Card -->
+          <div class="card">
 
-              <!--Form with header-->
-              <div class="card wow fadeIn" data-wow-delay="0.3s">
-                <div class="card-body">
-                  <!--Header-->
-                  <div class="form-header peach-gradient">
-                    <h3><i class="fas fa-user mt-2 mb-2"></i> Log in:</h3>
-                  </div>
-                  <!--Body-->
-                  <div class="md-form">
-                    <i class="fas fa-user prefix white-text"></i>
-                    <input type="text" id="orangeForm-name" class="form-control">
-                    <label for="orangeForm-name">Username</label>
-                  </div>
-                  <div class="md-form">
-                    <i class="fas fa-lock prefix white-text"></i>
-                    <input type="text" id="orangeForm-email" class="form-control">
-                    <label for="orangeForm-email">password</label>
-                  </div>
-                  <div class="text-center">
-                    <button class="btn peach-gradient btn-lg">Sign up</button>
-                    <hr>
-                    <div class="inline-ul text-center d-flex justify-content-center">
-                      <a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-twitter white-text"></i></a>
-                      <a class="p-2 m-2 fa-lg li-ic"><i class="fab fa-linkedin-in white-text"> </i></a>
-                      <a class="p-2 m-2 fa-lg ins-ic"><i class="fab fa-instagram white-text"> </i></a>
-                    </div>
-                  </div>
+            <!--Card content -->
+            <div class="card-body">
 
+              <!-- Login form -->
+              <form>
+                <p class="h5 text-center mb-4">Sign in</p>
+
+                <div class="md-form">
+                  <i class="fas fa-envelope prefix grey-text"></i>
+                  <input type="text" id="defaultForm-email" class="form-control">
+                  <label for="defaultForm-email">Your email</label>
                 </div>
-              </div>
-              <!--/Form with header-->
+
+                <div class="md-form">
+                  <i class="fas fa-lock prefix grey-text"></i>
+                  <input type="password" id="defaultForm-pass" class="form-control">
+                  <label for="defaultForm-pass">Your password</label>
+                </div>
+
+                <div class="text-center mt-4">
+                  <button class="btn btn-default">Login</button>
+                </div>
+              </form>
+              <!-- Login form -->
 
             </div>
+
           </div>
+          <!--Card -->
         </div>
+
       </div>
+      <!-- Grid row -->
+
     </section>
+    <!-- Section: Blog v.2 -->
 
-  </header>
-  <!--Main Navigation-->
+  </div>
+</main>
 
-
-  <!--  SCRIPTS  -->
-  <!-- JQuery -->
-  <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="../js/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="../js/mdb.min.js"></script>
-  <script>
-    new WOW().init();
-
-  </script>
 </body>
 
 </html>
