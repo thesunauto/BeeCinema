@@ -15,13 +15,38 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        manager.createUser(User.withDefaultPasswordEncoder()
+                .username("user")
+                .password("123")
+                .roles("USER")
+                .build());
+        manager.createUser(User.withDefaultPasswordEncoder()
+                .username("admin")
+                .password("123")
+                .roles("ADMIN")
+                .build());
+        manager.createUser(User.withDefaultPasswordEncoder()
+                .username("employee")
+                .password("123")
+                .roles("EMP")
+                .build());
 
+
+
+        return manager;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/","/css/**","/js/**","/img/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/employee/**").hasRole("EMP")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -32,16 +57,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
-                        .roles("ADMIN")
-                        .build();
 
-        return new InMemoryUserDetailsManager(user);
-    }
 }
