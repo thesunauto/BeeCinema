@@ -23,8 +23,8 @@ public class Phim implements Serializable {
     @Column(name = "iddotuoi", nullable = false)
     private String iddotuoi;
 
-    @Column(name = "idquocgia", nullable = false)
-    private String idquocgia;
+    @Column(name = "idngonngu", nullable = false)
+    private String idngonngu;
 
     @Column(name = "idloaiphim", nullable = false)
     private String idloaiphim;
@@ -52,5 +52,8 @@ public class Phim implements Serializable {
 
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
+
+    @Column(name = "idquocgia", nullable = false)
+    private String idquocgia;
 
 }

@@ -10,9 +10,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "ngonngu")
 @Data
-@Table(name = "ghe")
-public class Ghe implements Serializable {
+public class Ngonngu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,17 +20,11 @@ public class Ghe implements Serializable {
     @Column(name = "id", nullable = false)
     private String id;
 
-    @Column(name = "idphong", nullable = false)
-    private String idphong;
-
-    @Column(name = "iddayghe", nullable = false)
-    private String iddayghe;
-
     @Column(name = "ten", nullable = false)
     private String ten;
 
-    @Column(name = "idloaighe", nullable = false)
-    private String idloaighe;
+    @Column(name = "mota")
+    private String mota;
 
     @Column(name = "idnhanvien", nullable = false)
     private String idnhanvien;
