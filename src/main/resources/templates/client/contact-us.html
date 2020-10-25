@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{client/layout}">
+
+<head>
+  <title>Sign in</title>
+</head>
+
+<body th:style="'background-image:url(' + @{/img/images/bkg.jpg} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+
+<main layout:fragment="content" style="padding: 0;">
+  <div class="container pt-5 mt-5">
+
+    <!-- Section: Blog v.2 -->
+    <section class="wow fadeIn" data-wow-delay="0.3s">
+      <h2 class="text-center amber-text my-3 h1">Contact us</h2>
+
+      <!-- Section description -->
+      <p class="text-center mb-3 w-responsive mx-auto white-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum
+        porro a pariatur accusamus veniam.</p>
+
+      <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-sm-12 col-md-8 col-xl-9">
+          <form>
+
+            <!-- Grid row -->
+            <div class="row">
+
+              <!-- Grid column -->
+              <div class="col-md-6">
+                <div class="md-form mb-0">
+                  <input type="text" id="contact-name" class="form-control">
+                  <label for="contact-name" class="amber-text">Your name</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6">
+                <div class="md-form mb-0">
+                  <input type="text" id="contact-email" class="form-control">
+                  <label for="contact-email" class="amber-text">Your email</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+            <!-- Grid row -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="md-form mb-0">
+                  <input type="text" id="contact-Subject" class="form-control">
+                  <label for="contact-Subject" class="amber-text">Subject</label>
+                </div>
+              </div>
+            </div>
+            <!-- Grid row -->
+
+            <!-- Grid row -->
+            <div class="row mb-4">
+
+              <!-- Grid column -->
+              <div class="col-md-12">
+
+                <div class="md-form mb-0">
+                  <textarea type="text" id="contact-message" class="md-textarea form-control" rows="3"></textarea>
+                  <label for="contact-message" class="amber-text">Your message</label>
+                </div>
+
+              </div>
+            </div>
+            <!-- Grid row -->
+
+          </form>
+
+          <div class="text-center text-md-left mb-4">
+            <a class="btn btn-amber">Send</a>
+          </div>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-12 col-md-4 col-xl-3 white-text">
+          <ul class="contact-icons list-unstyled text-center">
+            <li><i class="fas fa-map-marker-alt fa-2x"></i>
+              <p>FPT Polytechnic, HCMC, Viet Nam</p>
+            </li>
+
+            <li><i class="fas fa-phone fa-2x"></i>
+              <p>0968547852</p>
+            </li>
+
+            <li><i class="fas fa-envelope fa-2x"></i>
+              <p>Support@Becinema.com</p>
+            </li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+
+    </section>
+    <!-- Section: Blog v.2 -->
+
+  </div>
+</main>
+
+</body>
+
+</html>

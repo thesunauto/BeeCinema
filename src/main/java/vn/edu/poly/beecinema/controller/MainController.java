@@ -21,4 +21,8 @@ public class MainController {
     public String loginPage(Model model) {
         return "client/SignIn";
     }
+    @RequestMapping("/signup")
+    public String signUpPage(Model model) {
+        return "client/SignUp";
+    }
 }

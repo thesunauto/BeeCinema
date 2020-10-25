@@ -56,13 +56,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" th:href="@{/client/list-film}">Movies <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" th:href="@{/client/list-event}">Events</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" th:href="@{/client/about-us}">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/client/contact-us}">Contact us</a>
                     </li>
                 </ul>
                 <form class="form-inline">
@@ -82,7 +85,7 @@
                             <!--Menu-->
                             <div class="dropdown-menu dropdown-warning">
                                 <a class="dropdown-item" th:href="@{/login}">Đăng nhập</a>
-                                <a class="dropdown-item" href="#">Đăng ký</a>
+                                <a class="dropdown-item" th:href="@{/signup}">Đăng ký</a>
                                 <a class="dropdown-item" href="#">Quên mật khẩu</a>
                                 <form th:action="@{/logout}" method="post">
                                     <input type="submit" class="dropdown-item" value="Đăng xuất">
@@ -133,7 +136,7 @@
 
             <!-- First column -->
             <div class="col-md-3 col-lg-4 col-xl-3 offset-xl-1 col-12 mb-4">
-                <h6 class="text-uppercase font-weight-bold mb-4">Company name</h6>
+                <h6 class="text-uppercase font-weight-bold mb-4">Bee Cinema</h6>
                 <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet,
                     consectetur
                     adipisicing elit.</p>
@@ -169,10 +172,10 @@
             <!-- Fourth column -->
             <div class="col-md-4 col-lg-3 col-12">
                 <h6 class="text-uppercase font-weight-bold mb-4">Contact</h6>
-                <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-                <p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
-                <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                <p><i class="fas fa-home mr-3"></i> FPT Polytechnic, HCMC, VN</p>
+                <p><i class="fas fa-envelope mr-3"></i>Support@Becinema.com</p>
+                <p><i class="fas fa-phone mr-3"></i> 0968547852</p>
+
 
             </div>
             <!-- /.Fourth column -->
