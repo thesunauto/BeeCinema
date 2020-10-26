@@ -1,11 +1,8 @@
 package vn.edu.poly.beecinema.controller.admin;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import vn.edu.poly.beecinema.service.QuyenService;
 
 @Controller
 @RequestMapping("/admin/user")
