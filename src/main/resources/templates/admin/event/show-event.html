@@ -122,106 +122,37 @@
                     </th>
                     <th ><a class="font-weight-bold">ID </a></th>
                     <th ><a class="font-weight-bold">Tên</a></th>
-                    <th ><a class="font-weight-bold">Giảm Giá</a></th>
-                    <th ><a class="font-weight-bold">Ngày Bắt đầu</a></th>
-                    <th ><a class="font-weight-bold">Ngày Kết thúc</a></th>
                     <th ><a class="font-weight-bold">Hình ảnh</a></th>
                     <th ><a class="font-weight-bold">Mô tả</a></th>
-                    <th ><a class="font-weight-bold">Người Tạo</a></th>
-                    <th ><a class="font-weight-bold">Ngày Tạo</a></th>
-                    <th ><a class="font-weight-bold">Người Sửa</a></th>
-                    <th ><a class="font-weight-bold">Ngày Sửa</a></th>
-                    <th ><a class="font-weight-bold">Trạng thái </th>
+                    <th ><a class="font-weight-bold">Giảm</a></th>
+                    <th ><a class="font-weight-bold">Người tạo</a></th>
+                    <th ><a class="font-weight-bold">Ngày bắt đầu</a></th>
+                    <th ><a class="font-weight-bold">Ngày kết thúc</a></th>
+                    <th ><a class="font-weight-bold">Người sửa</a></th>
+                    <th ><a class="font-weight-bold">Ngày sửa</a></th>
+                    <th ><a class="font-weight-bold">Trạng thái </a></th>
                   </tr>
                 </thead>
                 <!-- Table head -->
 
                 <!-- Table body -->
                 <tbody>
-                  <tr>
+                  <tr th:each="sukien : ${sukiens}">
                     <td> 
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i> 
+                      <i class="fas fa-edit text-primary"></i>
+                      <a th:href="@{/delete?id={id}(id=${sukien.id})}"><i class="fas fa-trash ml-3 text-danger"></i> </a>
                     </td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>markotto@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>jacobt@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>larrybird@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Paul</td>
-                    <td>Topolski</td>
-                    <td>@P_Topolski</td>
-                    <td>ptopolski@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Anna</td>
-                    <td>Doe</td>
-                    <td>@andy</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
+                    <td th:text="${sukien.id}"></td>
+                    <td th:text="${sukien.ten}"></td>
+                    <td th:text="${sukien.hinhanh}"></td>
+                    <td th:text="${sukien.mota}"></td>
+                    <td th:text="${sukien.giam}"></td>
+                    <td th:text="${sukien.idnhanvien}"></td>
+                    <td th:text="${sukien.ngaybatdau}"></td>
+                    <td th:text="${sukien.ngayketthuc}"></td>
+                    <td>empty</td>
+                    <td>empty</td>
+                    <td th:text="${sukien.trangthai}"></td>
                   </tr>
                 </tbody>
                 <!-- Table body -->
