@@ -120,19 +120,19 @@
                     <tr>
                       <th >
                       </th>
-                      <th ><a class="font-weight-bold">ID </a></th>
-                      <th ><a class="font-weight-bold">ID Quyền </a></th>
-                      <th ><a class="font-weight-bold">Tên Nhân Viên</a></th>
-                      <th ><a class="font-weight-bold">Mật Khẩu</a></th>
+                      <th ><a class="font-weight-bold">Tài Khoản </a></th>
+                      <th ><a class="font-weight-bold">Mật Khẩu </a></th>
+                      <th ><a class="font-weight-bold">Quyền</a></th>
+                      <th ><a class="font-weight-bold">Tên</a></th>
+                      <th ><a class="font-weight-bold">Giới Tính</a></th>
                       <th ><a class="font-weight-bold">Ngày Sinh</a></th>
+                      <th ><a class="font-weight-bold">Địa Chỉ</a></th>
                       <th ><a class="font-weight-bold">Số Điện Thoại</a></th>
                       <th ><a class="font-weight-bold">Email</a></th>
-                      <th ><a class="font-weight-bold">Giới Tính</a></th>
-                      <th ><a class="font-weight-bold">Hình Ảnh</a></th>
-                      <th ><a class="font-weight-bold">Địa Chỉ</a></th>
                       <th ><a class="font-weight-bold">Mô Tả</a></th>
-                      <th ><a class="font-weight-bold">Người Tạo</a></th>
+                      <th ><a class="font-weight-bold">Hình Ảnh</a></th>
                       <th ><a class="font-weight-bold">Ngày Tạo</a></th>
+                      <th ><a class="font-weight-bold">Người Tạo</a></th>
                       <th ><a class="font-weight-bold">Người Sửa</a></th>
                       <th ><a class="font-weight-bold">Ngày Sửa</a></th>
                       <th ><a class="font-weight-bold">Trạng Thái</a></th>
@@ -142,237 +142,27 @@
   
                   <!-- Table body -->
                   <tbody>
-                    <tr>
+                    <tr th:each="taikhoan : ${taikhoans}">
                       <td> 
                         <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i> 
                       </td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
+                      <td th:text="${taikhoan.username}"""></td>
+                      <td th:text="${taikhoan.matkhau}"""></td>
+                      <td th:text="${taikhoan.idquyen}"""></td>
+                      <td th:text="${taikhoan.ten}"""></td>
+                      <td th:text="${taikhoan.gioitinh}"""></td>
+                      <td th:text="${taikhoan.ngaysinh}"""></td>
+                      <td th:text="${taikhoan.diachi}"""></td>
+                      <td th:text="${taikhoan.sodienthoai}"""></td>
+                      <td th:text="${taikhoan.email}"""></td>
+                      <td th:text="${taikhoan.mota}"""></td>
+                      <td th:text="${taikhoan.hinhanh}"""></td>
+                      <td th:text="${taikhoan.ngaytao}"""></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td th:text="${taikhoan.trangthai}"""></td>
                     </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>Otto</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                      </tr>
                   </tbody>
                   <!-- Table body -->
                 </table>
