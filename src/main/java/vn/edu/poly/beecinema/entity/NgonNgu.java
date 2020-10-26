@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "dotuoi")
-public class Dotuoi implements Serializable {
+@Table(name = "ngonngu")
+public class NgonNgu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

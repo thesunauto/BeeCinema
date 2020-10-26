@@ -2,8 +2,8 @@ package vn.edu.poly.beecinema.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import vn.edu.poly.beecinema.entity.Quocgia;
+import vn.edu.poly.beecinema.entity.LoaiPhim;
 
-public interface QuocgiaRepository extends JpaRepository<Quocgia, String>, JpaSpecificationExecutor<Quocgia> {
+public interface LoaiPhimRepository extends JpaRepository<LoaiPhim, String>, JpaSpecificationExecutor<LoaiPhim> {
 
 }

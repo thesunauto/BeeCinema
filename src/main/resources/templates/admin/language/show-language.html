@@ -16,7 +16,7 @@
         <!-- Section: Basic examples -->
         <section>
   
-          <h5 class="my-4 dark-grey-text font-weight-bold">QUẢN LÝ QUỐC GIA</h5>
+          <h5 class="my-4 dark-grey-text font-weight-bold">QUẢN LÝ NGÔN NGỮ</h5>
   
           <!-- Top Table UI -->
           <div class="card p-2 mb-5">
@@ -98,7 +98,7 @@
                 <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-columns mt-0"></i></button>
               </div>
   
-              <h4 class="white-text font-weight-bold">Danh Sách Quốc Gia</h4>
+              <h4 class="white-text font-weight-bold">Danh Sách Ngôn Ngữ</h4>
   
               <div>
                 <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-pencil-alt mt-0"></i></button>
@@ -121,7 +121,7 @@
                       <th >
                       </th>
                       <th ><a class="font-weight-bold">ID </a></th>
-                      <th ><a class="font-weight-bold">Tên Quốc Gia</a></th>
+                      <th ><a class="font-weight-bold">Ngôn Ngữ</a></th>
                       <th ><a class="font-weight-bold">Mô Tả</a></th>
                       <th ><a class="font-weight-bold">Người Tạo</a></th>
                       <th ><a class="font-weight-bold">Ngày Tạo</a></th>
@@ -134,149 +134,19 @@
   
                   <!-- Table body -->
                   <tbody>
-                    <tr>
+                    <tr th:each="ngonngu :${ngonNgu}">
                       <td> 
                         <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i> 
                       </td>
-                      <td>Mark</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
+                      <td th:text="${ngonngu.id}"></td>
+                      <td th:text="${ngonngu.ten}"></td>
+                      <td th:text="${ngonngu.mota}"></td>
+                      <td th:text="${ngonngu.idnhanvien}"></td>
+                      <td th:text="${ngonngu.ngaytao}"></td>
+                      <td ></td>
+                      <td></td>
+                      <td th:text="${ngonngu.trangthai}"></td>
                     </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Thornton</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>@fat</td>
-                      <td>jacobt@gmail.com</td>
-                      <td>France</td>
-                      <td>Paris</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>larrybird@gmail.com</td>
-                      <td>Germany</td>
-                      <td>Berlin</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Topolski</td>
-                      <td>@P_Topolski</td>
-                      <td>ptopolski@gmail.com</td>
-                      <td>Poland</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>Warsaw</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Doe</td>
-                      <td>@andy</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>Spain</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>annadoe@gmail.com</td>
-                      <td>Madrid</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                        <td>Doe</td>
-                        <td>@andy</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Spain</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Madrid</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Doe</td>
-                        <td>@andy</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Spain</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Madrid</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Doe</td>
-                        <td>@andy</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Spain</td>
-                        <td>Madrid</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Doe</td>
-                        <td>@andy</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Spain</td>
-                        <td>Madrid</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Doe</td>
-                        <td>@andy</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Spain</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Madrid</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">
-                          <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                        </th>
-                        <td>Doe</td>
-                        <td>@andy</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Spain</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>annadoe@gmail.com</td>
-                        <td>Madrid</td>
-                      </tr>
                   </tbody>
                   <!-- Table body -->
                 </table>
