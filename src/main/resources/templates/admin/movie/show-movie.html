@@ -124,10 +124,12 @@
                       <th ><a class="font-weight-bold">Tên Phim</a></th>
                       <th ><a class="font-weight-bold">Thể Loại</a></th>
                       <th ><a class="font-weight-bold">Độ Tuổi</a></th>
-                      <th ><a class="font-weight-bold">Quốc Gia</a></th>
+                      <th ><a class="font-weight-bold">Ngôn Ngữ</a></th>
                       <th ><a class="font-weight-bold">Hình Ảnh</a></th>
                       <th ><a class="font-weight-bold">Độ Dài</a></th>
                       <th ><a class="font-weight-bold">Mô Tả</a></th>
+                      <th ><a class="font-weight-bold">Ngày Bắt đầu</a></th>
+                      <th ><a class="font-weight-bold">Ngày Kết thúc</a></th>
                       <th ><a class="font-weight-bold">Người Tạo</a></th>
                       <th ><a class="font-weight-bold">Ngày Tạo</a></th>
                       <th ><a class="font-weight-bold">Người Sửa</a></th>
@@ -139,79 +141,26 @@
   
                   <!-- Table body -->
                   <tbody>
-                    <tr>
+                    <tr th:each="phim :${phim}">
                       <td> 
                         <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i> 
                       </td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
+                      <td th:text="${phim.id}"></td>
+                      <td th:text="${phim.ten}"></td>
+                      <td th:text="${phim.idloaiphim}"></td>
+                      <td th:text="${phim.iddotuoi}"></td>
+                      <td th:text="${phim.idngonngu}"></td>
+                      <td th:text="${phim.hinhanh}"></td>
+                      <td th:text="${phim.dodai}"></td>
+                      <td th:text="${phim.mota}"></td>
+                      <td th:text="${phim.ngaybatdau}"></td>
+                      <td th:text="${phim.ngayketthuc}"></td>
+                      <td th:text="${phim.idnhanvien}"></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td th:text="${phim.trangthai}"></td>
                     </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                        <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                      </th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>markotto@gmail.com</td>
-                      <td>USA</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>San Francisco</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>Otto</td>
-                    </tr>
-                    
                   </tbody>
                   <!-- Table body -->
                 </table>

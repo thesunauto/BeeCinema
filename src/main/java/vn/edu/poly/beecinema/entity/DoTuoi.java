@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "quocgia")
-public class Quocgia implements Serializable {
+@Table(name = "dotuoi")
+public class DoTuoi implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,17 +20,17 @@ public class Quocgia implements Serializable {
     @Column(name = "id", nullable = false)
     private String id;
 
-    @Column(name = "idnhanvien", nullable = false)
-    private String idnhanvien;
+    @Column(name = "ten", nullable = false)
+    private String ten;
 
     @Column(name = "mota")
     private String mota;
 
+    @Column(name = "idnhanvien", nullable = false)
+    private String idnhanvien;
+
     @Column(name = "ngaytao", nullable = false)
     private LocalDateTime ngaytao;
-
-    @Column(name = "ten", nullable = false)
-    private String ten;
 
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
