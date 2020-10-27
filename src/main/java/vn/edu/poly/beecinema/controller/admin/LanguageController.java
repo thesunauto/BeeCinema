@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import vn.edu.poly.beecinema.entity.LoaiPhim;
-import vn.edu.poly.beecinema.entity.NgonNgu;
-import vn.edu.poly.beecinema.service.LoaiPhimService;
+import vn.edu.poly.beecinema.entity.Ngonngu;
 import vn.edu.poly.beecinema.service.NgonNguService;
 
 import java.util.List;
@@ -19,7 +17,7 @@ public class LanguageController {
 
     @GetMapping("/show-language")
     public String showLanguage(Model model){
-        List<NgonNgu> ngonNgu = ngonNguService.getAllNgonNgu();
+        List<Ngonngu> ngonNgu = ngonNguService.getAllNgonNgu();
         model.addAttribute("ngonNgu", ngonNgu);
         return "admin/language/show-language";
     }
