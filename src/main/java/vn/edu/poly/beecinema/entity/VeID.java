@@ -6,6 +6,6 @@ import java.io.Serializable;
 
 @Data
 public class VeID implements Serializable {
-    private Integer idsuatchieu;
-    private String idghe;
+    private Suatchieu suatchieu;
+    private Ghe ghe;
 }

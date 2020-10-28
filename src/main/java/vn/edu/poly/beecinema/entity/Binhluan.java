@@ -1,6 +1,6 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,20 +9,26 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "binhluan")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Binhluan implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "idphim", nullable = false)
-    private String idphim;
+    @ManyToOne
+    @JoinColumn(name = "idphim",nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Phim phim;
 
-    @Column(name = "idthanhvien", nullable = false)
-    private String idthanhvien;
+    @ManyToOne
+    @JoinColumn(name = "idthanhvien", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Taikhoan taikhoan;
 
     @Column(name = "ngaytao", nullable = false)
     private LocalDateTime ngaytao;

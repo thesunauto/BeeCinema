@@ -1,19 +1,17 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name = "quyen")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Quyen implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -22,4 +20,8 @@ public class Quyen implements Serializable {
     @Column(name = "ten", nullable = false)
     private String ten;
 
+    @OneToMany(mappedBy = "quyen",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Taikhoan> taikhoans;
 }

@@ -1,13 +1,14 @@
 package vn.edu.poly.beecinema.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Collection;
 
 @Entity
 @Table(name = "khunggio")
@@ -20,16 +21,23 @@ public class Khunggio implements Serializable {
     @Column(name = "id", nullable = false)
     private String id;
 
-    @Column(name = "idnhanvien", nullable = false)
-    private String idnhanvien;
+    @ManyToOne
+    @JoinColumn(name = "idnhanvien", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Taikhoan taikhoan;
 
     @Column(name = "batdau", nullable = false)
-    private LocalDateTime batdau;
+    private LocalTime batdau;
 
     @Column(name = "ketthuc", nullable = false)
-    private LocalDateTime ketthuc;
+    private LocalTime ketthuc;
 
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
+    @OneToMany(mappedBy = "khunggio",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Suatchieu> suatchieus;
 }
