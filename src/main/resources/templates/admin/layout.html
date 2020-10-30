@@ -348,7 +348,10 @@
                     <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Tài Khoản</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">Log Out</a>
+
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" class="dropdown-item" value="Log Out">
+                    </form>
                     <a class="dropdown-item" href="../profile/update-profile.html">My account</a>
                 </div>
             </li>
