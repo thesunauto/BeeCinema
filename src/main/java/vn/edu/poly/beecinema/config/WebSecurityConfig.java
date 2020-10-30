@@ -10,33 +10,30 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import vn.edu.poly.beecinema.entity.Taikhoan;
+import vn.edu.poly.beecinema.service.TaikhoanService;
+
+import java.util.List;
 
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    TaikhoanService taikhoanService;
+
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("123")
-                .roles("USER")
-                .build());
-        manager.createUser(User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("123")
-                .roles("ADMIN")
-                .build());
-        manager.createUser(User.withDefaultPasswordEncoder()
-                .username("employee")
-                .password("123")
-                .roles("EMP")
-                .build());
-
-
-
+        List<Taikhoan> taikhoans = taikhoanService.getAllTaikhoan();
+        taikhoans.forEach(user -> {
+            manager.createUser(User.withDefaultPasswordEncoder()
+                    .username(user.getUsername())
+                    .password(user.getMatkhau())
+                    .roles(user.getQuyen().getTen())
+                    .build());
+        });
         return manager;
     }
 
@@ -44,14 +41,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/css/**","/js/**","/img/**").permitAll()
+                .antMatchers("/", "/css/**", "/js/**", "/img/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/employee/**").hasRole("EMP")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll().defaultSuccessUrl("/",true)
+                .permitAll()
+                .defaultSuccessUrl("/becinema", true)
+                .failureUrl("/loginfail")
                 .and()
                 .logout()
                 .permitAll();

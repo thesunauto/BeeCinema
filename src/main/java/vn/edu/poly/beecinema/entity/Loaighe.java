@@ -1,20 +1,18 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Table(name = "loaighe")
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Loaighe implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -32,4 +30,8 @@ public class Loaighe implements Serializable {
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
+    @OneToMany(mappedBy = "loaighe",cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Collection<Ghe> ghes;
 }

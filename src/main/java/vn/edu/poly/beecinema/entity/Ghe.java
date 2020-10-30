@@ -1,13 +1,13 @@
 package vn.edu.poly.beecinema.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -20,20 +20,32 @@ public class Ghe implements Serializable {
     @Column(name = "id", nullable = false)
     private String id;
 
-    @Column(name = "idphong", nullable = false)
-    private String idphong;
+    @ManyToOne
+    @JoinColumn(name = "idphong", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Phong phong;
 
-    @Column(name = "iddayghe", nullable = false)
-    private String iddayghe;
+    @ManyToOne
+    @JoinColumn(name = "iddayghe", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Dayghe dayghe;
 
     @Column(name = "ten", nullable = false)
     private String ten;
 
-    @Column(name = "idloaighe", nullable = false)
-    private String idloaighe;
+    @ManyToOne
+    @JoinColumn(name = "idloaighe", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Loaighe loaighe;
 
-    @Column(name = "idnhanvien", nullable = false)
-    private String idnhanvien;
+    @ManyToOne
+    @JoinColumn(name = "idnhanvien", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Taikhoan taikhoan;
 
     @Column(name = "ngaytao", nullable = false)
     private LocalDateTime ngaytao;
@@ -41,4 +53,13 @@ public class Ghe implements Serializable {
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
+    @OneToMany(mappedBy = "ghe",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Ve> ves;
+
+    @OneToMany(mappedBy = "ghe",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Veonline> veonlines;
 }

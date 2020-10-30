@@ -1,34 +1,46 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Entity
 @Table(name = "suatchieu")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Suatchieu implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "idphim", nullable = false)
-    private String idphim;
+    @ManyToOne
+    @JoinColumn(name = "idphim", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Phim phim;
+    @ManyToOne
+    @JoinColumn(name = "idphong", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Phong phong;
 
-    @Column(name = "idphong", nullable = false)
-    private String idphong;
+    @ManyToOne
+    @JoinColumn(name = "idnhanvien", nullable = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Taikhoan taikhoan;
 
-    @Column(name = "idnhanvien", nullable = false)
-    private String idnhanvien;
-
-    @Column(name = "idkhunggio", nullable = false)
-    private String idkhunggio;
+    @ManyToOne
+    @JoinColumn(name = "idkhunggio", nullable = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Khunggio khunggio;
 
     @Column(name = "ngaytao", nullable = false)
     private LocalDate ngaytao;
@@ -45,4 +57,13 @@ public class Suatchieu implements Serializable {
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
+    @OneToMany(mappedBy = "suatchieu",cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Collection<Ve> ves;
+
+    @OneToMany(mappedBy = "suatchieu",cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Collection<Veonline> veonlines;
 }

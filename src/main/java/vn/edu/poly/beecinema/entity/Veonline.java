@@ -1,6 +1,6 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,23 +9,35 @@ import java.io.Serializable;
 @Table(name = "veonline")
 @IdClass(VeonlineID.class)
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Veonline implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "idsuatchieu", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Suatchieu suatchieu;
 
     @Id
-    @Column(name = "idsuatchieu", nullable = false)
-    private Integer idsuatchieu;
+    @ManyToOne
+    @JoinColumn(name = "idghe", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Ghe ghe;
 
-    @Id
-    @Column(name = "idghe", nullable = false)
-    private String idghe;
+    @ManyToOne
+    @JoinColumn(name = "idthanhvien", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Taikhoan taikhoan;
 
-    @Column(name = "idthanhvien", nullable = false)
-    private String idthanhvien;
-
-    @Column(name = "idsukien")
-    private String idsukien;
+    @ManyToOne
+    @JoinColumn(name = "idsukien")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Sukien sukien;
 
     @Column(name = "trangthai", nullable = false)
     private String trangthai;

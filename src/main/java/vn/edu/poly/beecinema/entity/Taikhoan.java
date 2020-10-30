@@ -1,21 +1,19 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Table(name = "taikhoan")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Taikhoan implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "username", nullable = false)
@@ -42,8 +40,11 @@ public class Taikhoan implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "idquyen", nullable = false)
-    private String idquyen;
+    @ManyToOne
+    @JoinColumn(name = "idquyen", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Quyen quyen;
 
     @Column(name = "ngaytao", nullable = false)
     private LocalDateTime ngaytao;
@@ -57,4 +58,64 @@ public class Taikhoan implements Serializable {
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<DoTuoi> dotuois;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Binhluan> binhluans;
+
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Ghe> ghes;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Khunggio> khunggios;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<LoaiPhim> loaiphims;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<NgonNgu> ngonngus;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Phim> phims;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Phong> phongs;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Suatchieu> suatchieus;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Sukien> sukiens;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Ve> ves;
+
+    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Veonline> veonlines;
 }

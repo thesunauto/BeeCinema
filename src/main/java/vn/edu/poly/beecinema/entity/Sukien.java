@@ -1,27 +1,28 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Data
 @Table(name = "sukien")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Sukien implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "id", nullable = false)
     private String id;
 
-    @Column(name = "idnhanvien", nullable = false)
-    private String idnhanvien;
+    @ManyToOne
+    @JoinColumn(name = "idnhanvien", nullable = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Taikhoan taikhoan;
 
     @Column(name = "ten", nullable = false)
     private String ten;
@@ -44,4 +45,13 @@ public class Sukien implements Serializable {
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
+    @OneToMany(mappedBy = "sukien",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Ve> ves;
+
+    @OneToMany(mappedBy = "sukien",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Veonline> veonlines;
 }

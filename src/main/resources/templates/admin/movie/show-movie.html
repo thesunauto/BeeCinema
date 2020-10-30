@@ -141,25 +141,25 @@
   
                   <!-- Table body -->
                   <tbody>
-                    <tr th:each="phim :${phim}">
+                    <tr th:each="phim2 :${phim}">
                       <td> 
                         <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i> 
                       </td>
-                      <td th:text="${phim.id}"></td>
-                      <td th:text="${phim.ten}"></td>
-                      <td th:text="${phim.idloaiphim}"></td>
-                      <td th:text="${phim.iddotuoi}"></td>
-                      <td th:text="${phim.idngonngu}"></td>
-                      <td th:text="${phim.hinhanh}"></td>
-                      <td th:text="${phim.dodai}"></td>
-                      <td th:text="${phim.mota}"></td>
-                      <td th:text="${phim.ngaybatdau}"></td>
-                      <td th:text="${phim.ngayketthuc}"></td>
-                      <td th:text="${phim.idnhanvien}"></td>
+                      <td th:text="${phim2.id}"></td>
+                      <td th:text="${phim2.ten}"></td>
+                      <td th:text="${phim2.loaiphim.ten}"></td>
+                      <td th:text="${phim2.dotuoi.ten}"></td>
+                      <td th:text="${phim2.ngonngu.ten}"></td>
+                      <td th:text="${phim2.hinhanh}"></td>
+                      <td th:text="${phim2.dodai}"></td>
+                      <td th:text="${phim2.mota}"></td>
+                      <td th:text="${phim2.ngaybatdau}"></td>
+                      <td th:text="${phim2.ngayketthuc}"></td>
+                      <td th:text="${phim2.taikhoan.ten}"></td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td th:text="${phim.trangthai}"></td>
+                      <td th:text="${phim2.trangthai}"></td>
                     </tr>
                   </tbody>
                   <!-- Table body -->
