@@ -39,10 +39,8 @@ public class MovieTypeController {
 
     @PostMapping(value = "save")
     public String saveMovieType(LoaiPhim loaiPhim, Model model){
-
         loaiPhim.setNgaytao(today);
         loaiPhim.setIdnhanvien("chaund");
-        loaiPhim.setTrangthai(0);
         loaiPhimService.saveLoaiPhim(loaiPhim);
         model.addAttribute("messages", "thanhcong");
         return "admin/movie-type/add-movie-type";

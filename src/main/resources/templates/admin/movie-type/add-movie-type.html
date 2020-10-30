@@ -53,15 +53,11 @@
             <div class="col-md-5 mb-5">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option disabled selected>Choose your option</option>
-                <option value="1" >Hiện</option>
-                <option value="2" >Ẩn</option>
+                <option th:value="'0'" th:text="Hiện"  ></option>
+                <option th:value="'1'" th:text="Ẩn" ></option>
               </select><label class="mdb-main-label active">Trạng thái</label>
-<!--              <select th:field="*{gender}">-->
-<!--                <option th:value="'M'" th:text="Male"></option>-->
-<!--                <option th:value="'F'" th:text="Female"></option>-->
-<!--              </select>-->
             </div>  
             
             <!-- Grid column -->
