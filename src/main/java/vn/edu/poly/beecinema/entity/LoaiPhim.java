@@ -1,6 +1,7 @@
 package vn.edu.poly.beecinema.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +31,7 @@ public class LoaiPhim implements Serializable {
     private String idnhanvien;
 
     @Column(name = "ngaytao", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime ngaytao;
 
     @Column(name = "trangthai", nullable = false)

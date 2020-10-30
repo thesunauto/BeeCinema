@@ -22,9 +22,12 @@
             </div>
 
         <div class="card-body">
-
+          <form th:object="${loaiPhim}" th:action="@{save}" action="#" method="post">
           <!-- Section heading -->
-
+            <div th:switch="${messages}">
+              <p th:case="'thanhcong'" class="text-success">Thêm thành công!</p>
+              <p th:case="'thatbai'" class="text-danger">Thêm thất bại!</p>
+            </div>
           <!-- Grid row -->
           <div class="row">
 
@@ -33,7 +36,7 @@
 
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input type="text" id="form31" class="form-control">
+                <input type="text" th:field="*{id}" id="form31" class="form-control">
                 <label for="form31" class="active">ID</label>
               </div>
 
@@ -42,7 +45,7 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-film prefix"></i>
-                  <input type="text" id="form31" class="form-control">
+                  <input type="text" th:field="*{ten}" id="form31" class="form-control">
                   <label for="form31" class="active">Tên</label>
                 </div>
   
@@ -52,10 +55,13 @@
               <!-- Name -->
               <select class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+                <option value="1" >Hiện</option>
+                <option value="2" >Ẩn</option>
               </select><label class="mdb-main-label active">Trạng thái</label>
-
+<!--              <select th:field="*{gender}">-->
+<!--                <option th:value="'M'" th:text="Male"></option>-->
+<!--                <option th:value="'F'" th:text="Female"></option>-->
+<!--              </select>-->
             </div>  
             
             <!-- Grid column -->
@@ -67,7 +73,7 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
-                  <textarea type="" id="form31" class="form-control"></textarea>
+                  <textarea type="textarea" th:field="*{mota}" id="form31" class="form-control"></textarea>
                   <label for="form31" class="active">Mô tả</label>
                 </div>
   
@@ -80,13 +86,13 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="button" class="btn blue-gradient float-right btn-rounded ">THÊM</button>
+              <button type="submit" class="btn blue-gradient float-right btn-rounded ">THÊM</button>
 
             </div>
             <!-- Grid column -->
 
           </div>
-
+          </form>
         </div>
 
         </div>

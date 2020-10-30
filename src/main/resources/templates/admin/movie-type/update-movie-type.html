@@ -23,9 +23,12 @@
             </div>
             
         <div class="card-body">
-
+          <form th:object="${loaiPhim}" th:action="@{update}" action="#" method="post">
           <!-- Section heading -->
-
+            <div th:switch="${messages}">
+              <p th:case="'thanhcong'" class="text-success">Cập nhật thành công!</p>
+              <p th:case="'thatbai'" class="text-danger">Cập nhật thất bại!</p>
+            </div>
           <!-- Grid row -->
           <div class="row">
 
@@ -34,8 +37,8 @@
 
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input type="text" id="form31" class="form-control">
-                <label for="form31" class="active">ID</label>
+                <input type="text" th:field="*{id}" id="form31" class="form-control" >
+                <label for="form231" class="active">ID</label>
               </div>
 
             </div>
@@ -43,7 +46,7 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-film prefix"></i>
-                  <input type="text" id="form31" class="form-control">
+                  <input type="text" th:field="*{ten}" id="form31" class="form-control">
                   <label for="form31" class="active">Tên</label>
                 </div>
   
@@ -51,10 +54,9 @@
             <div class="col-md-5 mb-5">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:value="'0'" th:text="Hiện"  ></option>
+                <option th:value="'1'" th:text="Ẩn" ></option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>  
@@ -65,13 +67,11 @@
           
           <div class="row">
             <div class="col-md-12 mb-12">
-
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
-                  <textarea type="" id="form31" class="form-control"></textarea>
+                  <textarea type="textarea" th:field="*{mota}" id="form31" class="form-control"></textarea>
                   <label for="form31" class="active">Mô tả</label>
                 </div>
-  
             </div>
           </div>
 
@@ -81,7 +81,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-user-plus prefix"></i>
-                <input type="text" id="form31" class="form-control" disabled>
+                <input type="text" th:field="*{idnhanvien}" id="form31" class="form-control" readonly >
                 <label for="form31" class="active">Người Tạo</label>
               </div>
 
@@ -91,8 +91,7 @@
             <!-- Grid column -->
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
-                <i class="fas fa-calendar-plus prefix"></i>
-                <input type="date" id="form31" class="form-control" disabled>
+                <input type="datetime-local" th:field="*{ngaytao}" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Ngày Tạo</label>
               </div>
 
@@ -103,7 +102,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-user-edit prefix"></i>
-                <input type="text" id="form31" class="form-control" disabled>
+                <input type="text" id="form31" class="form-control" readonly >
                 <label for="form31" class="active">Người Sửa</label>
               </div>
 
@@ -113,8 +112,7 @@
             <!-- Grid column -->
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
-                <i class="fas fa-calendar-alt prefix"></i>
-                <input type="date" id="form31" class="form-control" disabled>
+                <input type="date" id="form31" class="form-control" readonly >
                 <label for="form31" class="active">Ngày Sửa</label>
               </div>
 
@@ -133,13 +131,13 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="button" class="btn blue-gradient float-right btn-rounded ">CẬP NHẬT</button>
+              <button type="submit" class="btn blue-gradient float-right btn-rounded ">CẬP NHẬT</button>
 
             </div>
             <!-- Grid column -->
 
           </div>
-
+          </form>
         </div>
 
         </div>
