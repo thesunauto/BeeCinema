@@ -27,7 +27,7 @@ public class MainController {
         boolean hasEMPRole = authentication.getAuthorities().stream()
                 .anyMatch(r -> r.getAuthority().equals("ROLE_EMP"));
         if(hasADMINRole){path= "redirect:/admin/user/show-user";};
-        if(hasEMPRole) {path=  "redirect:/employee/datve";};
+        if(hasEMPRole) {path=  "redirect:/employee/chonphim";};
         if(hasUSERRole){path=  "redirect:/";};
         return path;
     }
@@ -50,5 +50,10 @@ public class MainController {
     @RequestMapping("/signup")
     public String signUpPage(Model model) {
         return "client/SignUp";
+    }
+
+    @RequestMapping("/index")
+    public String index(Model model) {
+        return "index";
     }
 }
