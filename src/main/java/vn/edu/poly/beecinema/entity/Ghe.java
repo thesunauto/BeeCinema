@@ -1,8 +1,6 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,10 +9,10 @@ import java.util.Collection;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ghe")
 public class Ghe implements Serializable {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "id", nullable = false)

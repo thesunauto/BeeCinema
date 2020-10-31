@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.edu.poly.beecinema.commons.DayGheResponse;
+import vn.edu.poly.beecinema.commons.GheResponse;
 import vn.edu.poly.beecinema.commons.PhimResponse;
 import vn.edu.poly.beecinema.entity.Phim;
+import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.service.PhimService;
+import vn.edu.poly.beecinema.service.SuatChieuService;
 import vn.edu.poly.beecinema.storage.StorageService;
 
 import java.nio.file.Path;
@@ -22,6 +26,8 @@ import java.util.List;
 public class EmployeeRestController {
     @Autowired
     private PhimService phimService;
+    @Autowired
+    private SuatChieuService suatChieuService;
     @Autowired
     private StorageService storageService;
 
@@ -91,4 +97,15 @@ public class EmployeeRestController {
         Path resource = storageService.load(filename);
         return ResponseEntity.ok().body(resource);
     }
+
+    @GetMapping("/getGhe/{idsuatchieu}")
+    public ResponseEntity getGhe(@PathVariable Integer idsuatchieu){
+        List<DayGheResponse> gheResponses = new ArrayList<>();
+        Suatchieu suatchieu = suatChieuService.findById(idsuatchieu);
+        suatchieu.getPhong().getGhes().forEach(ghe -> {
+
+        });
+        return ResponseEntity.ok().body(gheResponses);
+    }
+
 }

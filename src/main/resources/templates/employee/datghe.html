@@ -36,13 +36,15 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
+                                <label class="h4 rgba-black-light p-1 rounded" >Phòng: </label>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                        <tr class="text-center white-text"><th colspan="100%">Màn hình</th></tr>
+                                        <tr class="text-center white-text"><th class="h4" colspan="100%"><i class="fas fa-desktop"></i> MÀN HÌNH <i class="fas fa-desktop"></i></th></tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="text-center">
+                                        <tr class="text-center" id="dataGhe">
+                                            <td class="white-text">Dãy A</td>
                                             <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
                                             <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
                                             <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
@@ -53,6 +55,7 @@
                                             <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
                                             <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
                                             <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
+                                            <td class="white-text">Dãy A</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -69,7 +72,55 @@
 
 </main>
 <th:block layout:fragment="script">
+    <script>
+        $(document).ready(function () {
+            $('body').ready(loadGhe());
+            var listGhe = [];
+            function loadGhe() {
+                $.ajax({
+                    url: '/api/employee/getGhe/1',
+                    type: 'GET',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    beforeSend: function () {
+                        $('#dataGhe').html('<div id="mdb-preloader" class="flex-center">\n' +
+                            '  <div class="preloader-wrapper active">\n' +
+                            '    <div class="spinner-layer spinner-blue-only">\n' +
+                            '      <div class="circle-clipper left">\n' +
+                            '        <div class="circle"></div>\n' +
+                            '      </div>\n' +
+                            '      <div class="gap-patch">\n' +
+                            '        <div class="circle"></div>\n' +
+                            '      </div>\n' +
+                            '      <div class="circle-clipper right">\n' +
+                            '        <div class="circle"></div>\n' +
+                            '      </div>\n' +
+                            '    </div>\n' +
+                            '  </div>\n' +
+                            '</div>');
+                    },
+                    success: function (data) {
+                        listGhe = data;
+                    },
+                    complete: function () {
+                        fillGhe();
+                    },
+                    error: function () {
+                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+            };
+            function fillGhe() {
+                var content = '';
+                for(var i =0;i<listGhe.length;i++){
+                    content += '<td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>';
+                };
 
+                $('#dataGhe').html(content);
+            }
+        })
+    </script>
 </th:block>
 </body>
 </html>

@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface DayGheService {
     List<Dayghe> getAllDayGhe();
 
+    List<Dayghe> findDayGheByPhong(String idPhong);
+
     void saveDayGhe(Dayghe dayGhe);
 
     void deleteDayGhe(String id);
