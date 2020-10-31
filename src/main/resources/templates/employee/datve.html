@@ -1,126 +1,88 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{employee/layout}">
 
 <head>
 
-  <title>Đặt vé</title>
+    <title>Đặt vé</title>
 
 </head>
 
 <body>
 
 
- <main layout:fragment="content">
-   <!-- Mega menu -->
-   <div class="container-fluid" style="margin: 0;padding: 0;"
-        th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
-      <div class="row pt-5 wow fadeIn"  data-wow-delay="1s">
-        <div class="col-sm mb-3 mx-auto">
-          <div class="card card-image"
-               style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
+<main layout:fragment="content">
+    <!-- Mega menu -->
+    <div class="container-fluid" style="margin: 0;padding: 0;"
+         th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+        <div id="dataFilm" class="row pt-5 wow fadeIn" data-wow-delay="1s" style="min-height: 70vh;">
 
-            <!-- Content -->
-            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-              <div>
-                <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing</h5>
-                <h3 class="card-title pt-2"><strong>This is the card title</strong></h3>
-                <p></p>
-                <a class="btn btn-pink"><i class="fas fa-clone left"></i> View project</a>
-              </div>
-            </div>
-
-          </div>
         </div>
-        <div class="col-sm mb-3 mx-auto">
-          <div class="card card-image"
-               style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
+    </div>
+    <!-- Mega menu -->
 
-            <!-- Content -->
-            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-              <div>
-                <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing</h5>
-                <h3 class="card-title pt-2"><strong>This is the card title</strong></h3>
-                <p></p>
-                <a class="btn btn-pink"><i class="fas fa-clone left"></i> View project</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-sm mb-3 mx-auto">
-          <div class="card card-image"
-               style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
-
-            <!-- Content -->
-            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-              <div>
-                <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing</h5>
-                <h3 class="card-title pt-2"><strong>This is the card title</strong></h3>
-                <p></p>
-                <a class="btn btn-pink"><i class="fas fa-clone left"></i> View project</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-sm mb-3 mx-auto">
-          <div class="card card-image"
-               style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
-
-            <!-- Content -->
-            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-              <div>
-                <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing</h5>
-                <h3 class="card-title pt-2"><strong>This is the card title</strong></h3>
-                <p></p>
-                <a class="btn btn-pink"><i class="fas fa-clone left"></i> View project</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-sm mb-3 mx-auto">
-          <div class="card card-image"
-               style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
-
-            <!-- Content -->
-            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-              <div>
-                <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing</h5>
-                <h3 class="card-title pt-2"><strong>This is the card title</strong></h3>
-                <p></p>
-                <a class="btn btn-pink"><i class="fas fa-clone left"></i> View project</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-sm mb-3 mx-auto">
-          <div class="card card-image"
-               style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
-
-            <!-- Content -->
-            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-              <div>
-                <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing</h5>
-                <h3 class="card-title pt-2"><strong>This is the card title</strong></h3>
-                <p></p>
-                <a class="btn btn-pink"><i class="fas fa-clone left"></i> View project</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-   </div>
-   <!-- Mega menu -->
-
- </main>
-
+</main>
+<th:block layout:fragment="script">
+    <script>
+        var listFilm = [];
+        function loadFilm() {
+            $.ajax({
+                url: 'http://localhost:8080/api/employee/list-film-showing',
+                type: 'GET',
+                dataType: 'JSON',
+                contentType: 'application/json',
+                processData: false,
+                beforeSend: function () {
+                    $('#dataFilm').html('<div id="mdb-preloader" class="flex-center">\n' +
+                        '        <div id="preloader-markup">\n' +
+                        '        </div>\n' +
+                        '    </div>');
+                },
+                success: function (data) {
+                    listFilm = data;
+                },
+                complete: function () {
+                    fillFilm();
+                },
+                error: function () {
+                    toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                }
+            });
+        };
+        function fillFilm() {
+            var content = '';
+            for(var i =0;i<listFilm.length;i++){
+                var film = listFilm[i];
+                content += '<div class="col-md col-lg-4 mb-3 mx-auto">\n' +
+                    '                <div class="card card-image"\n' +
+                    '                     style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">\n' +
+                    '\n' +
+                    '                    <!-- Content -->\n' +
+                    '                    <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">\n' +
+                    '                        <div>\n' +
+                    '                            <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing</h5>\n' +
+                    '                            <h3 class="card-title pt-2"><strong>This is the card title</strong></h3>\n' +
+                    '                            <p></p>\n' +
+                    '                            <a class="btn btn-pink"><i class="fas fa-clone left"></i> View project</a>\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '\n' +
+                    '                </div>\n' +
+                    '            </div>';
+            }
+            $('#dataFilm').html(content);
+        };
+        $(document).ready(function () {
+            loadFilm();
+        });
+    </script>
+</th:block>
 
 </body>
+
 
 </html>

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
 
@@ -53,7 +56,7 @@
 
 </header>
 <!-- Navigation -->
-<div class="pt-5" layout:fragment="content" style="min-height: 70vh;">
+<div class="pt-5" layout:fragment="content">
     <p>This is filled by the content template.</p>
 </div>
 
@@ -201,7 +204,7 @@
 
 </footer>
 <!-- Footer -->
-<th:block layout:fragment="optional" />
+
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
@@ -213,24 +216,26 @@
 <script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
 
 <script type="text/javascript">
-    /* WOW.js init */
-    new WOW().init();
 
-    // Tooltips Initialization
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
 
     // Material Select Initialization
     $(document).ready(function () {
+        /* WOW.js init */
+        new WOW().init();
+
+        // Tooltips Initialization
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
         $('.mdb-select').materialSelect();
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
     });
 
-    // SideNav Initialization
-    $(".button-collapse").sideNav();
+
 
 </script>
-
+<th:block layout:fragment="script"></th:block>
 </body>
 
 </html>
