@@ -11,6 +11,7 @@
 
   <!-- Main layout -->
   <main layout:fragment="content">
+    <form th:action="@{/admin/seat-type/add-seat-type}" th:object="${seatType}" method="post">
     <div class="container-fluid">
 
     
@@ -33,8 +34,8 @@
             <div class="col-md-2 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input  type="text" id="form31" class="form-control">
-                <label for="form31" class="active">ID</label>
+                <input th:field="*{id}" type="text" id="form1" class="form-control">
+                <label for="form1" class="active">ID</label>
               </div>
 
             </div>
@@ -44,8 +45,8 @@
             <div class="col-md-4 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-chair prefix"></i>
-                <input type="text" id="form31" class="form-control">
-                <label for="form31" class="active">Tên Loại Ghế</label>
+                <input th:field="*{ten}" type="text" id="1" class="form-control">
+                <label for="1" class="active">Tên Loại Ghế</label>
               </div>
 
             </div>
@@ -55,7 +56,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-money-bill prefix"></i>
-                <input  type="text" id="form31" class="form-control">
+                <input th:field="*{gia}" type="text" id="form31" class="form-control">
                 <label for="form31" class="active">Giá</label>
               </div>
 
@@ -66,10 +67,9 @@
             <div class="col-md-3 mb-4">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option value="1">Hiện</option>
+                <option value="0">Ẩn</option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>
@@ -86,7 +86,7 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="button" class="btn blue-gradient btn-rounded float-right">Thêm</button>
+              <button type="submit" class="btn blue-gradient btn-rounded float-right">Thêm</button>
 
             </div>
             <!-- Grid column -->
@@ -101,6 +101,7 @@
 
 
     </div>
+    </form>
   </main>
   <!-- Main layout -->
 

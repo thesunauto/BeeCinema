@@ -1,14 +1,16 @@
 package vn.edu.poly.beecinema.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import vn.edu.poly.beecinema.entity.Ghe;
 import vn.edu.poly.beecinema.entity.Loaighe;
 import vn.edu.poly.beecinema.service.GheService;
 import vn.edu.poly.beecinema.service.LoaiGheService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -22,16 +24,32 @@ public class SeatTypeController {
         return "admin/seat-type/show-seat-type";
     }
 
-    @RequestMapping("/add-seat-type")
-    public String addtypeseat(Model model){
+    @GetMapping("/add-seat-type")
+    public String addseattype(Model model){
+        Loaighe loaighe = new Loaighe();
+        model.addAttribute("seatType",loaighe);
         return "admin/seat-type/add-seat-type";
     }
+
+    @PostMapping("/add-seat-type")
+    public String saveseat(Model model, @ModelAttribute(value = "seatType") Loaighe loaighe){
+        loaighe.setNgaytao(LocalDateTime.now());
+        loaiGheService.saveLoaiGhe(loaighe);
+
+        return "redirect:/admin/seat-type/show-seat-type";
+    }
+
 
     @RequestMapping("/update-seat-type")
     public String updatetypeseat(Model model){
         return "admin/seat-type/update-seat-type";
     }
 
+    @GetMapping("/delete-seat-type/{id}")
+    public  String deleteSeatType (@PathVariable(value = "id") String id){
+        loaiGheService.deleteLoaiGhe(id);
+        return "redirect:/admin/seat-type/show-seat-type";
+    }
 
 
 

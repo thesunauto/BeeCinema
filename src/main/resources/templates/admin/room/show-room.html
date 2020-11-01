@@ -132,7 +132,7 @@
                 <tbody th:each="phong: ${phong} ">
                   <tr>
                     <td> 
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i> 
+                      <i class="fas fa-edit text-primary"></i><a th:href="@{${'/admin/room/delete-room/'+phong.id}}"> <i class="fas fa-trash ml-3 text-danger"></i></a>
                     </td>
                     <td th:text="${phong.id}"></td>
                     <td th:text="${phong.ten}"></td>
