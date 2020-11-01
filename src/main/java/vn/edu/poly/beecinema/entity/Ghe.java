@@ -15,8 +15,9 @@ import java.util.Collection;
 public class Ghe implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private String id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "idphong", nullable = false)
@@ -30,8 +31,8 @@ public class Ghe implements Serializable {
     @ToString.Exclude
     private Dayghe dayghe;
 
-    @Column(name = "ten", nullable = false)
-    private String ten;
+    @Column(name = "col", nullable = false)
+    private Integer col;
 
     @ManyToOne
     @JoinColumn(name = "idloaighe", nullable = false)

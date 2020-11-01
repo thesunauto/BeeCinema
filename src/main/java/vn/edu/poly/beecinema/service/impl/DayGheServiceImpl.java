@@ -29,6 +29,7 @@ public class DayGheServiceImpl implements DayGheService {
         gheRepository.findByPhong(phongRepository.findById(idPhong).get()).forEach(ghe -> {
             boolean ck = true;
             Ghe ghe1 = gheRepository.getOne(ghe.getId());
+
             Dayghe dayghe = dayGheRepository.findByGhes(ghe1);
             for (Dayghe dayghea:dayghes) {
                 if(dayghea.getId().equals(dayghe.getId())){

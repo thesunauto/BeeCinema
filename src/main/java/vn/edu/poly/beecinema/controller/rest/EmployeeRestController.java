@@ -13,6 +13,7 @@ import vn.edu.poly.beecinema.commons.PhimResponse;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.service.DayGheService;
+import vn.edu.poly.beecinema.service.GheService;
 import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
 import vn.edu.poly.beecinema.storage.StorageService;
@@ -33,6 +34,7 @@ public class EmployeeRestController {
     private StorageService storageService;
     @Autowired
     private DayGheService dayGheService;
+    @Autowired private GheService gheService;
 
     public EmployeeRestController(StorageService storageService) {
         this.storageService = storageService;
@@ -105,8 +107,16 @@ public class EmployeeRestController {
 
     @GetMapping("/getGhe/{idsuatchieu}")
     public ResponseEntity getGhe(@PathVariable Integer idsuatchieu){
+        List<DayGheResponse> gheResponses = new ArrayList<>();
         Suatchieu suatchieu = suatChieuService.findById(idsuatchieu);
-        return ResponseEntity.ok().body(dayGheService.findDayGheByPhong(suatchieu.getPhong().getId()));
+        dayGheService.findDayGheByPhong(suatchieu.getPhong().getId()).forEach(dayghe -> {
+            List<GheResponse> gheResponses1 = new ArrayList<>();
+            gheService.findByPhongAndDayGhe(suatchieu.getPhong().getId(),dayghe.getId()).forEach(ghe -> {
+                gheResponses1.add(new GheResponse(ghe.getCol(),ghe.getPhong().getId(),ghe.getDayghe().getId(),ghe.getDayghe().getTen(),ghe.getLoaighe().getId(),ghe.getTrangthai()));
+            });
+            gheResponses.add(new DayGheResponse(dayghe.getId(),dayghe.getTen(),gheResponses1));
+        });
+        return ResponseEntity.ok().body(gheResponses);
     }
 
 }

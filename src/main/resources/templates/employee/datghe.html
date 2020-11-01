@@ -36,24 +36,18 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="h4 rgba-black-light p-1 rounded" >Phòng: </label>
+                                <label class="h4 rgba-black-light p-1 rounded">Phòng: </label>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                        <tr class="text-center white-text"><th class="h4" colspan="100%"><i class="fas fa-desktop"></i> MÀN HÌNH <i class="fas fa-desktop"></i></th></tr>
+                                        <tr class="text-center white-text">
+                                            <th class="h4" colspan="100%"><i class="fas fa-desktop"></i> MÀN HÌNH <i
+                                                    class="fas fa-desktop"></i></th>
+                                        </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr class="text-center" id="dataGhe">
+                                        <tbody id="dataGhe">
+                                        <tr class="text-center">
                                             <td class="white-text">Dãy A</td>
-                                            <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
                                             <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
                                             <td class="white-text">Dãy A</td>
                                         </tr>
@@ -75,7 +69,8 @@
     <script>
         $(document).ready(function () {
             $('body').ready(loadGhe());
-            var listGhe = [];
+            var listDayGhe = [];
+
             function loadGhe() {
                 $.ajax({
                     url: '/api/employee/getGhe/1',
@@ -101,7 +96,7 @@
                             '</div>');
                     },
                     success: function (data) {
-                        listGhe = data;
+                        listDayGhe = data;
                     },
                     complete: function () {
                         fillGhe();
@@ -111,11 +106,23 @@
                     }
                 });
             };
+
             function fillGhe() {
                 var content = '';
-                for(var i =0;i<listGhe.length;i++){
-                    content += '<td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>';
-                };
+                for (var i = 0; i < listDayGhe.length; i++) {
+
+
+                    content += '<tr class="text-center">\n' +
+                        '<td class="white-text">Dãy '+listDayGhe[i].ten+'</td>\n';
+                        var listGhe = listDayGhe[i].gheResponses;
+                    for(var ii = 0;ii<listGhe.length;ii++){
+                        content += '<td><a class="btn btn-yt text-center"><i class="fas fa-chair"></i> '+listGhe[ii].tenDay+listGhe[ii].col+'</a></td>';
+                    }
+
+                    content += '<td class="white-text">Dãy '+listDayGhe[i].ten+'</td>\n' +
+                        '</tr>';
+                }
+                ;
 
                 $('#dataGhe').html(content);
             }

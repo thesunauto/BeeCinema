@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GheService {
+    List<Ghe> findByPhongAndDayGhe(String idphong,String idDayGhe);
+
     List<Ghe> getAllGhe();
 
     void saveGhe(Ghe ghe);
 
-    void deleteGhe(String id);
+    void deleteGhe(Integer id);
 
-    Optional<Ghe> findGheById(String id);
+    Optional<Ghe> findGheById(Integer id);
 }

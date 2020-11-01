@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GheResponse {
-    private String ten;
+    private Integer col;
     private String idphong;
     private String idDay;
+    private String tenDay;
     private String idLoaiGhe;
     private Integer trangthai;
 }
