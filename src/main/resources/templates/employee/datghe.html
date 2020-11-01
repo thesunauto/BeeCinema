@@ -123,7 +123,7 @@
                         '<td class="white-text">Dãy '+listDayGhe[i].ten+'</td>\n';
                         var listGhe = listDayGhe[i].gheResponses;
                     for(var ii = 0;ii<listGhe.length;ii++){
-                        content += '<td><a class="btn btn-yt text-center"><i class="fas fa-chair"></i> '+listGhe[ii].tenDay+listGhe[ii].col+'</a></td>';
+                        content += '<td><a class="btn '+(listGhe[ii].trangthai==0?'btn-info':'btn-danger')+' text-center"><i class="fas fa-chair"></i> '+listGhe[ii].tenDay+listGhe[ii].col+'</a></td>';
                     }
 
                     content += '<td class="white-text">Dãy '+listDayGhe[i].ten+'</td>\n' +
