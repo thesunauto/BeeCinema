@@ -11,4 +11,5 @@ import java.util.List;
 public interface GheRepository extends JpaRepository<Ghe, Integer>, JpaSpecificationExecutor<Ghe> {
     List<Ghe> findByPhong(Phong phong);
     List<Ghe> findByPhongAndDayghe(Phong phong, Dayghe dayghe);
+    List<Ghe> findByPhongAndDaygheOrderByCol(Phong phong, Dayghe dayghe);
 }
