@@ -12,6 +12,7 @@ import vn.edu.poly.beecinema.commons.GheResponse;
 import vn.edu.poly.beecinema.commons.PhimResponse;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
+import vn.edu.poly.beecinema.service.DayGheService;
 import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
 import vn.edu.poly.beecinema.storage.StorageService;
@@ -30,6 +31,8 @@ public class EmployeeRestController {
     private SuatChieuService suatChieuService;
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private DayGheService dayGheService;
 
     public EmployeeRestController(StorageService storageService) {
         this.storageService = storageService;
@@ -98,14 +101,12 @@ public class EmployeeRestController {
         return ResponseEntity.ok().body(resource);
     }
 
+
+
     @GetMapping("/getGhe/{idsuatchieu}")
     public ResponseEntity getGhe(@PathVariable Integer idsuatchieu){
-        List<DayGheResponse> gheResponses = new ArrayList<>();
         Suatchieu suatchieu = suatChieuService.findById(idsuatchieu);
-        suatchieu.getPhong().getGhes().forEach(ghe -> {
-
-        });
-        return ResponseEntity.ok().body(gheResponses);
+        return ResponseEntity.ok().body(dayGheService.findDayGheByPhong(suatchieu.getPhong().getId()));
     }
 
 }
