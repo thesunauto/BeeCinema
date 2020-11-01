@@ -70,14 +70,42 @@
 <th:block layout:fragment="script">
     <script>
         $(document).ready(function () {
+
             var listDayGhe = [];
-            var idSuatChieu = '';
+            var idSuatChieu = 1;
+
+            $(document).on('click','option.ActionGhe',function () {
+                $.ajax({
+                    url : "/api/employee/setghefocus",
+                    type : "POST",
+                    cache : false,
+                    async : true,
+                    contentType : "application/json; charset=UTF-8",
+                    data : JSON.stringify({
+                        "idsuatchieu" : parseInt(idSuatChieu),
+                        "idghe" : parseInt($(this).val()),
+                        "stt" : 1
+                    }),
+                    datatype : "json",
+                    success : function(data) {
+
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert(XMLHttpRequest.status + " : " + errorThrown);
+                    }
+                });
+                loadGhe();
+            });
 
             $(document).on('click','option.rdoSuatChieu',function () {
                 idSuatChieu = $(this).val();
                 loadGhe();
             });
-
+            setInterval(function () {
+                if(idSuatChieu!=''){
+                    loadGhe();
+                };
+            },1000);
             function loadGhe() {
                 $.ajax({
                     url: '/api/employee/getGhe/'+idSuatChieu,
@@ -85,23 +113,6 @@
                     dataType: 'JSON',
                     contentType: 'application/json',
                     processData: false,
-                    beforeSend: function () {
-                        $('#dataGhe').html('<div id="mdb-preloader" class="flex-center">\n' +
-                            '  <div class="preloader-wrapper active">\n' +
-                            '    <div class="spinner-layer spinner-blue-only">\n' +
-                            '      <div class="circle-clipper left">\n' +
-                            '        <div class="circle"></div>\n' +
-                            '      </div>\n' +
-                            '      <div class="gap-patch">\n' +
-                            '        <div class="circle"></div>\n' +
-                            '      </div>\n' +
-                            '      <div class="circle-clipper right">\n' +
-                            '        <div class="circle"></div>\n' +
-                            '      </div>\n' +
-                            '    </div>\n' +
-                            '  </div>\n' +
-                            '</div>');
-                    },
                     success: function (data) {
                         listDayGhe = data;
                     },
@@ -123,7 +134,7 @@
                         '<td class="white-text">Dãy '+listDayGhe[i].ten+'</td>\n';
                         var listGhe = listDayGhe[i].gheResponses;
                     for(var ii = 0;ii<listGhe.length;ii++){
-                        content += '<td><a class="btn '+(listGhe[ii].trangthai==0?'btn-info':'btn-danger')+' text-center"><i class="fas fa-chair"></i> '+listGhe[ii].tenDay+listGhe[ii].col+'</a></td>';
+                        content += '<td><option value="'+listGhe[ii].id+'" class="ActionGhe btn '+(listGhe[ii].trangthai==0?'btn-info':'btn-danger')+' text-center"><i class="fas fa-chair"></i> '+listGhe[ii].tenDay+listGhe[ii].col+'</option></td>';
                     }
 
                     content += '<td class="white-text">Dãy '+listDayGhe[i].ten+'</td>\n' +
@@ -132,7 +143,8 @@
                 ;
 
                 $('#dataGhe').html(content);
-            }
+            };
+
         })
     </script>
 </th:block>

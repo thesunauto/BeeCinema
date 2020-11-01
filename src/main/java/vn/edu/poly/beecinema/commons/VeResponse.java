@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VeResponse {
-    private Integer idSuatChieu;
-    private Integer idGhe;
+    private Integer idsuatchieu;
+    private Integer idghe;
     private Integer stt;
 }

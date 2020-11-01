@@ -119,20 +119,36 @@ public class EmployeeRestController {
             gheService.findByPhongAndDayGhe(suatchieu.getPhong().getId(),dayghe.getId()).forEach(ghe -> {
                 Integer stt = ghe.getTrangthai();
                 for(VeResponse veResponse : veResponses){
-                    if(veResponse.getIdSuatChieu().equals(suatchieu.getId()) && veResponse.getIdGhe().equals(ghe.getId())){
+                    if(veResponse.getIdsuatchieu().equals(suatchieu.getId()) && veResponse.getIdghe().equals(ghe.getId())){
                         stt = veResponse.getStt();
                     }
                 }
-                gheResponses1.add(new GheResponse(ghe.getCol(),ghe.getPhong().getId(),ghe.getDayghe().getId(),ghe.getDayghe().getTen(),ghe.getLoaighe().getId(),stt));
+                gheResponses1.add(new GheResponse(ghe.getId(),ghe.getCol(),ghe.getPhong().getId(),ghe.getDayghe().getId(),ghe.getDayghe().getTen(),ghe.getLoaighe().getId(),stt));
             });
             gheResponses.add(new DayGheResponse(dayghe.getId(),dayghe.getTen(),gheResponses1));
         });
         return ResponseEntity.ok().body(gheResponses);
     }
 
-    @GetMapping("/setghefocus")
-    public ResponseEntity setGheFocus(@RequestBody VeResponse veResponse){
-        return ResponseEntity.ok().body(true);
+    @PostMapping("/setghefocus")
+    @ResponseBody
+    public ResponseEntity setGheFocus(HttpSession httpSession,@RequestBody VeResponse veResponse){
+        if(httpSession.getAttribute("veresponse")==null){
+            httpSession.setAttribute("veresponse",new ArrayList<VeResponse>());
+        }
+        List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
+        for (int i = 0;i<veResponses.size();i++){
+            if(veResponse.getIdsuatchieu().equals(veResponses.get(i).getIdsuatchieu())){
+                if(veResponse.getIdghe().equals(veResponses.get(i).getIdghe())){
+                    veResponses.remove(i);
+                    httpSession.setAttribute("veresponse",veResponses);
+                    return ResponseEntity.ok().body("true");
+                }
+            }
+        }
+        veResponses.add(veResponse);
+        httpSession.setAttribute("veresponse",veResponses);
+        return ResponseEntity.ok().body("true");
     }
 
 }

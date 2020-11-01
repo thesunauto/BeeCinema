@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GheResponse {
+    private Integer id;
     private Integer col;
     private String idphong;
     private String idDay;

@@ -38,8 +38,6 @@ public class EmployeeController {
             httpSession.setAttribute("veresponse", new ArrayList<VeResponse>());
         }
         List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
-        veResponses.add(new VeResponse(1,9,1));
-        System.out.println("set value");
         httpSession.setAttribute("veresponse",veResponses);
         model.addAttribute("film", phimService.findPhimById(id));
         return "employee/datghe";
