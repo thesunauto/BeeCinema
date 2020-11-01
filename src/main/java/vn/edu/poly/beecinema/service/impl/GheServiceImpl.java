@@ -19,8 +19,10 @@ public class GheServiceImpl implements GheService {
     @Autowired private DaygheRepository daygheRepository;
     @Override
     public List<Ghe> findByPhongAndDayGhe(String idphong, String idDayGhe) {
-        return GheRepository.findByPhongAndDayghe(phongRepository.getOne(idphong),daygheRepository.getOne(idDayGhe));
+        return GheRepository.findByPhongAndDaygheOrderByCol(phongRepository.getOne(idphong),daygheRepository.getOne(idDayGhe));
     }
+
+
 
     @Override
     public List<Ghe> getAllGhe() {
