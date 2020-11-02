@@ -17,9 +17,7 @@ public class LoaiPhimServiceImpl implements LoaiPhimService {
     }
 
     @Override
-    public void saveLoaiPhim(LoaiPhim loaiPhim) {
-        loaiPhimRepository.save(loaiPhim);
-    }
+    public void saveLoaiPhim(LoaiPhim loaiPhim) { loaiPhimRepository.save(loaiPhim); }
 
     @Override
     public void deleteLoaiPhim(String id) {

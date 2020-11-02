@@ -1,39 +1,50 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ghe")
 public class Ghe implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private String id;
+    private Integer id;
 
-    @Column(name = "idphong", nullable = false)
-    private String idphong;
+    @ManyToOne
+    @JoinColumn(name = "idphong", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Phong phong;
 
-    @Column(name = "iddayghe", nullable = false)
-    private String iddayghe;
+    @ManyToOne
+    @JoinColumn(name = "iddayghe", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Dayghe dayghe;
 
-    @Column(name = "ten", nullable = false)
-    private String ten;
+    @Column(name = "col", nullable = false)
+    private Integer col;
 
-    @Column(name = "idloaighe", nullable = false)
-    private String idloaighe;
+    @ManyToOne
+    @JoinColumn(name = "idloaighe", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Loaighe loaighe;
 
-    @Column(name = "idnhanvien", nullable = false)
-    private String idnhanvien;
+    @ManyToOne
+    @JoinColumn(name = "idnhanvien", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Taikhoan taikhoan;
 
     @Column(name = "ngaytao", nullable = false)
     private LocalDateTime ngaytao;
@@ -41,4 +52,13 @@ public class Ghe implements Serializable {
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
+    @OneToMany(mappedBy = "ghe",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Ve> ves;
+
+    @OneToMany(mappedBy = "ghe",cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Collection<Veonline> veonlines;
 }

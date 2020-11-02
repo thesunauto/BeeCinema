@@ -93,18 +93,13 @@
           <!-- Card image -->
           <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
 
-            <div>
-              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-th-large mt-0"></i></button>
-              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-columns mt-0"></i></button>
-            </div>
+
 
             <h4 class="white-text font-weight-bold">Danh sách Ghế</h4>
 
             <div>
-              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-pencil-alt mt-0"></i></button>
-              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-eraser mt-0"></i></button>
-              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-info-circle mt-0"></i></button>
-            </div>
+              <a  class="btn btn-outline-white btn-rounded btn-sm px-2" th:href="@{/admin/seat/add-seat}"><i class="fas fa-pencil-alt mt-0"></i></a>
+              </div>
 
           </div>
           <!-- /Card image -->
@@ -127,88 +122,27 @@
                     <th ><a class="font-weight-bold">Dãy Ghế</a></th>
                     <th ><a class="font-weight-bold">Người Tạo</a></th>
                     <th ><a class="font-weight-bold">Ngày Tạo</a></th>
-                    <th ><a class="font-weight-bold">Người Sửa</a></th>
-                    <th ><a class="font-weight-bold">Ngày Sửa</a></th>
-                    <th ><a class="font-weight-bold">Trạng thái </th>
+                    <th ><a class="font-weight-bold">Trạng thái </a></th>
                   </tr>
                 </thead>
                 <!-- Table head -->
 
                 <!-- Table body -->
-                <tbody>
+                <tbody th:each="ghe1: ${ghe}">
                   <tr>
-                    <td> 
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i> 
+                    <td>
+                      <a th:href="@{${'/admin/seat/update-seat/'+ghe1.id}}"> <i class="fas fa-edit text-primary"></i></a> <a th:href="@{${'/admin/seat/delete-seat/'+ghe1.id}}"> <i class="fas fa-trash ml-3 text-danger"></i></a>
                     </td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>markotto@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
+                    <td th:text="${ghe1.id}"></td>
+                    <td th:text="${ghe1.col}"></td>
+                    <td th:text="${ghe1.phong.ten}"></td>
+                    <td th:text="${ghe1.dayghe.ten}"></td>
+                    <td th:text="${ghe1.loaighe.ten}"></td>
+                    <td th:text="${ghe1.taikhoan.ten}"></td>
+                    <td th:text="${ghe1.ngaytao}"></td>
+                    <td th:text="${ghe1.trangthai}"></td>
                   </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>jacobt@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>larrybird@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Paul</td>
-                    <td>Topolski</td>
-                    <td>@P_Topolski</td>
-                    <td>ptopolski@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Anna</td>
-                    <td>Doe</td>
-                    <td>@andy</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
+
                 </tbody>
                 <!-- Table body -->
               </table>

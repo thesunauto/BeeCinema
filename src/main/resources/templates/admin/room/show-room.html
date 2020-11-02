@@ -123,74 +123,22 @@
                     <th ><a class="font-weight-bold">Tên</a></th>
                     <th ><a class="font-weight-bold">Người Tạo</a></th>
                     <th ><a class="font-weight-bold">Ngày Tạo</a></th>
-                    <th ><a class="font-weight-bold">Người Sửa</a></th>
-                    <th ><a class="font-weight-bold">Ngày Sửa</a></th>
                     <th ><a class="font-weight-bold">Trạng thái </th>
                   </tr>
                 </thead>
                 <!-- Table head -->
 
                 <!-- Table body -->
-                <tbody>
+                <tbody th:each="phong: ${phong} ">
                   <tr>
                     <td> 
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i> 
+                      <i class="fas fa-edit text-primary"></i><a th:href="@{${'/admin/room/delete-room/'+phong.id}}"> <i class="fas fa-trash ml-3 text-danger"></i></a>
                     </td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>markotto@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>jacobt@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>larrybird@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Paul</td>
-                    <td>Topolski</td>
-                    <td>@P_Topolski</td>
-                    <td>ptopolski@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <i class="fas fa-edit text-primary"></i> <i class="fas fa-trash ml-3 text-danger"></i>
-                    </th>
-                    <td>Anna</td>
-                    <td>Doe</td>
-                    <td>@andy</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
-                    <td>annadoe@gmail.com</td>
+                    <td th:text="${phong.id}"></td>
+                    <td th:text="${phong.ten}"></td>
+                    <td th:text="${phong.taikhoan.ten}"></td>
+                    <td th:text="${phong.ngaytao}"></td>
+                    <td th:text="${phong.trangthai}"></td>
                   </tr>
                 </tbody>
                 <!-- Table body -->

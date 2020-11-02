@@ -141,8 +141,8 @@
                         <a th:href="@{/delete?id={id}(id=${binhluan.id})}"><i class="fas fa-trash ml-3 text-danger"></i></a>
                       </td>
                       <td th:text="${binhluan.id}"></td>
-                      <td th:text="${binhluan.idphim}"></td>
-                      <td th:text="${binhluan.idthanhvien}"></td>
+                      <td th:text="${binhluan.phim.ten}"></td>
+                      <td th:text="${binhluan.taikhoan.ten}"></td>
                       <td th:text="${binhluan.noidung}"></td>
                       <td th:text="${binhluan.ngaytao}"></td>
                       <td ></td>
