@@ -14,7 +14,7 @@
     <div class="container-fluid">
 
       <!-- Section: Inputs -->
-      <section class="section card mb-5">
+      <section class="section card mb-1">
 
         <div>
           <div class="card card-cascade narrower ">
@@ -23,35 +23,36 @@
             </div>
             
         <div class="card-body">
-          <form th:object="${loaiPhim}" th:action="@{update}" action="#" method="post">
+          <form th:object="${loaiPhim}" th:action="@{/admin/movie-type/edit}" action="#" method="post">
           <!-- Section heading -->
             <div th:switch="${messages}">
-              <p th:case="'thanhcong'" class="text-success">Cập nhật thành công!</p>
-              <p th:case="'thatbai'" class="text-danger">Cập nhật thất bại!</p>
+              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Cập nhật thành công!</p>
             </div>
           <!-- Grid row -->
           <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-2 mb-2">
+            <div class="col-md-2 mb-1">
 
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
                 <input type="text" th:field="*{id}" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">ID</label>
+                <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
               </div>
 
             </div>
-            <div class="col-md-5 mb-5">
+            <div class="col-md-5 mb-1">
 
                 <div class="md-form md-outline">
                   <i class="fas fa-film prefix"></i>
                   <input type="text" th:field="*{ten}" id="form31" class="form-control">
                   <label for="form31" class="active">Tên</label>
+                  <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                 </div>
   
             </div>
-            <div class="col-md-5 mb-5">
+            <div class="col-md-5 mb-1">
 
               <!-- Name -->
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
@@ -66,7 +67,7 @@
           </div>
           
           <div class="row">
-            <div class="col-md-12 mb-12">
+            <div class="col-md-12 mb-1">
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
                   <textarea type="textarea" th:field="*{mota}" id="form31" class="form-control"></textarea>
@@ -78,10 +79,10 @@
           <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-3 mb-1">
               <div class="md-form md-outline">
                 <i class="fas fa-user-plus prefix"></i>
-                <input type="text" th:field="*{idnhanvien}" id="form31" class="form-control" readonly >
+                <input type="text" th:field="*{taikhoan.username}" id="form31" class="form-control" readonly >
                 <label for="form31" class="active">Người Tạo</label>
               </div>
 
@@ -89,7 +90,7 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-3 mb-1">
               <div class="md-form md-outline">
                 <input type="datetime-local" th:field="*{ngaytao}" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Ngày Tạo</label>
@@ -99,7 +100,7 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-3 mb-1">
               <div class="md-form md-outline">
                 <i class="fas fa-user-edit prefix"></i>
                 <input type="text" id="form31" class="form-control" readonly >
@@ -110,7 +111,7 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-3 mb-1">
               <div class="md-form md-outline">
                 <input type="date" id="form31" class="form-control" readonly >
                 <label for="form31" class="active">Ngày Sửa</label>

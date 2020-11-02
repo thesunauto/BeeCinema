@@ -111,12 +111,11 @@
 
             <div class="px-4">
               <div th:switch="${messages}">
-                <p th:case="'thanhcong'" class="text-success">Xóa thành công!</p>
-                <p th:case="'thatbai'" class="text-danger">Xóa thất bại!</p>
+                <p th:case="'thanhcong'" class="alert alert-success" role="alert">Xóa thành công!</p>
               </div>
-              <div class="table-responsive text-nowrap">
+              <div class="table-responsive text-nowrap" style="height:350px">
                 <!-- Table -->
-                <table class="table table-striped table-hover mb-0">
+                <table class="table table-striped table-hover mb-0 ">
 
                   <!-- Table head -->
                   <thead>

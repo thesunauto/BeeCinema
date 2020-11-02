@@ -7,6 +7,8 @@ import lombok.ToString;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -18,10 +20,12 @@ public class LoaiPhim implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "Vui lòng nhập ID")
     @Id
     @Column(name = "id", nullable = false)
     private String id;
 
+    @NotBlank(message = "Vui lòng nhập Tên")
     @Column(name = "ten", nullable = false)
     private String ten;
 

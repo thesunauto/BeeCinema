@@ -14,7 +14,7 @@
     <div class="container-fluid">
 
       <!-- Section: Inputs -->
-      <section class="section card mb-5">
+      <section class="section card mb-1">
         <div>
           <div class="card card-cascade narrower ">
             <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
@@ -22,50 +22,52 @@
             </div>
 
         <div class="card-body">
-          <form th:object="${loaiPhim}" th:action="@{save}" action="#" method="post">
+          <form th:object="${loaiPhim}" th:action="@{/admin/movie-type/add-movie-type}" action="#" method="post">
           <!-- Section heading -->
             <div th:switch="${messages}">
-              <p th:case="'thanhcong'" class="text-success">Thêm thành công!</p>
-              <p th:case="'thatbai'" class="text-danger">Thêm thất bại!</p>
+              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+              <p th:case="'trungid'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
             </div>
           <!-- Grid row -->
           <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-2 mb-2">
+            <div class="col-md-2 mb-1">
 
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
                 <input type="text" th:field="*{id}" id="form31" class="form-control">
                 <label for="form31" class="active">ID</label>
+                <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
               </div>
 
+
             </div>
-            <div class="col-md-5 mb-5">
+            <div class="col-md-5 mb-1">
 
                 <div class="md-form md-outline">
                   <i class="fas fa-film prefix"></i>
                   <input type="text" th:field="*{ten}" id="form31" class="form-control">
                   <label for="form31" class="active">Tên</label>
+                  <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                 </div>
-  
+
             </div>
-            <div class="col-md-5 mb-5">
+            <div class="col-md-5 mb-1">
 
               <!-- Name -->
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
                 <option th:value="'0'" th:text="Hiện"  ></option>
                 <option th:value="'1'" th:text="Ẩn" ></option>
               </select><label class="mdb-main-label active">Trạng thái</label>
-            </div>  
+            </div>
             
             <!-- Grid column -->
 
           </div>
 
           <div class="row">
-            <div class="col-md-12 mb-12">
+            <div class="col-md-12 mb-1">
 
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
