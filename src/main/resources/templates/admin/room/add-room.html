@@ -11,6 +11,7 @@
 
   <!-- Main layout -->
   <main layout:fragment="content">
+    <form th:action="@{/admin/room/add-room}" th:object="${room}" method="post">
     <div class="container-fluid">
 
     
@@ -33,7 +34,7 @@
             <div class="col-md-2 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input  type="text" id="form31" class="form-control">
+                <input th:field="*{id}" type="text" id="form31" class="form-control">
                 <label for="form31" class="active">ID</label>
               </div>
 
@@ -44,8 +45,8 @@
             <div class="col-md-4 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-door-closed prefix"></i>
-                <input type="text" id="form31" class="form-control">
-                <label for="form31" class="active">Tên Phòng</label>
+                <input th:field="*{ten}" type="text" id="form311" class="form-control">
+                <label for="form311" class="active">Tên Phòng</label>
               </div>
 
             </div>
@@ -55,10 +56,9 @@
             <div class="col-md-3 mb-4">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option value="1">Hiện</option>
+                <option value="0">Ẩn</option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>
@@ -75,7 +75,7 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="button" class="btn blue-gradient btn-rounded float-right">Thêm</button>
+              <button type="submit" class="btn blue-gradient btn-rounded float-right">Thêm</button>
 
             </div>
             <!-- Grid column -->
@@ -90,6 +90,7 @@
 
 
     </div>
+    </form>
   </main>
   <!-- Main layout -->
 

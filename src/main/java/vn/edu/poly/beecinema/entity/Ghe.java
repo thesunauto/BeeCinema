@@ -1,8 +1,6 @@
 package vn.edu.poly.beecinema.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,14 +9,15 @@ import java.util.Collection;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ghe")
 public class Ghe implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private String id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "idphong", nullable = false)
@@ -32,8 +31,8 @@ public class Ghe implements Serializable {
     @ToString.Exclude
     private Dayghe dayghe;
 
-    @Column(name = "ten", nullable = false)
-    private String ten;
+    @Column(name = "col", nullable = false)
+    private Integer col;
 
     @ManyToOne
     @JoinColumn(name = "idloaighe", nullable = false)

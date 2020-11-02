@@ -45,9 +45,9 @@ public class MovieTypeController {
     }
 
     @PostMapping("/add-movie-type")
-    public String saveMovieType(@Valid @ModelAttribute("loaiPhim") LoaiPhim loaiPhim ,
+    public String saveMovieType(@Valid @ModelAttribute("loaiPhim") LoaiPhim loaiPhim ,BindingResult bindingResult,
                                 @ModelAttribute("id") String idLoaiPhim,
-                                BindingResult bindingResult, Model model,  Authentication authentication){
+                                 Model model,  Authentication authentication){
         if(bindingResult.hasErrors()){
 
         }else if(loaiPhimService.findLoaiPhimById(idLoaiPhim).isPresent()){

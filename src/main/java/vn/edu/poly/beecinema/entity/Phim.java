@@ -65,9 +65,6 @@ public class Phim implements Serializable {
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
-    @Column(name = "idquocgia", nullable = false)
-    private String idquocgia;
-
     @OneToMany(mappedBy = "phim",cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
