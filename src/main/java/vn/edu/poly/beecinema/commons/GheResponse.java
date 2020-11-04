@@ -15,4 +15,10 @@ public class GheResponse {
     private String tenDay;
     private String idLoaiGhe;
     private Integer trangthai;
+    /**
+     * @trangthai = 0 ghế sẳn sàng
+     * @trangthai = 1 ghế đã có vé
+     * @trangthai = 2 ghế đang được chọn
+     * @trangthai = 3 ghế không thể chọn là đường đi hay gì đó
+     */
 }
