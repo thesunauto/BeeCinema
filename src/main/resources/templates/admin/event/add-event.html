@@ -26,28 +26,32 @@
           <!-- /Card image -->
           <!-- Section heading -->
           <div class="card-body ">
-
+            <form th:object="${sukien}" th:action="@{/admin/event/add-event}" action="#" method="post">
           <!-- Grid row -->
+              <div th:switch="${messages}">
+                <p th:case="'thanhcong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+                <p th:case="'trungid'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
+              </div>
           <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <form class="md-form">
-                <div class="file-field">
-                  <div class="z-depth-1-half mb-4">
-                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid"
-                      alt="example placeholder">
-                  </div>
-                  <div class="d-flex justify-content-center">
-                    <div class="btn btn-mdb-color btn-rounded float-left">
-                      <span>Choose file</span>
-                      <input type="file">
-                    </div>
-                  </div>
-                </div>
-              </form>
+<!--            <div class="col-md-3 mb-4">-->
+<!--              <form class="md-form">-->
+<!--                <div class="file-field">-->
+<!--                  <div class="z-depth-1-half mb-4">-->
+<!--                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid"-->
+<!--                      alt="example placeholder">-->
+<!--                  </div>-->
+<!--                  <div class="d-flex justify-content-center">-->
+<!--                    <div class="btn btn-mdb-color btn-rounded float-left">-->
+<!--                      <span>Choose file</span>-->
+<!--                      <input type="file">-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </form>-->
 
-            </div>
+<!--            </div>-->
             <!-- Grid column -->
 
             <!-- Grid column -->
@@ -60,8 +64,9 @@
             <div class="col-md-3 ">
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input  type="text" id="form31" class="form-control" disabled value="100">
+                <input  type="text" th:field="*{id}" id="form31" class="form-control" >
                 <label for="form31" class="active">ID</label>
+                <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -71,8 +76,9 @@
             <div class="col-md-5 ">
               <div class="md-form md-outline">
                 <i class="fas fa-star prefix"></i>
-                <input type="text" id="form31" class="form-control">
+                <input type="text" th:field="*{ten}" id="form31" class="form-control">
                 <label for="form31" class="active">Tên Sự kiện</label>
+                <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -82,7 +88,7 @@
             <div class="col-md-4 ">
               <div class="md-form md-outline">
                 <i class="fas fa-money-bill prefix"></i>
-                <input  type="text" id="form31" class="form-control">
+                <input  type="text" th:field="*{giam}" id="form31" class="form-control">
                 <label for="form31" class="active">Giảm Giá</label>
               </div>
 
@@ -99,7 +105,7 @@
             <div class="col-md-12">
               <div class="md-form md-outline">
                 <i class="fas fa-clipboard prefix"></i>
-                <textarea class="form-control" id="exampleFormControlTextarea3" rows="6"></textarea>
+                <textarea type="textarea" th:field="*{mota}" id="form31" class="form-control"></textarea>
                 <label for="form31" class="active">Mô tả</label>
               </div>
 
@@ -144,10 +150,9 @@
             <div class="col-md-4 mb-4">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:value="'0'" th:text="Hiện" ></option>
+                <option th:value="'1'" th:text="Ẩn"></option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>
@@ -163,12 +168,13 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 center">
 
-              <button type="button" class="btn blue-gradient btn-rounded float-right ">THÊM</button>
+              <button type="submit" class="btn blue-gradient btn-rounded float-right ">THÊM</button>
 
             </div>
             <!-- Grid column -->
 
           </div>
+            </form>
           <!-- Grid row -->
           </div>
         </div>

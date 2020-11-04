@@ -3,6 +3,7 @@ package vn.edu.poly.beecinema.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -14,6 +15,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class Sukien implements Serializable {
 
+    @NotBlank(message = "Vui lòng nhập ID")
     @Id
     @Column(name = "id", nullable = false)
     private String id;
@@ -24,6 +26,7 @@ public class Sukien implements Serializable {
     @EqualsAndHashCode.Exclude
     private Taikhoan taikhoan;
 
+    @NotBlank(message = "Vui lòng nhập Tên sự kiện")
     @Column(name = "ten", nullable = false)
     private String ten;
 

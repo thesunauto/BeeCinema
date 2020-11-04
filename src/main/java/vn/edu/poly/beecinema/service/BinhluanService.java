@@ -13,4 +13,6 @@ public interface BinhluanService {
     void deleteBinhluan(Integer id);
 
     Optional<Binhluan> findBinhluanById(Integer id);
+
+
 }

@@ -2,7 +2,7 @@ package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.edu.poly.beecinema.entity.Ngonngu;
+import vn.edu.poly.beecinema.entity.NgonNgu;
 import vn.edu.poly.beecinema.repository.NgonNguRepository;
 import vn.edu.poly.beecinema.service.NgonNguService;
 
@@ -13,11 +13,11 @@ import java.util.Optional;
 public class NgonNguServiceImpl implements NgonNguService {
     @Autowired private NgonNguRepository ngonNguRepository;
     @Override
-    public List<Ngonngu> getAllNgonNgu() {  return (List<Ngonngu>) ngonNguRepository.findAll();
+    public List<NgonNgu> getAllNgonNgu() {  return (List<NgonNgu>) ngonNguRepository.findAll();
     }
 
     @Override
-    public void saveNgonNgu(Ngonngu ngonNgu) {
+    public void saveNgonNgu(NgonNgu ngonNgu) {
         ngonNguRepository.save(ngonNgu);
     }
 
@@ -26,7 +26,7 @@ public class NgonNguServiceImpl implements NgonNguService {
     }
 
     @Override
-    public Optional<Ngonngu> findNgonNguById(String id) {
+    public Optional<NgonNgu> findNgonNguById(String id) {
         return ngonNguRepository.findById(id);
     }
 }

@@ -12,7 +12,7 @@ import java.util.Collection;
 @Entity
 @Data
 @Table(name = "ngonngu")
-public class Ngonngu implements Serializable {
+public class NgonNgu implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)

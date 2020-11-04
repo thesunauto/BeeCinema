@@ -1,16 +1,16 @@
 package vn.edu.poly.beecinema.service;
 
-import vn.edu.poly.beecinema.entity.Ngonngu;
+import vn.edu.poly.beecinema.entity.NgonNgu;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface NgonNguService {
-    List<Ngonngu> getAllNgonNgu();
+    List<NgonNgu> getAllNgonNgu();
 
-    void saveNgonNgu(Ngonngu ngonNgu);
+    void saveNgonNgu(NgonNgu ngonNgu);
 
     void deleteNgonNgu(String id);
 
-    Optional<Ngonngu> findNgonNguById(String id);
+    Optional<NgonNgu> findNgonNguById(String id);
 }
