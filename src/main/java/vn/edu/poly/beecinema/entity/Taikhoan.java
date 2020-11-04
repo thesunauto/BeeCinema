@@ -1,12 +1,15 @@
 package vn.edu.poly.beecinema.entity;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name = "taikhoan")
@@ -15,13 +18,16 @@ import java.util.Collection;
 @AllArgsConstructor
 public class Taikhoan implements Serializable {
 
+    @NotBlank(message = "Vui lòng nhập Tài khoản")
     @Id
     @Column(name = "username", nullable = false)
     private String username;
 
+    @NotBlank(message = "Vui lòng nhập Mật khẩu")
     @Column(name = "matkhau", nullable = false)
     private String matkhau;
 
+    @NotBlank(message = "Vui lòng nhập Họ Tên")
     @Column(name = "ten", nullable = false)
     private String ten;
 
@@ -29,14 +35,17 @@ public class Taikhoan implements Serializable {
     private Integer gioitinh;
 
     @Column(name = "ngaysinh")
-    private LocalDate ngaysinh;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date ngaysinh;
 
     @Column(name = "diachi")
     private String diachi;
 
+    @NotBlank(message = "Vui lòng nhập số Điện thoại")
     @Column(name = "sodienthoai")
     private String sodienthoai;
 
+    @NotBlank(message = "Vui lòng nhập Email")
     @Column(name = "email")
     private String email;
 

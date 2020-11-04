@@ -26,54 +26,34 @@
           <!-- /Card image -->
           <!-- Section heading -->
           <div class="card-body ">
+            <form th:object="${khungGio}" th:action="@{/admin/showtime/add-showtime}" action="#" method="post">
+              <!-- Section heading -->
+              <div th:switch="${messages}">
+                <p th:case="'thanhcong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+                <p th:case="'trungid'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
+              </div>
           <!-- Grid row -->
-          <div class="row col-10 m-auto">
+          <div class="row ">
 
             <!-- Grid column -->
             <div class="col-md-2 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input  type="text" id="form31" class="form-control">
+                <input  type="text" th:field="*{id}" id="form31" class="form-control">
                 <label for="form31" class="active">ID</label>
+                <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
               </div>
 
             </div>
             <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-4 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-clock prefix"></i>
-                <input type="text" id="form31" class="form-control">
-                <label for="form31" class="active">Tên Khung Giờ</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-money-bill prefix"></i>
-                <input  type="text" id="form31" class="form-control">
-                <label for="form31" class="active">Giá</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-          </div>
-          <!-- Grid row -->
-
-           <!-- Grid row -->
-           <div class="row col-10 m-auto">
 
             <!-- Grid column -->
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-hourglass-start prefix"></i>
-                <input  type="text" id="form31" class="form-control">
+                <input type="time" th:field="*{batdau}" id="form31" class="form-control">
                 <label for="form31" class="active">Bắt Đầu</label>
+                <p th:if="${#fields.hasErrors('batdau')}" th:errors="*{batdau}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -83,8 +63,9 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-hourglass-end prefix"></i>
-                <input type="text" id="form31" class="form-control">
+                <input type="time" th:field="*{ketthuc}" id="form31" class="form-control">
                 <label for="form31" class="active">Kết Thúc</label>
+                <p th:if="${#fields.hasErrors('ketthuc')}" th:errors="*{ketthuc}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -94,10 +75,9 @@
             <div class="col-md-3 mb-4">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:value="'0'" th:text="Hiện"  ></option>
+                <option th:value="'1'" th:text="Ẩn" ></option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>
@@ -113,13 +93,14 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="button" class="btn blue-gradient btn-rounded float-right">Thêm</button>
+              <button type="submit" class="btn blue-gradient btn-rounded float-right">Thêm</button>
 
             </div>
             <!-- Grid column -->
 
           </div>
           <!-- Grid row -->
+            </form>
           </div>
         </div>
       </div>

@@ -26,6 +26,12 @@
           <!-- /Card image -->
           <!-- Section heading -->
           <div class="card-body ">
+            <form th:object="${suatChieu}" th:action="@{/admin/screenings/add-screenings}" action="#" method="post">
+            <!-- Section heading -->
+            <div th:switch="${messages}">
+              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+              <p th:case="'trungid'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
+            </div>
           <!-- Grid row -->
           <div class="row">
 
@@ -33,7 +39,7 @@
             <div class="col-md-2 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input  type="text" id="form31" class="form-control" disabled value="100">
+                <input  type="text" th:field="*{id}" id="form31" class="form-control"  >
                 <label for="form31" class="active">ID</label>
               </div>
 
@@ -42,10 +48,8 @@
 
             <!-- Grid column -->
             <div class="col-md-4 mb-4">
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{phim}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:each="phim : ${@phimServiceImpl.getAllPhim()}" th:value="${phim.id}" th:text="${phim.ten}"></option>
               </select><label class="mdb-main-label active">Tên Phim</label>
 
             </div>
@@ -55,11 +59,21 @@
             <div class="col-md-3 mb-4">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{phong}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:each="phong : ${@phongServiceImpl.getAllPhong()}" th:value="${phong.id}" th:text="${phong.ten}"></option>
               </select><label class="mdb-main-label active">Tên Phòng</label>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-4">
+
+              <!-- Name -->
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:value="'0'" th:text="Hiện"  ></option>
+                <option th:value="'1'" th:text="Ẩn" ></option>
+              </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>
             <!-- Grid column -->
@@ -74,7 +88,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-day prefix"></i>
-                <input type="date" id="form31" class="form-control">
+                <input type="date" th:field="*{ngaychieu}" id="form31" class="form-control">
                 <label for="form31" class="active">Ngày Chiếu</label>
               </div>
 
@@ -83,10 +97,8 @@
 
             <!-- Grid column -->
             <div class="col-md-3 mb-4">
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{khunggio}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:each="khunggio : ${@khungGioServiceImpl.getAllKhungGio()}" th:value="${khunggio.id}" th:text="${khunggio.batdau} + ' - ' + ${khunggio.ketthuc}"></option>
               </select><label class="mdb-main-label active">Khung Giờ</label>
 
             </div>
@@ -96,7 +108,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-money-bill prefix"></i>
-                <input  type="text" id="form31" class="form-control">
+                <input  type="number" th:field="*{dongia}" id="form31" class="form-control">
                 <label for="form31" class="active">Đơn Giá</label>
               </div>
 
@@ -106,12 +118,11 @@
             <!-- Grid column -->
             <div class="col-md-3 mb-4">
 
-              <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
-              </select><label class="mdb-main-label active">Trạng thái</label>
+              <div class="md-form md-outline">
+                <i class="fas fa-money-bill prefix"></i>
+                <input  type="number" th:field="*{phuthuyonline}" id="form31" class="form-control">
+                <label for="form31" class="active">Phút Hủy Online</label>
+              </div>
 
             </div>
             <!-- Grid column -->
@@ -126,13 +137,14 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 center">
 
-              <button type="button" class="btn blue-gradient btn-rounded float-right ">Cập Nhật</button>
+              <button type="submit" class="btn blue-gradient btn-rounded float-right ">THÊM</button>
 
             </div>
             <!-- Grid column -->
 
           </div>
           <!-- Grid row -->
+            </form>
           </div>
         </div>
       </div>
