@@ -91,8 +91,14 @@
         $('.mdb-select').materialSelect();
         // SideNav Initialization
         $(".button-collapse").sideNav();
+
     });
 
+$(window).on('beforeunload',function () {
+    $.ajax({
+        url:'/api/employee/close'
+    });
+})
 
 
 </script>
