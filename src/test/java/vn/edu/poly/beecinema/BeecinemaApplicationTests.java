@@ -11,6 +11,8 @@ import vn.edu.poly.beecinema.repository.GheRepository;
 import vn.edu.poly.beecinema.repository.KhunggioRepository;
 import vn.edu.poly.beecinema.repository.VeRepository;
 import vn.edu.poly.beecinema.service.DayGheService;
+import vn.edu.poly.beecinema.service.VeService;
+import vn.edu.poly.beecinema.service.impl.VeServiceImpl;
 
 @SpringBootTest
 class BeecinemaApplicationTests {
@@ -18,16 +20,15 @@ class BeecinemaApplicationTests {
     private DayGheService dayGheService;
     @Autowired
     private GheRepository gheRepository;
+    @Autowired
+    private DaygheRepository daygheRepository;
 @Autowired
-   private KhunggioRepository khunggioRepository;
-@Autowired
-  private  DaygheRepository daygheRepository;
+private VeService veService;
+
     @Test
     void contextLoads() {
-        for (Dayghe ve: dayGheService.findDayGheByPhong("1")
-             ) {
-            System.out.println(ve.getId() + " - " + ve.getTen());
-        }
+        System.out.println(veService.IsExists(1,9));
+
 
     }
 

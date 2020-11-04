@@ -27,9 +27,11 @@
                                     <label th:if="${film.get().suatchieus.isEmpty()}"
                                            class="d-flex justify-content-center btn btn-danger">Không có suất chiếu
                                         nào</label>
-                                    <option class="btn btn-danger mx-1 rdoSuatChieu" th:each="sc : ${film.get().suatchieus}" th:value="${sc.getId()}">
+                                    <option class="btn btn-danger mx-1 rdoSuatChieu"
+                                            th:each="sc : ${film.get().suatchieus}" th:value="${sc.getId()}">
                                         <input type="radio" name="options" autocomplete="off">
-                                        <div th:text="${sc.phong.getTen()}"></div> |
+                                        <div th:text="${sc.phong.getTen()}"></div>
+                                        |
                                         <div th:text="${sc.khunggio.getBatdau() +' - '+sc.khunggio.getKetthuc()}"></div>
 
                                     </option>
@@ -58,7 +60,56 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button class="float-right btn purple-gradient" data-toggle="modal"
+                                        data-target="#modalContactForm">Thanh toán
+                                </button>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Thanh toán</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-5">
+                            <i class="fas fa-user prefix grey-text"></i>
+                            <input type="text" id="form34" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                        </div>
+
+                        <div class="md-form mb-5">
+                            <i class="fas fa-envelope prefix grey-text"></i>
+                            <input type="email" id="form29" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                        </div>
+
+                        <div class="md-form mb-5">
+                            <i class="fas fa-tag prefix grey-text"></i>
+                            <input type="text" id="form32" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fas fa-pencil prefix grey-text"></i>
+                            <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                            <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
                     </div>
                 </div>
             </div>
@@ -72,57 +123,62 @@
         $(document).ready(function () {
 
             var listDayGhe = [];
-            var idSuatChieu = 1;
+            var idSuatChieu = null;
 
-            $(document).on('click','option.ActionGhe',function () {
+
+            $(document).on('click', 'option.ActionGhe', function () {
                 $.ajax({
-                    url : "/api/employee/setghefocus",
-                    type : "POST",
-                    cache : false,
-                    async : true,
-                    contentType : "application/json; charset=UTF-8",
-                    data : JSON.stringify({
-                        "idsuatchieu" : parseInt(idSuatChieu),
-                        "idghe" : parseInt($(this).val()),
-                        "stt" : 1
+                    url: "/api/employee/setghefocus",
+                    type: "POST",
+                    cache: false,
+                    async: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify({
+                        "idsuatchieu": parseInt(idSuatChieu),
+                        "idghe": parseInt($(this).val()),
+                        "stt": 2
                     }),
-                    datatype : "json",
-                    success : function(data) {
+                    datatype: "json",
+                    success: function (data) {
 
                     },
-                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
                         alert(XMLHttpRequest.status + " : " + errorThrown);
                     }
                 });
                 loadGhe();
             });
 
-            $(document).on('click','option.rdoSuatChieu',function () {
+            $(document).on('click', 'option.rdoSuatChieu', function () {
                 idSuatChieu = $(this).val();
                 loadGhe();
             });
             setInterval(function () {
-                if(idSuatChieu!=''){
+                if (idSuatChieu != '') {
                     loadGhe();
-                };
-            },1000);
+                }
+                ;
+            }, 1000);
+
             function loadGhe() {
-                $.ajax({
-                    url: '/api/employee/getGhe/'+idSuatChieu,
-                    type: 'GET',
-                    dataType: 'JSON',
-                    contentType: 'application/json',
-                    processData: false,
-                    success: function (data) {
-                        listDayGhe = data;
-                    },
-                    complete: function () {
-                        fillGhe();
-                    },
-                    error: function () {
-                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
-                    }
-                });
+                if (idSuatChieu != null) {
+                    $.ajax({
+                        url: '/api/employee/getGhe/' + idSuatChieu,
+                        type: 'GET',
+                        dataType: 'JSON',
+                        contentType: 'application/json',
+                        processData: false,
+                        success: function (data) {
+                            listDayGhe = data;
+                        },
+                        complete: function () {
+                            fillGhe();
+                        },
+                        error: function () {
+                            toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                        }
+                    });
+                }
             };
 
             function fillGhe() {
@@ -131,13 +187,13 @@
 
 
                     content += '<tr class="text-center">\n' +
-                        '<td class="white-text">Dãy '+listDayGhe[i].ten+'</td>\n';
-                        var listGhe = listDayGhe[i].gheResponses;
-                    for(var ii = 0;ii<listGhe.length;ii++){
-                        content += '<td><option value="'+listGhe[ii].id+'" class="ActionGhe btn '+(listGhe[ii].trangthai==0?'btn-info':'btn-danger')+' text-center"><i class="fas fa-chair"></i> '+listGhe[ii].tenDay+listGhe[ii].col+'</option></td>';
+                        '<td class="white-text">Dãy ' + listDayGhe[i].ten + '</td>\n';
+                    var listGhe = listDayGhe[i].gheResponses;
+                    for (var ii = 0; ii < listGhe.length; ii++) {
+                        content += '<td><option ' + ((listGhe[ii].trangthai == 0 || listGhe[ii].trangthai == 2) ? '' : 'disabled') + ' value="' + listGhe[ii].id + '" class="ActionGhe btn ' + (listGhe[ii].trangthai == 0 ? 'btn-info' : listGhe[ii].trangthai == 2 ? 'btn-warning' : listGhe[ii].trangthai == 3 ? 'btn-warning' : listGhe[ii].trangthai == 1 ? 'btn-danger' : 'btn-light') + ' text-center"><i class="fas fa-chair"></i> ' + listGhe[ii].tenDay + listGhe[ii].col + '</option></td>';
                     }
 
-                    content += '<td class="white-text">Dãy '+listDayGhe[i].ten+'</td>\n' +
+                    content += '<td class="white-text">Dãy ' + listDayGhe[i].ten + '</td>\n' +
                         '</tr>';
                 }
                 ;
