@@ -24,9 +24,15 @@
 
       <!-- Section: Edit Account -->
       <section class="section">
+        <form th:object="${taikhoan}" th:action="@{/admin/profile/update-profile}" action="#" method="post">
+          <div th:switch="${messages}">
+            <p th:case="'thanhcong'" class="alert alert-success" role="alert">Cập nhật thành công!</p>
+          </div>
         <!-- First row -->
         <div class="row">
           <!-- First column -->
+
+
           <div class="col-lg-4 mb-4">
 
             <!-- Card -->
@@ -72,7 +78,7 @@
               <div class="card-body card-body-cascade text-center">
 
                 <!-- Edit Form -->
-                <form>
+
                   <!-- First row -->
 
                   <div class="row">
@@ -80,15 +86,16 @@
                     <!-- First column -->
                     <div class="col-md-6">
                       <div class="md-form mb-0">
-                        <input type="text" id="form2" class="form-control ">
+                        <input type="text" th:field="*{username}" id="form2" class="form-control " readonly>
                         <label for="form2" >ID</label>
                       </div>
                     </div>
                     <!-- Second column -->
                     <div class="col-md-6">
                       <div class="md-form mb-0">
-                        <input type="text" id="form2" class="form-control">
+                        <input type="text" th:field="*{ten}" id="form2" class="form-control">
                         <label for="form2" >Họ Tên</label>
+                        <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                       </div>
                     </div>
                   </div>
@@ -100,23 +107,23 @@
                     <div class="col-md-6">
                       <div class="md-form mb-0">
                         <div class="form-check form-check-inline">
-                          <input type="radio" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample" checked>
+                          <input type="radio" th:field="*{gioitinh}" value="0" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample" checked>
                           <label class="form-check-label" for="materialInline1">Nam</label>
                         </div>
                         
                         <!-- Material inline 2 -->
                         <div class="form-check form-check-inline">
-                          <input type="radio" class="form-check-input" id="materialInline2" name="inlineMaterialRadiosExample">
+                          <input type="radio" th:field="*{gioitinh}" value="1" class="form-check-input" id="materialInline2" name="inlineMaterialRadiosExample">
                           <label class="form-check-label" for="materialInline2">Nữ</label>
                         </div>
-                        <label for="form81" data-error="wrong" data-success="right">Giới tính:</label>
+                        <label for="materialInline2" data-error="wrong" data-success="right">Giới tính:</label>
                       </div>
                     </div>
 
                     <!-- Second column -->
                     <div class="col-md-6">
                       <div class="md-form mb-0">
-                        <input type="text" id="form82" class="form-control ">
+                        <input type="date" th:field="*{ngaysinh}" id="form82" class="form-control ">
                         <label for="form82" >Ngày sinh</label>
                       </div>
                     </div>
@@ -129,16 +136,18 @@
                     <!-- First column -->
                     <div class="col-md-6">
                       <div class="md-form mb-0">
-                        <input type="email" id="form76" class="form-control ">
+                        <input type="email" th:field="*{email}" id="form76" class="form-control ">
                         <label for="form76">Email</label>
+                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger text-center"></p>
                       </div>
                     </div>
                     <!-- Second column -->
 
                     <div class="col-md-6">
                       <div class="md-form mb-0">
-                        <input type="text" id="form77" class="form-control">
+                        <input type="text" th:field="*{sodienthoai}" id="form77" class="form-control">
                         <label for="form77" >Điện thoại</label>
+                        <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}" class="text-danger text-center"></p>
                       </div>
                     </div>
                   </div>
@@ -150,7 +159,7 @@
                     <!-- First column -->
                     <div class="col-md-6">
                       <div class="md-form mb-0">
-                        <textarea type="text" id="form78" class="md-textarea form-control" rows="3"></textarea>
+                        <textarea type="text" th:field="*{diachi}" id="form78" class="md-textarea form-control" rows="3"></textarea>
                         <label for="form78">Địa chỉ</label>
                       </div>
                     </div>
@@ -158,7 +167,7 @@
 
                     <div class="col-md-6">
                       <div class="md-form mb-0">
-                        <textarea type="text" id="form78" class="md-textarea form-control" rows="3"></textarea>
+                        <textarea type="text" th:field="*{mota}" id="form78" class="md-textarea form-control" rows="3"></textarea>
                         <label for="form78">Mô tả</label>
                       </div>
                     </div>
@@ -167,12 +176,11 @@
 
                   <div class="row">
                     <div class="col-md-12 text-center my-4">
-                      <input type="submit" value="Cập Nhật" class="btn blue-gradient btn-rounded">
+                      <button type="submit" class="btn blue-gradient btn-rounded">CẬP NHẬT</button>
                     </div>
                   </div>
                   <!-- Fourth row -->
 
-                </form>
                 <!-- Edit Form -->
 
               </div>
@@ -186,7 +194,7 @@
 
         </div>
         <!-- First row -->
-
+        </form>
       </section>
       <!-- Section: Edit Account -->
 

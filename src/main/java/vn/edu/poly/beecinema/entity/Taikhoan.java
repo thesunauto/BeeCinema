@@ -18,16 +18,17 @@ import java.util.Date;
 @AllArgsConstructor
 public class Taikhoan implements Serializable {
 
-    @NotBlank(message = "Vui lòng nhập UserName")
+
+    @NotBlank(message = "Vui lòng nhập Tài khoản")
     @Id
     @Column(name = "username", nullable = false)
     private String username;
 
-    @NotBlank(message = "Vui lòng nhập Password")
+    @NotBlank(message = "Vui lòng nhập Mật khẩu")
     @Column(name = "matkhau", nullable = false)
     private String matkhau;
 
-    @NotBlank(message = "Vui lòng nhập Tên")
+    @NotBlank(message = "Vui lòng nhập Họ Tên")
     @Column(name = "ten", nullable = false)
     private String ten;
 
@@ -41,9 +42,11 @@ public class Taikhoan implements Serializable {
     @Column(name = "diachi")
     private String diachi;
 
+    @NotBlank(message = "Vui lòng nhập số Điện thoại")
     @Column(name = "sodienthoai")
     private String sodienthoai;
 
+    @NotBlank(message = "Vui lòng nhập Email")
     @Column(name = "email")
     private String email;
 

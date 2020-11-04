@@ -5,7 +5,10 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collection;
@@ -17,6 +20,7 @@ public class Khunggio implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "Vui lòng nhập ID")
     @Id
     @Column(name = "id", nullable = false)
     private String id;
@@ -27,9 +31,11 @@ public class Khunggio implements Serializable {
     @ToString.Exclude
     private Taikhoan taikhoan;
 
+    @NotNull(message = "Vui lòng nhập giờ Bắt đầu")
     @Column(name = "batdau", nullable = false)
     private LocalTime batdau;
 
+    @NotNull(message = "Vui lòng nhập giờ Kết thúc")
     @Column(name = "ketthuc", nullable = false)
     private LocalTime ketthuc;
 
