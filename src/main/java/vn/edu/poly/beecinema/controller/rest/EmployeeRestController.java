@@ -13,10 +13,7 @@ import vn.edu.poly.beecinema.commons.VeResponse;
 import vn.edu.poly.beecinema.config.HttpSessionConfig;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
-import vn.edu.poly.beecinema.service.DayGheService;
-import vn.edu.poly.beecinema.service.GheService;
-import vn.edu.poly.beecinema.service.PhimService;
-import vn.edu.poly.beecinema.service.SuatChieuService;
+import vn.edu.poly.beecinema.service.*;
 import vn.edu.poly.beecinema.storage.StorageService;
 
 import javax.annotation.PostConstruct;
@@ -39,7 +36,10 @@ public class EmployeeRestController {
     private StorageService storageService;
     @Autowired
     private DayGheService dayGheService;
-    @Autowired private GheService gheService;
+    @Autowired
+    private GheService gheService;
+    @Autowired
+    private VeService veService;
 
     public EmployeeRestController(StorageService storageService) {
         this.storageService = storageService;
@@ -94,7 +94,7 @@ public class EmployeeRestController {
 
         return ResponseEntity.ok().body(phim);
 
-}
+    }
 
     @GetMapping("/getResourse/{filename:.+}")
     public ResponseEntity getResourseFile(@PathVariable String filename) {
@@ -109,54 +109,81 @@ public class EmployeeRestController {
     }
 
 
-
     @GetMapping("/getGhe/{idsuatchieu}")
-    public ResponseEntity getGhe(HttpSessionConfig httpSessionConfig,HttpSession httpSession, @PathVariable Integer idsuatchieu){
+    public ResponseEntity getGhe(HttpSessionConfig httpSessionConfig, HttpSession httpSession, @PathVariable Integer idsuatchieu) {
         List<VeResponse> veResponses = new ArrayList<>();
+        final List<VeResponse> veResponsesCurent = (List<VeResponse>) httpSession.getAttribute("veresponse");
         List<HttpSession> httpSessions = httpSessionConfig.getActiveSessions();
-        httpSessions.forEach(session -> {
-            if(session.getAttribute("veresponse")!=null){
-                veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
-            }
-        });
+        if (!httpSessions.isEmpty()) {
+            httpSessions.forEach(session -> {
+                if (session.getAttribute("veresponse") != null) {
+                    veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
+                }
+            });
+        }
+
+
 
         List<DayGheResponse> gheResponses = new ArrayList<>();
         Suatchieu suatchieu = suatChieuService.findById(idsuatchieu);
         dayGheService.findDayGheByPhong(suatchieu.getPhong().getId()).forEach(dayghe -> {
             List<GheResponse> gheResponses1 = new ArrayList<>();
-            gheService.findByPhongAndDayGhe(suatchieu.getPhong().getId(),dayghe.getId()).forEach(ghe -> {
+            gheService.findByPhongAndDayGhe(suatchieu.getPhong().getId(), dayghe.getId()).forEach(ghe -> {
                 Integer stt = ghe.getTrangthai();
-                for(VeResponse veResponse : veResponses){
-                    if(veResponse.getIdsuatchieu().equals(suatchieu.getId()) && veResponse.getIdghe().equals(ghe.getId())){
-                        stt = veResponse.getStt();
+                for (VeResponse veResponse : veResponses) {
+                    if (veResponse.getIdsuatchieu().equals(suatchieu.getId())) {
+                        if (veResponse.getIdghe().equals(ghe.getId())) {
+                            stt = 3;
+                            for(VeResponse veResponse1 : veResponsesCurent){
+                                if(veResponse1.getIdsuatchieu().equals(suatchieu.getId())){
+                                    if(veResponse1.getIdghe().equals(ghe.getId())){
+                                        stt =2;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-                gheResponses1.add(new GheResponse(ghe.getId(),ghe.getCol(),ghe.getPhong().getId(),ghe.getDayghe().getId(),ghe.getDayghe().getTen(),ghe.getLoaighe().getId(),stt));
+
+
+
+                if (veService.IsExists(suatchieu.getId(), ghe.getId())) {
+                    stt = 1;
+                }
+                if (ghe.getTrangthai() == 1) {
+                    stt = 4;
+                }
+
+                gheResponses1.add(new GheResponse(ghe.getId(), ghe.getCol(), ghe.getPhong().getId(), ghe.getDayghe().getId(), ghe.getDayghe().getTen(), ghe.getLoaighe().getId(), stt));
             });
-            gheResponses.add(new DayGheResponse(dayghe.getId(),dayghe.getTen(),gheResponses1));
+            gheResponses.add(new DayGheResponse(dayghe.getId(), dayghe.getTen(), gheResponses1));
         });
         return ResponseEntity.ok().body(gheResponses);
     }
 
     @PostMapping("/setghefocus")
     @ResponseBody
-    public ResponseEntity setGheFocus(HttpSession httpSession, @RequestBody VeResponse veResponse){
-        if(httpSession.getAttribute("veresponse")==null){
-            httpSession.setAttribute("veresponse",new ArrayList<VeResponse>());
+    public ResponseEntity setGheFocus(HttpSession httpSession, @RequestBody VeResponse veResponse) {
+        if (httpSession.getAttribute("veresponse") == null) {
+            httpSession.setAttribute("veresponse", new ArrayList<VeResponse>());
         }
         List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
-        for (int i = 0;i<veResponses.size();i++){
-            if(veResponse.getIdsuatchieu().equals(veResponses.get(i).getIdsuatchieu())){
-                if(veResponse.getIdghe().equals(veResponses.get(i).getIdghe())){
+        for (int i = 0; i < veResponses.size(); i++) {
+            if (veResponse.getIdsuatchieu().equals(veResponses.get(i).getIdsuatchieu())) {
+                if (veResponse.getIdghe().equals(veResponses.get(i).getIdghe())) {
                     veResponses.remove(i);
-                    httpSession.setAttribute("veresponse",veResponses);
+                    httpSession.setAttribute("veresponse", veResponses);
                     return ResponseEntity.ok().body("true");
                 }
             }
         }
         veResponses.add(veResponse);
-        httpSession.setAttribute("veresponse",veResponses);
+        httpSession.setAttribute("veresponse", veResponses);
         return ResponseEntity.ok().body("true");
     }
 
+    @GetMapping("/close")
+    public void killSession(HttpSession session) {
+        session.removeAttribute("veresponse");
+    }
 }
