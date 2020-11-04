@@ -7,8 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.LoaiPhim;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import vn.edu.poly.beecinema.entity.NgonNgu;
-import vn.edu.poly.beecinema.service.LoaiPhimService;
 import vn.edu.poly.beecinema.service.NgonNguService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 

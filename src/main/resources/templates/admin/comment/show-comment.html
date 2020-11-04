@@ -136,8 +136,9 @@
                   <!-- Table body -->
                   <tbody>
                     <tr th:each="binhluan : ${binhluans}">
-                      <td> 
-                        <i class="fas fa-edit text-primary"></i>
+                      <td th:switch="${binhluan.trangthai}">
+                        <span th:case="'0'"><a  th:href="@{antrangthai/{id}(id=${binhluan.id})}" > <i  class="fas fa-eye"></i><a/></span>
+                         <span th:case="'1'"><a  th:href="@{hientrangthai/{id}(id=${binhluan.id})}" ><i  class="fas fa-eye-slash"></i><a/></span>
                         <a th:href="@{/delete?id={id}(id=${binhluan.id})}"><i class="fas fa-trash ml-3 text-danger"></i></a>
                       </td>
                       <td th:text="${binhluan.id}"></td>

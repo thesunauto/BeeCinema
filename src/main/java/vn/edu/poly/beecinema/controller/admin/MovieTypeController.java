@@ -27,7 +27,6 @@ public class MovieTypeController {
     public String showMovieType(Model model){
         List<LoaiPhim> loaiPhim = loaiPhimService.getAllLoaiPhim();
         model.addAttribute("loaiPhim", loaiPhim);
-
         return "admin/movie-type/show-movie-type";
     }
 

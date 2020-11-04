@@ -33,4 +33,6 @@ public class BinhluanServiceimpl implements BinhluanService {
     public Optional<Binhluan> findBinhluanById(Integer id) {
         return binhluanRepository.findById(id);
     }
+
+
 }

@@ -18,6 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Taikhoan implements Serializable {
 
+
     @NotBlank(message = "Vui lòng nhập Tài khoản")
     @Id
     @Column(name = "username", nullable = false)

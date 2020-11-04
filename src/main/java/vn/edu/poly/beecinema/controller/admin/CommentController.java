@@ -49,6 +49,15 @@ public class CommentController {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "/antrangthai", method = RequestMethod.GET)
+    public String anConment(@RequestParam("id") Integer binhluanId, Model model) {
+       Optional<Binhluan> binhluanEdit = binhluanService.findBinhluanById(binhluanId);
+//       Binhluan binhluan ;
+//        binhluanEdit.ifPresent();
+//        binhluanService.saveBinhluan(binhluan);
+        return "redirect:/";
+    }
+
 
 
 

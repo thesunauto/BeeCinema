@@ -20,7 +20,12 @@
               <h3 class="card-header-title">Thêm mới Tài Khoản</h3>  
             </div>
         <div class="card-body">
+          <form th:object="${taikhoan}" th:action="@{/admin/user/add-user}" action="#" method="post">
+            <div th:switch="${messages}">
+              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+              <p th:case="'trungid2'" class="alert alert-danger" role="alert">User name đã tồn tại</p>
 
+            </div>
           <!-- Section heading -->
 
           <!-- Grid row -->
@@ -31,27 +36,35 @@
 
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input type="text" id="form31" class="form-control">
-                <label for="form31" class="active">ID</label>
+                <input type="text" th:field="*{username}" id="form31" class="form-control">
+                <label for="form31" class="active">UserName</label>
+                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger text-center"></p>
               </div>
 
             </div>
 
-            <div class="col-md-2 mb-2">
+<!--            <div class="col-md-2 mb-2">-->
 
-                <div class="md-form md-outline">
-                  <i class="fas fa-key prefix"></i>
-                  <input type="text" id="form31" class="form-control">
-                  <label for="form31" class="active">ID Quyền</label>
-                </div>
-  
-              </div>
+<!--                <div class="md-form md-outline">-->
+<!--                  <i class="fas fa-key prefix"></i>-->
+<!--                  <input type="text" th:field="*{quyen.ten}" id="form31" class="form-control">-->
+<!--                  <label for="form31" class="active">ID Quyền</label>-->
+<!--                </div>-->
+
+<!--              </div>-->
+            <div class="col-md-2 mb-2">
+              <select th:field="*{quyen}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:each="quyen1 : ${@quyenServiceImpl.getAllQuyen()}" th:value="${quyen1.id}" th:text="${quyen1.ten}">Hiện</option>
+              </select><label class="mdb-main-label active">Quyền</label>
+            </div>
+
             <div class="col-md-4 mb-4">
 
                 <div class="md-form md-outline">
                   <i class="fas fa-user prefix"></i>
-                  <input type="text" id="form31" class="form-control">
+                  <input type="text" th:field="*{ten}" id="form31" class="form-control">
                   <label for="form31" class="active">Tên Nhân Viên</label>
+                  <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                 </div>
   
             </div>
@@ -59,10 +72,11 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-lock prefix"></i>
-                  <input type="password" id="form31" class="form-control">
+                  <input type="password" th:field="*{matkhau}" id="form31" class="form-control">
                   <label for="form31" class="active">Mật Khẩu</label>
+                  <p th:if="${#fields.hasErrors('matkhau')}" th:errors="*{matkhau}" class="text-danger text-center"></p>
                 </div>
-  
+
             </div>
         
             <!-- Grid column -->
@@ -76,16 +90,16 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-calendar-alt prefix"></i>
-                  <input type="date" id="form31" class="form-control">
+                  <input type="date" th:field="*{ngaysinh}" id="form31" class="form-control">
                   <label for="form31" class="active">Ngày Sinh</label>
                 </div>
-  
+
               </div>
             <div class="col-md-4 mb-4">
 
               <div class="md-form md-outline">
                 <i class="fas fa-phone prefix"></i>
-                <input type="number" id="form31" class="form-control">
+                <input type="text" th:field="*{sodienthoai}" id="form31" class="form-control">
                 <label for="form31" class="active">Số Điện Thoại</label>
               </div>
 
@@ -95,7 +109,7 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-envelope prefix"></i>
-                  <input type="email" id="form31" class="form-control">
+                  <input type="email"  th:field="*{email}" id="form31" class="form-control">
                   <label for="form31" class="active">Email</label>
                 </div>
   
@@ -109,31 +123,28 @@
             <div class="col-md-4 mb-4">
 
                 <!-- Name -->
-                <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                  <option disabled selected>Choose your option</option>
-                  <option value="2">Nam</option>
-                  <option value="3">Nữ</option>
-                  <option value="3">Khác</option>
+                <select  th:field="*{gioitinh}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                  <option th:value="'0'" th:text="Nam" ></option>
+                  <option th:value="'1'" th:text="Nữ"></option>
                 </select><label class="mdb-main-label active">Giới Tính</label>
   
             </div> 
-            <div class="col-md-4 mb-4">
+<!--            <div class="col-md-4 mb-4">-->
 
-                <div class="md-form md-outline">
-                    <label for="form31"></label>
-                    <!-- <img src="../../img/photo.jpg" name="test" style="width: 200px; height: 120px;"  /> <br><br> -->
-                  <input type="file" id="form31" class="form-control-file">
-                </div>
-  
-            </div>
+<!--                <div class="md-form md-outline">-->
+<!--                    <label for="form31"></label>-->
+<!--                    &lt;!&ndash; <img src="../../img/photo.jpg" name="test" style="width: 200px; height: 120px;"  /> <br><br> &ndash;&gt;-->
+<!--                  <input type="file" id="form31" class="form-control-file">-->
+<!--                </div>-->
+<!--  -->
+<!--            </div>-->
         
             <div class="col-md-4 mb-4">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:value="'0'" th:text="Hiện" ></option>
+                <option th:value="'1'" th:text="Ẩn"></option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>          
@@ -143,7 +154,7 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-address-card prefix"></i>
-                  <textarea type="" id="form31" class="form-control"></textarea>
+                  <textarea type="textarea" th:field="*{diachi}" id="form31" class="form-control"></textarea>
                   <label for="form31" class="active">Địa Chỉ</label>
                 </div>
   
@@ -152,7 +163,7 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
-                  <textarea type="" id="form31" class="form-control"></textarea>
+                  <textarea type="textarea" th:field="*{mota}" id="form31" class="form-control"></textarea>
                   <label for="form31" class="active">Mô tả</label>
                 </div>
   
@@ -171,13 +182,13 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="button" class="btn blue-gradient float-right btn-rounded ">THÊM</button>
+              <button type="submit" class="btn blue-gradient float-right btn-rounded ">THÊM</button>
 
             </div>
             <!-- Grid column -->
 
           </div>
-
+          </form>
         </div>
         </div>
         </div>

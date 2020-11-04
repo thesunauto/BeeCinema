@@ -2,6 +2,7 @@ package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vn.edu.poly.beecinema.entity.LoaiPhim;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.repository.SukienRepository;
 import vn.edu.poly.beecinema.service.SukienService;
@@ -15,11 +16,13 @@ public class SukienServiceimpl implements SukienService {
     private SukienRepository sukienRepository;
 
     @Override
+//    public List<Sukien> getAllSukien() {
+//        List<Sukien> sukiens = sukienRepository.findAll();
+//        return sukiens;
+//    }
     public List<Sukien> getAllSukien() {
-        List<Sukien> sukiens = sukienRepository.findAll();
-        return sukiens;
+        return (List<Sukien>) sukienRepository.findAll();
     }
-
     @Override
     public void saveSukien(Sukien sukien) {
         sukienRepository.save(sukien);
