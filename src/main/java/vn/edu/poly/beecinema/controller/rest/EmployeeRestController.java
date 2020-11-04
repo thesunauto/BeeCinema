@@ -5,10 +5,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.WebSession;
 import vn.edu.poly.beecinema.commons.DayGheResponse;
 import vn.edu.poly.beecinema.commons.GheResponse;
 import vn.edu.poly.beecinema.commons.PhimResponse;
 import vn.edu.poly.beecinema.commons.VeResponse;
+import vn.edu.poly.beecinema.config.HttpSessionConfig;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.service.DayGheService;
@@ -109,9 +111,15 @@ public class EmployeeRestController {
 
 
     @GetMapping("/getGhe/{idsuatchieu}")
-    public ResponseEntity getGhe(HttpSession httpSession, @PathVariable Integer idsuatchieu){
-        List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
-        System.out.println(veResponses.size());
+    public ResponseEntity getGhe(HttpSessionConfig httpSessionConfig,HttpSession httpSession, @PathVariable Integer idsuatchieu){
+        List<VeResponse> veResponses = new ArrayList<>();
+        List<HttpSession> httpSessions = httpSessionConfig.getActiveSessions();
+        httpSessions.forEach(session -> {
+            if(session.getAttribute("veresponse")!=null){
+                veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
+            }
+        });
+
         List<DayGheResponse> gheResponses = new ArrayList<>();
         Suatchieu suatchieu = suatChieuService.findById(idsuatchieu);
         dayGheService.findDayGheByPhong(suatchieu.getPhong().getId()).forEach(dayghe -> {
@@ -132,7 +140,7 @@ public class EmployeeRestController {
 
     @PostMapping("/setghefocus")
     @ResponseBody
-    public ResponseEntity setGheFocus(HttpSession httpSession,@RequestBody VeResponse veResponse){
+    public ResponseEntity setGheFocus(HttpSession httpSession, @RequestBody VeResponse veResponse){
         if(httpSession.getAttribute("veresponse")==null){
             httpSession.setAttribute("veresponse",new ArrayList<VeResponse>());
         }
