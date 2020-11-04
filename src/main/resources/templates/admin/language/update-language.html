@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/layout}">
+      layout:decorate="~{admin/layout}" xmlns="http://www.w3.org/1999/html">
 
 <head>
   <title>Cập nhật quốc gia</title>
@@ -23,9 +23,11 @@
             </div>
 
         <div class="card-body">
-
-          <!-- Section heading -->
-
+          <form th:object="${ngonNgu}" th:action="@{/admin/language/edit}" action="#" method="post">
+            <!-- Section heading -->
+            <div th:switch="${messages}">
+              <p th:case="'ThanhCong'" class="alert alert-success" role="alert">Cập nhật thành công!</p>
+            </div>
           <!-- Grid row -->
           <div class="row">
 
@@ -34,8 +36,10 @@
 
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input type="text" id="form31" class="form-control">
+                <input type="text" th:field="*{id}" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">ID</label>
+                <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center" ></p>
+              </div>
               </div>
 
             </div>
@@ -44,8 +48,9 @@
 
               <div class="md-form md-outline">
                 <i class="fas fa-globe prefix"></i>
-                <input type="text" id="form31" class="form-control">
+                <input type="text" th:field="*{ten}" id="form31" class="form-control">
                 <label for="form31" class="active">Tên Quốc Gia</label>
+                <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -53,8 +58,7 @@
             <div class="col-md-5 mb-5">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option value="2">Hiện</option>
                 <option value="3">Ẩn</option>
               </select><label class="mdb-main-label active">Trạng thái</label>
@@ -63,13 +67,13 @@
             
             <!-- Grid column -->
 
-          </div>
+
           <div class="row">
             <div class="col-md-12 mb-12">
 
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
-                  <textarea type="" id="form31" class="form-control"></textarea>
+                  <textarea type="textarea"  th:field="*{mota}" id="form31" class="form-control"></textarea>
                   <label for="form31" class="active">Mô tả</label>
                 </div>
   
@@ -81,7 +85,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-user-plus prefix"></i>
-                <input type="text" id="form31" class="form-control" disabled>
+                <input type="text" th:field="*{taikhoan.username}" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Người Tạo</label>
               </div>
 
@@ -92,7 +96,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-plus prefix"></i>
-                <input type="date" id="form31" class="form-control" disabled>
+                <input type="datetime-local" th:field="*{ngaytao}" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Ngày Tạo</label>
               </div>
 
@@ -103,7 +107,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-user-edit prefix"></i>
-                <input type="text" id="form31" class="form-control" disabled>
+                <input type="text" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Người Sửa</label>
               </div>
 
@@ -114,7 +118,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-alt prefix"></i>
-                <input type="date" id="form31" class="form-control" disabled>
+                <input type="date" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Ngày Sửa</label>
               </div>
 
@@ -131,13 +135,14 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="button" class="btn blue-gradient float-right btn-rounded ">CẬP NHẬT</button>
+              <button type="submit" class="btn blue-gradient float-right btn-rounded ">CẬP NHẬT</button>
 
             </div>
             <!-- Grid column -->
 
           </div>
 
+          </form>
         </div>
         </div>
         </div>
