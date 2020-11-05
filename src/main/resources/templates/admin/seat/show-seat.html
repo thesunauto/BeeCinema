@@ -91,6 +91,9 @@
         <div class="card card-cascade narrower z-depth-1">
 
           <!-- Card image -->
+          <div>
+
+          </div>
           <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
 
 
@@ -105,8 +108,11 @@
           <!-- /Card image -->
 
           <div class="px-4">
-
-            <div class="table-responsive text-nowrap">
+            <div th:switch="${messages}">
+              <p th:case="'ThemThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+              <p th:case="'XoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+            </div>
+            <div class="table-responsive text-nowrap" style="height:350px">
               <!-- Table -->
               <table class="table table-striped table-hover mb-0">
 
@@ -116,7 +122,7 @@
                     <th >
                     </th>
                     <th ><a class="font-weight-bold">ID </a></th>
-                    <th ><a class="font-weight-bold">Tên</a></th>
+                    <th ><a class="font-weight-bold">Cột</a></th>
                     <th ><a class="font-weight-bold">Phòng</a></th>
                     <th ><a class="font-weight-bold">Loại Ghế</a></th>
                     <th ><a class="font-weight-bold">Dãy Ghế</a></th>
@@ -139,8 +145,8 @@
                     <td th:text="${ghe1.dayghe.ten}"></td>
                     <td th:text="${ghe1.loaighe.ten}"></td>
                     <td th:text="${ghe1.taikhoan.ten}"></td>
-                    <td th:text="${ghe1.ngaytao}"></td>
-                    <td th:text="${ghe1.trangthai}"></td>
+                    <td th:text="${#temporals.format(ghe1.ngaytao, 'dd-MM-yyyy | HH:mm:ss')}"></td>
+                    <td th:switch="${ghe1.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
                   </tr>
 
                 </tbody>

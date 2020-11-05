@@ -36,7 +36,9 @@ public class RowSeatController {
     public String saverowseat(Authentication authentication, Model model, @ModelAttribute(value = "rowSeat") Dayghe DayGhe){
         DayGhe.setNgaytao(LocalDateTime.now());
         dayGheService.saveDayGhe(DayGhe);
-        return "redirect:/admin/row-seat/show-row-seat";
+        model.addAttribute("messages" , "ThemThanhCong");
+        model.addAttribute("dayGhe", dayGheService.getAllDayGhe());
+        return "admin/row-seat/show-row-seat";
     }
 
     @RequestMapping("/update-row-seat")
@@ -45,9 +47,11 @@ public class RowSeatController {
     }
 
     @GetMapping("/delete-row-seat/{id}")
-    public  String deleteRowSeat (@PathVariable(value = "id") String id){
+    public  String deleteRowSeat (@PathVariable(value = "id") String id, Model model){
         dayGheService.deleteDayGhe(id);
-        return "redirect:/admin/row-seat/show-row-seat";
+        model.addAttribute("messages" , "XoaThanhCong");
+        model.addAttribute("dayGhe", dayGheService.getAllDayGhe());
+        return "admin/row-seat/show-row-seat";
     }
 
 

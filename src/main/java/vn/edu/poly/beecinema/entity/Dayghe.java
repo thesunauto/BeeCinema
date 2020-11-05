@@ -13,6 +13,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Dayghe implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "id", nullable = false)

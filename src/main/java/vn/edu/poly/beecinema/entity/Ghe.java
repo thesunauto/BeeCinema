@@ -3,6 +3,7 @@ package vn.edu.poly.beecinema.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -13,7 +14,8 @@ import java.util.Collection;
 @AllArgsConstructor
 @Table(name = "ghe")
 public class Ghe implements Serializable {
-
+    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

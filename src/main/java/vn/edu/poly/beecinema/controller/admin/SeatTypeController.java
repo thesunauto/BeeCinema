@@ -35,8 +35,9 @@ public class SeatTypeController {
     public String saveseat(Model model, @ModelAttribute(value = "seatType") Loaighe loaighe){
         loaighe.setNgaytao(LocalDateTime.now());
         loaiGheService.saveLoaiGhe(loaighe);
-
-        return "redirect:/admin/seat-type/show-seat-type";
+        model.addAttribute("messages" , "ThemThanhCong");
+        model.addAttribute("loaiGhe", loaiGheService.getAllLoaiGhe());
+        return "admin/seat-type/show-seat-type";
     }
 
 
@@ -46,9 +47,11 @@ public class SeatTypeController {
     }
 
     @GetMapping("/delete-seat-type/{id}")
-    public  String deleteSeatType (@PathVariable(value = "id") String id){
+    public  String deleteSeatType (@PathVariable(value = "id") String id, Model model){
         loaiGheService.deleteLoaiGhe(id);
-        return "redirect:/admin/seat-type/show-seat-type";
+        model.addAttribute("messages" , "XoaThanhCong");
+        model.addAttribute("loaiGhe", loaiGheService.getAllLoaiGhe());
+        return "admin/seat-type/show-seat-type";
     }
 
 
