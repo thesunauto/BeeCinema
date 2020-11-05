@@ -101,6 +101,7 @@
                 <i class="fas fa-phone prefix"></i>
                 <input type="text" th:field="*{sodienthoai}" id="form31" class="form-control">
                 <label for="form31" class="active">Số Điện Thoại</label>
+                <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -111,6 +112,7 @@
                   <i class="fas fa-envelope prefix"></i>
                   <input type="email"  th:field="*{email}" id="form31" class="form-control">
                   <label for="form31" class="active">Email</label>
+                  <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger text-center"></p>
                 </div>
   
               </div>
