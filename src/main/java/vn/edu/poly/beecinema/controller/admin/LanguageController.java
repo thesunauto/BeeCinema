@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import vn.edu.poly.beecinema.entity.LoaiPhim;
 import vn.edu.poly.beecinema.entity.NgonNgu;
-import vn.edu.poly.beecinema.service.LoaiPhimService;
 import vn.edu.poly.beecinema.service.NgonNguService;
 
 import java.util.List;

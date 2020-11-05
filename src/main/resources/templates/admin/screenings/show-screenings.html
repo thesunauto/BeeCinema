@@ -128,6 +128,7 @@
                     <th ><a class="font-weight-bold">Ngày Chiếu</a></th>
                     <th ><a class="font-weight-bold">Khung Giờ</a></th>
                     <th ><a class="font-weight-bold">Đơn Giá</a></th>
+                    <th ><a class="font-weight-bold">Thời Gian Hủy</a></th>
                     <th ><a class="font-weight-bold">Người Tạo</a></th>
                     <th ><a class="font-weight-bold">Ngày Tạo</a></th>
                     <th ><a class="font-weight-bold">Người Sửa</a></th>
@@ -149,6 +150,7 @@
                     <td th:text="${suatChieu.ngaychieu}"></td>
                     <td th:text="${suatChieu.khunggio.batdau} + ' - ' + ${suatChieu.khunggio.ketthuc}"></td>
                     <td th:text="${suatChieu.dongia}"></td>
+                    <td th:text="${suatChieu.phuthuyonline}"></td>
                     <td th:text="${suatChieu.taikhoan.ten}"></td>
                     <td ></td>
                     <td ></td>

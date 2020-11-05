@@ -1,6 +1,7 @@
 package vn.edu.poly.beecinema.entity;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,9 +44,11 @@ public class Suatchieu implements Serializable {
     private Khunggio khunggio;
 
     @Column(name = "ngaytao", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate ngaytao;
 
     @Column(name = "ngaychieu", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate ngaychieu;
 
     @Column(name = "dongia", nullable = false)
