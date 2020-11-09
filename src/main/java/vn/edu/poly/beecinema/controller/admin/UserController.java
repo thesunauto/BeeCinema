@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/edit")
-    public String updateUser(@ModelAttribute("taikhoan") Taikhoan taikhoan ,
+    public String updateUser(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan ,
                               BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
 
