@@ -3,8 +3,10 @@ package vn.edu.poly.beecinema.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -13,14 +15,18 @@ import java.util.Collection;
 @Data
 @Table(name = "dotuoi")
 public class DoTuoi implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "Vui lòng nhập ID!")
     @Id
     @Column(name = "id", nullable = false)
     private String id;
 
+    @NotBlank(message = "Vui lòng nhập độ tuổi!")
     @Column(name = "ten", nullable = false)
     private String ten;
 
+    @NotBlank(message = "Vui lòng nhập mô tả!")
     @Column(name = "mota")
     private String mota;
 
@@ -31,6 +37,7 @@ public class DoTuoi implements Serializable {
     private Taikhoan taikhoan;
 
     @Column(name = "ngaytao", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime ngaytao;
 
     @Column(name = "trangthai", nullable = false)

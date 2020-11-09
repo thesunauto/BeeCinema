@@ -25,7 +25,7 @@
           <form th:object="${loaiPhim}" th:action="@{/admin/movie-type/add-movie-type}" action="#" method="post">
           <!-- Section heading -->
             <div th:switch="${messages}">
-              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+              <p th:case="'thanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
               <p th:case="'trungid'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
             </div>
           <!-- Grid row -->

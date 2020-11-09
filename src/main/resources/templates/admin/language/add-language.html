@@ -21,9 +21,12 @@
           </div>
 
           <div class="card-body">
-
-            <!-- Section heading -->
-
+            <form th:object="${ngonNgu}" th:action="@{/admin/language/add-language}" action="#" method="post">
+              <!-- Section heading -->
+              <div th:switch="${messages}">
+                <p th:case="'ThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+                <p th:case="'TrungID'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
+              </div>
             <!-- Grid row -->
             <div class="row">
 
@@ -32,8 +35,9 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-key prefix"></i>
-                  <input type="text" id="form31" class="form-control">
+                  <input type="text" th:field="*{id}" id="form31" class="form-control">
                   <label for="form31" class="active">ID</label>
+                  <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
                 </div>
 
               </div>
@@ -42,8 +46,9 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-globe prefix"></i>
-                  <input type="text" id="form31" class="form-control">
+                  <input type="text" th:field="*{ten}" id="form31" class="form-control">
                   <label for="form31" class="active">Tên Quốc Gia</label>
+                  <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                 </div>
 
               </div>
@@ -51,10 +56,9 @@
               <div class="col-md-5 mb-4">
 
                 <!-- Name -->
-                <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                  <option disabled selected>Choose your option</option>
-                  <option value="2">Hiện</option>
-                  <option value="3">Ẩn</option>
+                <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                  <option th:value="'0'" th:text="Hiện"  ></option>
+                  <option th:value="'1'" th:text="Ẩn" ></option>
                 </select><label class="mdb-main-label active">Trạng thái</label>
 
               </div>
@@ -68,7 +72,7 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
-                  <textarea type="" id="form31" class="form-control"></textarea>
+                  <textarea type="textarea" th:field="*{mota}"  id="form31" class="form-control"></textarea>
                   <label for="form31" class="active">Mô tả</label>
                 </div>
 
@@ -81,7 +85,7 @@
               <!-- Grid column -->
               <div class="col-md-12 mb-4 ">
 
-                <button type="button" class="btn blue-gradient float-right btn-rounded ">THÊM</button>
+                <button type="submit" class="btn blue-gradient float-right btn-rounded ">THÊM</button>
 
               </div>
               <!-- Grid column -->

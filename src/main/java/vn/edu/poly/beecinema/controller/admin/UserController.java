@@ -41,11 +41,11 @@ public class UserController {
     }
     @PostMapping("/add-user")
     public String saveUser(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan, BindingResult bindingResult,
-                           @ModelAttribute("id") String usernameTaikhoan,
+                           @ModelAttribute("id") String idTaikhoan,
                            Model model, Authentication authentication){
         if(bindingResult.hasErrors()){
 
-        }else if(taikhoanService.findTaikhoanById(usernameTaikhoan).isPresent()){
+        }else if(taikhoanService.findTaikhoanById(idTaikhoan).isPresent()){
             model.addAttribute("messages", "trungid2");
         }else{
             taikhoan.setNgaytao(LocalDateTime.now());
