@@ -41,7 +41,7 @@ public class ScreeningsController {
     }
 
     @GetMapping(value = "/edit")
-    public String editMovieType(Model model, @PathVariable("id") Integer suatChieuId){
+    public String editMovieType(Model model, @RequestParam("id") Integer suatChieuId){
         Optional<Suatchieu> suatChieuEdit = suatChieuService.findSuatChieuById(suatChieuId);
         suatChieuEdit.ifPresent(suatChieu -> model.addAttribute("suatChieu", suatChieu));
         return "admin/screenings/update-screenings";
@@ -68,14 +68,14 @@ public class ScreeningsController {
     }
 
     @PostMapping(value = "/edit")
-    public String updateMovieType(@Valid @ModelAttribute("khungGio") Suatchieu suatChieu ,
+    public String updateMovieType( @ModelAttribute("khungGio") Suatchieu suatChieu ,
                                   BindingResult bindingResult, Model model,  Authentication authentication){
-        if(bindingResult.hasErrors()){
-
-        }else{
+//        if(bindingResult.hasErrors()){
+//
+//        }else{
             suatChieuService.saveSuatChieu(suatChieu);
             model.addAttribute("messages", "thanhcong");
-        }
+//        }
         return "admin/screenings/update-screenings";
     }
 
