@@ -182,6 +182,11 @@ public class EmployeeRestController {
         return ResponseEntity.ok().body("true");
     }
 
+    @GetMapping("/clearsession")
+    public void clearSession(HttpSession session) {
+        session.setAttribute("veresponse",new ArrayList<VeResponse>());
+    }
+
     @GetMapping("/close")
     public void killSession(HttpSession session) {
         session.removeAttribute("veresponse");

@@ -83,6 +83,18 @@
                         </button>
                     </div>
                     <div class="modal-body mx-3">
+                        <div class="card card-image"
+                             th:style="'background-image:url(/api/employee/getResourse/' + ${film.get().getHinhanh()} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;'">
+
+                            <!-- Content -->
+                            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                                <div>
+                                    <h5 class="yellow-text"><i class="fas fa-chart-pie"></i> <span> 12:00 - 13:00 </span></h5>
+                                    <h3 class="card-title pt-2"><strong th:text="${film.get().getTen()}"></strong></h3>
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="md-form mb-5">
                             <i class="fas fa-user prefix grey-text"></i>
                             <input type="text" id="form34" class="form-control validate">
@@ -122,6 +134,13 @@
     <script>
         $(document).ready(function () {
 
+            $(window).on('beforeunload',function () {
+                $.ajax({
+                    url:'/api/employee/close',
+                    type:'GET'
+                });
+            })
+
             var listDayGhe = [];
             var idSuatChieu = null;
 
@@ -150,6 +169,10 @@
             });
 
             $(document).on('click', 'option.rdoSuatChieu', function () {
+                $.ajax({
+                    url:'/api/employee/clearsession',
+                    type:'GET'
+                });
                 idSuatChieu = $(this).val();
                 loadGhe();
             });
