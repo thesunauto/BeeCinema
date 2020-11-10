@@ -118,10 +118,11 @@
                       <th >
                       </th>
                       <th >
-
                         <a class="font-weight-bold" th:href="@{'/admin/movie-type/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">ID <i class="fas fa-sort ml-1"></i></a>
                       </th>
-                      <th ><a class="font-weight-bold" th:href="@{'/admin/movie-type/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên <i class="fas fa-sort ml-1"></i></a></th>
+                      <th >
+                        <a class="font-weight-bold" th:href="@{'/admin/movie-type/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên <i class="fas fa-sort ml-1"></i></a>
+                      </th>
                       <th ><a class="font-weight-bold">Mô Tả</a></th>
                       <th ><a class="font-weight-bold">Người Tạo</a></th>
                       <th ><a class="font-weight-bold">Ngày Tạo</a></th>

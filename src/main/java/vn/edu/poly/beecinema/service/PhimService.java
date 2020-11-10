@@ -1,5 +1,6 @@
 package vn.edu.poly.beecinema.service;
 
+import org.springframework.data.domain.Page;
 import vn.edu.poly.beecinema.entity.Phim;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface PhimService {
     void deletePhim(String id);
 
     Optional<Phim> findPhimById(String id);
+
+    Page<Phim> listAll(int pageNumber, String sortField, String sortDir, String keyword);
 }

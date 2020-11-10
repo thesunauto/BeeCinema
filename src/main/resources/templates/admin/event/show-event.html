@@ -25,15 +25,15 @@
           <div class="row">
 
             <!-- Grid column -->
-            <div class="col-lg-3 col-md-12">
+            <div class="col-lg-2 col-md-12">
 
               <!-- Name -->
-              <select class="mdb-select colorful-select dropdown-primary mx-2 md-form mt-3 md-dropdown">
-                <option value="" disabled selected>Bulk actions</option>
-                <option value="1">Delate</option>
-                <option value="2">Export</option>
-                <option value="3">Change segment</option>
-              </select>
+<!--              <select class="mdb-select colorful-select dropdown-primary mx-2 md-form mt-3 md-dropdown">-->
+<!--                <option value="" disabled selected>Bulk actions</option>-->
+<!--                <option value="1">Delate</option>-->
+<!--                <option value="2">Export</option>-->
+<!--                <option value="3">Change segment</option>-->
+<!--              </select>-->
 
             </div>
             <!-- Grid column -->
@@ -72,11 +72,22 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-lg-3 col-md-6">
+<!--            <div class="col-lg-3 col-md-6">-->
 
-              <form class="form-inline md-form mt-2 ml-2">
-                <input class="form-control mt-2" type="text" placeholder="Search" style="max-width: 150px;">
-                <button class="btn btn-sm btn-primary ml-2 px-1"><i class="fas fa-search"></i> </button>
+<!--              <form class="form-inline md-form mt-2 ml-2">-->
+<!--                <input class="form-control mt-2" type="text" placeholder="Search" style="max-width: 150px;">-->
+<!--                <button class="btn btn-sm btn-primary ml-2 px-1"><i class="fas fa-search"></i> </button>-->
+<!--              </form>-->
+
+<!--            </div>-->
+            <div class="col-lg-4 col-md-6">
+
+              <form th:action="@{/admin/event/page/1}" class="form-inline md-form mt-2 ml-2">
+                <input type="hidden" name="sortField" th:value="${sortField}"/>
+                <input type="hidden" name="sortDir" th:value="${sortDir}"/>
+                <input class="form-control mt-2" type="text" name="keyword" id="keyword" th:value="${keyword}" required>
+                <button type="submit" class="btn btn-sm btn-primary ml-2 px-1"><i class="fas fa-search" title="tìm kiếm"></i> </button>
+                <a th:href="@{/admin/event/show-event}" class="btn btn-sm btn-primary ml-2 px-1" ><i class="fas fa-eraser" title=""></i></a>
               </form>
 
             </div>
@@ -122,8 +133,12 @@
                   <tr>
                     <th >
                     </th>
-                    <th ><a class="font-weight-bold">ID </a></th>
-                    <th ><a class="font-weight-bold">Tên</a></th>
+                    <th >
+                      <a class="font-weight-bold" th:href="@{'/admin/event/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">ID <i class="fas fa-sort ml-1"></i></a>
+                    </th>
+                    <th >
+                      <a class="font-weight-bold" th:href="@{'/admin/event/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên <i class="fas fa-sort ml-1"></i></a>
+                    </th>
                     <th ><a class="font-weight-bold">Hình ảnh</a></th>
                     <th ><a class="font-weight-bold">Mô tả</a></th>
                     <th ><a class="font-weight-bold">Giảm</a></th>
@@ -168,47 +183,52 @@
             <div class="d-flex justify-content-between">
 
               <!-- Name -->
-              <select class="mdb-select colorful-select dropdown-primary mt-2">
-                <option value="" disabled>Rows number</option>
-                <option value="1" selected>5 rows</option>
-                <option value="2">25 rows</option>
-                <option value="3">50 rows</option>
-                <option value="4">100 rows</option>
-              </select>
+              <div class="my-4">
+                Tổng: [[${totalItem}]] | Trang [[${currentPage}]]/[[${totalPages}]]
+              </div>
 
               <!-- Pagination -->
               <nav class="my-4">
                 <ul class="pagination pagination-circle pg-blue mb-0">
 
                   <!-- First -->
-                  <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link">First</a></li>
+                  <li class="page-item clearfix d-none d-md-block">
+                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/event/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
+                    <span  class="page-link" th:unless="${currentPage > 1}">First</span>
+                  </li>
 
                   <!-- Arrow left -->
-                  <li class="page-item disabled">
-                    <a class="page-link" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </a>
+                  <li class="page-item ">
+                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/event/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&laquo;</a>
+                    <span  class="page-link" th:unless="${currentPage > 1}">&laquo;</span>
                   </li>
 
                   <!-- Numbers -->
-                  <li class="page-item active"><a class="page-link">1</a></li>
-                  <li class="page-item"><a class="page-link">2</a></li>
-                  <li class="page-item clearfix d-none d-md-inline-block"><a class="page-link">3</a></li>
-                  <li class="page-item clearfix d-none d-md-inline-block"><a class="page-link">4</a></li>
-                  <li class="page-item clearfix d-none d-md-inline-block"><a class="page-link">5</a></li>
+                  <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a></li>-->
+                  <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                      <li class="page-item  clearfix d-none d-md-inline-block"><a class="page-link" th:if="${currentPage != i}" th:href="@{'/admin/event/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a></li>
+                        <span th:unless="${i != currentPage}">
+                          <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">[[${i}]]</a></li>
+                        </span>
+                        &nbsp;&nbsp;
+                    </span>
+                  <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a>-->
+
+                  <!--                    </li>-->
+
+
 
                   <!-- Arrow right -->
                   <li class="page-item">
-                    <a class="page-link" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
+                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/event/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&raquo;</a>
+                    <span  class="page-link" th:unless="${currentPage < totalPages}">&raquo;</span>
                   </li>
 
                   <!-- First -->
-                  <li class="page-item clearfix d-none d-md-block"><a class="page-link">Last</a></li>
-
+                  <li class="page-item clearfix d-none d-md-block">
+                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/event/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
+                    <span  class="page-link" th:unless="${currentPage < totalPages}">Last</span>
+                  </li>
                 </ul>
               </nav>
               <!-- /Pagination -->
