@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -16,6 +17,7 @@ public class Phong implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "Vui lòng nhập ID!")
     @Id
     @Column(name = "id", nullable = false)
     private String id;
@@ -26,6 +28,7 @@ public class Phong implements Serializable {
     @ToString.Exclude
     private Taikhoan taikhoan;
 
+    @NotBlank(message = "Vui lòng nhập tên phòng!")
     @Column(name = "ten", nullable = false)
     private String ten;
 

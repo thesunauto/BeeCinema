@@ -94,15 +94,13 @@
             <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
   
               <div>
-                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-th-large mt-0"></i></button>
-                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-columns mt-0"></i></button>
+
               </div>
   
               <h4 class="white-text font-weight-bold">Danh Sách Ngôn Ngữ</h4>
   
               <div>
-                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-pencil-alt mt-0"></i></button>
-                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-eraser mt-0"></i></button>
+
                 <a th:href="@{/admin/language/add-language}"class="btn-floating btn-sm btn-primary"><i class="fas fa-plus-circle"></i></a>
               </div>
   
@@ -115,7 +113,7 @@
               </div>
               <div class="table-responsive text-nowrap">
                 <!-- Table -->
-                <table class="table table-striped table-hover mb-0">
+                <table class="table table-hover mb-0">
   
                   <!-- Table head -->
                   <thead>
@@ -144,10 +142,10 @@
                       <td th:text="${ngonngu.ten}"></td>
                       <td th:text="${ngonngu.mota}"></td>
                       <td th:text="${ngonngu.taikhoan.ten}"></td>
-                      <td th:text="${ngonngu.ngaytao}"></td>
+                      <td th:text="${#temporals.format(ngonngu.ngaytao, 'dd-MM-yyyy | HH:mm:ss')}"></td>
                       <td ></td>
                       <td></td>
-                      <td th:text="${ngonngu.trangthai}"></td>
+                      <td th:switch="${ngonngu.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
                     </tr>
                   </tbody>
                   <!-- Table body -->

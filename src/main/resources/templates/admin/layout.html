@@ -31,25 +31,9 @@
             <!-- Side navigation links -->
             <li>
                 <ul class="collapsible collapsible-accordion">
-
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-tachometer-alt"></i>Dashboards<i class="fas fa-angle-down rotate-icon"></i>
-                        </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <a href="../dashboards/v-1.html" class="waves-effect">Version 1</a>
-                                </li>
-                                <li>
-                                    <a href="../dashboards/v-2.html" class="waves-effect">Version 2</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>User<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-user"></i> User<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -58,9 +42,6 @@
                                 </li>
                                 <li>
                                     <a th:href="@{/admin/user/add-user}"class="waves-effect">Thêm User</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/admin/user/update-user}" class="waves-effect">Cập nhật User</a>
                                 </li>
                             </ul>
                         </div>
@@ -77,9 +58,6 @@
                                 <li>
                                     <a th:href="@{/admin/movie/add-movie}" class="waves-effect">Thêm Movie</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/movie/update-movie}" class="waves-effect">Cập nhật Movie</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
@@ -94,9 +72,6 @@
                                 </li>
                                 <li>
                                     <a th:href="@{/admin/movie-type/add-movie-type}" class="waves-effect">Thêm Movie Type</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/admin/movie-type/update-movie-type}" class="waves-effect">Cập nhật Movie Type</a>
                                 </li>
                             </ul>
                         </div>
@@ -113,9 +88,6 @@
                                 <li>
                                     <a th:href="@{/admin/language/add-language}" class="waves-effect">Thêm Language</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/language/update-language}" class="waves-effect">Cập nhật Language</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
@@ -131,9 +103,6 @@
                                 <li>
                                     <a th:href="@{/admin/comment/add-comment}" class="waves-effect">Thêm Comment</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/comment/update-comment}" class="waves-effect">Cập nhật Comment</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
@@ -148,9 +117,6 @@
                                 </li>
                                 <li>
                                     <a th:href="@{/admin/age/add-age}" class="waves-effect">Thêm Age</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/admin/age/update-age}" class="waves-effect">Cập nhật Age</a>
                                 </li>
                             </ul>
                         </div>
@@ -169,7 +135,7 @@
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Event<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-calendar-week"></i> Event<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -179,15 +145,12 @@
                                 <li>
                                     <a th:href="@{/admin/event/add-event}" class="waves-effect">Thêm Event</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/event/update-event}" class="waves-effect">Cập nhật Event</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Permission<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-drum-steelpan"></i>Permission<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -197,15 +160,12 @@
                                 <li>
                                     <a th:href="@{/admin/permission/add-permission}" class="waves-effect">Thêm Permission</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/permission/update-permission}" class="waves-effect">Cập nhật Permission</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Room<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-person-booth"></i>Room<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -215,15 +175,12 @@
                                 <li>
                                     <a th:href="@{/admin/room/add-room}" class="waves-effect">Thêm Room</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/room/update-room}" class="waves-effect">Cập nhật Room</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Screenings<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="far fa-caret-square-left"></i>Screenings<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -233,15 +190,12 @@
                                 <li>
                                     <a th:href="@{/admin/screenings/add-screenings}" class="waves-effect">Thêm Screenings</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/screenings/update-screenings}" class="waves-effect">Cập nhật Screenings</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Showtime<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-clock"></i>Showtime<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -251,15 +205,12 @@
                                 <li>
                                     <a th:href="@{/admin/showtime/add-showtime}" class="waves-effect">Thêm Showtime</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/showtime/update-showtime}" class="waves-effect">Cập nhật Showtime</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Seat<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-chair"></i> Seat <i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -269,15 +220,12 @@
                                 <li>
                                     <a th:href="@{/admin/seat/add-seat}" class="waves-effect">Thêm Seat</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/seat/update-seat}" class="waves-effect">Cập nhật Seat</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Row Seat<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-couch"></i>Row Seat<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -287,15 +235,12 @@
                                 <li>
                                     <a th:href="@{/admin/row-seat/add-row-seat}" class="waves-effect">Thêm Row Seat</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/row-seat/update-row-seat}" class="waves-effect">Cập nhật Row Seat</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Seat Type<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-wheelchair"></i>Seat Type<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -304,9 +249,6 @@
                                 </li>
                                 <li>
                                     <a th:href="@{/admin/seat-type/add-seat-type}" class="waves-effect">Thêm Seat Type</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/admin/seat-type/update-seat-type}" class="waves-effect">Cập nhật Seat Type</a>
                                 </li>
                             </ul>
                         </div>

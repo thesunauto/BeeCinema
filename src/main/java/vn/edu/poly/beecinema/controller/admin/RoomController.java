@@ -37,7 +37,9 @@ public class RoomController {
         phong.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
         phong.setNgaytao(LocalDateTime.now());
         phongService.savePhong(phong);
-        return "redirect:/admin/room/show-room";
+        model.addAttribute("messages" , "ThemThanhCong");
+        model.addAttribute("phong",  phongService.getAllPhong());
+        return "admin/room/show-room";
     }
 
     @RequestMapping("/update-room")
@@ -46,9 +48,11 @@ public class RoomController {
     }
 
     @GetMapping("/delete-room/{id}")
-    public  String deleteroom (@PathVariable(value = "id") String id){
+    public  String deleteroom (@PathVariable(value = "id") String id, Model model){
         phongService.deletePhong(id);
-        return  "redirect:/admin/room/show-room";
+        model.addAttribute("messages" , "XoaThanhCong");
+        model.addAttribute("phong",  phongService.getAllPhong());
+        return  "admin/room/show-room";
     }
 
 

@@ -43,8 +43,10 @@ public class SeatController {
         ghe.setLoaighe(loaiGheService.findLoaiGheById(ghe.getLoaighe().getId()).get());
         ghe.setNgaytao(LocalDateTime.now());
         gheService.saveGhe(ghe);
+        model.addAttribute("messages" , "ThemThanhCong");
+        model.addAttribute("ghe", gheService.getAllGhe());
         System.out.println(ghe);
-        return "redirect:/admin/seat/show-seat";
+        return "admin/seat/show-seat";
     }
 
 //    @GetMapping("/update-seat/{id}")
@@ -68,9 +70,11 @@ public class SeatController {
 //    }
 
     @GetMapping("/delete-seat/{id}")
-    public  String deleteSeat (@PathVariable(value = "id") int id){
+    public  String deleteSeat (@PathVariable(value = "id") int id,  Model model){
         gheService.deleteGhe(id);
-        return "redirect:/admin/seat/show-seat";
+        model.addAttribute("messages" , "XoaThanhCong");
+        model.addAttribute("ghe", gheService.getAllGhe());
+        return "admin/seat/show-seat";
     }
 
 
