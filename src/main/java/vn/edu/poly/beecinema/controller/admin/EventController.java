@@ -50,8 +50,8 @@ public class EventController {
         }else if(sukienService.findSukienById(idSukien).isPresent()){
             model.addAttribute("messages", "trungid");
         }else{
-            sukien.setNgaybatdau(LocalDateTime.now());
-            sukien.setNgayketthuc(LocalDateTime.now());
+//            sukien.setNgaybatdau(LocalDateTime.now());
+//            sukien.setNgayketthuc(LocalDateTime.now());
             sukien.setHinhanh("a.jpg");
             sukien.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
             sukienService.saveSukien(sukien);

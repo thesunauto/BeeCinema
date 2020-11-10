@@ -46,7 +46,7 @@ public class UserController {
         if(bindingResult.hasErrors()){
 
         }else if(taikhoanService.findTaikhoanById(idTaikhoan).isPresent()){
-            model.addAttribute("messages", "trungid2");
+            model.addAttribute("messages", "trungid");
         }else{
             taikhoan.setNgaytao(LocalDateTime.now());
             taikhoan.setHinhanh("a.jpg");

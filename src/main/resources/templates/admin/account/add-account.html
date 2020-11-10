@@ -23,7 +23,7 @@
           <form th:object="${taikhoan}" th:action="@{/admin/user/add-user}" action="#" method="post">
             <div th:switch="${messages}">
               <p th:case="'thanhcong'" class="alert alert-success" role="alert">Thêm thành công!</p>
-              <p th:case="'trungid2'" class="alert alert-danger" role="alert">User name đã tồn tại</p>
+              <p th:case="'trungid'" class="alert alert-danger" role="alert">User name đã tồn tại</p>
 
             </div>
           <!-- Section heading -->
@@ -37,7 +37,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
                 <input type="text" th:field="*{username}" id="form31" class="form-control">
-                <label for="form31" class="active">UserName</label>
+                <label for="form31" class="active">Tài Khoản</label>
                 <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger text-center"></p>
               </div>
 
@@ -92,6 +92,7 @@
                   <i class="fas fa-calendar-alt prefix"></i>
                   <input type="date" th:field="*{ngaysinh}" id="form31" class="form-control">
                   <label for="form31" class="active">Ngày Sinh</label>
+                  <p th:if="${#fields.hasErrors('ngaysinh')}" th:errors="*{ngaysinh}" class="text-danger text-center"></p>
                 </div>
 
               </div>
@@ -99,7 +100,7 @@
 
               <div class="md-form md-outline">
                 <i class="fas fa-phone prefix"></i>
-                <input type="text" th:field="*{sodienthoai}" id="form31" class="form-control">
+                <input type="number" th:field="*{sodienthoai}" id="form31" class="form-control">
                 <label for="form31" class="active">Số Điện Thoại</label>
                 <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}" class="text-danger text-center"></p>
               </div>

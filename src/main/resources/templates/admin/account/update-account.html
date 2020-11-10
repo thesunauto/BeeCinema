@@ -36,7 +36,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
                 <input type="text" th:field="*{username}" id="form31" class="form-control" readonly>
-                <label for="form31" class="active">User Name</label>
+                <label for="form31" class="active">Tài Khoản</label>
                 <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger text-center"></p>
               </div>
 
@@ -90,7 +90,7 @@
                   <i class="fas fa-calendar-alt prefix"></i>
                   <input type="date" th:field="*{ngaysinh}" id="form31" class="form-control">
                   <label for="form31" class="active">Ngày Sinh</label>
-<!--                  <p th:if="${#fields.hasErrors('ngaysinh')}" th:errors="*{ngaysinh}" class="text-danger text-center"></p>-->
+                  <p th:if="${#fields.hasErrors('ngaysinh')}" th:errors="*{ngaysinh}" class="text-danger text-center"></p>
                 </div>
   
               </div>
