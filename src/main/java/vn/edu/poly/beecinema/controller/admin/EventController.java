@@ -1,6 +1,8 @@
 package vn.edu.poly.beecinema.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +23,36 @@ public class EventController {
     @Autowired private SukienService sukienService;
     @Autowired private TaikhoanService taiKhoanService;
 
+//    @GetMapping("/show-event")
+//    public String showEvent(Model model){
+//        List<Sukien> sukiens = sukienService.getAllSukien();
+//        model.addAttribute("sukiens", sukiens);
+//        return "admin/event/show-event";
+//    }
     @GetMapping("/show-event")
     public String showEvent(Model model){
-        List<Sukien> sukiens = sukienService.getAllSukien();
+        String keyword = null;
+        return listByPage(model, 1, "id", "asc", keyword);
+    }
+
+    @GetMapping("/page/{pageNumber}")
+    public String listByPage(Model model ,
+                             @PathVariable("pageNumber") int currentPage,
+                             @Param("sortField") String sortField,
+                             @Param("sortDir") String sortDir,
+                             @Param("keyword") String keyword) {
+        Page<Sukien> page = sukienService.listAll(currentPage, sortField, sortDir, keyword);
+        long totalItem = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+        List<Sukien> sukiens = page.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalItem", totalItem);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("sukiens", sukiens);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("keyword", keyword);
         return "admin/event/show-event";
     }
 
@@ -50,8 +78,8 @@ public class EventController {
         }else if(sukienService.findSukienById(idSukien).isPresent()){
             model.addAttribute("messages", "trungid");
         }else{
-            sukien.setNgaybatdau(LocalDateTime.now());
-            sukien.setNgayketthuc(LocalDateTime.now());
+//            sukien.setNgaybatdau(LocalDateTime.now());
+//            sukien.setNgayketthuc(LocalDateTime.now());
             sukien.setHinhanh("a.jpg");
             sukien.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
             sukienService.saveSukien(sukien);

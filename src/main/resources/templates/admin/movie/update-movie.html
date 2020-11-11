@@ -23,7 +23,10 @@
         <div class="card-body">
 
           <!-- Section heading -->
-
+          <form th:object="${phim}" th:action="@{/admin/movie/edit}" action="#" method="post">
+            <div th:switch="${messages}">
+              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Cập nhật thành công!</p>
+            </div>
           <!-- Grid row -->
           <div class="row">
 
@@ -32,37 +35,28 @@
 
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input type="text" id="form31" class="form-control">
+                <input type="text" th:field="*{id}" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">ID</label>
+                <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
               </div>
 
             </div>
             <div class="col-md-3 mb-3">
-
-                <div class="md-form md-outline">
-                  <i class="fas fa-image prefix"></i>
-                  <input type="text" id="form31" class="form-control">
-                  <label for="form31" class="active">Độ tuổi</label>
-                </div>
-  
+              <select th:field="*{dotuoi}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:each="dotuoi1 : ${@doTuoiServiceImpl.getAllDoTuoi()}" th:value="${dotuoi1.id}" th:text="${dotuoi1.ten}">Hiện</option>
+              </select><label class="mdb-main-label active">Độ tuổi</label>
             </div>
-            <div class="col-md-3 mb-3">
 
-                <div class="md-form md-outline">
-                  <i class="fas fa-globe prefix"></i>
-                  <input type="text" id="form31" class="form-control">
-                  <label for="form31" class="active">Quốc gia</label>
-                </div>
-  
+            <div class="col-md-3 mb-3">
+              <select th:field="*{ngonngu}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:each="ngonngu1 : ${@ngonNguServiceImpl.getAllNgonNgu()}" th:value="${ngonngu1.id}" th:text="${ngonngu1.ten}">Hiện</option>
+              </select><label class="mdb-main-label active">Ngôn ngữ</label>
             </div>
-            <div class="col-md-3 mb-3">
 
-                <div class="md-form md-outline">
-                  <i class="fas fa-film prefix"></i>
-                  <input type="text" id="form31" class="form-control">
-                  <label for="form31" class="active">Loại phim</label>
-                </div>
-  
+            <div class="col-md-3 mb-3">
+              <select th:field="*{loaiphim}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:each="loaiphim1 : ${@loaiPhimServiceImpl.getAllLoaiPhim()}" th:value="${loaiphim1.id}" th:text="${loaiphim1.ten}">Hiện</option>
+              </select><label class="mdb-main-label active">Loại phim</label>
             </div>
             
             <!-- Grid column -->
@@ -74,10 +68,31 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-film prefix"></i>
-                  <input type="text" id="form31" class="form-control">
+                  <input type="text" th:field="*{ten}" id="form31" class="form-control">
                   <label for="form31" class="active">Tên phim</label>
+                  <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                 </div>
   
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="md-form md-outline">
+                <i class="fas fa-calendar-day prefix"></i>
+                <input  type="datetime-local" th:field="*{ngaybatdau}" id="form31" class="form-control">
+                <label for="form31" class="active">Ngày Bắt đầu</label>
+                <p th:if="${#fields.hasErrors('ngaybatdau')}" th:errors="*{ngaybatdau}" class="text-danger text-center"></p>
+              </div>
+
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="md-form md-outline">
+                <i class="fas fa-calendar-day prefix"></i>
+                <input  type="datetime-local" th:field="*{ngayketthuc}" id="form31" class="form-control">
+                <label for="form31" class="active">Ngày Kết thúc</label>
+                <p th:if="${#fields.hasErrors('ngayketthuc')}" th:errors="*{ngayketthuc}" class="text-danger text-center"></p>
+              </div>
+
             </div>
             <!-- <div class="col-md-3 mb-3">
 
@@ -87,15 +102,15 @@
                 </div>
   
             </div> -->
-            <div class="col-md-6 mb-6">
+<!--            <div class="col-md-6 mb-6">-->
 
-                <div class="md-form md-outline">
-                    <label for="form31"></label>
-                    <!-- <img src="../../img/photo.jpg" name="test" style="width: 200px; height: 120px;"  /> <br><br> -->
-                  <input type="file" id="form31" class="form-control-file">
-                </div>
-  
-            </div>
+<!--                <div class="md-form md-outline">-->
+<!--                    <label for="form31"></label>-->
+<!--                    &lt;!&ndash; <img src="../../img/photo.jpg" name="test" style="width: 200px; height: 120px;"  /> <br><br> &ndash;&gt;-->
+<!--                  <input type="file" id="form31" class="form-control-file">-->
+<!--                </div>-->
+<!--  -->
+<!--            </div>-->
             
           </div>
           <div class="row">
@@ -103,18 +118,18 @@
 
               <div class="md-form md-outline">
                 <i class="fas fa-clock prefix"></i>
-                <input type="time" id="form31" class="form-control">
+                <input type="text" th:field="*{dodai}" id="form31" class="form-control">
                 <label for="form31" class="active">Độ dài</label>
+                <p th:if="${#fields.hasErrors('dodai')}" th:errors="*{dodai}" class="text-danger text-center"></p>
               </div>
 
           </div>
             <div class="col-md-6 mb-6">
 
               <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                <option th:value="'0'" th:text="Hiện" ></option>
+                <option th:value="'1'" th:text="Ẩn"></option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>          
@@ -125,7 +140,7 @@
 
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
-                  <textarea type="" id="form31" class="form-control"></textarea>
+                  <textarea type="textarea" th:field="*{mota}" id="form31" class="form-control"></textarea>
                   <label for="form31" class="active">Mô tả</label>
                 </div>
   
@@ -138,7 +153,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-user-plus prefix"></i>
-                <input type="text" id="form31" class="form-control" disabled>
+                <input type="text" th:field="*{taikhoan.username}" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Người Tạo</label>
               </div>
 
@@ -149,7 +164,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-plus prefix"></i>
-                <input type="date" id="form31" class="form-control" disabled>
+                <input type="date" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Ngày Tạo</label>
               </div>
 
@@ -160,7 +175,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-user-edit prefix"></i>
-                <input type="text" id="form31" class="form-control" disabled>
+                <input type="text" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Người Sửa</label>
               </div>
 
@@ -171,7 +186,7 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-alt prefix"></i>
-                <input type="date" id="form31" class="form-control" disabled>
+                <input type="date" id="form31" class="form-control" readonly>
                 <label for="form31" class="active">Ngày Sửa</label>
               </div>
 
@@ -189,13 +204,13 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="button" class="btn blue-gradient float-right btn-rounded ">CẬP NHẬT</button>
+              <button type="submit" class="btn blue-gradient float-right btn-rounded ">CẬP NHẬT</button>
 
             </div>
             <!-- Grid column -->
 
           </div>
-
+          </form>
         </div>
         </div>
         </div>

@@ -1,9 +1,11 @@
 package vn.edu.poly.beecinema.entity;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -36,13 +38,18 @@ public class Sukien implements Serializable {
     @Column(name = "mota", nullable = false)
     private String mota;
 
+    @NotNull(message = "Vui lòng nhập Giảm giá")
     @Column(name = "giam", nullable = false)
     private Float giam;
 
+    @NotNull(message = "Vui lòng chọn Ngày bắt đầu")
     @Column(name = "ngaybatdau", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime ngaybatdau;
 
+    @NotNull(message = "Vui lòng chọn Ngày kết thúc")
     @Column(name = "ngayketthuc", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime ngayketthuc;
 
     @Column(name = "trangthai", nullable = false)

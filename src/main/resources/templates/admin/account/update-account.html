@@ -36,7 +36,8 @@
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
                 <input type="text" th:field="*{username}" id="form31" class="form-control" readonly>
-                <label for="form31" class="active">User Name</label>
+                <label for="form31" class="active">Tài Khoản</label>
+                <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -61,6 +62,7 @@
                   <i class="fas fa-user prefix"></i>
                   <input type="text" th:field="*{ten}" id="form31" class="form-control">
                   <label for="form31" class="active">Tên Nhân Viên</label>
+                  <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                 </div>
   
             </div>
@@ -70,6 +72,7 @@
                   <i class="fas fa-lock prefix"></i>
                   <input type="password" th:field="*{matkhau}" id="form31" class="form-control">
                   <label for="form31" class="active">Mật Khẩu</label>
+                  <p th:if="${#fields.hasErrors('matkhau')}" th:errors="*{matkhau}" class="text-danger text-center"></p>
                 </div>
   
             </div>
@@ -87,6 +90,7 @@
                   <i class="fas fa-calendar-alt prefix"></i>
                   <input type="date" th:field="*{ngaysinh}" id="form31" class="form-control">
                   <label for="form31" class="active">Ngày Sinh</label>
+                  <p th:if="${#fields.hasErrors('ngaysinh')}" th:errors="*{ngaysinh}" class="text-danger text-center"></p>
                 </div>
   
               </div>
@@ -96,6 +100,7 @@
                 <i class="fas fa-phone prefix"></i>
                 <input type="number" th:field="*{sodienthoai}" id="form31" class="form-control">
                 <label for="form31" class="active">Số Điện Thoại</label>
+                <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -106,6 +111,7 @@
                   <i class="fas fa-envelope prefix"></i>
                   <input type="email" th:field="*{email}" id="form31" class="form-control">
                   <label for="form31" class="active">Email</label>
+                  <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger text-center"></p>
                 </div>
   
               </div>

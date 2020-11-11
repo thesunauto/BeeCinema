@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -34,7 +35,8 @@ public class Taikhoan implements Serializable {
     @Column(name = "gioitinh")
     private Integer gioitinh;
 
-    @Column(name = "ngaysinh")
+    @NotNull(message = "Vui lòng chọn Ngày sinh")
+    @Column(name = "ngaysinh", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ngaysinh;
 
