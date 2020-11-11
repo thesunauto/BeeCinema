@@ -100,9 +100,7 @@
             <h4 class="white-text font-weight-bold">Danh sách Loại Ghế</h4>
 
             <div>
-
               <a th:href="@{/admin/seat-type/add-seat-type}"class="btn-floating btn-sm btn-primary" th:title="Sửa"><i class="fas fa-plus-circle" th:title="Xóa"></i></a>
-
             </div>
 
           </div>
@@ -134,8 +132,8 @@
                 <!-- Table body -->
                 <tbody>
                   <tr th:each="loaiGhe:${loaiGhe}">
-                    <td> 
-                      <i class="fas fa-edit text-primary"></i> <a th:href="@{${'/admin/seat-type/delete-seat-type/'+loaiGhe.id}}"> <i class="fas fa-trash ml-3 text-danger"></i></a>
+                    <td>
+                      <a th:href="@{${'/admin/seat-type/update-seat-type/'+loaiGhe.id}}"> <i class="fas fa-edit text-primary"></i></a> <a th:href="@{${'/admin/seat-type/delete-seat-type/'+loaiGhe.id}}"> <i class="fas fa-trash ml-3 text-danger"></i></a>
                     </td>
                     <td th:text="${loaiGhe.id}"></td>
                     <td th:text="${loaiGhe.ten}"></td>

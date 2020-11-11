@@ -11,6 +11,7 @@ import vn.edu.poly.beecinema.repository.GheRepository;
 import vn.edu.poly.beecinema.repository.KhunggioRepository;
 import vn.edu.poly.beecinema.repository.VeRepository;
 import vn.edu.poly.beecinema.service.DayGheService;
+import vn.edu.poly.beecinema.service.SukienService;
 import vn.edu.poly.beecinema.service.VeService;
 import vn.edu.poly.beecinema.service.impl.VeServiceImpl;
 
@@ -22,13 +23,17 @@ class BeecinemaApplicationTests {
     private GheRepository gheRepository;
     @Autowired
     private DaygheRepository daygheRepository;
+    @Autowired
+    private SukienService sukienService;
 @Autowired
 private VeService veService;
 
     @Test
     void contextLoads() {
-        System.out.println(veService.IsExists(1,9));
 
+    sukienService.getAllSuKienActive().forEach(sukien -> {
+        System.out.println(sukien);
+    });
 
     }
 

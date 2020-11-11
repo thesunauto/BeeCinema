@@ -133,8 +133,13 @@
                 <!-- Table body -->
                 <tbody th:each="dayGhe: ${dayGhe}">
                   <tr>
+<<<<<<< HEAD
                     <td> 
                       <i class="fas fa-edit text-primary" th:title="Sửa"></i> <a th:href="@{${'/admin/row-seat/delete-row-seat/'+dayGhe.id}}"> <i class="fas fa-trash ml-3 text-danger" th:title="Xóa"></i></a>
+=======
+                    <td>
+                      <a th:href="@{${'/admin/row-seat/update-row-seat/'+dayGhe.id}}"> <i class="fas fa-edit text-primary"></i></a> <a th:href="@{${'/admin/row-seat/delete-row-seat/'+dayGhe.id}}"> <i class="fas fa-trash ml-3 text-danger"></i></a>
+>>>>>>> origin/Huuversion4
 
                     </td>
                     <td th:text="${dayGhe.id}"></td>

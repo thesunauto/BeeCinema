@@ -10,6 +10,8 @@ import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.repository.SukienRepository;
 import vn.edu.poly.beecinema.service.SukienService;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +47,17 @@ public class SukienServiceimpl implements SukienService {
         if (keyword != null) {
             return sukienRepository.findAll(keyword, pageable);
         }
-        return  sukienRepository.findAll(pageable);
+        return sukienRepository.findAll(pageable);
+    }
+    @Override
+    public List<Sukien> getAllSuKienActive() {
+        List<Sukien> sukiens = new ArrayList<>();
+        sukienRepository.findAll().forEach(sukien -> {
+            if(sukien.getNgaybatdau().compareTo(LocalDateTime.now())<0&&sukien.getNgayketthuc().compareTo(LocalDateTime.now())>0){
+                sukiens.add(sukien);
+            }
+        });
+        return sukiens;
+
     }
 }

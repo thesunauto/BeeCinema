@@ -62,7 +62,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button class="float-right btn purple-gradient" data-toggle="modal"
+                                <button id="btnthanhtoan" class="float-right btn purple-gradient" data-toggle="modal"
                                         data-target="#modalContactForm">Thanh toán
                                 </button>
                             </div>
@@ -83,29 +83,28 @@
                         </button>
                     </div>
                     <div class="modal-body mx-3">
-                        <div class="md-form mb-5">
-                            <i class="fas fa-user prefix grey-text"></i>
-                            <input type="text" id="form34" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                        <div class="card card-image mb-5"
+                             th:style="'background-image:url(/api/employee/getResourse/' + ${film.get().getHinhanh()} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;'">
+
+                            <!-- Content -->
+                            <div class="text-white text-center d-flex align-items-center justify-content-center rgba-black-strong py-5 px-4">
+                                <div>
+                                    <h5 class="yellow-text"><i class="fas fa-chart-pie"></i> <span id="timeSuatChieu"> 12:00 - 13:00 </span></h5>
+                                    <h3 class="card-title pt-2"><strong id="thanhtoanTenPhim"></strong></h3>
+                                    <div class="row" id="ghechoosen">
+                                    </div>
+                                    <h3 class="font-weight-bold text-danger yellow rounded"><span>Tổng cộng: </span><span id="tongcong">237298743</span><span> VND</span></h3>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="md-form mb-5">
-                            <i class="fas fa-envelope prefix grey-text"></i>
-                            <input type="email" id="form29" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="form29">Your email</label>
-                        </div>
+                        <select class="mdb-select mb-5" id="thanhtoanSukien">
+                            <option value="" disabled>Choose option</option>
+                            <option value="noevent" selected>Sự kiện</option>
+                            <option th:each="sukien : ${@sukienServiceimpl.getAllSuKienActive()}" th:value="${sukien.id}" th:text="${sukien.ten}"></option>
+                        </select>
 
-                        <div class="md-form mb-5">
-                            <i class="fas fa-tag prefix grey-text"></i>
-                            <input type="text" id="form32" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="form32">Subject</label>
-                        </div>
-
-                        <div class="md-form">
-                            <i class="fas fa-pencil prefix grey-text"></i>
-                            <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
-                            <label data-error="wrong" data-success="right" for="form8">Your message</label>
-                        </div>
 
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
@@ -122,9 +121,16 @@
     <script>
         $(document).ready(function () {
 
+            $(window).on('beforeunload',function () {
+                $.ajax({
+                    url:'/api/employee/close',
+                    type:'GET'
+                });
+            })
+
             var listDayGhe = [];
             var idSuatChieu = null;
-
+            var idSukien = 'noevent';
 
             $(document).on('click', 'option.ActionGhe', function () {
                 $.ajax({
@@ -150,15 +156,20 @@
             });
 
             $(document).on('click', 'option.rdoSuatChieu', function () {
+                $.ajax({
+                    url:'/api/employee/clearsession',
+                    type:'GET'
+                });
                 idSuatChieu = $(this).val();
                 loadGhe();
             });
+
             setInterval(function () {
                 if (idSuatChieu != '') {
                     loadGhe();
                 }
                 ;
-            }, 1000);
+            }, 1999);
 
             function loadGhe() {
                 if (idSuatChieu != null) {
@@ -201,6 +212,80 @@
                 $('#dataGhe').html(content);
             };
 
+            $('#btnthanhtoan').click(function () {
+                $('#thanhtoanSukien').val('noevent');
+                idSukien = 'noevent';
+                var suatchieu = {};
+                var gheChoosen = [];
+                $.ajax({
+                    url: '/api/employee/getSuatChieu/' + idSuatChieu,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (data) {
+                        suatchieu = data;
+                    },
+                    complete: function () {
+                        $('#timeSuatChieu').text(suatchieu.batdau +' - '+suatchieu.ketthuc);
+                        $('#thanhtoanTenPhim').text(suatchieu.idphim)
+                    },
+                    error: function () {
+                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+
+                $.ajax({
+                    url: '/api/employee/getGheChoosen',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (result) {
+                        gheChoosen = result;
+                    },
+                    complete: function () {
+                        var content = '';
+                        for(var ii = 0;ii<gheChoosen.length;ii++){
+                            content += '<div class="col-6 mx-auto p-1">\n' +
+                                '<div class="btn btn-warning"><i class="fas fa-chair text-center"></i> '+(gheChoosen[ii].gheResponse.tenDay + gheChoosen[ii].gheResponse.col)+'</div>\n' +
+                                '</div>';
+                        }
+                        $('#ghechoosen').html(content);
+                    },
+                    error: function () {
+                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+                loadTongCong(idSukien);
+            });
+
+
+
+            function loadTongCong(idsukien) {
+                $.ajax({
+                    url: '/api/employee/getTotal?idsukien=' + idsukien,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (data) {
+                        $('#tongcong').text(data);
+                     },
+                    complete: function () {
+
+                       },
+                    error: function () {
+                        toastr.error('không load được dữ liệu tong cong từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+            };
+
+            $('#thanhtoanSukien').change(function () {
+                idSukien = $(this).val();
+                console.log(idSukien);
+                loadTongCong(idSukien);
+            });
         })
     </script>
 </th:block>

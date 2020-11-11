@@ -12,6 +12,9 @@
   <!-- Main layout -->
   <main layout:fragment="content">
     <form th:action="@{/admin/seat/update-seat/}" th:object="${seat}" method="post">
+      <input type="hidden" th:field="*{id}">
+      <input type="hidden" th:field="*{ngaytao}">
+      <input type="hidden" th:field="*{taikhoan}">
       <div class="container-fluid">
         <!-- Section: Inputs -->
         <section >
@@ -89,7 +92,7 @@
                   <!-- Grid column -->
                   <div class="col-md-12 mb-4 ">
 
-                    <button type="submit" class="btn blue-gradient btn-rounded float-right">Thêm</button>
+                    <button type="submit" class="btn blue-gradient btn-rounded float-right">Cập nhật</button>
 
                   </div>
                   <!-- Grid column -->

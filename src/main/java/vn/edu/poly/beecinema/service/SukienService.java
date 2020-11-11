@@ -15,5 +15,9 @@ public interface SukienService {
 
     Optional<Sukien> findSukienById(String id);
 
+
     Page<Sukien> listAll(int pageNumber, String sortField, String sortDir, String keyword);
+
+    List<Sukien> getAllSuKienActive();
+
 }

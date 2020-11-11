@@ -39,13 +39,18 @@ public class SeatTypeController {
         model.addAttribute("loaiGhe", loaiGheService.getAllLoaiGhe());
         return "admin/seat-type/show-seat-type";
     }
-
-
-    @RequestMapping("/update-seat-type")
-    public String updatetypeseat(Model model){
+    @GetMapping("/update-seat-type/{id}")
+    public String findSeatType(Model model, @PathVariable(value = "id") String id){
+        Loaighe loaighe =  loaiGheService.findLoaiGheById(id).get();
+        model.addAttribute("seatType",loaighe);
         return "admin/seat-type/update-seat-type";
     }
 
+    @PostMapping("/update-seat-type")
+    public String updateSeatType(Model model, @ModelAttribute(value = "seatType") Loaighe loaighe){
+        loaiGheService.saveLoaiGhe(loaighe);
+        return "redirect:/admin/seat-type/show-seat-type";
+    }
     @GetMapping("/delete-seat-type/{id}")
     public  String deleteSeatType (@PathVariable(value = "id") String id, Model model){
         loaiGheService.deleteLoaiGhe(id);

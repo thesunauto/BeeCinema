@@ -40,11 +40,19 @@ public class RowSeatController {
         model.addAttribute("dayGhe", dayGheService.getAllDayGhe());
         return "admin/row-seat/show-row-seat";
     }
-
-    @RequestMapping("/update-row-seat")
-    public String updaterowseat(Model model){
+    @GetMapping("/update-row-seat/{id}")
+    public String findrowseat(Model model, @PathVariable(value = "id") String id){
+        Dayghe dayghe = dayGheService.findDayGheByID(id).get();
+        model.addAttribute("rowSeat",dayghe);
         return "admin/row-seat/update-row-seat";
     }
+
+    @PostMapping("/update-row-seat")
+    public String updaterowseat(Model model, @ModelAttribute(value = "rowSeat") Dayghe DayGhe){
+        dayGheService.saveDayGhe(DayGhe);
+        return "redirect:/admin/row-seat/show-row-seat";
+    }
+
 
     @GetMapping("/delete-row-seat/{id}")
     public  String deleteRowSeat (@PathVariable(value = "id") String id, Model model){
