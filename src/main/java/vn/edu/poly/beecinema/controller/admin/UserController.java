@@ -92,7 +92,7 @@ public class UserController {
         if(bindingResult.hasErrors()){
 
         }else{
-            taikhoan.setHinhanh("a.jpg");
+            taikhoan.setHinhanh(null);
             taikhoan.setNgaytao(LocalDateTime.now());
             taikhoanService.saveTaikhoan(taikhoan);
             model.addAttribute("messages", "thanhcong");

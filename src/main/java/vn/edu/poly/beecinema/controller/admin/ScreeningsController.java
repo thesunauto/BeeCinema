@@ -68,8 +68,8 @@ public class ScreeningsController {
     }
 
     @PostMapping(value = "/edit")
-    public String updateMovieType( @ModelAttribute("khungGio") Suatchieu suatChieu ,
-                                  BindingResult bindingResult, Model model,  Authentication authentication){
+    public String updateMovieType(@ModelAttribute("khungGio") Suatchieu suatChieu ,
+                                   Model model,  Authentication authentication){
 //        if(bindingResult.hasErrors()){
 //
 //        }else{

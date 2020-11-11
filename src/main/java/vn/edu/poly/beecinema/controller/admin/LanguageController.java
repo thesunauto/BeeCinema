@@ -1,6 +1,8 @@
 package vn.edu.poly.beecinema.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +28,28 @@ public class LanguageController {
 
     @GetMapping("/show-language")
     public String showLanguage(Model model){
-        List<NgonNgu> ngonNgu = ngonNguService.getAllNgonNgu();
+        String keyword = null;
+        return listByPage(model, 1, "id", "asc", keyword);
+    }
+
+    @GetMapping("/page/{pageNumber}")
+    public String listByPage(Model model ,
+                             @PathVariable("pageNumber") int currentPage,
+                             @Param("sortField") String sortField,
+                             @Param("sortDir") String sortDir,
+                             @Param("keyword") String keyword) {
+        Page<NgonNgu> page = ngonNguService.listAll(currentPage, sortField, sortDir, keyword);
+        long totalItem = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+        List<NgonNgu> ngonNgu = page.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalItem", totalItem);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("ngonNgu", ngonNgu);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("keyword", keyword);
         return "admin/language/show-language";
     }
 
