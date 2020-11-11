@@ -160,8 +160,8 @@
                   <tbody>
                     <tr th:each="phim2 :${phim}">
                       <td>
-                        <a th:href="@{/admin/movie/edit?id={id}(id=${phim2.id})}" class="fas fa-edit text-primary" title="chỉnh sửa"></a>
-                        <a th:href="@{/admin/movie/delete?id={id}(id=${phim2.id})}" class="fas fa-trash ml-3 text-danger" title="xóa"></a>
+                        <a th:href="@{/admin/movie/edit?id={id}(id=${phim2.id})}" class="fas fa-edit text-primary" title="Sửa"></a>
+                        <a th:href="@{/admin/movie/delete?id={id}(id=${phim2.id})}" class="fas fa-trash ml-3 text-danger" title="Xóa"></a>
                       </td>
                       <td th:text="${phim2.id}"></td>
                       <td th:text="${phim2.ten}"></td>

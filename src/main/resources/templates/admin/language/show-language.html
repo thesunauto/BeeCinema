@@ -135,7 +135,7 @@
                   <tbody>
                     <tr th:each="ngonngu :${ngonNgu}">
                       <td>
-                        <a th:href="@{/admin/language/edit?id={id}(id=${ngonngu.id})}" class="fas fa-edit text-primary"></a> <a th:href="@{/admin/language/delete?id={id}(id=${ngonngu.id})}" class="fas fa-trash ml-3 text-danger"></a>
+                        <a th:href="@{/admin/language/edit?id={id}(id=${ngonngu.id})}" class="fas fa-edit text-primary" th:title="Sửa"></a> <a th:href="@{/admin/language/delete?id={id}(id=${ngonngu.id})}" class="fas fa-trash ml-3 text-danger" th:title="Xóa"></a>
                       </td>
                       <td th:text="${ngonngu.id}"></td>
                       <td th:text="${ngonngu.ten}"></td>

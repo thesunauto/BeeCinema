@@ -134,7 +134,7 @@
                 <tbody th:each="dayGhe: ${dayGhe}">
                   <tr>
                     <td> 
-                      <i class="fas fa-edit text-primary"></i> <a th:href="@{${'/admin/row-seat/delete-row-seat/'+dayGhe.id}}"> <i class="fas fa-trash ml-3 text-danger"></i></a>
+                      <i class="fas fa-edit text-primary" th:title="Sửa"></i> <a th:href="@{${'/admin/row-seat/delete-row-seat/'+dayGhe.id}}"> <i class="fas fa-trash ml-3 text-danger" th:title="Xóa"></i></a>
 
                     </td>
                     <td th:text="${dayGhe.id}"></td>

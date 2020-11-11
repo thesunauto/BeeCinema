@@ -161,8 +161,7 @@
                   <tbody>
                     <tr th:each="taikhoan : ${taikhoans}">
                       <td>
-                        <a th:href="@{/admin/user/edit?id={id}(id=${taikhoan.username})}" class="fas fa-edit text-primary" title="chỉnh sửa"></a>
-                        <a th:href="@{/admin/user/delete?id={id}(id=${taikhoan.username})}" class="fas fa-trash ml-3 text-danger" title="xóa"></a>
+                        <a th:href="@{/admin/user/edit?id={id}(id=${taikhoan.username})}" class="fas fa-edit text-primary" th:title="Sửa"></a> <a th:href="@{/admin/user/delete?id={id}(id=${taikhoan.username})}" class="fas fa-trash ml-3 text-danger" th:title="Xóa"></a>
                       </td>
                       <td th:text="${taikhoan.username}"></td>
                       <td th:text="${taikhoan.matkhau}"></td>

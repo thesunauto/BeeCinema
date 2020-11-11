@@ -154,8 +154,7 @@
                 <tbody>
                   <tr th:each="sukien : ${sukiens}">
                     <td>
-                      <a th:href="@{/admin/event/edit?id={id}(id=${sukien.id})}" class="fas fa-edit text-primary" title="chỉnh sửa"></a>
-                      <a th:href="@{/admin/event/delete?id={id}(id=${sukien.id})}" class="fas fa-trash ml-3 text-danger" title="xóa"></a>
+                      <a th:href="@{/admin/event/edit?id={id}(id=${sukien.id})}" class="fas fa-edit text-primary" th:title="Sửa"></a> <a th:href="@{/admin/event/delete?id={id}(id=${sukien.id})}" class="fas fa-trash ml-3 text-danger" th:title="Xóa"></a>
                     </td>
                     <td th:text="${sukien.id}"></td>
                     <td th:text="${sukien.ten}"></td>
