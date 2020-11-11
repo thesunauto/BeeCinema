@@ -13,4 +13,6 @@ public interface SukienService {
     void deleteSukien(String id);
 
     Optional<Sukien> findSukienById(String id);
+
+    List<Sukien> getAllSuKienActive();
 }

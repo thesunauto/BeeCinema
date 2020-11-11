@@ -6,13 +6,12 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.WebSession;
-import vn.edu.poly.beecinema.commons.DayGheResponse;
-import vn.edu.poly.beecinema.commons.GheResponse;
-import vn.edu.poly.beecinema.commons.PhimResponse;
-import vn.edu.poly.beecinema.commons.VeResponse;
+import vn.edu.poly.beecinema.commons.*;
 import vn.edu.poly.beecinema.config.HttpSessionConfig;
+import vn.edu.poly.beecinema.entity.Ghe;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
+import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.service.*;
 import vn.edu.poly.beecinema.storage.StorageService;
 
@@ -40,6 +39,8 @@ public class EmployeeRestController {
     private GheService gheService;
     @Autowired
     private VeService veService;
+    @Autowired
+    private  SukienService sukienService;
 
     public EmployeeRestController(StorageService storageService) {
         this.storageService = storageService;
@@ -182,6 +183,62 @@ public class EmployeeRestController {
         veResponses.add(veResponse);
         httpSession.setAttribute("veresponse", veResponses);
         return ResponseEntity.ok().body("true");
+    }
+
+    @PostMapping("/getSuatChieu/{idsuatchieu}")
+    public ResponseEntity getSuatChieu(@PathVariable Integer idsuatchieu){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        Suatchieu suatchieu =suatChieuService.findById(idsuatchieu);
+        return ResponseEntity.ok().body(SuatChieuResponse.builder()
+                .id(suatchieu.getId())
+                .idphim(suatchieu.getPhim().getTen())
+                .batdau(suatchieu.getKhunggio().getBatdau().format(dateTimeFormatter))
+                .ketthuc(suatchieu.getKhunggio().getKetthuc().format(dateTimeFormatter))
+                .dongia(Double.valueOf(suatchieu.getDongia()))
+                .build());
+    }
+
+
+    @PostMapping("/getGheChoosen")
+    public ResponseEntity getGheChoosen(HttpSession session){
+        List<VeResponse> veResponsesCurent = new ArrayList<>();
+        if(session.getAttribute("veresponse")!=null){
+            veResponsesCurent =(List<VeResponse>) session.getAttribute("veresponse");
+            veResponsesCurent.forEach(veResponse -> {
+                Ghe ghe = gheService.findGheById(veResponse.getIdghe()).get();
+                veResponse.setGheResponse(GheResponse.builder()
+                        .id(ghe.getId())
+                        .col(ghe.getCol())
+                        .tenDay(ghe.getDayghe().getTen())
+                        .build());
+            });
+        }
+        return ResponseEntity.ok().body(veResponsesCurent);
+    }
+
+    @PostMapping("/getTotal")
+    public ResponseEntity getTotal(HttpSession session,@RequestParam(value = "idsukien",required = false) String idsukien){
+        float tongcong = 0;
+        List<VeResponse> veResponsesCurent =(List<VeResponse>) session.getAttribute("veresponse");
+        List<Ghe> ghes = new ArrayList<>();
+        Suatchieu suatchieu = suatChieuService.findById(veResponsesCurent.get(0).getIdsuatchieu());
+        for(VeResponse veResponse : veResponsesCurent){
+            Ghe ghe = gheService.findGheById(veResponse.getIdghe()).get();
+            tongcong += suatchieu.getDongia().floatValue()+ghe.getDayghe().getGia().floatValue()+ghe.getLoaighe().getGia().floatValue();
+        }
+        if(!idsukien.equals("noevent")){Sukien sukien = sukienService.findSukienById(idsukien).get();tongcong -= sukien.getGiam();}
+        return ResponseEntity.ok().body(tongcong);
+    }
+
+    @PostMapping("/saveTicket")
+    public ResponseEntity saveTicket(HttpSession session,@RequestParam(value = "idsukien",required = false)  String idsukien){
+        List<VeResponse> veResponsesCurent =(List<VeResponse>) session.getAttribute("veresponse");
+        Suatchieu suatchieu = suatChieuService.findById(veResponsesCurent.get(0).getIdsuatchieu());
+        if(!idsukien.equals("noevent")){Sukien sukien = sukienService.findSukienById(idsukien).get();}
+        for (VeResponse veResponse:veResponsesCurent) {
+            Ghe ghe = gheService.findGheById(veResponse.getIdghe()).get();
+        }
+        return ResponseEntity.ok().body(null);
     }
 
     @GetMapping("/clearsession")
