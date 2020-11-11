@@ -140,7 +140,7 @@
                 <tbody>
                   <tr th:each="suatChieu :${suatChieu}">
                     <td>
-                      <a th:href="@{/admin/screenings/edit?id={id}(id=${suatChieu.id})}" class="fas fa-edit text-primary"></a> <a th:href="@{/admin/screenings/delete?id={id}(id=${suatChieu.id})}" class="fas fa-trash ml-3 text-danger"></a>
+                      <a th:href="@{/admin/screenings/edit?id={id}(id=${suatChieu.id})}" class="fas fa-edit text-primary" th:title="Sửa"></a> <a th:href="@{/admin/screenings/delete?id={id}(id=${suatChieu.id})}" class="fas fa-trash ml-3 text-danger" th:title="Xóa"></a>
                     </td>
                     <td th:text="${suatChieu.id}"></td>
                     <td th:text="${suatChieu.phim.ten}"></td>

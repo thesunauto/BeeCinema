@@ -136,7 +136,7 @@
                   <tbody>
                     <tr th:each="loaiphim :${loaiPhim}">
                       <td>
-                        <a th:href="@{/admin/movie-type/edit?id={id}(id=${loaiphim.id})}" class="fas fa-edit text-primary"></a> <a th:href="@{/admin/movie-type/delete?id={id}(id=${loaiphim.id})}" class="fas fa-trash ml-3 text-danger"></a>
+                        <a th:href="@{/admin/movie-type/edit?id={id}(id=${loaiphim.id})}" class="fas fa-edit text-primary" th:title="Sửa"></a> <a th:href="@{/admin/movie-type/delete?id={id}(id=${loaiphim.id})}" class="fas fa-trash ml-3 text-danger" th:title="Xóa"></a>
                       </td>
                       <td th:text="${loaiphim.id}"></td>
                       <td th:text="${loaiphim.ten}"></td>
