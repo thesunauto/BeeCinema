@@ -116,8 +116,10 @@ public class EmployeeRestController {
         List<HttpSession> httpSessions = httpSessionConfig.getActiveSessions();
         if (!httpSessions.isEmpty()) {
             httpSessions.forEach(session -> {
-                if (session.getAttribute("veresponse") != null) {
-                    veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
+                if(session!=null){
+                    if (session.getAttribute("veresponse") != null) {
+                        veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
+                    }
                 }
             });
         }
