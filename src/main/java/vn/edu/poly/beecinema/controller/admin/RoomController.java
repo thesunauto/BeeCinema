@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.Ghe;
+import vn.edu.poly.beecinema.entity.Loaighe;
 import vn.edu.poly.beecinema.entity.Phong;
 import vn.edu.poly.beecinema.service.PhongService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
@@ -39,10 +40,17 @@ public class RoomController {
         phongService.savePhong(phong);
         return "redirect:/admin/room/show-room";
     }
-
-    @RequestMapping("/update-room")
-    public String updateRoom(Model model){
+    @GetMapping("/update-room/{id}")
+    public String findRoom(Model model, @PathVariable(value = "id") String id){
+        Phong phong =  phongService.findPhongById(id).get();
+        model.addAttribute("room",phong);
         return "admin/room/update-room";
+    }
+
+    @PostMapping("/update-room")
+    public String updateRoom(Authentication authentication, Model model, @ModelAttribute(value = "room") Phong phong){
+        phongService.savePhong(phong);
+        return "redirect:/admin/room/show-room";
     }
 
     @GetMapping("/delete-room/{id}")

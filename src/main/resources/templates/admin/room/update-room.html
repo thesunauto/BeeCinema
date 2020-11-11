@@ -11,6 +11,9 @@
 
   <!-- Main layout -->
   <main layout:fragment="content">
+    <form th:action="@{/admin/room/update-room}" th:object="${room}" method="post">
+      <input type="hidden" th:field="*{ngaytao}">
+      <input type="hidden" th:field="*{taikhoan}">
     <div class="container-fluid">
 
     
@@ -18,128 +21,78 @@
       <!-- Section: Inputs -->
       <section >
         <div>
-        <div class="card card-cascade narrower ">
-          <!-- Card image -->
-          <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
-            <h3 class="card-header-title">Cập nhật Phòng</h3>  
-          </div>
-          <!-- /Card image -->
-          <!-- Section heading -->
-          <div class="card-body ">
-          <!-- Grid row -->
-          <div class="row">
+          <div class="card card-cascade narrower ">
+            <!-- Card image -->
+            <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
+              <h3 class="card-header-title">Cập nhật phòng</h3>
+            </div>
+            <!-- /Card image -->
+            <!-- Section heading -->
+            <div class="card-body ">
+              <!-- Grid row -->
+              <div class="row">
 
-            <!-- Grid column -->
-            <div class="col-md-2 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-key prefix"></i>
-                <input  type="text" id="form31" class="form-control" disabled value="100">
-                <label for="form31" class="active">ID</label>
+                <!-- Grid column -->
+                <div class="col-md-2 mb-4">
+                  <div class="md-form md-outline">
+                    <i class="fas fa-key prefix"></i>
+                    <input  type="text" id="form312" th:field="*{id}" class="form-control" readonly value="100">
+                    <label for="form312" class="active">ID</label>
+                  </div>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 mb-4">
+                  <div class="md-form md-outline">
+                    <i class="fas fa-door-closed prefix"></i>
+                    <input th:field="*{ten}" type="text" id="form311" class="form-control">
+                    <label for="form311" class="active">Tên Phòng</label>
+                  </div>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-4">
+
+                  <!-- Name -->
+                  <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                    <option value="1">Hiện</option>
+                    <option value="0">Ẩn</option>
+                  </select><label class="mdb-main-label active">Trạng thái</label>
+
+                </div>
+                <!-- Grid column -->
+
               </div>
+              <!-- Grid row -->
 
-            </div>
-            <!-- Grid column -->
 
-            <!-- Grid column -->
-            <div class="col-md-4 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-door-closed prefix"></i>
-                <input type="text" id="form31" class="form-control">
-                <label for="form31" class="active">Tên Phòng</label>
+              <hr/>
+              <!-- Grid row -->
+              <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-12 mb-4 ">
+
+                  <button type="submit" class="btn blue-gradient btn-rounded float-right">Cập nhật</button>
+
+                </div>
+                <!-- Grid column -->
+
               </div>
-
+              <!-- Grid row -->
             </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-
-              <!-- Name -->
-              <select class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option disabled selected>Choose your option</option>
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
-              </select><label class="mdb-main-label active">Trạng thái</label>
-
-            </div>
-            <!-- Grid column -->
-
-          </div>
-          <!-- Grid row -->
-
-          <!-- Grid row -->
-          <div class="row">
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-user-plus prefix"></i>
-                <input type="text" id="form31" class="form-control" disabled>
-                <label for="form31" class="active">Người Tạo</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-calendar-plus prefix"></i>
-                <input type="date" id="form31" class="form-control" disabled>
-                <label for="form31" class="active">Ngày Tạo</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-user-edit prefix"></i>
-                <input type="text" id="form31" class="form-control" disabled>
-                <label for="form31" class="active">Người Sửa</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-calendar-alt prefix"></i>
-                <input type="date" id="form31" class="form-control" disabled>
-                <label for="form31" class="active">Ngày Sửa</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-
-
-          </div>
-          <!-- Grid row -->
-          <hr/>
-           <!-- Grid row -->
-           <div class="row">
-
-            <!-- Grid column -->
-            <div class="col-md-12 mb-4 center">
-
-              <button type="button" class="btn blue-gradient btn-rounded float-right ">Cập Nhật</button>
-
-            </div>
-            <!-- Grid column -->
-
-          </div>
-          <!-- Grid row -->
           </div>
         </div>
-      </div>
       </section>
       <!-- Section: Inputs -->
 
 
     </div>
+    </form>
   </main>
   <!-- Main layout -->
 

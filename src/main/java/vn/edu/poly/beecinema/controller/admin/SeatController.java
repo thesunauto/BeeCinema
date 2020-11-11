@@ -47,25 +47,19 @@ public class SeatController {
         return "redirect:/admin/seat/show-seat";
     }
 
-//    @GetMapping("/update-seat/{id}")
-//    public String findseat(Model model, @PathVariable(value = "id") int id){
-//        List<Ghe> ghe =  gheService.findGheById(id);
-//        model.addAttribute("seat",ghe);
-//        return "admin/seat/update-seat";
-//    }
-//
-//    @PostMapping("/update-seat")
-//    public String updateseat(Authentication authentication, Model model, @ModelAttribute(value = "seat") Ghe ghe){
-//
-//        ghe.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
-//        ghe.setPhong(phongService.findPhongById(ghe.getPhong().getId()).get());
-//        ghe.setDayghe(dayGheService.findDayGheByID(ghe.getDayghe().getId()).get());
-//        ghe.setLoaighe(loaiGheService.findLoaiGheById(ghe.getLoaighe().getId()).get());
-//        ghe.setNgaytao(LocalDateTime.now());
-//        gheService.saveGhe(ghe);
-//        System.out.println(ghe);
-//        return "redirect:/admin/seat/show-seat";
-//    }
+    @GetMapping("/update-seat/{id}")
+    public String findseat(Model model, @PathVariable(value = "id") int id){
+        Ghe ghe =  gheService.findGheById(id).get();
+        model.addAttribute("seat",ghe);
+        return "admin/seat/update-seat";
+    }
+
+    @PostMapping("/update-seat")
+    public String updateseat(Authentication authentication, Model model, @ModelAttribute(value = "seat") Ghe ghe){
+        gheService.saveGhe(ghe);
+        System.out.println(ghe);
+        return "redirect:/admin/seat/show-seat";
+    }
 
     @GetMapping("/delete-seat/{id}")
     public  String deleteSeat (@PathVariable(value = "id") int id){
