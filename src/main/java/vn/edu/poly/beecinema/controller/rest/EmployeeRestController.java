@@ -118,9 +118,11 @@ public class EmployeeRestController {
         if (!httpSessions.isEmpty()) {
             httpSessions.forEach(session -> {
                 if(session!=null){
-                    if (session.getAttribute("veresponse") != null) {
-                        veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
-                    }
+                    try{
+                        if (session.getAttribute("veresponse") != null) {
+                            veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
+                        }
+                    }catch (Exception e){}
                 }
             });
         }
