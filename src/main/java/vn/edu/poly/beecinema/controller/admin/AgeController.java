@@ -1,12 +1,15 @@
 package vn.edu.poly.beecinema.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.DoTuoi;
+import vn.edu.poly.beecinema.entity.Taikhoan;
 import vn.edu.poly.beecinema.service.DoTuoiService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
@@ -20,10 +23,38 @@ import java.util.Optional;
 public class AgeController {
     @Autowired private DoTuoiService doTuoiService;
     @Autowired private TaikhoanService taikhoanService;
+
+//    @GetMapping("/show-age")
+//    public String showAge(Model model){
+//        List<DoTuoi> doTuoi = doTuoiService.getAllDoTuoi();
+//        model.addAttribute("doTuoi", doTuoi);
+//        return "admin/age/show-age";
+//    }
+
     @GetMapping("/show-age")
     public String showAge(Model model){
-        List<DoTuoi> doTuoi = doTuoiService.getAllDoTuoi();
+        String keyword = null;
+        return listByPage(model, 1, "id", "asc", keyword);
+    }
+
+    @GetMapping("/page/{pageNumber}")
+    public String listByPage(Model model ,
+                             @PathVariable("pageNumber") int currentPage,
+                             @Param("sortField") String sortField,
+                             @Param("sortDir") String sortDir,
+                             @Param("keyword") String keyword) {
+        Page<DoTuoi> page = doTuoiService.listAll(currentPage, sortField, sortDir, keyword);
+        long totalItem = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+        List<DoTuoi> doTuoi = page.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalItem", totalItem);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("doTuoi", doTuoi);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("keyword", keyword);
         return "admin/age/show-age";
     }
 

@@ -1,5 +1,6 @@
 package vn.edu.poly.beecinema.service;
 
+import org.springframework.data.domain.Page;
 import vn.edu.poly.beecinema.entity.Phong;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface PhongService {
     void deletePhong(String id);
 
     Optional<Phong> findPhongById(String id);
+
+    Page<Phong> listAll(int pageNumber, String sortField, String sortDir, String keyword);
 }

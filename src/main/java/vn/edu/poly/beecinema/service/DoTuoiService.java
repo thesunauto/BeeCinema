@@ -1,5 +1,6 @@
 package vn.edu.poly.beecinema.service;
 
+import org.springframework.data.domain.Page;
 import vn.edu.poly.beecinema.entity.DoTuoi;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface DoTuoiService {
     void deleteDoTuoi(String id);
 
     Optional<DoTuoi> findDoTuoiById(String id);
+
+    Page<DoTuoi> listAll(int pageNumber, String sortField, String sortDir, String keyword);
 }

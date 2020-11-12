@@ -1,6 +1,8 @@
 package vn.edu.poly.beecinema.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +21,38 @@ import java.util.List;
 public class RoomController {
     @Autowired private PhongService phongService;
     @Autowired private TaikhoanService taikhoanService;
+
+//    @GetMapping("/show-room")
+//    public String showRoom(Model model){
+//        List<Phong> phong = phongService.getAllPhong();
+//        model.addAttribute("phong", phong);
+//        return "admin/room/show-room";
+//    }
+
     @GetMapping("/show-room")
     public String showRoom(Model model){
-        List<Phong> phong = phongService.getAllPhong();
+        String keyword = null;
+        return listByPage(model, 1, "id", "asc", keyword);
+    }
+
+    @GetMapping("/page/{pageNumber}")
+    public String listByPage(Model model ,
+                             @PathVariable("pageNumber") int currentPage,
+                             @Param("sortField") String sortField,
+                             @Param("sortDir") String sortDir,
+                             @Param("keyword") String keyword) {
+        Page<Phong> page = phongService.listAll(currentPage, sortField, sortDir, keyword);
+        long totalItem = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+        List<Phong> phong = page.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalItem", totalItem);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("phong", phong);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("keyword", keyword);
         return "admin/room/show-room";
     }
 
