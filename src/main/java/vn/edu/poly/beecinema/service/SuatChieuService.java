@@ -11,9 +11,13 @@ public interface SuatChieuService {
 
     List<Suatchieu> getAllSuatChieu();
 
+    List<Suatchieu> getAllSuatChieuByPhim(String idphim);
+
     void saveSuatChieu(Suatchieu suatChieu);
 
     void deleteSuatChieu(Integer id);
 
     Optional<Suatchieu> findSuatChieuById(Integer id);
+
+
 }

@@ -28,7 +28,7 @@
                                            class="d-flex justify-content-center btn btn-danger">Không có suất chiếu
                                         nào</label>
                                     <option class="btn btn-danger mx-1 rdoSuatChieu"
-                                            th:each="sc : ${film.get().suatchieus}" th:value="${sc.getId()}">
+                                            th:each="sc : ${suatchieu}" th:value="${sc.getId()}">
                                         <input type="radio" name="options" autocomplete="off">
                                         <div th:text="${sc.phong.getTen()}"></div>
                                         |

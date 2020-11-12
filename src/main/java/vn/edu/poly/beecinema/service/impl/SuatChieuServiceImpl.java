@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import vn.edu.poly.beecinema.entity.Khunggio;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.repository.SuatchieuRepository;
+import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class SuatChieuServiceImpl implements SuatChieuService {
     @Autowired
     SuatchieuRepository suatchieuRepository;
-
+@Autowired private PhimService phimService;
     @Override
     public Suatchieu findById(Integer id) {
         return Optional.ofNullable(id).map(integer -> suatchieuRepository.getOne(id)).orElse(null);
@@ -22,7 +23,12 @@ public class SuatChieuServiceImpl implements SuatChieuService {
 
     @Override
     public List<Suatchieu> getAllSuatChieu() {
-        return (List<Suatchieu>) suatchieuRepository.findAll();
+        return (List<Suatchieu>) suatchieuRepository.findAllByTrangthai(0);
+    }
+
+    @Override
+    public List<Suatchieu> getAllSuatChieuByPhim(String idphim) {
+        return suatchieuRepository.findAllByPhimAndTrangthai(phimService.findPhimById(idphim).get(),0);
     }
 
     @Override
@@ -39,4 +45,6 @@ public class SuatChieuServiceImpl implements SuatChieuService {
     public Optional<Suatchieu> findSuatChieuById(Integer id) {
         return suatchieuRepository.findById(id);
     }
+
+
 }

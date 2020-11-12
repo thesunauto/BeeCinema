@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vn.edu.poly.beecinema.commons.VeResponse;
 import vn.edu.poly.beecinema.service.PhimService;
+import vn.edu.poly.beecinema.service.SuatChieuService;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,7 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired private PhimService phimService;
-
+    @Autowired private SuatChieuService suatChieuService;
     @GetMapping("/chonphim")
     public String chonphim(){
         return "employee/chonPhim";
@@ -40,6 +41,7 @@ public class EmployeeController {
         List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
         httpSession.setAttribute("veresponse",veResponses);
         model.addAttribute("film", phimService.findPhimById(id));
+        model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhim(id));
         return "employee/datghe";
     }
 }
