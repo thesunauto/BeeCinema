@@ -40,6 +40,8 @@ public class EmployeeRestController {
     @Autowired
     private VeService veService;
     @Autowired
+    private VeonlineService veonlineService;
+    @Autowired
     private  SukienService sukienService;
 
     public EmployeeRestController(StorageService storageService) {
@@ -110,61 +112,61 @@ public class EmployeeRestController {
     }
 
 
-    @GetMapping("/getGhe/{idsuatchieu}")
-    public ResponseEntity getGhe(HttpSessionConfig httpSessionConfig, HttpSession httpSession, @PathVariable Integer idsuatchieu) {
-        List<VeResponse> veResponses = new ArrayList<>();
-        final List<VeResponse> veResponsesCurent = (List<VeResponse>) httpSession.getAttribute("veresponse");
-        List<HttpSession> httpSessions = httpSessionConfig.getActiveSessions();
-        if (!httpSessions.isEmpty()) {
-            httpSessions.forEach(session -> {
-                if(session!=null){
-                    try{
-                        if (session.getAttribute("veresponse") != null) {
-                            veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
-                        }
-                    }catch (Exception e){}
-                }
-            });
-        }
-
-
-
-        List<DayGheResponse> gheResponses = new ArrayList<>();
-        Suatchieu suatchieu = suatChieuService.findById(idsuatchieu);
-        dayGheService.findDayGheByPhong(suatchieu.getPhong().getId()).forEach(dayghe -> {
-            List<GheResponse> gheResponses1 = new ArrayList<>();
-            gheService.findByPhongAndDayGhe(suatchieu.getPhong().getId(), dayghe.getId()).forEach(ghe -> {
-                Integer stt = ghe.getTrangthai();
-                for (VeResponse veResponse : veResponses) {
-                    if (veResponse.getIdsuatchieu().equals(suatchieu.getId())) {
-                        if (veResponse.getIdghe().equals(ghe.getId())) {
-                            stt = 3;
-                            for(VeResponse veResponse1 : veResponsesCurent){
-                                if(veResponse1.getIdsuatchieu().equals(suatchieu.getId())){
-                                    if(veResponse1.getIdghe().equals(ghe.getId())){
-                                        stt =2;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-
-
-                if (veService.IsExists(suatchieu.getId(), ghe.getId())) {
-                    stt = 1;
-                }
-                if (ghe.getTrangthai() == 1) {
-                    stt = 4;
-                }
-
-                gheResponses1.add(new GheResponse(ghe.getId(), ghe.getCol(), ghe.getPhong().getId(), ghe.getDayghe().getId(), ghe.getDayghe().getTen(), ghe.getLoaighe().getId(), stt));
-            });
-            gheResponses.add(new DayGheResponse(dayghe.getId(), dayghe.getTen(), gheResponses1));
-        });
-        return ResponseEntity.ok().body(gheResponses);
-    }
+//    @GetMapping("/getGhe/{idsuatchieu}")
+//    public ResponseEntity getGhe(HttpSessionConfig httpSessionConfig, HttpSession httpSession, @PathVariable Integer idsuatchieu) {
+//        List<VeResponse> veResponses = new ArrayList<>();
+//        final List<VeResponse> veResponsesCurent = (List<VeResponse>) httpSession.getAttribute("veresponse");
+//        List<HttpSession> httpSessions = httpSessionConfig.getActiveSessions();
+//        if (!httpSessions.isEmpty()) {
+//            httpSessions.forEach(session -> {
+//                if(session!=null){
+//                    try{
+//                        if (session.getAttribute("veresponse") != null) {
+//                            veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
+//                        }
+//                    }catch (Exception e){}
+//                }
+//            });
+//        }
+//
+//
+//
+//        List<DayGheResponse> gheResponses = new ArrayList<>();
+//        Suatchieu suatchieu = suatChieuService.findById(idsuatchieu);
+//        dayGheService.findDayGheByPhong(suatchieu.getPhong().getId()).forEach(dayghe -> {
+//            List<GheResponse> gheResponses1 = new ArrayList<>();
+//            gheService.findByPhongAndDayGhe(suatchieu.getPhong().getId(), dayghe.getId()).forEach(ghe -> {
+//                Integer stt = ghe.getTrangthai();
+//                for (VeResponse veResponse : veResponses) {
+//                    if (veResponse.getIdsuatchieu().equals(suatchieu.getId())) {
+//                        if (veResponse.getIdghe().equals(ghe.getId())) {
+//                            stt = 3;
+//                            for(VeResponse veResponse1 : veResponsesCurent){
+//                                if(veResponse1.getIdsuatchieu().equals(suatchieu.getId())){
+//                                    if(veResponse1.getIdghe().equals(ghe.getId())){
+//                                        stt =2;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//
+//
+//
+//                if (veService.IsExists(suatchieu.getId(), ghe.getId())) {
+//                    stt = 1;
+//                }
+//                if (ghe.getTrangthai() == 1) {
+//                    stt = 4;
+//                }
+//
+//                gheResponses1.add(new GheResponse(ghe.getId(), ghe.getCol(), ghe.getPhong().getId(), ghe.getDayghe().getId(), ghe.getDayghe().getTen(), ghe.getLoaighe().getId(), stt));
+//            });
+//            gheResponses.add(new DayGheResponse(dayghe.getId(), dayghe.getTen(), gheResponses1));
+//        });
+//        return ResponseEntity.ok().body(gheResponses);
+//    }
 
     @PostMapping("/setghefocus")
     @ResponseBody
@@ -185,6 +187,75 @@ public class EmployeeRestController {
         veResponses.add(veResponse);
         httpSession.setAttribute("veresponse", veResponses);
         return ResponseEntity.ok().body("true");
+    }
+
+    @PostMapping("/loadghebysuatchieu={idsuatchieu}")
+    public ResponseEntity loadGhe(@PathVariable Integer idsuatchieu){
+        List<DayGheResponse> gheResponses = new ArrayList<>();
+        Suatchieu suatchieu = suatChieuService.findById(idsuatchieu);
+        dayGheService.findDayGheByPhong(suatchieu.getPhong().getId()).forEach(dayghe -> {
+            List<GheResponse> gheResponses1 = new ArrayList<>();
+            gheService.findByPhongAndDayGhe(suatchieu.getPhong().getId(), dayghe.getId()).forEach(ghe -> {
+                Integer stt = ghe.getTrangthai();
+                if (ghe.getTrangthai() == 1) {
+                    stt = 4;
+                }
+                gheResponses1.add(new GheResponse(ghe.getId(), ghe.getCol(), ghe.getPhong().getId(), ghe.getDayghe().getId(), ghe.getDayghe().getTen(), ghe.getLoaighe().getId(), stt));
+            });
+            gheResponses.add(new DayGheResponse(dayghe.getId(), dayghe.getTen(), gheResponses1));
+        });
+        return ResponseEntity.ok().body(gheResponses);
+    }
+
+    @PostMapping("/gettrangthaighebysuatchieu={idsuatchieu}")
+    public ResponseEntity gettrangthaighe(HttpSessionConfig httpSessionConfig, HttpSession httpSession, @PathVariable Integer idsuatchieu){
+        List<GheResponse> gheResponses = new ArrayList<>();
+        if(idsuatchieu!=-1){
+            List<VeResponse> veResponses = new ArrayList<>();
+            List<VeResponse> veResponsesCurent = (List<VeResponse>) httpSession.getAttribute("veresponse");
+            List<HttpSession> httpSessions = httpSessionConfig.getActiveSessions();
+            if (!httpSessions.isEmpty()) {
+                httpSessions.forEach(session -> {
+                    if(session!=null){
+                        try{
+                            if(session.getId()!=httpSession.getId()){
+                                if (session.getAttribute("veresponse") != null) {
+                                    veResponses.addAll((List<VeResponse>) session.getAttribute("veresponse"));
+                                }
+                            }
+
+                        }catch (Exception e){}
+                    }
+                });
+            }
+
+
+
+            veService.findAllByIdSuatchieu(idsuatchieu).forEach(ve -> {
+                gheResponses.add(GheResponse.builder().id(ve.getGhe().getId()).trangthai(1).build());
+            });
+            veonlineService.findAllByIdSuatchieu(idsuatchieu).forEach(veon -> {
+                gheResponses.add(GheResponse.builder().id(veon.getGhe().getId()).trangthai(1).build());
+            });
+
+            for(VeResponse ve1 : veResponses){
+                if(ve1.getIdsuatchieu().equals(idsuatchieu)){
+                    gheResponses.add(GheResponse.builder()
+                            .id(ve1.getIdghe())
+                            .trangthai(3)
+                            .build());
+                }
+            }
+            for(VeResponse ve1 : veResponsesCurent){
+                if(ve1.getIdsuatchieu().equals(idsuatchieu)){
+                    gheResponses.add(GheResponse.builder()
+                            .id(ve1.getIdghe())
+                            .trangthai(2)
+                            .build());
+                }
+            }
+        }
+        return ResponseEntity.ok().body(gheResponses);
     }
 
     @PostMapping("/getSuatChieu/{idsuatchieu}")

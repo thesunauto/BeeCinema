@@ -133,15 +133,15 @@
             })
 
             var listDayGhe = [];
-            var idSuatChieu = null;
+            var idSuatChieu = -1;
             var idSukien = 'noevent';
 
 
             function loadGhe() {
                 if (idSuatChieu != null) {
                     $.ajax({
-                        url: '/api/employee/getGhe/' + idSuatChieu,
-                        type: 'GET',
+                        url: '/api/employee/loadghebysuatchieu=' + idSuatChieu,
+                        type: 'POST',
                         dataType: 'JSON',
                         contentType: 'application/json',
                         processData: false,
@@ -173,6 +173,64 @@
                 }
             };
 
+            function  loadStt() {
+                $.ajax({
+                    url: '/api/employee/gettrangthaighebysuatchieu=' + idSuatChieu,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (data) {
+                        var listGheStt = data;
+                        console.log(data)
+                        $('option.ActionGhe').each(function()
+                        {
+                            for (var i = 0; i < listDayGhe.length; i++) {
+                                var listGhe = listDayGhe[i].gheResponses;
+                                for (var ii = 0; ii < listGhe.length; ii++) {
+                                    if(listGhe[ii].id == $(this).val()){
+                                        $(this).removeClass();
+                                        $(this).attr("disabled", false);
+                                        if(listGhe[ii].trangthai == 0){
+                                            $(this).addClass('ActionGhe btn text-center btn-info');
+                                        }
+                                        if(listGhe[ii].trangthai == 4){
+                                            $(this).addClass('ActionGhe btn text-center btn-light');
+                                            $(this).attr("disabled", true);
+                                        }
+                                    }
+                                }
+                            }
+
+                            for(var iz =0; iz<listGheStt.length;iz++){
+                                if(listGheStt[iz].id == $(this).val()){
+                                    $(this).removeClass();
+                                    $(this).attr("disabled", false);
+                                    if(listGheStt[iz].trangthai ==1){
+                                        $(this).attr('disabled', 'disabled');
+                                        $(this).addClass('ActionGhe btn text-center btn-danger');
+                                    }
+                                    if(listGheStt[iz].trangthai == 2){
+                                        $(this).addClass('ActionGhe btn text-center btn-warning');
+                                    }
+                                    if(listGheStt[iz].trangthai == 3){
+                                        $(this).attr("disabled", true);
+                                        $(this).addClass('ActionGhe btn text-center btn-warning');
+
+                                    }
+                                }
+                            }
+                        });
+                    },
+                    error: function () {
+                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+            }
+
+            setInterval(loadStt,1000);
+
+
             function fillGhe() {
                 var content = '';
                 for (var i = 0; i < listDayGhe.length; i++) {
@@ -182,7 +240,7 @@
                         '<td class="white-text">Dãy ' + listDayGhe[i].ten + '</td>\n';
                     var listGhe = listDayGhe[i].gheResponses;
                     for (var ii = 0; ii < listGhe.length; ii++) {
-                        content += '<td><option ' + ((listGhe[ii].trangthai == 0 || listGhe[ii].trangthai == 2) ? '' : 'disabled') + ' value="' + listGhe[ii].id + '" class="ActionGhe btn ' + (listGhe[ii].trangthai == 0 ? 'btn-info' : listGhe[ii].trangthai == 2 ? 'btn-warning' : listGhe[ii].trangthai == 3 ? 'btn-warning' : listGhe[ii].trangthai == 1 ? 'btn-danger' : 'btn-light') + ' text-center"><i class="fas fa-chair"></i> ' + listGhe[ii].tenDay + listGhe[ii].col + '</option></td>';
+                        content += '<td><option value="' + listGhe[ii].id + '" class="ActionGhe btn text-center"><i class="fas fa-chair"></i> ' + listGhe[ii].tenDay + listGhe[ii].col + '</option></td>';
                     }
 
                     content += '<td class="white-text">Dãy ' + listDayGhe[i].ten + '</td>\n' +
@@ -233,8 +291,8 @@
                         alert(XMLHttpRequest.status + " : " + errorThrown);
                     }
                 });
-                loadGhe();
             });
+
             $(document).on('click', 'option.rdoSuatChieu', function () {
                 $.ajax({
                     url: '/api/employee/clearsession',
