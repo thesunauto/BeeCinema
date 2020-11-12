@@ -89,11 +89,14 @@
                             <!-- Content -->
                             <div class="text-white text-center d-flex align-items-center justify-content-center rgba-black-strong py-5 px-4">
                                 <div>
-                                    <h5 class="yellow-text"><i class="fas fa-chart-pie"></i> <span id="timeSuatChieu"> 12:00 - 13:00 </span></h5>
+                                    <h5 class="yellow-text"><i class="fas fa-chart-pie"></i> <span id="timeSuatChieu"> 12:00 - 13:00 </span>
+                                    </h5>
                                     <h3 class="card-title pt-2"><strong id="thanhtoanTenPhim"></strong></h3>
                                     <div class="row" id="ghechoosen">
                                     </div>
-                                    <h3 class="font-weight-bold text-danger yellow rounded"><span>Tổng cộng: </span><span id="tongcong">237298743</span><span> VND</span></h3>
+                                    <h3 class="font-weight-bold text-danger yellow rounded">
+                                        <span>Tổng cộng: </span><span id="tongcong">237298743</span><span> VND</span>
+                                    </h3>
                                 </div>
                             </div>
 
@@ -102,7 +105,8 @@
                         <select class="mdb-select mb-5" id="thanhtoanSukien">
                             <option value="" disabled>Choose option</option>
                             <option value="noevent" selected>Sự kiện</option>
-                            <option th:each="sukien : ${@sukienServiceimpl.getAllSuKienActive()}" th:value="${sukien.id}" th:text="${sukien.ten}"></option>
+                            <option th:each="sukien : ${@sukienServiceimpl.getAllSuKienActive()}"
+                                    th:value="${sukien.id}" th:text="${sukien.ten}"></option>
                         </select>
 
 
@@ -121,10 +125,10 @@
     <script>
         $(document).ready(function () {
 
-            $(window).on('beforeunload',function () {
+            $(window).on('beforeunload', function () {
                 $.ajax({
-                    url:'/api/employee/close',
-                    type:'GET'
+                    url: '/api/employee/close',
+                    type: 'GET'
                 });
             })
 
@@ -132,44 +136,6 @@
             var idSuatChieu = null;
             var idSukien = 'noevent';
 
-            $(document).on('click', 'option.ActionGhe', function () {
-                $.ajax({
-                    url: "/api/employee/setghefocus",
-                    type: "POST",
-                    cache: false,
-                    async: true,
-                    contentType: "application/json; charset=UTF-8",
-                    data: JSON.stringify({
-                        "idsuatchieu": parseInt(idSuatChieu),
-                        "idghe": parseInt($(this).val()),
-                        "stt": 2
-                    }),
-                    datatype: "json",
-                    success: function (data) {
-
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        alert(XMLHttpRequest.status + " : " + errorThrown);
-                    }
-                });
-                loadGhe();
-            });
-
-            $(document).on('click', 'option.rdoSuatChieu', function () {
-                $.ajax({
-                    url:'/api/employee/clearsession',
-                    type:'GET'
-                });
-                idSuatChieu = $(this).val();
-                loadGhe();
-            });
-
-            setInterval(function () {
-                if (idSuatChieu != '') {
-                    loadGhe();
-                }
-                ;
-            }, 1999);
 
             function loadGhe() {
                 if (idSuatChieu != null) {
@@ -179,11 +145,26 @@
                         dataType: 'JSON',
                         contentType: 'application/json',
                         processData: false,
+                        beforeSend: function () {
+                            $('#dataGhe').html('<div class="d-flex justify-content-center align-items-center preloader-wrapper big active">\n' +
+                                '  <div class="spinner-layer spinner-red-only">\n' +
+                                '    <div class="circle-clipper left">\n' +
+                                '      <div class="circle"></div>\n' +
+                                '    </div>\n' +
+                                '    <div class="gap-patch">\n' +
+                                '      <div class="circle"></div>\n' +
+                                '    </div>\n' +
+                                '    <div class="circle-clipper right">\n' +
+                                '      <div class="circle"></div>\n' +
+                                '    </div>\n' +
+                                '  </div>\n' +
+                                '</div>');
+                        },
                         success: function (data) {
                             listDayGhe = data;
                         },
                         complete: function () {
-                            fillGhe();
+                                fillGhe();
                         },
                         error: function () {
                             toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
@@ -212,6 +193,56 @@
                 $('#dataGhe').html(content);
             };
 
+            function loadTongCong(idsukien) {
+                $.ajax({
+                    url: '/api/employee/getTotal?idsukien=' + idsukien,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (data) {
+                        $('#tongcong').text(data);
+                    },
+                    complete: function () {
+
+                    },
+                    error: function () {
+                        toastr.error('không load được dữ liệu tong cong từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+            };
+
+
+            $(document).on('click', 'option.ActionGhe', function () {
+                $.ajax({
+                    url: "/api/employee/setghefocus",
+                    type: "POST",
+                    cache: false,
+                    async: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify({
+                        "idsuatchieu": parseInt(idSuatChieu),
+                        "idghe": parseInt($(this).val()),
+                        "stt": 2
+                    }),
+                    datatype: "json",
+                    success: function (data) {
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(XMLHttpRequest.status + " : " + errorThrown);
+                    }
+                });
+                loadGhe();
+            });
+            $(document).on('click', 'option.rdoSuatChieu', function () {
+                $.ajax({
+                    url: '/api/employee/clearsession',
+                    type: 'GET'
+                });
+                idSuatChieu = $(this).val();
+                loadGhe();
+            });
             $('#btnthanhtoan').click(function () {
                 $('#thanhtoanSukien').val('noevent');
                 idSukien = 'noevent';
@@ -227,7 +258,7 @@
                         suatchieu = data;
                     },
                     complete: function () {
-                        $('#timeSuatChieu').text(suatchieu.batdau +' - '+suatchieu.ketthuc);
+                        $('#timeSuatChieu').text(suatchieu.batdau + ' - ' + suatchieu.ketthuc);
                         $('#thanhtoanTenPhim').text(suatchieu.idphim)
                     },
                     error: function () {
@@ -246,9 +277,9 @@
                     },
                     complete: function () {
                         var content = '';
-                        for(var ii = 0;ii<gheChoosen.length;ii++){
+                        for (var ii = 0; ii < gheChoosen.length; ii++) {
                             content += '<div class="col-6 mx-auto p-1">\n' +
-                                '<div class="btn btn-warning"><i class="fas fa-chair text-center"></i> '+(gheChoosen[ii].gheResponse.tenDay + gheChoosen[ii].gheResponse.col)+'</div>\n' +
+                                '<div class="btn btn-warning"><i class="fas fa-chair text-center"></i> ' + (gheChoosen[ii].gheResponse.tenDay + gheChoosen[ii].gheResponse.col) + '</div>\n' +
                                 '</div>';
                         }
                         $('#ghechoosen').html(content);
@@ -259,28 +290,6 @@
                 });
                 loadTongCong(idSukien);
             });
-
-
-
-            function loadTongCong(idsukien) {
-                $.ajax({
-                    url: '/api/employee/getTotal?idsukien=' + idsukien,
-                    type: 'POST',
-                    dataType: 'JSON',
-                    contentType: 'application/json',
-                    processData: false,
-                    success: function (data) {
-                        $('#tongcong').text(data);
-                     },
-                    complete: function () {
-
-                       },
-                    error: function () {
-                        toastr.error('không load được dữ liệu tong cong từ máy chủ', '', {positionClass: 'md-toast-top-right'});
-                    }
-                });
-            };
-
             $('#thanhtoanSukien').change(function () {
                 idSukien = $(this).val();
                 console.log(idSukien);
