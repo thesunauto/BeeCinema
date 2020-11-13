@@ -198,6 +198,10 @@
                                             $(this).addClass('ActionGhe btn text-center btn-light');
                                             $(this).attr("disabled", true);
                                         }
+                                        if(listGhe[ii].idLoaiGhe == 2){
+                                            $(this).addClass('border-bottom border-warning');
+
+                                        }
                                     }
                                 }
                             }
@@ -240,7 +244,7 @@
                         '<td class="white-text">Dãy ' + listDayGhe[i].ten + '</td>\n';
                     var listGhe = listDayGhe[i].gheResponses;
                     for (var ii = 0; ii < listGhe.length; ii++) {
-                        content += '<td><option value="' + listGhe[ii].id + '" class="ActionGhe btn text-center"><i class="fas fa-chair"></i> ' + listGhe[ii].tenDay + listGhe[ii].col + '</option></td>';
+                        content += '<td><option value="' + listGhe[ii].id + '" style="border-width:4px !important;" class="ActionGhe btn text-center"><i class="fas fa-chair"></i> ' + listGhe[ii].tenDay + listGhe[ii].col + '</option></td>';
                     }
 
                     content += '<td class="white-text">Dãy ' + listDayGhe[i].ten + '</td>\n' +
@@ -272,6 +276,11 @@
 
 
             $(document).on('click', 'option.ActionGhe', function () {
+
+
+
+
+
                 $.ajax({
                     url: "/api/employee/setghefocus",
                     type: "POST",

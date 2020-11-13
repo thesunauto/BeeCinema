@@ -171,10 +171,14 @@ public class EmployeeRestController {
     @PostMapping("/setghefocus")
     @ResponseBody
     public ResponseEntity setGheFocus(HttpSession httpSession, @RequestBody VeResponse veResponse) {
+
         if (httpSession.getAttribute("veresponse") == null) {
             httpSession.setAttribute("veresponse", new ArrayList<VeResponse>());
         }
         List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
+
+
+
         for (int i = 0; i < veResponses.size(); i++) {
             if (veResponse.getIdsuatchieu().equals(veResponses.get(i).getIdsuatchieu())) {
                 if (veResponse.getIdghe().equals(veResponses.get(i).getIdghe())) {
