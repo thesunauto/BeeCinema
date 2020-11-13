@@ -120,11 +120,11 @@
             </div>
             <!-- /Card image -->
   
-            <div class="px-4">
+            <div class="px-2">
               <div th:switch="${messages}">
                 <p th:case="'thanhcong'" class="alert alert-success" role="alert">Xóa thành công!</p>
               </div>
-              <div class="table-responsive text-nowrap">
+              <div class="table-responsive text-nowrap" style="height: 350px">
                 <!-- Table -->
                 <table class="table table-hover mb-0">
   
@@ -173,7 +173,10 @@
                       <td th:text="${taikhoan.sodienthoai}"></td>
                       <td th:text="${taikhoan.email}"></td>
                       <td th:text="${taikhoan.mota}"></td>
-                      <td th:text="${taikhoan.hinhanh}"></td>
+                      <td th:switch="${taikhoan.hinhanh}">
+                        <p th:case="'null'"><img th:src="@{'/getImage/placeholder.jpg'}" alt="User Photo" class="z-depth-1 mb-3 mx-auto" style="height: 50px; width: 50px;" /></p>
+                        <p th:case="*"><img id="blah" th:src="@{'/getImage/'+ ${taikhoan.hinhanh}}" alt="User Photo" class="z-depth-1 mb-3 mx-auto" style="height: 50px; width: 50px;" /></p>
+                      </td>
                       <td th:text="${#temporals.format(taikhoan.ngaytao, 'dd-MM-yyyy HH:mm:ss')}"></td>
                       <td></td>
                       <td></td>
