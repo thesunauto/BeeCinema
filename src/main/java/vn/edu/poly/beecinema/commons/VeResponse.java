@@ -13,7 +13,6 @@ import vn.edu.poly.beecinema.service.GheService;
 @AllArgsConstructor
 @Builder
 public class VeResponse {
-    @Autowired private GheService gheService;
     private Integer idsuatchieu;
     private Integer idghe;
     private Integer idsukien;

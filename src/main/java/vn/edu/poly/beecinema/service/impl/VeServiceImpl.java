@@ -9,6 +9,7 @@ import vn.edu.poly.beecinema.repository.VeRepository;
 import vn.edu.poly.beecinema.service.VeService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VeServiceImpl implements VeService {
@@ -25,4 +26,11 @@ public class VeServiceImpl implements VeService {
     public List<Ve> findAllByIdSuatchieu(Integer idsuatchieu) {
         return veRepository.findAllBySuatchieu(suatchieuRepository.getOne(idsuatchieu));
     }
+
+    @Override
+    public void save(Ve ve) {
+        veRepository.save(ve);
+    }
+
+
 }

@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.WebSession;
 import vn.edu.poly.beecinema.commons.*;
 import vn.edu.poly.beecinema.config.HttpSessionConfig;
-import vn.edu.poly.beecinema.entity.Ghe;
-import vn.edu.poly.beecinema.entity.Phim;
-import vn.edu.poly.beecinema.entity.Suatchieu;
-import vn.edu.poly.beecinema.entity.Sukien;
+import vn.edu.poly.beecinema.entity.*;
 import vn.edu.poly.beecinema.service.*;
 import vn.edu.poly.beecinema.storage.StorageService;
 
@@ -43,7 +41,7 @@ public class EmployeeRestController {
     private VeonlineService veonlineService;
     @Autowired
     private  SukienService sukienService;
-
+@Autowired private TaikhoanService taikhoanService;
     public EmployeeRestController(StorageService storageService) {
         this.storageService = storageService;
     }
@@ -296,26 +294,36 @@ public class EmployeeRestController {
     @PostMapping("/getTotal")
     public ResponseEntity getTotal(HttpSession session,@RequestParam(value = "idsukien",required = false) String idsukien){
         float tongcong = 0;
+        float giam = (idsukien.equals("noevent"))?0:sukienService.findSukienById(idsukien).get().getGiam();
         List<VeResponse> veResponsesCurent =(List<VeResponse>) session.getAttribute("veresponse");
         List<Ghe> ghes = new ArrayList<>();
         Suatchieu suatchieu = suatChieuService.findById(veResponsesCurent.get(0).getIdsuatchieu());
         for(VeResponse veResponse : veResponsesCurent){
             Ghe ghe = gheService.findGheById(veResponse.getIdghe()).get();
-            tongcong += suatchieu.getDongia().floatValue()+ghe.getDayghe().getGia().floatValue()+ghe.getLoaighe().getGia().floatValue();
+            tongcong += suatchieu.getDongia().floatValue()+ghe.getDayghe().getGia().floatValue()+ghe.getLoaighe().getGia().floatValue()-giam;
         }
-        if(!idsukien.equals("noevent")){Sukien sukien = sukienService.findSukienById(idsukien).get();tongcong -= sukien.getGiam();}
         return ResponseEntity.ok().body(tongcong);
     }
 
     @PostMapping("/saveTicket")
-    public ResponseEntity saveTicket(HttpSession session,@RequestParam(value = "idsukien",required = false)  String idsukien){
+    public void saveTicket(Authentication authentication,HttpSession session, @RequestParam(value = "idsukien",required = false)  String idsukien){
         List<VeResponse> veResponsesCurent =(List<VeResponse>) session.getAttribute("veresponse");
         Suatchieu suatchieu = suatChieuService.findById(veResponsesCurent.get(0).getIdsuatchieu());
-        if(!idsukien.equals("noevent")){Sukien sukien = sukienService.findSukienById(idsukien).get();}
+        Sukien sukien = idsukien.equals("noevent")?null:sukienService.findSukienById(idsukien).get();
+        System.out.println(suatchieu);
+        System.out.println(sukien);
         for (VeResponse veResponse:veResponsesCurent) {
-            Ghe ghe = gheService.findGheById(veResponse.getIdghe()).get();
+            System.out.println(veResponse);
+            Ghe ghe1 = gheService.findGheById(veResponse.getIdghe()).get();
+            System.out.println(ghe1);
+            Ve ve = new Ve();
+            ve.setGhe(ghe1);
+            ve.setSuatchieu(suatchieu);
+            ve.setSukien(sukien);
+            ve.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
+            ve.setTrangthai(0);
+            veService.save(ve);
         }
-        return ResponseEntity.ok().body(null);
     }
 
     @GetMapping("/clearsession")
