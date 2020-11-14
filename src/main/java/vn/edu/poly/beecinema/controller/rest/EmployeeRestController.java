@@ -184,13 +184,13 @@ public class EmployeeRestController {
                 if (veResponse.getIdghe().equals(veResponses.get(i).getIdghe())) {
                     veResponses.remove(i);
                     httpSession.setAttribute("veresponse", veResponses);
-                    return ResponseEntity.ok().body("true");
+                    return ResponseEntity.ok().body(veResponses);
                 }
             }
         }
         veResponses.add(veResponse);
         httpSession.setAttribute("veresponse", veResponses);
-        return ResponseEntity.ok().body("true");
+        return ResponseEntity.ok().body(veResponses);
     }
 
     @PostMapping("/loadghebysuatchieu={idsuatchieu}")

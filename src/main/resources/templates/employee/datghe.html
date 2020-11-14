@@ -135,7 +135,7 @@
             var listDayGhe = [];
             var idSuatChieu = -1;
             var idSukien = 'noevent';
-
+            var listGhe = [];
 
             function loadGhe() {
                 if (idSuatChieu != null) {
@@ -164,7 +164,7 @@
                             listDayGhe = data;
                         },
                         complete: function () {
-                                fillGhe();
+                            fillGhe();
                         },
                         error: function () {
                             toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
@@ -173,7 +173,7 @@
                 }
             };
 
-            function  loadStt() {
+            function loadStt() {
                 $.ajax({
                     url: '/api/employee/gettrangthaighebysuatchieu=' + idSuatChieu,
                     type: 'POST',
@@ -182,23 +182,21 @@
                     processData: false,
                     success: function (data) {
                         var listGheStt = data;
-                        console.log(data)
-                        $('option.ActionGhe').each(function()
-                        {
+                        $('option.ActionGhe').each(function () {
                             for (var i = 0; i < listDayGhe.length; i++) {
                                 var listGhe = listDayGhe[i].gheResponses;
                                 for (var ii = 0; ii < listGhe.length; ii++) {
-                                    if(listGhe[ii].id == $(this).val()){
+                                    if (listGhe[ii].id == $(this).val()) {
                                         $(this).removeClass();
                                         $(this).attr("disabled", false);
-                                        if(listGhe[ii].trangthai == 0){
+                                        if (listGhe[ii].trangthai == 0) {
                                             $(this).addClass('ActionGhe btn text-center btn-info');
                                         }
-                                        if(listGhe[ii].trangthai == 4){
+                                        if (listGhe[ii].trangthai == 4) {
                                             $(this).addClass('ActionGhe btn text-center btn-light');
                                             $(this).attr("disabled", true);
                                         }
-                                        if(listGhe[ii].idLoaiGhe == 2){
+                                        if (listGhe[ii].idLoaiGhe == 2) {
                                             $(this).addClass('border-bottom border-warning');
 
                                         }
@@ -206,18 +204,18 @@
                                 }
                             }
 
-                            for(var iz =0; iz<listGheStt.length;iz++){
-                                if(listGheStt[iz].id == $(this).val()){
+                            for (var iz = 0; iz < listGheStt.length; iz++) {
+                                if (listGheStt[iz].id == $(this).val()) {
                                     $(this).removeClass();
                                     $(this).attr("disabled", false);
-                                    if(listGheStt[iz].trangthai ==1){
+                                    if (listGheStt[iz].trangthai == 1) {
                                         $(this).attr('disabled', 'disabled');
                                         $(this).addClass('ActionGhe btn text-center btn-danger');
                                     }
-                                    if(listGheStt[iz].trangthai == 2){
+                                    if (listGheStt[iz].trangthai == 2) {
                                         $(this).addClass('ActionGhe btn text-center btn-warning');
                                     }
-                                    if(listGheStt[iz].trangthai == 3){
+                                    if (listGheStt[iz].trangthai == 3) {
                                         $(this).attr("disabled", true);
                                         $(this).addClass('ActionGhe btn text-center btn-warning');
 
@@ -232,7 +230,7 @@
                 });
             }
 
-            setInterval(loadStt,1000);
+            setInterval(loadStt, 1000);
 
 
             function fillGhe() {
@@ -242,9 +240,11 @@
 
                     content += '<tr class="text-center">\n' +
                         '<td class="white-text">Dãy ' + listDayGhe[i].ten + '</td>\n';
-                    var listGhe = listDayGhe[i].gheResponses;
-                    for (var ii = 0; ii < listGhe.length; ii++) {
-                        content += '<td><option value="' + listGhe[ii].id + '" style="border-width:4px !important;" class="ActionGhe btn text-center"><i class="fas fa-chair"></i> ' + listGhe[ii].tenDay + listGhe[ii].col + '</option></td>';
+                    var listGheofDay = listDayGhe[i].gheResponses;
+
+                    for (var ii = 0; ii < listGheofDay.length; ii++) {
+                        listGhe.push(listGheofDay[ii]);
+                        content += '<td><option value="' + listGheofDay[ii].id + '" style="border-width:4px !important;" class="ActionGhe btn text-center"><i class="fas fa-chair"></i> ' + listGheofDay[ii].tenDay + listGheofDay[ii].col + '</option></td>';
                     }
 
                     content += '<td class="white-text">Dãy ' + listDayGhe[i].ten + '</td>\n' +
@@ -275,12 +275,63 @@
             };
 
 
+            function findGheByID(idghe) {
+                for (var i = 0; i < listGhe.length; i++) {
+                    if (parseInt(idghe) == listGhe[i].id) {
+                        return listGhe[i];
+                    }
+                }
+                return 'Can';
+            };
+
+            function sortNumber(a, b) {
+                return a - b;
+            }
+
+            function getMinandMaxGhe() {
+                var array = [];
+                for (var i = 0; i < listGhefocus.length; i++) {
+                    array.push(listGhefocus[i].col);
+                }
+                array.sort(sortNumber);
+                return [array[0] - 1, array[array.length - 1] + 1];
+            }
+
+            var listGhefocus = [];
+
             $(document).on('click', 'option.ActionGhe', function () {
 
+                var ghe = findGheByID($(this).val());
+                var MinandMax = getMinandMaxGhe();
 
 
+                var index = listGhefocus.indexOf(ghe);
+                if (index != -1) {
+                    if (!(ghe.col > MinandMax[0] + 1 && ghe.col < MinandMax[1] - 1)) {
+                        listGhefocus.splice(index, 1);
+                        focus(ghe.id);
+                    } else {
+                        toastr.warning('không thể hủy ghế ở giữa!', '', {positionClass: 'md-toast-top-center'});
+                    }
+                } else {
+                    if (listGhefocus.length == 0) {
+                        listGhefocus.push(ghe);
+                        focus(ghe.id);
+                    } else if (listGhefocus[0].idDay == ghe.idDay) {
+                        if (ghe.col == MinandMax[0] || ghe.col == MinandMax[1]) {
+                            listGhefocus.push(ghe);
+                            focus(ghe.id);
+                        }else{
+                            toastr.warning('Hãy chọn ghế liền nhau!', '', {positionClass: 'md-toast-top-center'});
+                        }
+                    }else{
+                        toastr.warning('Hãy chọn ghế cũng dãy!', '', {positionClass: 'md-toast-top-center'});
+                    }
+                }
+            });
 
 
+            function focus(idghe) {
                 $.ajax({
                     url: "/api/employee/setghefocus",
                     type: "POST",
@@ -289,7 +340,7 @@
                     contentType: "application/json; charset=UTF-8",
                     data: JSON.stringify({
                         "idsuatchieu": parseInt(idSuatChieu),
-                        "idghe": parseInt($(this).val()),
+                        "idghe": parseInt(idghe),
                         "stt": 2
                     }),
                     datatype: "json",
@@ -300,7 +351,7 @@
                         alert(XMLHttpRequest.status + " : " + errorThrown);
                     }
                 });
-            });
+            }
 
             $(document).on('click', 'option.rdoSuatChieu', function () {
                 $.ajax({
