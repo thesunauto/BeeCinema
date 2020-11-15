@@ -2,12 +2,16 @@ package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.DateUtils;
 import vn.edu.poly.beecinema.entity.Khunggio;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.repository.SuatchieuRepository;
 import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +34,19 @@ public class SuatChieuServiceImpl implements SuatChieuService {
     public List<Suatchieu> getAllSuatChieuByPhim(String idphim) {
         return suatchieuRepository.findAllByPhimAndTrangthai(phimService.findPhimById(idphim).get(),0);
     }
+
+    @Override
+    public List<Suatchieu> getAllSuatChieuByPhimAndToday(String idphim) {
+       List<Suatchieu> suatchieus = new ArrayList<>();
+        suatchieuRepository.findAllByPhimAndTrangthai(phimService.findPhimById(idphim).get(),0).forEach(suatchieu -> {
+            if(suatchieu.getNgaychieu().equals(LocalDate.now()))
+            {
+                suatchieus.add(suatchieu);
+            }
+        });
+        return suatchieus;
+    }
+
 
     @Override
     public void saveSuatChieu(Suatchieu suatChieu) {

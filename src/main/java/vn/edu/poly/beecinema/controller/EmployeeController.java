@@ -41,7 +41,7 @@ public class EmployeeController {
         List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
         httpSession.setAttribute("veresponse",veResponses);
         model.addAttribute("film", phimService.findPhimById(id));
-        model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhim(id));
+        model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhimAndToday(id));
         return "employee/datghe";
     }
 }
