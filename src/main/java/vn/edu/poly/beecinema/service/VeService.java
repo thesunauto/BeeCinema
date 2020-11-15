@@ -7,5 +7,5 @@ import java.util.List;
 public interface VeService {
     Boolean IsExists(Integer idSuatChieu, Integer idGhe);
     List<Ve> findAllByIdSuatchieu(Integer idsuatchieu);
-    void save(Ve ve);
+    void insert(Integer idsuatchieu,Integer idghe, String idsukien, String username);
 }

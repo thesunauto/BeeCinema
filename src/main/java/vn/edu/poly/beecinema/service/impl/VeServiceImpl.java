@@ -2,10 +2,12 @@ package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.edu.poly.beecinema.entity.Ve;
+import vn.edu.poly.beecinema.entity.*;
 import vn.edu.poly.beecinema.repository.GheRepository;
 import vn.edu.poly.beecinema.repository.SuatchieuRepository;
+import vn.edu.poly.beecinema.repository.TaikhoanRepository;
 import vn.edu.poly.beecinema.repository.VeRepository;
+import vn.edu.poly.beecinema.service.SukienService;
 import vn.edu.poly.beecinema.service.VeService;
 
 import java.util.List;
@@ -17,6 +19,8 @@ public class VeServiceImpl implements VeService {
     private VeRepository veRepository;
     @Autowired private SuatchieuRepository suatchieuRepository;
     @Autowired private GheRepository gheRepository;
+    @Autowired private TaikhoanRepository taikhoanRepository;
+    @Autowired private SukienService sukienService;
     @Override
     public Boolean IsExists(Integer idSuatChieu, Integer idGhe) {
         return veRepository.findByGheAndSuatchieu(gheRepository.findById(idGhe).orElse(null),suatchieuRepository.findById(idSuatChieu).orElse(null))!=null;
@@ -28,8 +32,16 @@ public class VeServiceImpl implements VeService {
     }
 
     @Override
-    public void save(Ve ve) {
-        veRepository.save(ve);
+    public void insert(Integer idsuatchieu,Integer idghe, String idsukien, String username) {
+        Sukien sukien = idsukien.equals("noevent")?null:sukienService.findSukienById(idsukien).get();
+        Suatchieu suatchieu = suatchieuRepository.findById(idsuatchieu).get();
+        Ghe ghe = gheRepository.findById(idghe).get();
+        veRepository.save(Ve.builder()
+                .veID(VeID.builder().idghe(idghe).idsuatchieu(idsuatchieu).build())
+                .trangthai(0)
+                .sukien(sukien)
+                .taikhoan(taikhoanRepository.findById(username).get())
+                .build());
     }
 
 

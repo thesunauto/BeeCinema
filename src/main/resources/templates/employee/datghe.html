@@ -420,14 +420,18 @@
                     dataType: 'JSON',
                     contentType: 'application/json',
                     processData: false,
-                    success: function () {
-                        loadGhe();
+                    success: function (data) {
+                        var bo = data;
+                        if(bo){
+                            toastr.success('Xuất vé thành công', '', {positionClass: 'md-toast-top-right'});
+                        }else {
+                            toastr.error('Xuất vé thất bại', '', {positionClass: 'md-toast-top-right'});
+                        }
                     },
                     complete: function () {
-
-                    },
-                    error: function () {
-                        toastr.error('Đã xãy ra lỗi!', '', {positionClass: 'md-toast-top-right'});
+                        $('#modalContactForm').modal('toggle');
+                        listGhefocus = [];
+                        loadGhe();
                     }
                 });
             });

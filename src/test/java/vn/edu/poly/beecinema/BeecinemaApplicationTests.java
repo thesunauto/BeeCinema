@@ -27,21 +27,14 @@ class BeecinemaApplicationTests {
     @Autowired private SuatChieuService suatChieuService;
     @Autowired private TaikhoanService taikhoanService;
     @Autowired private VeRepository veRepository;
+
+    @Autowired private VeonlineService veonlineService;
 @Autowired
 private VeService veService;
 
     @Test
     void contextLoads() {
-        Suatchieu suatchieu = suatChieuService.findById(1);
-
-        Ghe ghe = gheService.findGheById(10).get();
-        Ve ve = new Ve();
-        ve.setSuatchieu(suatchieu);
-        ve.setGhe(ghe);
-        ve.setTrangthai(0);
-        ve.setTaikhoan(taikhoanService.findTaikhoanById("nhanpt").get());
-
-        veRepository.save(ve);
+        veonlineService.insert(1,10);
     }
 
 }

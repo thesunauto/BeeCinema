@@ -306,24 +306,18 @@ public class EmployeeRestController {
     }
 
     @PostMapping("/saveTicket")
-    public void saveTicket(Authentication authentication,HttpSession session, @RequestParam(value = "idsukien",required = false)  String idsukien){
-        List<VeResponse> veResponsesCurent =(List<VeResponse>) session.getAttribute("veresponse");
-        Suatchieu suatchieu = suatChieuService.findById(veResponsesCurent.get(0).getIdsuatchieu());
-        Sukien sukien = idsukien.equals("noevent")?null:sukienService.findSukienById(idsukien).get();
-        System.out.println(suatchieu);
-        System.out.println(sukien);
-        for (VeResponse veResponse:veResponsesCurent) {
-            System.out.println(veResponse);
-            Ghe ghe1 = gheService.findGheById(veResponse.getIdghe()).get();
-            System.out.println(ghe1);
-            Ve ve = new Ve();
-            ve.setGhe(ghe1);
-            ve.setSuatchieu(suatchieu);
-            ve.setSukien(sukien);
-            ve.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
-            ve.setTrangthai(0);
-            veService.save(ve);
+    public ResponseEntity saveTicket(Authentication authentication,HttpSession session, @RequestParam(value = "idsukien",required = false)  String idsukien){
+        try{
+            List<VeResponse> veResponsesCurent =(List<VeResponse>) session.getAttribute("veresponse");
+
+            for (VeResponse veResponse:veResponsesCurent) {
+                veService.insert(veResponsesCurent.get(0).getIdsuatchieu(),veResponse.getIdghe(),idsukien,authentication.getName());
+            } session.setAttribute("veresponse",new ArrayList<VeResponse>());
+            return ResponseEntity.ok().body(true);
+        }catch (Exception exception){
+            exception.printStackTrace();
         }
+        return ResponseEntity.ok().body(false);
     }
 
     @GetMapping("/clearsession")

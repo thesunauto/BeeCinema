@@ -7,22 +7,24 @@ import java.io.Serializable;
 
 @Entity
 @Data
+@Builder
 @Table(name = "ve")
-@IdClass(VeID.class)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ve implements Serializable {
 
-    @Id
+    @EmbeddedId
+    private VeID veID;
+
     @ManyToOne
-    @JoinColumn(name = "idsuatchieu", nullable = false)
+    @JoinColumn(name = "idsuatchieu", nullable = false,insertable = false, updatable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Suatchieu suatchieu;
 
-    @Id
+
     @ManyToOne
-    @JoinColumn(name = "idghe", nullable = false)
+    @JoinColumn(name = "idghe", nullable = false,insertable = false, updatable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Ghe ghe;

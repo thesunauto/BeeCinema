@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface VeonlineService {
     List<Veonline> findAllByIdSuatchieu(Integer idsuatchieu);
+    void insert(Integer idsuatchieu,Integer idghe);
 }

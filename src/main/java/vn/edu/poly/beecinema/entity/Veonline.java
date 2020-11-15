@@ -7,22 +7,23 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "veonline")
-@IdClass(VeonlineID.class)
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Veonline implements Serializable {
 
-    @Id
+    @EmbeddedId
+    private  VeonlineID veonlineID;
+
     @ManyToOne
-    @JoinColumn(name = "idsuatchieu", nullable = false)
+    @JoinColumn(name = "idsuatchieu", nullable = false,insertable = false, updatable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Suatchieu suatchieu;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "idghe", nullable = false)
+    @JoinColumn(name = "idghe", nullable = false,insertable = false, updatable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Ghe ghe;
@@ -40,6 +41,6 @@ public class Veonline implements Serializable {
     private Sukien sukien;
 
     @Column(name = "trangthai", nullable = false)
-    private String trangthai;
+    private Integer trangthai;
 
 }
