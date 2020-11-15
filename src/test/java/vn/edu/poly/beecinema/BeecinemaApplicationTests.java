@@ -27,12 +27,13 @@ class BeecinemaApplicationTests {
 @Autowired private PhimService phimService;
 @Autowired private PhimRepository phimRepository;
     @Autowired private VeonlineService veonlineService;
+
 @Autowired
 private VeService veService;
 
     @Test
     void contextLoads() {
-        phimService.getAllPhimAlive().forEach(phim -> System.out.println(phim));
+        veonlineService.findAllByToday().forEach(veonline -> System.out.println(veonline));
     }
 
 }

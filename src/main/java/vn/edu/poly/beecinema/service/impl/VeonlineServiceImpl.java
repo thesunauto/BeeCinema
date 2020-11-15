@@ -9,7 +9,9 @@ import vn.edu.poly.beecinema.repository.TaikhoanRepository;
 import vn.edu.poly.beecinema.repository.VeonlineRepository;
 import vn.edu.poly.beecinema.service.VeonlineService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +26,7 @@ public class VeonlineServiceImpl implements VeonlineService {
 
     @Override
     public List<Veonline> findAllByIdSuatchieu(Integer idsuatchieu) {
-        return veonlineRepository.findAllBySuatchieu(suatchieuRepository.getOne(idsuatchieu));
+        return veonlineRepository.findAllBySuatchieuAndTrangthai(suatchieuRepository.getOne(idsuatchieu),0);
     }
 
     @Override
@@ -37,5 +39,16 @@ public class VeonlineServiceImpl implements VeonlineService {
                 .ngaytao(LocalDateTime.now())
                 .taikhoan(taikhoanRepository.findById("nhanpt").get())
                 .build());
+    }
+
+    @Override
+    public List<Veonline> findAllByToday() {
+        List<Veonline>veonlines = new ArrayList<>();
+        suatchieuRepository.findAllByTrangthai(0).forEach(suatchieu -> {
+            if(suatchieu.getNgaychieu().equals(LocalDate.now())){
+                veonlines.addAll(findAllByIdSuatchieu(suatchieu.getId()));
+            }
+        });
+        return veonlines;
     }
 }

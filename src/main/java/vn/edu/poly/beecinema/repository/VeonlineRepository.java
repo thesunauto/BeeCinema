@@ -8,5 +8,5 @@ import vn.edu.poly.beecinema.entity.Veonline;
 import java.util.List;
 
 public interface VeonlineRepository extends JpaRepository<Veonline, String>, JpaSpecificationExecutor<Veonline> {
-    List<Veonline> findAllBySuatchieu(Suatchieu suatchieu);
+    List<Veonline> findAllBySuatchieuAndTrangthai(Suatchieu suatchieu,Integer trangthai);
 }

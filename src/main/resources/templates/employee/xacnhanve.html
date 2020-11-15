@@ -70,142 +70,24 @@
                                         </tr>
                                         </thead>
 
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Phạm Nhân</td>
-                                            <td>0987654321</td>
-                                            <td>Phim 2 người đóng</td>
-                                            <td>12:30</td>
-                                            <td>12/12/22</td>
-                                            <td>12/12/22</td>
-                                            <td>Hết hạn</td>
+                                        <tbody >
+                                        <tr th:each="veon,ir : ${@veonlineServiceImpl.findAllByToday()}">
+                                            <th scope="row" th:text="${ir.count}">1</th>
+                                            <td th:text="${veon.getTaikhoan().getTen()}">Phạm Nhân</td>
+                                            <td th:text="${veon.getTaikhoan().getSodienthoai()}">0987654321</td>
+                                            <td  th:text="${veon.getSuatchieu().getPhim().getTen()}">Phim 2 người đóng</td>
+                                            <td th:text="${veon.getSuatchieu().getKhunggio().getBatdau()}">12:30</td>
+                                            <td th:text="${veon.getNgaytao().getHour()+':'+veon.getNgaytao().getMinute()+' | '+veon.getNgaytao().getDayOfMonth()+'/'+veon.getNgaytao().getMonthValue()}">12/12/22</td>
+                                            <td th:text="${(veon.getSuatchieu().getKhunggio().getBatdau().getHour()-veon.getSuatchieu().getPhuthuyonline()/60)+':'+(veon.getSuatchieu().getKhunggio().getBatdau().getMinute()-veon.getSuatchieu().getPhuthuyonline()%60)+' | '+veon.getSuatchieu().getNgaychieu().getDayOfMonth()+'/'+veon.getSuatchieu().getNgaychieu().getMonthValue()}">12/12/22</td>
+<!--                                            <td th:text="${(localTime.now().compareTo(localTime.of((veon.getSuatchieu().getKhunggio().getBatdau().getHour()-veon.getSuatchieu().getPhuthuyonline()/60),(veon.getSuatchieu().getKhunggio().getBatdau().getMinute()-veon.getSuatchieu().getPhuthuyonline()%60)))>0)?'Hết hạn':'Còn hạn'}">Hết hạn</td>-->
+                                            <td th:text="${localTime.of(12,12)}"></td>
                                             <td>
                                                 <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
                                                     nhận
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Phạm Nhân</td>
-                                            <td>0987654321</td>
-                                            <td>Phim 2 người đóng</td>
-                                            <td>12:30</td>
-                                            <td>12/12/22</td>
-                                            <td>12/12/22</td>
-                                            <td>Hết hạn</td>
-                                            <td>
-                                                <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
-                                                    nhận
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Phạm Nhân</td>
-                                            <td>0987654321</td>
-                                            <td>Phim 2 người đóng</td>
-                                            <td>12:30</td>
-                                            <td>12/12/22</td>
-                                            <td>12/12/22</td>
-                                            <td>Hết hạn</td>
-                                            <td>
-                                                <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
-                                                    nhận
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Phạm Nhân</td>
-                                            <td>0987654321</td>
-                                            <td>Phim 2 người đóng</td>
-                                            <td>12:30</td>
-                                            <td>12/12/22</td>
-                                            <td>12/12/22</td>
-                                            <td>Hết hạn</td>
-                                            <td>
-                                                <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
-                                                    nhận
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Phạm Nhân</td>
-                                            <td>0987654321</td>
-                                            <td>Phim 2 người đóng</td>
-                                            <td>12:30</td>
-                                            <td>12/12/22</td>
-                                            <td>12/12/22</td>
-                                            <td>Hết hạn</td>
-                                            <td>
-                                                <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
-                                                    nhận
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Phạm Nhân</td>
-                                            <td>0987654321</td>
-                                            <td>Phim 2 người đóng</td>
-                                            <td>12:30</td>
-                                            <td>12/12/22</td>
-                                            <td>12/12/22</td>
-                                            <td>Hết hạn</td>
-                                            <td>
-                                                <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
-                                                    nhận
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Phạm Nhân</td>
-                                            <td>0987654321</td>
-                                            <td>Phim 2 người đóng</td>
-                                            <td>12:30</td>
-                                            <td>12/12/22</td>
-                                            <td>12/12/22</td>
-                                            <td>Hết hạn</td>
-                                            <td>
-                                                <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
-                                                    nhận
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Phạm Nhân</td>
-                                            <td>0987654321</td>
-                                            <td>Phim 2 người đóng</td>
-                                            <td>12:30</td>
-                                            <td>12/12/22</td>
-                                            <td>12/12/22</td>
-                                            <td>Hết hạn</td>
-                                            <td>
-                                                <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
-                                                    nhận
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Phạm Nhân</td>
-                                            <td>0987654321</td>
-                                            <td>Phim 2 người đóng</td>
-                                            <td>12:30</td>
-                                            <td>12/12/22</td>
-                                            <td>12/12/22</td>
-                                            <td>Hết hạn</td>
-                                            <td>
-                                                <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
-                                                    nhận
-                                                </button>
-                                            </td>
-                                        </tr>
+
                                         </tbody>
 
                                     </table>

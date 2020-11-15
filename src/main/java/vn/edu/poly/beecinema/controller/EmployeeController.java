@@ -12,6 +12,8 @@ import vn.edu.poly.beecinema.service.SuatChieuService;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class EmployeeController {
         return "employee/chonghe";
     }
     @GetMapping("/xacnhanve")
-    public String xacNhanVe(){
+    public String xacNhanVe(Model model){model.addAttribute("localTime", LocalTime.now());
         return "employee/xacnhanve";
     }
 

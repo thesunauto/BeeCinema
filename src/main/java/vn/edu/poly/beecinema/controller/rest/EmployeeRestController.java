@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -237,7 +239,16 @@ public class EmployeeRestController {
                 gheResponses.add(GheResponse.builder().id(ve.getGhe().getId()).trangthai(1).build());
             });
             veonlineService.findAllByIdSuatchieu(idsuatchieu).forEach(veon -> {
-                gheResponses.add(GheResponse.builder().id(veon.getGhe().getId()).trangthai(1).build());
+                LocalTime timehuy = veon.getSuatchieu().getKhunggio().getBatdau();
+                int phuthuy = veon.getSuatchieu().getPhuthuyonline();
+                int hour = phuthuy/60;
+                int min = phuthuy%60;
+                LocalTime localTime = LocalTime.of(timehuy.getHour()-hour,timehuy.getMinute()-min);
+
+                if(LocalTime.now().compareTo(localTime)<0){
+                    gheResponses.add(GheResponse.builder().id(veon.getGhe().getId()).trangthai(1).build());
+                }
+
             });
 
             for(VeResponse ve1 : veResponses){
