@@ -1,9 +1,14 @@
 package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vn.edu.poly.beecinema.entity.Dayghe;
 import vn.edu.poly.beecinema.entity.Ghe;
+import vn.edu.poly.beecinema.entity.LoaiPhim;
 import vn.edu.poly.beecinema.repository.DaygheRepository;
 import vn.edu.poly.beecinema.repository.GheRepository;
 import vn.edu.poly.beecinema.repository.PhongRepository;
@@ -57,5 +62,17 @@ public class DayGheServiceImpl implements DayGheService {
     @Override
     public Optional<Dayghe> findDayGheByID(String id) {
         return dayGheRepository.findById(id);
+    }
+
+    @Override
+    public Page<Dayghe> listAll(int pageNumber, String sortField, String sortDir, String keyword) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending()
+                        : Sort.by(sortField).descending()
+        );
+        if (keyword != null) {
+            return dayGheRepository.findAll(keyword, pageable);
+        }
+        return  dayGheRepository.findAll(pageable);
     }
 }

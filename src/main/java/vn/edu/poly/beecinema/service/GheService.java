@@ -1,6 +1,8 @@
 package vn.edu.poly.beecinema.service;
 
+import org.springframework.data.domain.Page;
 import vn.edu.poly.beecinema.entity.Ghe;
+import vn.edu.poly.beecinema.entity.LoaiPhim;
 
 
 import java.util.List;
@@ -16,4 +18,6 @@ public interface GheService {
     void deleteGhe(Integer id);
 
     Optional<Ghe> findGheById(Integer id);
+
+    Page<Ghe> listAll(int pageNumber, String sortField, String sortDir, String keyword);
 }

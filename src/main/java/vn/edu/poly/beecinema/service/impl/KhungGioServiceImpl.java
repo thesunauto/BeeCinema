@@ -1,8 +1,13 @@
 package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vn.edu.poly.beecinema.entity.Khunggio;
+import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.repository.KhunggioRepository;
 import vn.edu.poly.beecinema.service.KhungGioService;
 
@@ -28,5 +33,17 @@ public class KhungGioServiceImpl implements KhungGioService {
     @Override
     public Optional<Khunggio> findKhungGioById(String id) {
         return khungGioRepository.findById(id);
+    }
+
+    @Override
+    public Page<Khunggio> listAll(int pageNumber, String sortField, String sortDir, String keyword) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending()
+                        : Sort.by(sortField).descending()
+        );
+        if (keyword != null) {
+            return khungGioRepository.findAll(keyword, pageable);
+        }
+        return khungGioRepository.findAll(pageable);
     }
 }
