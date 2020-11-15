@@ -13,6 +13,8 @@ public interface SuatChieuService {
 
     List<Suatchieu> getAllSuatChieu();
 
+    List<Suatchieu> getAllSuatChieuByPhim(String idphim);
+
     void saveSuatChieu(Suatchieu suatChieu);
 
     void deleteSuatChieu(Integer id);
@@ -20,4 +22,5 @@ public interface SuatChieuService {
     Optional<Suatchieu> findSuatChieuById(Integer id);
 
     Page<Suatchieu> listAll(int pageNumber, String sortField, String sortDir, String keyword);
+
 }

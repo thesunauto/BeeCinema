@@ -26,18 +26,10 @@ public class ShowtimeController {
     @Autowired private KhungGioService khungGioService;
     @Autowired private TaikhoanService taiKhoanService;
 
-//    @GetMapping("/show-showtime")
-//    public String showMovieType(Model model){
-//        List<Khunggio> khungGio = khungGioService.getAllKhungGio();
-//        model.addAttribute("khungGio", khungGio);
-//
-//        return "admin/showtime/show-showtime";
-//    }
-
     @GetMapping("/show-showtime")
     public String showShowtime(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -45,7 +37,8 @@ public class ShowtimeController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<Khunggio> page = khungGioService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -58,6 +51,7 @@ public class ShowtimeController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/showtime/show-showtime";
     }
 
@@ -85,7 +79,7 @@ public class ShowtimeController {
         }else{
             khungGio.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
             khungGioService.saveKhungGio(khungGio);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
         return "admin/showtime/add-showtime";
     }
@@ -97,7 +91,7 @@ public class ShowtimeController {
 
         }else{
             khungGioService.saveKhungGio(khungGio);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
         return "admin/showtime/update-showtime";
     }
@@ -105,10 +99,7 @@ public class ShowtimeController {
     @RequestMapping(value = "/delete" )
     public String deleteShowtime(@RequestParam("id") String khungGioId, Model model) {
         khungGioService.deleteKhungGio(khungGioId);
-        List<Khunggio> khungGio = khungGioService.getAllKhungGio();
-        model.addAttribute("khungGio", khungGio);
-        model.addAttribute("messages", "thanhcong");
-        return "admin/showtime/show-showtime";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 
 

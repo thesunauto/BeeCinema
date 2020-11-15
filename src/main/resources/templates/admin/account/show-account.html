@@ -124,7 +124,7 @@
               <div th:switch="${messages}">
                 <p th:case="'thanhcong'" class="alert alert-success" role="alert">Xóa thành công!</p>
               </div>
-              <div class="table-responsive text-nowrap">
+              <div class="table-responsive text-nowrap" style="height: 350px">
                 <!-- Table -->
                 <table class="table table-hover mb-0">
   
@@ -159,7 +159,7 @@
   
                   <!-- Table body -->
                   <tbody>
-                    <tr th:each="taikhoan : ${taikhoans}">
+                    <tr th:each="taikhoan : ${taikhoans}" >
                       <td>
                         <a th:href="@{/admin/user/edit?id={id}(id=${taikhoan.username})}" class="fas fa-edit text-primary" th:title="Sửa"></a> <a th:href="@{/admin/user/delete?id={id}(id=${taikhoan.username})}" class="fas fa-trash ml-3 text-danger" th:title="Xóa"></a>
                       </td>
@@ -173,7 +173,10 @@
                       <td th:text="${taikhoan.sodienthoai}"></td>
                       <td th:text="${taikhoan.email}"></td>
                       <td th:text="${taikhoan.mota}"></td>
-                      <td th:text="${taikhoan.hinhanh}"></td>
+                      <td th:switch="${taikhoan.hinhanh}">
+                        <span th:case="'null'"><img th:src="@{'/getImage/placeholder.jpg'}" alt="User Photo" class="z-depth-1 " style="height: 50px; width: 50px;" /></span>
+                        <span th:case="*"><img id="blah" th:src="@{'/getImage/'+ ${taikhoan.hinhanh}}" alt="User Photo" class="z-depth-1 " style="height: 50px; width: 50px;" /></span>
+                      </td>
                       <td th:text="${#temporals.format(taikhoan.ngaytao, 'dd-MM-yyyy HH:mm:ss')}"></td>
                       <td></td>
                       <td></td>

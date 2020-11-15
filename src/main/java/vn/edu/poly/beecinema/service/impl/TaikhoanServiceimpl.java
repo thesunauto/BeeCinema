@@ -38,7 +38,7 @@ public class TaikhoanServiceimpl implements TaikhoanService {
 
     @Override
     public Page<Taikhoan> listAll(int pageNumber, String sortField, String sortDir, String keyword) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 5,
+        Pageable pageable = PageRequest.of(pageNumber - 1, 3,
                 sortDir.equals("asc") ? Sort.by(sortField).ascending()
                         : Sort.by(sortField).descending()
         );

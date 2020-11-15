@@ -1,12 +1,15 @@
 package vn.edu.poly.beecinema.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.Dayghe;
 import vn.edu.poly.beecinema.entity.Ghe;
+import vn.edu.poly.beecinema.entity.LoaiPhim;
 import vn.edu.poly.beecinema.service.DayGheService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
@@ -18,10 +21,31 @@ import java.util.List;
 public class RowSeatController {
     @Autowired private DayGheService dayGheService;
     @Autowired private TaikhoanService taikhoanService;
+
     @GetMapping("/show-row-seat")
-    public String showrowseat(Model model){
-        List<Dayghe> dayGhe = dayGheService.getAllDayGhe();
+    public String showRowSeat(Model model){
+        String keyword = null;
+        return listByPage(model, 1, "id", "asc", keyword);
+    }
+
+    @GetMapping("/page/{pageNumber}")
+    public String listByPage(Model model ,
+                             @PathVariable("pageNumber") int currentPage,
+                             @Param("sortField") String sortField,
+                             @Param("sortDir") String sortDir,
+                             @Param("keyword") String keyword) {
+        Page<Dayghe> page = dayGheService.listAll(currentPage, sortField, sortDir, keyword);
+        long totalItem = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+        List<Dayghe> dayGhe = page.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalItem", totalItem);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("dayGhe", dayGhe);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("keyword", keyword);
         return "admin/row-seat/show-row-seat";
     }
 

@@ -123,18 +123,6 @@
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-user"></i>Profile<i class="fas fa-angle-down rotate-icon"></i>
-                        </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <a th:href="@{/admin/profile/update-profile}" class="waves-effect">Cập nhật tài khoản</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="collapsible-header waves-effect arrow-r">
                             <i class="fas fa-calendar-week"></i> Event<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
@@ -294,7 +282,7 @@
                     <form th:action="@{/logout}" method="post">
                         <input type="submit" class="dropdown-item" value="Log Out">
                     </form>
-                    <a class="dropdown-item" href="../profile/update-profile.html">My account</a>
+                    <a class="dropdown-item" th:href="@{/admin/profile/update-profile}" >Cập nhật Tài khoản</a>
                 </div>
             </li>
 

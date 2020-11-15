@@ -118,11 +118,13 @@
           </div>
           <!-- /Card image -->
 
-          <div class="px-4">
-            <div th:switch="${messages}">
-              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+          <div class="px-4" onload="setTimeout(function() { alert('chau'); }, 3000);">
+            <div th:switch="${messages}" >
+              <p th:case="'themThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+              <p th:case="'suaThanhCong'" class="alert alert-success" role="alert">Sửa thành công!</p>
+              <p th:case="'xoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
             </div>
-            <div class="table-responsive text-nowrap">
+            <div class="table-responsive text-nowrap" style="height: 350px">
               <!-- Table -->
               <table class="table table-hover mb-0">
 
@@ -158,7 +160,10 @@
                     </td>
                     <td th:text="${sukien.id}"></td>
                     <td th:text="${sukien.ten}"></td>
-                    <td th:text="${sukien.hinhanh}"></td>
+                    <td th:switch="${sukien.hinhanh}">
+                      <span th:case="'null'"><img th:src="@{'/getImage/placeholder.jpg'}" alt="User Photo" class="z-depth-1 " style="height: 50px; width: 50px;" /></span>
+                      <span th:case="*"><img id="blah" th:src="@{'/getImage/'+ ${sukien.hinhanh}}" alt="User Photo" class="z-depth-1 " style="height: 50px; width: 50px;" /></span>
+                    </td>
                     <td th:text="${sukien.mota}"></td>
                     <td th:text="${sukien.giam}"></td>
                     <td th:text="${sukien.taikhoan.ten}"></td>
@@ -242,7 +247,6 @@
     </div>
   </main>
   <!-- Main layout -->
-
 </body>
 
 </html>

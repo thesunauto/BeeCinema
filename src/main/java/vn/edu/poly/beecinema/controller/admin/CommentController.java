@@ -1,12 +1,13 @@
 package vn.edu.poly.beecinema.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.Binhluan;
+import vn.edu.poly.beecinema.entity.LoaiPhim;
 import vn.edu.poly.beecinema.service.BinhluanService;
 
 import java.util.List;
@@ -17,11 +18,31 @@ import java.util.Optional;
 public class CommentController {
     @Autowired
     private BinhluanService binhluanService;
-    @RequestMapping("/show-comment")
-    public String showComment(Model model){
-        List<Binhluan> binhluans = binhluanService.getAllBinhluan();
 
+    @GetMapping("/show-comment")
+    public String showComment(Model model){
+        String keyword = null;
+        return listByPage(model, 1, "id", "asc", keyword);
+    }
+
+    @GetMapping("/page/{pageNumber}")
+    public String listByPage(Model model ,
+                             @PathVariable("pageNumber") int currentPage,
+                             @Param("sortField") String sortField,
+                             @Param("sortDir") String sortDir,
+                             @Param("keyword") String keyword) {
+        Page<Binhluan> page = binhluanService.listAll(currentPage, sortField, sortDir, keyword);
+        long totalItem = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+        List<Binhluan> binhluans = page.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalItem", totalItem);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("binhluans", binhluans);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("keyword", keyword);
         return "admin/comment/show-comment";
     }
 

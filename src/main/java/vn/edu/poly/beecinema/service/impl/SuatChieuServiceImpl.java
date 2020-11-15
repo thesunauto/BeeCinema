@@ -10,6 +10,7 @@ import vn.edu.poly.beecinema.entity.Khunggio;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.repository.SuatchieuRepository;
+import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Optional;
 public class SuatChieuServiceImpl implements SuatChieuService {
     @Autowired
     SuatchieuRepository suatchieuRepository;
-
+@Autowired private PhimService phimService;
     @Override
     public Suatchieu findById(Integer id) {
         return Optional.ofNullable(id).map(integer -> suatchieuRepository.getOne(id)).orElse(null);
@@ -27,7 +28,12 @@ public class SuatChieuServiceImpl implements SuatChieuService {
 
     @Override
     public List<Suatchieu> getAllSuatChieu() {
-        return (List<Suatchieu>) suatchieuRepository.findAll();
+        return (List<Suatchieu>) suatchieuRepository.findAllByTrangthai(0);
+    }
+
+    @Override
+    public List<Suatchieu> getAllSuatChieuByPhim(String idphim) {
+        return suatchieuRepository.findAllByPhimAndTrangthai(phimService.findPhimById(idphim).get(),0);
     }
 
     @Override
@@ -45,6 +51,7 @@ public class SuatChieuServiceImpl implements SuatChieuService {
         return suatchieuRepository.findById(id);
     }
 
+
     @Override
     public Page<Suatchieu> listAll(int pageNumber, String sortField, String sortDir, String keyword) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 5,
@@ -56,4 +63,5 @@ public class SuatChieuServiceImpl implements SuatChieuService {
         }
         return suatchieuRepository.findAll(pageable);
     }
+
 }
