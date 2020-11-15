@@ -49,7 +49,7 @@ public class EmployeeRestController {
     @GetMapping("/list-film-showing")
     public ResponseEntity listFilmShowing() {
         List<PhimResponse> phimResponses = new ArrayList<>();
-        phimService.getAllPhim().forEach(value -> {
+        phimService.getAllPhimAlive().forEach(value -> {
             PhimResponse phim = new PhimResponse();
             List<Integer> idsuatchieu = new ArrayList<>();
             value.getSuatchieus().forEach(suatchieu -> {

@@ -9,6 +9,7 @@ import vn.edu.poly.beecinema.repository.TaikhoanRepository;
 import vn.edu.poly.beecinema.repository.VeonlineRepository;
 import vn.edu.poly.beecinema.service.VeonlineService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,6 +34,7 @@ public class VeonlineServiceImpl implements VeonlineService {
         veonlineRepository.save(Veonline.builder()
                 .veonlineID(VeonlineID.builder().idghe(idghe).idsuatchieu(idsuatchieu).build())
                 .trangthai(0)
+                .ngaytao(LocalDateTime.now())
                 .taikhoan(taikhoanRepository.findById("nhanpt").get())
                 .build());
     }

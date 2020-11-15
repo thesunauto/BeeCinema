@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import vn.edu.poly.beecinema.entity.*;
-import vn.edu.poly.beecinema.repository.DaygheRepository;
-import vn.edu.poly.beecinema.repository.GheRepository;
-import vn.edu.poly.beecinema.repository.KhunggioRepository;
-import vn.edu.poly.beecinema.repository.VeRepository;
+import vn.edu.poly.beecinema.repository.*;
 import vn.edu.poly.beecinema.service.*;
 import vn.edu.poly.beecinema.service.impl.VeServiceImpl;
 
@@ -27,14 +24,15 @@ class BeecinemaApplicationTests {
     @Autowired private SuatChieuService suatChieuService;
     @Autowired private TaikhoanService taikhoanService;
     @Autowired private VeRepository veRepository;
-
+@Autowired private PhimService phimService;
+@Autowired private PhimRepository phimRepository;
     @Autowired private VeonlineService veonlineService;
 @Autowired
 private VeService veService;
 
     @Test
     void contextLoads() {
-        veonlineService.insert(1,10);
+        phimService.getAllPhimAlive().forEach(phim -> System.out.println(phim));
     }
 
 }

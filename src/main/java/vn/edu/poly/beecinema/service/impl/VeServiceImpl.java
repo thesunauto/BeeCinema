@@ -10,6 +10,7 @@ import vn.edu.poly.beecinema.repository.VeRepository;
 import vn.edu.poly.beecinema.service.SukienService;
 import vn.edu.poly.beecinema.service.VeService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,7 @@ public class VeServiceImpl implements VeService {
                 .veID(VeID.builder().idghe(idghe).idsuatchieu(idsuatchieu).build())
                 .trangthai(0)
                 .sukien(sukien)
+                .ngaytao(LocalDateTime.now())
                 .taikhoan(taikhoanRepository.findById(username).get())
                 .build());
     }

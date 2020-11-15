@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import vn.edu.poly.beecinema.entity.Phim;
 
+import java.util.List;
+
 //public interface PhimRepository extends JpaRepository<Phim, String>, JpaSpecificationExecutor<Phim> {
 //
 //}
@@ -15,4 +17,6 @@ import vn.edu.poly.beecinema.entity.Phim;
 public interface PhimRepository extends PagingAndSortingRepository<Phim, String>, JpaSpecificationExecutor<Phim> {
     @Query("SELECT p FROM Phim p WHERE CONCAT(p.id, ' ',p.ten) LIKE %?1%")
     public Page<Phim> findAll(String keyword, Pageable pageable);
+
+    List<Phim> findAllByTrangthai(Integer trangthai);
 }

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "veonline")
@@ -39,6 +40,9 @@ public class Veonline implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Sukien sukien;
+
+    @Column(name = "ngaytao", nullable = false)
+    private LocalDateTime ngaytao;
 
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;

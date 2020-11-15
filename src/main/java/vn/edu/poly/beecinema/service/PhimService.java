@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface PhimService {
     List<Phim> getAllPhim();
 
+    List<Phim> getAllPhimAlive();
+
     void savePhim(Phim loaiPhim);
 
     void deletePhim(String id);
