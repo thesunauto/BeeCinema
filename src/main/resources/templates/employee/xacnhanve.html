@@ -12,7 +12,7 @@
 
 
 <main class="my-5" layout:fragment="content">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-cascade wider reverse my-4 mx-3 card-transparent">
@@ -70,23 +70,8 @@
                                         </tr>
                                         </thead>
 
-                                        <tbody >
-                                        <tr th:each="veon,ir : ${@veonlineServiceImpl.findAllByToday()}">
-                                            <th scope="row" th:text="${ir.count}">1</th>
-                                            <td th:text="${veon.getTaikhoan().getTen()}">Phạm Nhân</td>
-                                            <td th:text="${veon.getTaikhoan().getSodienthoai()}">0987654321</td>
-                                            <td  th:text="${veon.getSuatchieu().getPhim().getTen()}">Phim 2 người đóng</td>
-                                            <td th:text="${veon.getSuatchieu().getKhunggio().getBatdau()}">12:30</td>
-                                            <td th:text="${veon.getNgaytao().getHour()+':'+veon.getNgaytao().getMinute()+' | '+veon.getNgaytao().getDayOfMonth()+'/'+veon.getNgaytao().getMonthValue()}">12/12/22</td>
-                                            <td th:text="${(veon.getSuatchieu().getKhunggio().getBatdau().getHour()-veon.getSuatchieu().getPhuthuyonline()/60)+':'+(veon.getSuatchieu().getKhunggio().getBatdau().getMinute()-veon.getSuatchieu().getPhuthuyonline()%60)+' | '+veon.getSuatchieu().getNgaychieu().getDayOfMonth()+'/'+veon.getSuatchieu().getNgaychieu().getMonthValue()}">12/12/22</td>
-<!--                                            <td th:text="${(localTime.now().compareTo(localTime.of((veon.getSuatchieu().getKhunggio().getBatdau().getHour()-veon.getSuatchieu().getPhuthuyonline()/60),(veon.getSuatchieu().getKhunggio().getBatdau().getMinute()-veon.getSuatchieu().getPhuthuyonline()%60)))>0)?'Hết hạn':'Còn hạn'}">Hết hạn</td>-->
-                                            <td th:text="${localTime.of(12,12)}"></td>
-                                            <td>
-                                                <button type="button" class="btn btn-teal btn-rounded btn-sm m-0">Xác
-                                                    nhận
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        <tbody id="dataVEON">
+
 
                                         </tbody>
 
@@ -105,9 +90,100 @@
             </div>
         </div>
 
-
+        <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Xác nhận vé</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Chắc chắn rằng muốn xác nhận vé này
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="xacnhanveMD btn btn-primary" data-dismiss="modal">Xác nhận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
+<!-- Modal -->
+
+<th:block layout:fragment="script">
+    <script>
+        $(document).ready(function () {
+            $('body').ready(loadVeonline());
+
+            var listVeon = [];
+
+
+            function loadVeonline() {
+                $.ajax({
+                    url:'/api/employee/getlistveonline',
+                    type:'POST',
+                    dataType:'JSON',
+                    success:function (data) {
+                        listVeon = data;
+
+                    }
+                    ,complete: function () {
+                        fillVEON();
+                    }
+                })
+            }
+
+            function fillVEON() {
+                var content = '';
+                for(var i = 0;i<listVeon.length;i++){
+                   content+='<tr>\n' +
+                       '<th scope="row">'+(i+1)+'</th>\n' +
+                       '<td>'+listVeon[i].tenkhachhang+'</td>\n' +
+                       '<td>'+listVeon[i].sdt+'</td>\n' +
+                       '<td>'+listVeon[i].tenphim+'</td>\n' +
+                       '<td>'+listVeon[i].suatchieu+'</td>\n' +
+                       '<td>'+listVeon[i].ngaytao+'</td>\n' +
+                       '<td>'+listVeon[i].hethan+'</td>\n' +
+                       '<td>'+(listVeon[i].trangthai==0?'Chưa XN':listVeon[i].trangthai==1?'Đã XN':'Hết hạn')+'</td>\n' +
+                       '<td>\n' +
+                       '<option data-toggle="modal" data-target="#basicExampleModal" '+(listVeon[i].trangthai==0?'':'disabled')+' value="'+listVeon[i].idsuatchieughe+'" type="button" class="xacnhanVE btn btn-teal btn-rounded btn-sm m-0">Xác nhận</option>\n' +
+                       '</td>\n' +
+                       '</tr>'
+                }
+                $('#dataVEON').html(content);
+            }
+            var idveon = '';
+            $(document).on('click','option.xacnhanVE',function () {
+                idveon = $(this).val()
+            });
+            $('button.xacnhanveMD').click(function () {
+                $.ajax({
+                    url:'/api/employee/xacnhanve'+idveon,
+                    type:'POST',
+                    dataType:'JSON',
+                    success:function (data) {
+                        var nbo = data;
+                        if(nbo){
+                            toastr.success('xác nhận hoàn tất', '', {positionClass: 'md-toast-top-right'});
+                        }else{
+                            toastr.error('xác nhận thất bại', '', {positionClass: 'md-toast-top-right'});
+                        }
+                    },
+                    error:function () {
+                        toastr.error('xác nhận thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                    ,complete: function () {
+                        loadVeonline();
+                    }
+                })
+            });
+        });
+    </script>
+</th:block>
 
 </body>
 
