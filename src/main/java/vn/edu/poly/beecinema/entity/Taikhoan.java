@@ -58,6 +58,7 @@ public class Taikhoan implements Serializable {
     private Quyen quyen;
 
     @Column(name = "ngaytao", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime ngaytao;
 
     @Column(name = "hinhanh")

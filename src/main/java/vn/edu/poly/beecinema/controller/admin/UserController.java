@@ -8,11 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.entity.Taikhoan;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
 import javax.validation.Valid;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -23,17 +29,10 @@ public class UserController {
     @Autowired
     private TaikhoanService taikhoanService;
 
-//    @GetMapping("/show-user")
-//    public String showUser(Model model){
-//        List<Taikhoan> taikhoan = taikhoanService.getAllTaikhoan();
-//        model.addAttribute("taikhoans", taikhoan);
-//        return "admin/account/show-account";
-//    }
-
     @GetMapping("/show-user")
     public String showUser(Model model){
         String keyword = null;
-        return listByPage(model, 1, "username", "asc", keyword);
+        return listByPage(model, 1, "username", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -41,7 +40,8 @@ public class UserController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<Taikhoan> page = taikhoanService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -54,6 +54,7 @@ public class UserController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/account/show-account";
     }
 
@@ -71,7 +72,7 @@ public class UserController {
     }
     @PostMapping("/add-user")
     public String saveUser(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan, BindingResult bindingResult,
-                           @ModelAttribute("id") String idTaikhoan,
+                           @ModelAttribute("id") String idTaikhoan, @RequestParam("images") MultipartFile images,
                            Model model, Authentication authentication){
         if(bindingResult.hasErrors()){
 
@@ -79,23 +80,44 @@ public class UserController {
             model.addAttribute("messages", "trungid");
         }else{
             taikhoan.setNgaytao(LocalDateTime.now());
-            taikhoan.setHinhanh("a.jpg");
+            taikhoan.setHinhanh("null");
+            if(!images.isEmpty()) {
+                Path path = Paths.get("uploads/");
+                try {
+                    InputStream inputStream = images.getInputStream();
+                    Files.copy(inputStream, path.resolve(images.getOriginalFilename()),
+                            StandardCopyOption.REPLACE_EXISTING);
+                    taikhoan.setHinhanh(images.getOriginalFilename().toLowerCase());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             taikhoanService.saveTaikhoan(taikhoan);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "username", "asc", null, "themThanhCong");
         }
         return "admin/account/add-account";
     }
 
     @PostMapping(value = "/edit")
     public String updateUser(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan ,
-                              BindingResult bindingResult, Model model){
+                              BindingResult bindingResult, Model model,
+                             @RequestParam("images") MultipartFile images){
         if(bindingResult.hasErrors()){
 
         }else{
-            taikhoan.setHinhanh(null);
-            taikhoan.setNgaytao(LocalDateTime.now());
+            if(!images.isEmpty()) {
+                Path path = Paths.get("uploads/");
+                try {
+                    InputStream inputStream = images.getInputStream();
+                    Files.copy(inputStream, path.resolve(images.getOriginalFilename()),
+                            StandardCopyOption.REPLACE_EXISTING);
+                    taikhoan.setHinhanh(images.getOriginalFilename().toLowerCase());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             taikhoanService.saveTaikhoan(taikhoan);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "username", "asc", null, "suaThanhCong");
         }
         return "admin/account/update-account";
     }
@@ -103,10 +125,7 @@ public class UserController {
     @RequestMapping(value = "/delete" )
     public String deleteUser(@RequestParam("id") String taikhoanId, Model model) {
         taikhoanService.deleteTaikhoan(taikhoanId);
-        List<Taikhoan> taikhoans = taikhoanService.getAllTaikhoan();
-        model.addAttribute("taikhoans", taikhoans);
-        model.addAttribute("messages", "thanhcong");
-        return "admin/account/show-account";
+        return listByPage(model, 1, "username", "asc", null, "xoaThanhCong");
     }
 
 

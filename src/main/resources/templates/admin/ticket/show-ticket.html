@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+
+<head>
+  <title>Danh sách suất chiếu</title>
+</head>
+
+<body>
+
+  <!-- Main layout -->
+  <main layout:fragment="content">
+    <div class="container-fluid">
+
+      <!-- Section: Basic examples -->
+      <section>
+
+        
+
+        <!-- Top Table UI -->
+        <div class="card p-2 mb-5">
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-lg-2 col-md-12">
+
+              <!-- Name -->
+<!--              <select class="mdb-select colorful-select dropdown-primary mx-2 md-form mt-3 md-dropdown">-->
+<!--                <option value="" disabled selected>Bulk actions</option>-->
+<!--                <option value="1">Delate</option>-->
+<!--                <option value="2">Export</option>-->
+<!--                <option value="3">Change segment</option>-->
+<!--              </select>-->
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-3 col-md-6">
+
+              <!-- Blue select -->
+              <select class="mdb-select colorful-select dropdown-primary mx-2 md-form mt-3 md-dropdown">
+                <option value="" disabled selected>Show only</option>
+                <option value="1">All <span> (2000)</span></option>
+                <option value="2">Never opened <span> (200)</span></option>
+                <option value="3">Opened but unanswered <span> (1800)</span></option>
+                <option value="4">Answered <span> (200)</span></option>
+                <option value="5">Unsunscribed <span> (50)</span></option>
+              </select>
+              <!-- /Blue select -->
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-3 col-md-6">
+
+              <!-- Blue select -->
+              <select class="mdb-select colorful-select dropdown-primary mx-2 md-form mt-3 md-dropdown">
+                <option value="" disabled selected>Filter segments</option>
+                <option value="1">Contacts in no segments <span> (100)</span></option>
+                <option value="1">Segment 1 <span> (2000)</span></option>
+                <option value="2">Segment 2 <span> (1000)</span></option>
+                <option value="3">Segment 3 <span> (4000)</span></option>
+              </select>
+              <!-- /Blue select -->
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-4 col-md-6">
+
+              <form th:action="@{/admin/ticket/page/1}" class="form-inline md-form mt-2 ml-2">
+                <input type="hidden" name="sortField" th:value="${sortField}"/>
+                <input type="hidden" name="sortDir" th:value="${sortDir}"/>
+                <input class="form-control mt-2" type="text" name="keyword" id="keyword" th:value="${keyword}" required>
+                <button type="submit" class="btn btn-sm btn-primary ml-2 px-1"><i class="fas fa-search" title="tìm kiếm"></i> </button>
+                <a th:href="@{/admin/ticket/show-ticket}" class="btn btn-sm btn-primary ml-2 px-1" ><i class="fas fa-eraser" title=""></i></a>
+              </form>
+
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+        </div>
+        <!-- Top Table UI -->
+
+        <div class="card card-cascade narrower z-depth-1">
+
+          <!-- Card image -->
+          <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+            <div>
+              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-th-large mt-0"></i></button>
+              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-columns mt-0"></i></button>
+            </div>
+
+            <h4 class="white-text font-weight-bold">Danh sách Đặt Vé</h4>
+
+            <div>
+              <a th:href="@{/admin/screenings/add-screenings}"class="btn-floating btn-sm btn-primary"><i class="fas fa-plus-circle"></i></a>
+            </div>
+
+          </div>
+          <!-- /Card image -->
+
+          <div class="px-4">
+            <div th:switch="${messages}">
+              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+            </div>
+            <div class="table-responsive text-nowrap" style="height:350px">
+              <!-- Table -->
+              <table class="table table-hover mb-0">
+
+                <!-- Table head -->
+                <thead>
+                  <tr>
+                    <th >
+                      <a class="font-weight-bold" th:href="@{'/admin/ticket/page/' + ${currentPage} + '?sortField=suatchieu.phim.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên Phim<i class="fas fa-sort ml-1"></i></a>
+                    </th>
+                    <th >
+                      <a class="font-weight-bold" th:href="@{'/admin/ticket/page/' + ${currentPage} + '?sortField=suatchieu.khunggio.batdau&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Khung Giờ<i class="fas fa-sort ml-1"></i></a>
+                    </th>
+                    <th >
+                      <a class="font-weight-bold" th:href="@{'/admin/ticket/page/' + ${currentPage} + '?sortField=suatchieu.ngaychieu&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Ngày Chiếu<i class="fas fa-sort ml-1"></i></a>
+                    </th>
+                    <th ><a class="font-weight-bold">Tên Phòng</a></th>
+                    <th ><a class="font-weight-bold">Ghế</a></th>
+                    <th ><a class="font-weight-bold">Giá Tiền</a></th>
+                    <th >
+                      <a class="font-weight-bold" th:href="@{'/admin/ticket/page/' + ${currentPage} + '?sortField=sukien.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Sự kiện<i class="fas fa-sort ml-1"></i></a>
+                    </th>
+                    <th ><a class="font-weight-bold">Nhân Viên</a></th>
+                    <th ><a class="font-weight-bold">Ngày mua</a></th>
+                    <th ><a class="font-weight-bold">Trạng thái </th>
+                  </tr>
+                </thead>
+                <!-- Table head -->
+
+                <!-- Table body -->
+                <tbody>
+                  <tr th:each="ve :${ve}">
+                    <td th:text="${ve.suatchieu.phim.ten}"></td>
+                    <td th:text="${ve.suatchieu.khunggio.batdau} + ' - ' + ${ve.suatchieu.khunggio.ketthuc}"></td>
+                    <td th:text="${ve.suatchieu.ngaychieu}"></td>
+                    <td th:text="${ve.suatchieu.phong.ten}"></td>
+                    <td th:text="${ve.ghe.dayghe.ten} + ${ve.ghe.col} + ' - ' + ${ve.ghe.loaighe.ten} "></td>
+                    <td th:text="${ve.suatchieu.dongia}"></td>
+                    <td th:text="${ve.sukien} ? ${ve.sukien.ten} : '' " ></td>
+                    <td th:text="${ve.taikhoan.ten}"></td>
+                    <td ></td>
+                    <td th:switch="${ve.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
+                  </tr>
+                </tbody>
+                <!-- Table body -->
+              </table>
+              <!-- Table -->
+            </div>
+
+            <hr class="my-0">
+
+            <!-- Bottom Table UI -->
+            <div class="d-flex justify-content-between">
+
+              <!-- Name -->
+              <div class="my-4">
+                Tổng: [[${totalItem}]] | Trang [[${currentPage}]]/[[${totalPages}]]
+              </div>
+
+              <!-- Pagination -->
+              <nav class="my-4">
+                <ul class="pagination pagination-circle pg-blue mb-0">
+
+                  <!-- First -->
+                  <li class="page-item clearfix d-none d-md-block">
+                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/ticket/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
+                    <span  class="page-link" th:unless="${currentPage > 1}">First</span>
+                  </li>
+
+                  <!-- Arrow left -->
+                  <li class="page-item ">
+                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/ticket/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&laquo;</a>
+                    <span  class="page-link" th:unless="${currentPage > 1}">&laquo;</span>
+                  </li>
+
+                  <!-- Numbers -->
+                  <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a></li>-->
+                  <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                      <li class="page-item  clearfix d-none d-md-inline-block"><a class="page-link" th:if="${currentPage != i}" th:href="@{'/admin/ticket/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a></li>
+                        <span th:unless="${i != currentPage}">
+                          <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">[[${i}]]</a></li>
+                        </span>
+                        &nbsp;&nbsp;
+                    </span>
+                  <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a>-->
+
+                  <!--                    </li>-->
+
+
+
+                  <!-- Arrow right -->
+                  <li class="page-item">
+                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/ticket/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&raquo;</a>
+                    <span  class="page-link" th:unless="${currentPage < totalPages}">&raquo;</span>
+                  </li>
+
+                  <!-- First -->
+                  <li class="page-item clearfix d-none d-md-block">
+                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/ticket/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
+                    <span  class="page-link" th:unless="${currentPage < totalPages}">Last</span>
+                  </li>
+                </ul>
+              </nav>
+              <!-- /Pagination -->
+
+            </div>
+            <!-- Bottom Table UI -->
+
+          </div>
+        </div>
+
+      </section>
+      <!-- Section: Basic examples -->
+
+    </div>
+  </main>
+  <!-- Main layout -->
+
+</body>
+
+</html>
