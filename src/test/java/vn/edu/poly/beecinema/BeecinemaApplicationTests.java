@@ -33,7 +33,6 @@ private VeService veService;
 
     @Test
     void contextLoads() {
-        veonlineService.findAllByToday().forEach(veonline -> System.out.println(veonline));
     }
 
 }

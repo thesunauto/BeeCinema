@@ -26,7 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employee")
-public class EmployeeRestController {
+public class EmployeeDatVeChonGheRestController {
     @Autowired
     private PhimService phimService;
     @Autowired
@@ -44,7 +44,7 @@ public class EmployeeRestController {
     @Autowired
     private  SukienService sukienService;
 @Autowired private TaikhoanService taikhoanService;
-    public EmployeeRestController(StorageService storageService) {
+    public EmployeeDatVeChonGheRestController(StorageService storageService) {
         this.storageService = storageService;
     }
 
@@ -239,13 +239,13 @@ public class EmployeeRestController {
                 gheResponses.add(GheResponse.builder().id(ve.getGhe().getId()).trangthai(1).build());
             });
             veonlineService.findAllByIdSuatchieu(idsuatchieu).forEach(veon -> {
-                LocalTime timehuy = veon.getSuatchieu().getKhunggio().getBatdau();
-                int phuthuy = veon.getSuatchieu().getPhuthuyonline();
-                int hour = phuthuy/60;
-                int min = phuthuy%60;
-                LocalTime localTime = LocalTime.of(timehuy.getHour()-hour,timehuy.getMinute()-min);
+//                LocalTime timehuy = veon.getSuatchieu().getKhunggio().getBatdau();
+//                int phuthuy = veon.getSuatchieu().getPhuthuyonline();
+//                int hour = phuthuy/60;
+//                int min = phuthuy%60;
+//                LocalTime localTime = LocalTime.of(timehuy.getHour()-hour,timehuy.getMinute()-min);
 
-                if(LocalTime.now().compareTo(localTime)<0){
+                if(veonlineService.getStt(veon)==0){
                     gheResponses.add(GheResponse.builder().id(veon.getGhe().getId()).trangthai(1).build());
                 }
 
