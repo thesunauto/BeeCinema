@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vn.edu.poly.beecinema.commons.VeResponse;
 import vn.edu.poly.beecinema.service.PhimService;
@@ -26,9 +27,9 @@ public class EmployeeController {
     public String chonphim(){
         return "employee/chonPhim";
     }
-    @GetMapping("/chonghe")
+    @GetMapping("/lichsu")
     public String chonGhe(){
-        return "employee/chonghe";
+        return "employee/lichsu";
     }
     @GetMapping("/xacnhanve")
     public String xacNhanVe(Model model){model.addAttribute("localTime", LocalTime.now());
@@ -46,4 +47,6 @@ public class EmployeeController {
         model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhimAndToday(id));
         return "employee/datghe";
     }
+
+
 }

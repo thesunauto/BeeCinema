@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.edu.poly.beecinema.commons.LichSuResponse;
 import vn.edu.poly.beecinema.commons.VeonlineResponse;
 import vn.edu.poly.beecinema.entity.Veonline;
 import vn.edu.poly.beecinema.entity.VeonlineID;
@@ -16,6 +17,7 @@ import vn.edu.poly.beecinema.service.VeonlineService;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -54,5 +56,30 @@ public class EmployeeXacNhanVeOnlineRestController {
           e.printStackTrace();
       }
         return ResponseEntity.ok().body(false);
+    }
+
+    @PostMapping("/getHistory")
+    public ResponseEntity getHistory(){
+        List<LichSuResponse> lichSuResponses = new ArrayList<>();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        List<Veonline> veonlines = veonlineService.findAllByToday();
+        veService.findAllByToDay().forEach(ve -> {
+            AtomicReference<String> pp = new AtomicReference<>("");
+            veonlines.forEach(veonline -> {
+                if(veonline.getVeonlineID().getIdghe().equals(ve.getVeID().getIdghe()) && ve.getVeID().getIdsuatchieu().equals(veonline.getVeonlineID().getIdsuatchieu())){
+                    pp.set("Xác nhận vé");
+                }
+            });
+
+            lichSuResponses.add(LichSuResponse.builder()
+                    .ghe(ve.getGhe().getDayghe().getTen()+" - "+ve.getGhe().getCol())
+                    .suatchieu(ve.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter)+" - "+ve.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter)+" | "+ve.getSuatchieu().getPhong().getTen()+" | "+ve.getSuatchieu().getPhim().getTen())
+                    .sukien(ve.getSukien()==null?"Không có":ve.getSukien().getTen())
+                    .nguoitao(ve.getTaikhoan().getTen())
+                    .loaigiaodich(pp.get().equals("")?"Bán vé":pp.get())
+                    .build());
+        });
+
+        return ResponseEntity.ok().body(lichSuResponses);
     }
 }
