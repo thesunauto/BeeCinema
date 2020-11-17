@@ -42,7 +42,9 @@
                     <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/employee/xacnhanve'} ? active">
                         <a class="nav-link" th:href="@{/employee/xacnhanve}" data-offset="60">Xác nhận vé online </a>
                     </li>
-
+                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/employee/lichsu'} ? active">
+                        <a class="nav-link" th:href="@{/employee/lichsu}" data-offset="60">Lịch sử </a>
+                    </li>
                 </ul>
                 <form class="form-inline">
                     <div class="md-form my-0">

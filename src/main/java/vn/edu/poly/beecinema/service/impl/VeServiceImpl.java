@@ -10,7 +10,9 @@ import vn.edu.poly.beecinema.repository.VeRepository;
 import vn.edu.poly.beecinema.service.SukienService;
 import vn.edu.poly.beecinema.service.VeService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +46,17 @@ public class VeServiceImpl implements VeService {
                 .ngaytao(LocalDateTime.now())
                 .taikhoan(taikhoanRepository.findById(username).get())
                 .build());
+    }
+
+    @Override
+    public List<Ve> findAllByToDay() {
+        List<Ve>ves = new ArrayList<>();
+        veRepository.findAllByTrangthai(0).forEach(ve -> {
+            if(ve.getNgaytao().toLocalDate().equals(LocalDate.now())){
+                ves.add(ve);
+            }
+        });
+        return ves;
     }
 
 
