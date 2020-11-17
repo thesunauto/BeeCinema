@@ -7,7 +7,7 @@
   <title>Sign in</title>
 </head>
 
-<body th:style="'background-image:url(' + @{/img/images/bkg.jpg} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+<body th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
 
 <main layout:fragment="content" style="padding: 0;">
   <div class="container pt-5 mt-5">
@@ -84,7 +84,8 @@
 
           <div class="col-md-6 float-left">
             <div class="avatar mx-auto">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" width="100%" class="z-depth-1" alt="First sample avatar image">
+
+              <img th:src="@{/img/avt/huu.jpg}" width="100%" height="240px" class="z-depth-1" alt="First sample avatar image">
             </div>
           </div>
 
@@ -142,7 +143,7 @@
 
           <div class="col-md-6 float-left">
             <div class="avatar mx-auto">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(26).jpg" width="100%" class="z-depth-1" alt="Fourth sample avatar image">
+              <img th:src="@{/img/avt/ngan.jpg}" width="100%" height="240px" class="z-depth-1" alt="Fourth sample avatar image">
             </div>
           </div>
 

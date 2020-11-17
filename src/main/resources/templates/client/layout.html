@@ -46,9 +46,9 @@
 <!-- Main Navigation -->
 <header th:style="${#httpServletRequest.requestURI!='/'}?'width:0;'">
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark p-0 fixed-top scrolling-navbar" style="background-color: #253f5c">
         <div class="container">
-            <a class="navbar-brand" href="#"><img th:src="@{/img/icon/logo80x160noBG.png}" height="60" alt="mdb logo"></a>
+            <a class="navbar-brand" th:href="@{/}"><img th:src="@{/img/icon/logo80x160noBG.png}" height="60" alt="mdb logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -100,19 +100,19 @@
     </nav>
 
     <!-- Intro Section -->
-    <div  th:if="${#httpServletRequest.requestURI=='/'}" class="view jarallax" data-jarallax='{"speed": 0.2}' th:style="'background-image:url(' + @{/img/images/banner.png} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;'">
+    <div  th:if="${#httpServletRequest.requestURI=='/'}" class="view jarallax" data-jarallax='{"speed": 0.2}' style="margin: 0;padding: 0;"
+          th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
         <div class="mask rgba-black-light">
             <div class="container h-100 d-flex justify-content-center align-items-center">
                 <div class="row pt-5 mt-3">
                     <div class="col-md-12">
                         <div class="text-center">
                             <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-3 wow fadeInDown" data-wow-delay="0.3s"><strong>welcome
-                                to my blog</strong></h1>
+                                to Bee Cinema</strong></h1>
                             <hr class="hr-light mt-4 wow fadeInDown" data-wow-delay="0.4s">
-                            <h5 class="text-uppercase mb-5 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Photography &
-                                design</strong></h5>
-                            <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">portfolio</a>
-                            <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">About me</a>
+                            <h5 class="text-uppercase mb-5 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Where you can enjoy</strong></h5>
+                            <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">Movies</a>
+                            <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">Events</a>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
 </main>
 
 <!-- Footer -->
-<footer class="page-footer pt-4 mt-0 text-center text-md-left">
+<footer class="page-footer pt-4 mt-0 rgba-black-strong text-center text-md-left">
 
     <!-- Footer Links -->
     <div class="container">
@@ -194,7 +194,7 @@
 
                 <!-- Copyright -->
                 <p class="text-left grey-text">© 2019 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/"><strong>
-                    MDBootstrap.com</strong></a></p>
+                    Bee Cinema Group</strong></a></p>
                 <!-- Copyright -->
             </div>
             <!-- Grid column -->
@@ -219,7 +219,7 @@
             <!-- Grid column -->
 
         </div></div>
-</footer>
+</footer >
 <!-- Footer -->
 
 <!--  SCRIPTS  -->

@@ -31,344 +31,149 @@
   </style>
 </head>
 
-<body th:style="'background-image:url(' + @{/img/images/bkg.jpg} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+<body th:style="'background-image:url(' + @{/img/images/bkg_cinema.png} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
 <!-- Main layout -->
 <main layout:fragment="content">
 
   <div class="container-fluid">
 
     <!-- Section: Blog v.2 -->
-    <section class="text-center my-5 wow fadeIn rgba-black-strong white-text p-5 rounded" data-wow-delay="0.3s">
+    <section class="text-center my-5 wow fadeIn rgba-black-strong white-text p-3 rounded" data-wow-delay="0.3s">
 
       <!-- Section heading -->
-      <h2 class="text-center my-5 h1">Phim đang chiếu</h2>
+      <h2 class="text-center mb-3 h1">Phim đang chiếu</h2>
       <!-- Section description -->
       <!-- Grid row -->
       <div class="row">
+        <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+           <!--/.Indicators-->
+          <div class="carousel-inner v-2"  role="listbox">
+            <div class="carousel-item active" style="max-height: 266.8px">
+              <div class="col-md-6 mb-4">
+                <!-- Card -->
+                <div class="card card-image" th:style="'background-image:url(' + @{/img/images/movie.jpg} + ')'">
 
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg" class="img-fluid"
-                 alt="First sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
+                  <!-- Content -->
+                  <div class="text-white d-flex justify-content-center rgba-black-strong py-5 ">
+                    <div>
+                      <h2 class="amber-text font-weight-bold"><strong> Bee Movies</strong></h2>
+                      <h4 class="card-title pt-4 pb-3 font-weight-bold">Thế giới điện ảnh</h4>
+                      <div class="d-flex justify-content-center">
+                        <a class="btn blue-gradient btn-rounded" ><i class="fas fa-film"></i> Movies</a>
+                        <a class="btn btn-pink btn-rounded"><i class="far fa-eye"></i>  Xem trailer</a>
+                      </div>
+
+                    </div>
+                  </div>
+                  <!-- Content -->
+                </div>
+                <!-- Card -->
+
+              </div>
+            </div>
+
+            <div class="carousel-item" th:each="phim : ${phim}" style="max-height: 266.8px">
+              <div class="col-sm-12 col-md-6 mb-4">
+
+                <!-- Card -->
+                <div class="card card-image" th:style="'background-image:url(' +@{'/api/employee/getResourse/'+${phim.hinhanh}} + ')'">
+
+                  <!-- Content -->
+                  <div class="text-white text-center d-flex justify-content-center rgba-black-strong py-5 ">
+                    <div>
+                      <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim.dotuoi.ten}"> </strong></h6>
+                      <h3 class="card-title pt-4 pb-3 font-weight-bold" th:text="${phim.ten}"></h3>
+                      <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim.id}}"><i class="fas fa-film"></i> Xem chi tiết</a>
+                      <a class="btn btn-pink btn-rounded"><i class="far fa-eye"></i>  Xem trailer</a>
+                    </div>
+                  </div>
+                  <!-- Content -->
+                </div>
+                <!-- Card -->
+
+              </div>
+            </div>
           </div>
-
-          <!-- Excerpt -->
-          <a href="" class="pink-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-map "></i><strong> Environment</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 15/07/2016</p>
-          <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
-            placeat facere possimus voluptas.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" class="img-fluid"
-                 alt="Second sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
+          <div class="controls-top">
+            <a class="btn-floating" href="#carousel-example-multi" data-slide="prev"><i
+                    class="fas fa-chevron-left"></i></a>
+            <a class="btn-floating" href="#carousel-example-multi" data-slide="next"><i
+                    class="fas fa-chevron-right"></i></a>
           </div>
-
-          <!-- Excerpt -->
-          <a href="" class="indigo-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-plane"></i><strong> Travels</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 12/07/2016</p>
-          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-            deleniti atque corrupti quos dolores.</p>
-          <a class="btn btn-primary">Read more</a>
         </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-6">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(118).jpg" class="img-fluid"
-                 alt="Thrid sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Excerpt -->
-          <a href="" class="cyan-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-leaf "></i><strong> Animals</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 10/07/2016</p>
-          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, quia consequuntur magni
-            dolores eos qui ratione voluptatem.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
 
       </div>
       <!-- Grid row -->
 
     </section>
-    <!-- Section: Blog v.2 -->
-    <!-- Section: Blog v.2 -->
-    <section class="text-center my-5 wow fadeIn rgba-black-strong white-text p-5 rounded" data-wow-delay="0.3s">
+    <section class="text-center my-5 wow fadeIn rgba-black-strong white-text p-3 rounded" data-wow-delay="0.3s">
 
       <!-- Section heading -->
-      <h2 class="text-center my-5 h1">Phim đang chiếu</h2>
+      <h2 class="text-center mb-3 h1">Chuỗi sự kiện</h2>
       <!-- Section description -->
       <!-- Grid row -->
       <div class="row">
+        <div id="carousel-example-multii" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+          <!--/.Indicators-->
+          <div class="carousel-inner v-2"  role="listbox">
+            <div class="carousel-item active" style="max-height: 266.8px">
+              <div class="col-md-6 mb-4">
+                <!-- Card -->
+                <div class="card card-image" th:style="'background-image:url(' + @{/img/images/event.jpg} + ')'">
 
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg" class="img-fluid"
-                 alt="First sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
+                  <!-- Content -->
+                  <div class="text-white d-flex justify-content-center rgba-black-strong py-5 ">
+                    <div>
+                      <h2 class="amber-text font-weight-bold"><strong> Bee Events</strong></h2>
+                      <h4 class="card-title pt-4 pb-3 font-weight-bold">Sự kiện hấp dẫn</h4>
+                      <div class="d-flex justify-content-center">
+                        <a class="btn blue-gradient btn-rounded "><i class="fas fa-film"></i> Events</a>
+                        <a class="btn btn-pink btn-rounded"><i class="far fa-eye"></i>  Xem trailer</a>
+                      </div>
+
+                    </div>
+                  </div>
+                  <!-- Content -->
+                </div>
+                <!-- Card -->
+
+              </div>
+            </div>
+
+            <div class="carousel-item" th:each="suKien : ${suKien}" style="max-height: 266.8px">
+              <div class="col-sm-12 col-md-6 mb-4">
+
+                <!-- Card -->
+                <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
+
+                  <!-- Content -->
+                  <div class="text-white text-center rgba-black-strong py-5 ">
+                    <div>
+                      <h6 class="amber-text "><i class="fas fa-hand-holding-usd p-2"></i><strong th:text=" 'Giảm giá: '+${suKien.giam} +' VNĐ'"> </strong></h6>
+                      <h3 class="card-title pt-4 pb-3 font-weight-bold" th:text="${suKien.ten}"></h3>
+                      <a class="btn blue-gradient btn-rounded pl-4"><i class="fas fa-film"></i> Xem chi tiết</a>
+                      <a class="btn btn-pink btn-rounded"><i class="far fa-eye"></i>  Xem trailer</a>
+                    </div>
+                  </div>
+                  <!-- Content -->
+                </div>
+                <!-- Card -->
+
+              </div>
+            </div>
           </div>
-
-          <!-- Excerpt -->
-          <a href="" class="pink-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-map "></i><strong> Environment</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 15/07/2016</p>
-          <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
-            placeat facere possimus voluptas.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" class="img-fluid"
-                 alt="Second sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
+          <div class="controls-top">
+            <a class="btn-floating" href="#carousel-example-multii" data-slide="prev"><i
+                    class="fas fa-chevron-left"></i></a>
+            <a class="btn-floating" href="#carousel-example-multii" data-slide="next"><i
+                    class="fas fa-chevron-right"></i></a>
           </div>
-
-          <!-- Excerpt -->
-          <a href="" class="indigo-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-plane"></i><strong> Travels</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 12/07/2016</p>
-          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-            deleniti atque corrupti quos dolores.</p>
-          <a class="btn btn-primary">Read more</a>
         </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-6">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(118).jpg" class="img-fluid"
-                 alt="Thrid sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Excerpt -->
-          <a href="" class="cyan-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-leaf "></i><strong> Animals</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 10/07/2016</p>
-          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, quia consequuntur magni
-            dolores eos qui ratione voluptatem.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
 
       </div>
       <!-- Grid row -->
 
     </section>
-    <!-- Section: Blog v.2 -->
-    <!-- Section: Blog v.2 -->
-    <section class="text-center my-5 wow fadeIn rgba-black-strong white-text p-5 rounded" data-wow-delay="0.3s">
-
-      <!-- Section heading -->
-      <h2 class="text-center my-5 h1">Phim đang chiếu</h2>
-      <!-- Section description -->
-      <!-- Grid row -->
-      <div class="row">
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg" class="img-fluid"
-                 alt="First sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Excerpt -->
-          <a href="" class="pink-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-map "></i><strong> Environment</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 15/07/2016</p>
-          <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
-            placeat facere possimus voluptas.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" class="img-fluid"
-                 alt="Second sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Excerpt -->
-          <a href="" class="indigo-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-plane"></i><strong> Travels</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 12/07/2016</p>
-          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-            deleniti atque corrupti quos dolores.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-6">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(118).jpg" class="img-fluid"
-                 alt="Thrid sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Excerpt -->
-          <a href="" class="cyan-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-leaf "></i><strong> Animals</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 10/07/2016</p>
-          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, quia consequuntur magni
-            dolores eos qui ratione voluptatem.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row -->
-
-    </section>
-    <!-- Section: Blog v.2 -->
-    <!-- Section: Blog v.2 -->
-    <section class="text-center my-5 wow fadeIn rgba-black-strong white-text p-5 rounded" data-wow-delay="0.3s">
-
-      <!-- Section heading -->
-      <h2 class="text-center my-5 h1">Phim đang chiếu</h2>
-      <!-- Section description -->
-      <!-- Grid row -->
-      <div class="row">
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg" class="img-fluid"
-                 alt="First sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Excerpt -->
-          <a href="" class="pink-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-map "></i><strong> Environment</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 15/07/2016</p>
-          <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
-            placeat facere possimus voluptas.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-6 mb-md-0 mb-4">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" class="img-fluid"
-                 alt="Second sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Excerpt -->
-          <a href="" class="indigo-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-plane"></i><strong> Travels</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 12/07/2016</p>
-          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-            deleniti atque corrupti quos dolores.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-4 col-md-6">
-          <!-- Featured image -->
-          <div class="view overlay z-depth-1 mb-2">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(118).jpg" class="img-fluid"
-                 alt="Thrid sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Excerpt -->
-          <a href="" class="cyan-text">
-            <h6 class="mb-3 mt-3"><i class="fas fa-leaf "></i><strong> Animals</strong></h6>
-          </a>
-          <h4 class="font-weight-bold mb-3">This is title of the news</h4>
-          <p>by <a><strong>Billy Forester</strong></a>, 10/07/2016</p>
-          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, quia consequuntur magni
-            dolores eos qui ratione voluptatem.</p>
-          <a class="btn btn-primary">Read more</a>
-        </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row -->
-
-    </section>
-    <!-- Section: Blog v.2 -->
   </div>
 
 </main>
@@ -381,4 +186,4 @@
 
 </body>
 
-</html>7
+</html>
