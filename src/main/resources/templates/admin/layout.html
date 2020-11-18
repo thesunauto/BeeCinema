@@ -100,9 +100,9 @@
                                 <li>
                                     <a th:href="@{/admin/comment/show-comment}" class="waves-effect">Danh sách Comment</a>
                                 </li>
-                                <li>
-                                    <a th:href="@{/admin/comment/add-comment}" class="waves-effect">Thêm Comment</a>
-                                </li>
+<!--                                <li>-->
+<!--                                    <a th:href="@{/admin/comment/add-comment}" class="waves-effect">Thêm Comment</a>-->
+<!--                                </li>-->
                             </ul>
                         </div>
                     </li>
@@ -117,18 +117,6 @@
                                 </li>
                                 <li>
                                     <a th:href="@{/admin/age/add-age}" class="waves-effect">Thêm Age</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-user"></i>Profile<i class="fas fa-angle-down rotate-icon"></i>
-                        </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <a th:href="@{/admin/profile/update-profile}" class="waves-effect">Cập nhật tài khoản</a>
                                 </li>
                             </ul>
                         </div>
@@ -294,7 +282,7 @@
                     <form th:action="@{/logout}" method="post">
                         <input type="submit" class="dropdown-item" value="Log Out">
                     </form>
-                    <a class="dropdown-item" href="../profile/update-profile.html">My account</a>
+                    <a class="dropdown-item" th:href="@{/admin/profile/update-profile}" >Cập nhật Tài khoản</a>
                 </div>
             </li>
 

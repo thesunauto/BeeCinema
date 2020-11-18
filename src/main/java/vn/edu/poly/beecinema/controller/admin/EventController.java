@@ -8,11 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.service.SukienService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
 import javax.validation.Valid;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -23,16 +29,11 @@ public class EventController {
     @Autowired private SukienService sukienService;
     @Autowired private TaikhoanService taiKhoanService;
 
-//    @GetMapping("/show-event")
-//    public String showEvent(Model model){
-//        List<Sukien> sukiens = sukienService.getAllSukien();
-//        model.addAttribute("sukiens", sukiens);
-//        return "admin/event/show-event";
-//    }
     @GetMapping("/show-event")
     public String showEvent(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        String messages = null;
+        return listByPage(model, 1, "id", "asc", keyword, messages);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -40,7 +41,8 @@ public class EventController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<Sukien> page = sukienService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -53,6 +55,7 @@ public class EventController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/event/show-event";
     }
 
@@ -71,32 +74,52 @@ public class EventController {
 
     @PostMapping("/add-event")
     public String saveEvent(@Valid @ModelAttribute("sukien") Sukien sukien, BindingResult bindingResult,
-                            @ModelAttribute("id") String idSukien,
+                            @ModelAttribute("id") String idSukien, @RequestParam("images") MultipartFile images,
                             Model model, Authentication authentication){
         if(bindingResult.hasErrors()){
 
         }else if(sukienService.findSukienById(idSukien).isPresent()){
             model.addAttribute("messages", "trungid");
         }else{
-//            sukien.setNgaybatdau(LocalDateTime.now());
-//            sukien.setNgayketthuc(LocalDateTime.now());
-            sukien.setHinhanh("a.jpg");
+            sukien.setHinhanh("null");
             sukien.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
+            if(!images.isEmpty()) {
+                Path path = Paths.get("uploads/");
+                try {
+                    InputStream inputStream = images.getInputStream();
+                    Files.copy(inputStream, path.resolve(images.getOriginalFilename()),
+                            StandardCopyOption.REPLACE_EXISTING);
+                    sukien.setHinhanh(images.getOriginalFilename().toLowerCase());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             sukienService.saveSukien(sukien);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
         return "admin/event/add-event";
     }
 
     @PostMapping(value = "/edit")
     public String updateEvent(@Valid @ModelAttribute("sukien") Sukien sukien ,
-                                  BindingResult bindingResult, Model model,  Authentication authentication){
+                                  BindingResult bindingResult, @RequestParam("images") MultipartFile images,
+                                 Model model,  Authentication authentication){
         if(bindingResult.hasErrors()){
 
         }else{
-            sukien.setHinhanh("a.jpg");
+            if(!images.isEmpty()) {
+                Path path = Paths.get("uploads/");
+                try {
+                    InputStream inputStream = images.getInputStream();
+                    Files.copy(inputStream, path.resolve(images.getOriginalFilename()),
+                            StandardCopyOption.REPLACE_EXISTING);
+                    sukien.setHinhanh(images.getOriginalFilename().toLowerCase());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             sukienService.saveSukien(sukien);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
         return "admin/event/update-event";
     }
@@ -104,10 +127,7 @@ public class EventController {
     @RequestMapping(value = "/delete" )
     public String deleteEvent(@RequestParam("id") String sukienId, Model model) {
         sukienService.deleteSukien(sukienId);
-        List<Sukien> sukiens = sukienService.getAllSukien();
-        model.addAttribute("sukiens", sukiens);
-        model.addAttribute("messages", "thanhcong");
-        return "admin/event/show-event";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 
 

@@ -1,6 +1,10 @@
 package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vn.edu.poly.beecinema.entity.*;
 import vn.edu.poly.beecinema.repository.GheRepository;
@@ -14,7 +18,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class VeServiceImpl implements VeService {
@@ -28,6 +31,19 @@ public class VeServiceImpl implements VeService {
     public Boolean IsExists(Integer idSuatChieu, Integer idGhe) {
         return veRepository.findByGheAndSuatchieu(gheRepository.findById(idGhe).orElse(null),suatchieuRepository.findById(idSuatChieu).orElse(null))!=null;
     }
+
+    @Override
+    public Page<Ve> listAll(int pageNumber, String sortField, String sortDir, String keyword) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending()
+                        : Sort.by(sortField).descending()
+        );
+        if (keyword != null) {
+            return veRepository.findAll(keyword, pageable);
+        }
+        return  veRepository.findAll(pageable);
+    }
+
 
     @Override
     public List<Ve> findAllByIdSuatchieu(Integer idsuatchieu) {

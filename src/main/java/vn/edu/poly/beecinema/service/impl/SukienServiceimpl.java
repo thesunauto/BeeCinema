@@ -40,7 +40,7 @@ public class SukienServiceimpl implements SukienService {
 
     @Override
     public Page<Sukien> listAll(int pageNumber, String sortField, String sortDir, String keyword) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 5,
+        Pageable pageable = PageRequest.of(pageNumber - 1, 3,
                 sortDir.equals("asc") ? Sort.by(sortField).ascending()
                         : Sort.by(sortField).descending()
         );

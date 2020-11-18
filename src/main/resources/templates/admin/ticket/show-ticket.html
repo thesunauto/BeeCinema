@@ -4,7 +4,7 @@
       layout:decorate="~{admin/layout}">
 
 <head>
-  <title>Danh sách loại ghế</title>
+  <title>Danh sách suất chiếu</title>
 </head>
 
 <body>
@@ -26,6 +26,14 @@
 
             <!-- Grid column -->
             <div class="col-lg-2 col-md-12">
+
+              <!-- Name -->
+<!--              <select class="mdb-select colorful-select dropdown-primary mx-2 md-form mt-3 md-dropdown">-->
+<!--                <option value="" disabled selected>Bulk actions</option>-->
+<!--                <option value="1">Delate</option>-->
+<!--                <option value="2">Export</option>-->
+<!--                <option value="3">Change segment</option>-->
+<!--              </select>-->
 
             </div>
             <!-- Grid column -->
@@ -66,12 +74,12 @@
             <!-- Grid column -->
             <div class="col-lg-4 col-md-6">
 
-              <form th:action="@{/admin/seat-type/page/1}" class="form-inline md-form mt-2 ml-2">
+              <form th:action="@{/admin/ticket/page/1}" class="form-inline md-form mt-2 ml-2">
                 <input type="hidden" name="sortField" th:value="${sortField}"/>
                 <input type="hidden" name="sortDir" th:value="${sortDir}"/>
                 <input class="form-control mt-2" type="text" name="keyword" id="keyword" th:value="${keyword}" required>
-                <button type="submit" class="btn btn-sm btn-primary ml-2 px-1"><i class="fas fa-search"></i> </button>
-                <a th:href="@{/admin/seat-type/show-seat-type}" class="btn btn-sm btn-primary ml-2 px-1" ><i class="fas fa-eraser"></i></a>
+                <button type="submit" class="btn btn-sm btn-primary ml-2 px-1"><i class="fas fa-search" title="tìm kiếm"></i> </button>
+                <a th:href="@{/admin/ticket/show-ticket}" class="btn btn-sm btn-primary ml-2 px-1" ><i class="fas fa-eraser" title=""></i></a>
               </form>
 
             </div>
@@ -89,13 +97,14 @@
           <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
 
             <div>
-
+              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-th-large mt-0"></i></button>
+              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-columns mt-0"></i></button>
             </div>
 
-            <h4 class="white-text font-weight-bold">Danh sách Loại Ghế</h4>
+            <h4 class="white-text font-weight-bold">Danh sách Đặt Vé</h4>
 
             <div>
-              <a th:href="@{/admin/seat-type/add-seat-type}"class="btn-floating btn-sm btn-primary" th:title="Sửa"><i class="fas fa-plus-circle" th:title="Xóa"></i></a>
+              <a th:href="@{/admin/screenings/add-screenings}"class="btn-floating btn-sm btn-primary"><i class="fas fa-plus-circle"></i></a>
             </div>
 
           </div>
@@ -103,10 +112,9 @@
 
           <div class="px-4">
             <div th:switch="${messages}">
-              <p th:case="'ThemThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
-              <p th:case="'XoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Xóa thành công!</p>
             </div>
-            <div class="table-responsive text-nowrap">
+            <div class="table-responsive text-nowrap" style="height:350px">
               <!-- Table -->
               <table class="table table-hover mb-0">
 
@@ -114,34 +122,40 @@
                 <thead>
                   <tr>
                     <th >
+                      <a class="font-weight-bold" th:href="@{'/admin/ticket/page/' + ${currentPage} + '?sortField=suatchieu.phim.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên Phim<i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">ID <i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/ticket/page/' + ${currentPage} + '?sortField=suatchieu.khunggio.batdau&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Khung Giờ<i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên<i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/ticket/page/' + ${currentPage} + '?sortField=suatchieu.ngaychieu&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Ngày Chiếu<i class="fas fa-sort ml-1"></i></a>
                     </th>
+                    <th ><a class="font-weight-bold">Tên Phòng</a></th>
+                    <th ><a class="font-weight-bold">Ghế</a></th>
+                    <th ><a class="font-weight-bold">Giá Tiền</a></th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=gia&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Giá<i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/ticket/page/' + ${currentPage} + '?sortField=sukien.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Sự kiện<i class="fas fa-sort ml-1"></i></a>
                     </th>
-                    <th ><a class="font-weight-bold">Ngày Tạo</a></th>
-                    <th ><a class="font-weight-bold">Trạng thái </a> </th>
+                    <th ><a class="font-weight-bold">Nhân Viên</a></th>
+                    <th ><a class="font-weight-bold">Ngày mua</a></th>
+                    <th ><a class="font-weight-bold">Trạng thái </th>
                   </tr>
                 </thead>
                 <!-- Table head -->
 
                 <!-- Table body -->
                 <tbody>
-                  <tr th:each="loaiGhe:${loaiGhe}">
-                    <td>
-                      <a th:href="@{${'/admin/seat-type/update-seat-type/'+loaiGhe.id}}"> <i class="fas fa-edit text-primary"></i></a> <a th:href="@{${'/admin/seat-type/delete-seat-type/'+loaiGhe.id}}"> <i class="fas fa-trash ml-3 text-danger"></i></a>
-                    </td>
-                    <td th:text="${loaiGhe.id}"></td>
-                    <td th:text="${loaiGhe.ten}"></td>
-                    <td th:text="${loaiGhe.gia}"></td>
-                    <td th:text="${#temporals.format(loaiGhe.ngaytao, 'dd-MM-yyyy | HH:mm:ss')}"></td>
-                    <td th:switch="${loaiGhe.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
-
+                  <tr th:each="ve :${ve}">
+                    <td th:text="${ve.suatchieu.phim.ten}"></td>
+                    <td th:text="${ve.suatchieu.khunggio.batdau} + ' - ' + ${ve.suatchieu.khunggio.ketthuc}"></td>
+                    <td th:text="${ve.suatchieu.ngaychieu}"></td>
+                    <td th:text="${ve.suatchieu.phong.ten}"></td>
+                    <td th:text="${ve.ghe.dayghe.ten} + ${ve.ghe.col} + ' - ' + ${ve.ghe.loaighe.ten} "></td>
+                    <td th:text="${ve.suatchieu.dongia}"></td>
+                    <td th:text="${ve.sukien} ? ${ve.sukien.ten} : '' " ></td>
+                    <td th:text="${ve.taikhoan.ten}"></td>
+                    <td ></td>
+                    <td th:switch="${ve.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
                   </tr>
                 </tbody>
                 <!-- Table body -->
@@ -165,20 +179,20 @@
 
                   <!-- First -->
                   <li class="page-item clearfix d-none d-md-block">
-                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/seat-type/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
+                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/ticket/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
                     <span  class="page-link" th:unless="${currentPage > 1}">First</span>
                   </li>
 
                   <!-- Arrow left -->
                   <li class="page-item ">
-                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/seat-type/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&laquo;</a>
+                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/ticket/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&laquo;</a>
                     <span  class="page-link" th:unless="${currentPage > 1}">&laquo;</span>
                   </li>
 
                   <!-- Numbers -->
                   <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a></li>-->
                   <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                      <li class="page-item  clearfix d-none d-md-inline-block"><a class="page-link" th:if="${currentPage != i}" th:href="@{'/admin/seat-type/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a></li>
+                      <li class="page-item  clearfix d-none d-md-inline-block"><a class="page-link" th:if="${currentPage != i}" th:href="@{'/admin/ticket/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a></li>
                         <span th:unless="${i != currentPage}">
                           <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">[[${i}]]</a></li>
                         </span>
@@ -192,13 +206,13 @@
 
                   <!-- Arrow right -->
                   <li class="page-item">
-                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/seat-type/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&raquo;</a>
+                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/ticket/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&raquo;</a>
                     <span  class="page-link" th:unless="${currentPage < totalPages}">&raquo;</span>
                   </li>
 
                   <!-- First -->
                   <li class="page-item clearfix d-none d-md-block">
-                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/seat-type/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
+                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/ticket/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
                     <span  class="page-link" th:unless="${currentPage < totalPages}">Last</span>
                   </li>
                 </ul>

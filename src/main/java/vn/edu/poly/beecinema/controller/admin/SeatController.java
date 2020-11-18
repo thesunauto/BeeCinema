@@ -1,12 +1,15 @@
 package vn.edu.poly.beecinema.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.Dayghe;
 import vn.edu.poly.beecinema.entity.Ghe;
+import vn.edu.poly.beecinema.entity.LoaiPhim;
 import vn.edu.poly.beecinema.service.*;
 
 import java.time.LocalDateTime;
@@ -21,10 +24,31 @@ public class SeatController {
     @Autowired private DayGheService dayGheService;
     @Autowired private LoaiGheService loaiGheService;
     @Autowired private TaikhoanService taikhoanService;
+
     @GetMapping("/show-seat")
-    public String showseat(Model model){
-        List<Ghe> ghe = gheService.getAllGhe();
+    public String showSeat(Model model){
+        String keyword = null;
+        return listByPage(model, 1, "id", "asc", keyword);
+    }
+
+    @GetMapping("/page/{pageNumber}")
+    public String listByPage(Model model ,
+                             @PathVariable("pageNumber") int currentPage,
+                             @Param("sortField") String sortField,
+                             @Param("sortDir") String sortDir,
+                             @Param("keyword") String keyword) {
+        Page<Ghe> page = gheService.listAll(currentPage, sortField, sortDir, keyword);
+        long totalItem = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+        List<Ghe> ghe = page.getContent();
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalItem", totalItem);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("ghe", ghe);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("keyword", keyword);
         return "admin/seat/show-seat";
     }
 

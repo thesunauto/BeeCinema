@@ -29,34 +29,34 @@ public class ProfileController {
 
 
     @GetMapping(value = "/update-profile")
-    public String editMovieType(Model model, Authentication authentication){
+    public String editProfileType(Model model, Authentication authentication){
         Optional<Taikhoan> taiKhoanEdit = taikhoanService.findTaikhoanById(taikhoanService.findTaikhoanById(authentication.getName()).get().getUsername());
         taiKhoanEdit.ifPresent(taikhoan -> model.addAttribute("taikhoan", taikhoan));
         return "admin/profile/update-profile";
     }
 
     @PostMapping(value = "/update-profile")
-    public String updateMovieType(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan, BindingResult bindingResult,
+    public String updateProfileType( @ModelAttribute("taikhoan") Taikhoan taikhoan,
                                   Model model,  Authentication authentication, @RequestParam("images") MultipartFile images){
 
-        taikhoan.setMatkhau(taikhoanService.findTaikhoanById(authentication.getName()).get().getMatkhau());
-        taikhoan.setNgaytao(taikhoanService.findTaikhoanById(authentication.getName()).get().getNgaytao());
-        taikhoan.setQuyen(taikhoanService.findTaikhoanById(authentication.getName()).get().getQuyen());
-        taikhoan.setHinhanh(taikhoanService.findTaikhoanById(authentication.getName()).get().getHinhanh());
-        taikhoan.setTrangthai(taikhoanService.findTaikhoanById(authentication.getName()).get().getTrangthai());
-        if(!images.isEmpty()){
-            Path path = Paths.get("uploads/");
-            try{
-                InputStream inputStream = images.getInputStream();
-                Files.copy(inputStream, path.resolve(images.getOriginalFilename()),
-                        StandardCopyOption.REPLACE_EXISTING);
-                taikhoan.setHinhanh(images.getOriginalFilename().toLowerCase());
-            }catch(Exception e){
-                e.printStackTrace();
+            taikhoan.setMatkhau(taikhoanService.findTaikhoanById(authentication.getName()).get().getMatkhau());
+            taikhoan.setNgaytao(taikhoanService.findTaikhoanById(authentication.getName()).get().getNgaytao());
+            taikhoan.setQuyen(taikhoanService.findTaikhoanById(authentication.getName()).get().getQuyen());
+            taikhoan.setHinhanh(taikhoanService.findTaikhoanById(authentication.getName()).get().getHinhanh());
+            taikhoan.setTrangthai(taikhoanService.findTaikhoanById(authentication.getName()).get().getTrangthai());
+            if(!images.isEmpty()){
+                Path path = Paths.get("uploads/");
+                try{
+                    InputStream inputStream = images.getInputStream();
+                    Files.copy(inputStream, path.resolve(images.getOriginalFilename()),
+                            StandardCopyOption.REPLACE_EXISTING);
+                    taikhoan.setHinhanh(images.getOriginalFilename().toLowerCase());
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
-        }
-        taikhoanService.saveTaikhoan(taikhoan);
-        model.addAttribute("messages", "thanhcong");
+            taikhoanService.saveTaikhoan(taikhoan);
+            model.addAttribute("messages", "thanhcong");
         return "admin/profile/update-profile";
     }
 

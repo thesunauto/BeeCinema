@@ -21,70 +21,81 @@
               <h3 class="card-header-title">Thêm mới Phim</h3>  
             </div>
         <div class="card-body">
-          <form th:object="${phim}" th:action="@{/admin/movie/add-movie}" action="#" method="post">
+          <form th:object="${phim}" th:action="@{/admin/movie/add-movie}" action="#" enctype="multipart/form-data" method="post">
           <!-- Section heading -->
+          <!-- Grid row -->
             <div th:switch="${messages}">
               <p th:case="'thanhcong'" class="alert alert-success" role="alert">Thêm thành công!</p>
               <p th:case="'trungid'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
             </div>
-          <!-- Grid row -->
           <div class="row">
+            <div class="col-md-3 mb-4">
+              <div class="file-field">
+                <div class="z-depth-1-half mb-4">
+                  <img id="blah" th:src="@{'/getImage/placeholder.jpg'}"  class="img-fluid"  alt="example placeholder" style="height: 153px; min-width: 100%"/>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <div class="btn btn-mdb-color btn-rounded float-left">
+                    <span>Choose file</span>
+                    <input type="file" id="imgInp" name="images">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9 mb-3">
+              <div class="row">
+                <div class="col-md-2 mb-4">
+                  <div class="md-form md-outline">
+                    <i class="fas fa-key prefix"></i>
+                    <input type="text" th:field="*{id}" id="form31" class="form-control">
+                    <label for="form31" class="active">ID</label>
+                    <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
+                  </div>
+                </div>
 
-            <!-- Grid column -->
-            <div class="col-md-3 mb-3">
+                <div class="col-md-8 mb-4">
+                  <div class="md-form md-outline">
+                    <i class="fas fa-film prefix"></i>
+                    <input type="text" th:field="*{ten}" id="form32" class="form-control">
+                    <label for="form32" class="active">Tên phim</label>
+                    <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
+                  </div>
+                </div>
 
-              <div class="md-form md-outline">
-                <i class="fas fa-key prefix"></i>
-                <input type="text" th:field="*{id}" id="form31" class="form-control">
-                <label for="form31" class="active">ID</label>
-                <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
+                <div class="col-md-2 mb-4">
+                  <div class="md-form md-outline">
+                    <i class="fas fa-clock prefix"></i>
+                    <input type="number" th:field="*{dodai}" id="form33" class="form-control" min="0">
+                    <label for="form33" class="active">Độ dài</label>
+                    <p th:if="${#fields.hasErrors('dodai')}" th:errors="*{dodai}" class="text-danger text-center"></p>
+                  </div>
+                </div>
+
               </div>
 
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <select th:field="*{dotuoi}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                    <option th:each="dotuoi1 : ${@doTuoiServiceImpl.getAllDoTuoi()}" th:value="${dotuoi1.id}" th:text="${dotuoi1.ten}">Hiện</option>
+                  </select><label class="mdb-main-label active">Độ tuổi</label>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <select th:field="*{ngonngu}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                    <option th:each="ngonngu1 : ${@ngonNguServiceImpl.getAllNgonNgu()}" th:value="${ngonngu1.id}" th:text="${ngonngu1.ten}">Hiện</option>
+                  </select><label class="mdb-main-label active">Ngôn ngữ</label>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <select th:field="*{loaiphim}" class="mdb-select md-form colorful-select dropdown-primary initialized">
+                    <option th:each="loaiphim1 : ${@loaiPhimServiceImpl.getAllLoaiPhim()}" th:value="${loaiphim1.id}" th:text="${loaiphim1.ten}">Hiện</option>
+                  </select><label class="mdb-main-label active">Loại phim</label>
+                </div>
+              </div>
             </div>
-<!--            <div class="col-md-3 mb-3">-->
-
-<!--                <div class="md-form md-outline">-->
-<!--                  <i class="fas fa-image prefix"></i>-->
-<!--                  <input type="text" id="form31" class="form-control">-->
-<!--                  <label for="form31" class="active">Độ tuổi</label>-->
-<!--                </div>-->
-<!--  -->
-<!--            </div>-->
-            <div class="col-md-3 mb-3">
-              <select th:field="*{dotuoi}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option th:each="dotuoi1 : ${@doTuoiServiceImpl.getAllDoTuoi()}" th:value="${dotuoi1.id}" th:text="${dotuoi1.ten}">Hiện</option>
-              </select><label class="mdb-main-label active">Độ tuổi</label>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <select th:field="*{ngonngu}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option th:each="ngonngu1 : ${@ngonNguServiceImpl.getAllNgonNgu()}" th:value="${ngonngu1.id}" th:text="${ngonngu1.ten}">Hiện</option>
-              </select><label class="mdb-main-label active">Ngôn ngữ</label>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <select th:field="*{loaiphim}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option th:each="loaiphim1 : ${@loaiPhimServiceImpl.getAllLoaiPhim()}" th:value="${loaiphim1.id}" th:text="${loaiphim1.ten}">Hiện</option>
-              </select><label class="mdb-main-label active">Loại phim</label>
-            </div>
-
-            
-            <!-- Grid column -->
-
           </div>
 
           <div class="row">
-            <div class="col-md-4 mb-4">
-
-                <div class="md-form md-outline">
-                  <i class="fas fa-film prefix"></i>
-                  <input type="text" th:field="*{ten}" id="form32" class="form-control">
-                  <label for="form32" class="active">Tên phim</label>
-                  <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
-                </div>
-  
-            </div>
-
             <div class="col-md-4 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-day prefix"></i>
@@ -92,7 +103,6 @@
                 <label for="form31" class="active">Ngày Bắt đầu</label>
                 <p th:if="${#fields.hasErrors('ngaybatdau')}" th:errors="*{ngaybatdau}" class="text-danger text-center"></p>
               </div>
-
             </div>
 
             <div class="col-md-4 mb-4">
@@ -102,48 +112,19 @@
                 <label for="form31" class="active">Ngày Kết thúc</label>
                 <p th:if="${#fields.hasErrors('ngayketthuc')}" th:errors="*{ngayketthuc}" class="text-danger text-center"></p>
               </div>
-
             </div>
-            <!-- <div class="col-md-3 mb-3">
 
-                <div class="md-form md-outline">
-                  <input type="text" id="form31" class="form-control">
-                  <label for="form31" class="active">Nhân viên</label>
-                </div>
-  
-            </div> -->
-<!--            <div class="col-md-6 mb-6">-->
-
-<!--                <div class="md-form md-outline">-->
-<!--                    <label for="form31"></label>-->
-<!--                    &lt;!&ndash; <img src="../../img/photo.jpg" name="test" style="width: 200px; height: 120px;"  /> <br><br> &ndash;&gt;-->
-<!--                  <input type="file" id="form31" class="form-control-file">-->
-<!--                </div>-->
-<!--  -->
-<!--            </div>-->
-            
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-6">
-
-              <div class="md-form md-outline">
-                <i class="fas fa-clock prefix"></i>
-                <input type="text" th:field="*{dodai}" id="form33" class="form-control">
-                <label for="form33" class="active">Độ dài</label>
-                <p th:if="${#fields.hasErrors('dodai')}" th:errors="*{dodai}" class="text-danger text-center"></p>
-              </div>
-
-          </div>
-            <div class="col-md-6 mb-6">
-
+            <div class="col-md-4 mb-6">
               <!-- Name -->
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:value="'0'" th:text="Hiện" ></option>
                 <option th:value="'1'" th:text="Ẩn"></option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
-            </div>          
+            </div>
+
           </div>
+
           <div class="row">
             <div class="col-md-12 mb-12">
 
@@ -177,7 +158,26 @@
     </div>
   </main>
   <!-- Main layout -->
+  <th:block layout:fragment="optional">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $('#blah').attr('src', e.target.result);
+          }
 
+          reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+      }
+
+      $('#imgInp').change(function() {
+        readURL(this);
+
+      });
+    </script>
+  </th:block>
 </body>
 
 </html>

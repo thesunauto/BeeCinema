@@ -1,8 +1,13 @@
 package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vn.edu.poly.beecinema.entity.Binhluan;
+import vn.edu.poly.beecinema.entity.LoaiPhim;
 import vn.edu.poly.beecinema.repository.BinhluanRepository;
 import vn.edu.poly.beecinema.service.BinhluanService;
 
@@ -34,5 +39,16 @@ public class BinhluanServiceimpl implements BinhluanService {
         return binhluanRepository.findById(id);
     }
 
+    @Override
+    public Page<Binhluan> listAll(int pageNumber, String sortField, String sortDir, String keyword) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending()
+                        : Sort.by(sortField).descending()
+        );
+        if (keyword != null) {
+            return binhluanRepository.findAll(keyword, pageable);
+        }
+        return  binhluanRepository.findAll(pageable);
+    }
 
 }

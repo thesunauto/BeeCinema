@@ -1,10 +1,15 @@
 package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.DateUtils;
 import vn.edu.poly.beecinema.entity.Khunggio;
 import vn.edu.poly.beecinema.entity.Suatchieu;
+import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.repository.SuatchieuRepository;
 import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
@@ -65,5 +70,17 @@ public class SuatChieuServiceImpl implements SuatChieuService {
         return suatchieuRepository.findById(id);
     }
 
+
+    @Override
+    public Page<Suatchieu> listAll(int pageNumber, String sortField, String sortDir, String keyword) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending()
+                        : Sort.by(sortField).descending()
+        );
+        if (keyword != null) {
+            return suatchieuRepository.findAll(keyword, pageable);
+        }
+        return suatchieuRepository.findAll(pageable);
+    }
 
 }

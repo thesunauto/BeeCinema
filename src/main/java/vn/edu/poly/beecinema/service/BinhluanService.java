@@ -1,5 +1,6 @@
 package vn.edu.poly.beecinema.service;
 
+import org.springframework.data.domain.Page;
 import vn.edu.poly.beecinema.entity.Binhluan;
 
 import java.util.List;
@@ -14,5 +15,6 @@ public interface BinhluanService {
 
     Optional<Binhluan> findBinhluanById(Integer id);
 
+    Page<Binhluan> listAll(int pageNumber, String sortField, String sortDir, String keyword);
 
 }

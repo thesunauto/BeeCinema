@@ -1,5 +1,7 @@
 package vn.edu.poly.beecinema.service;
 
+import org.springframework.data.domain.Page;
+import vn.edu.poly.beecinema.entity.Binhluan;
 import vn.edu.poly.beecinema.entity.Dayghe;
 
 import java.util.List;
@@ -15,5 +17,7 @@ public interface DayGheService {
     void deleteDayGhe(String id);
 
     Optional<Dayghe> findDayGheByID(String id);
+
+    Page<Dayghe> listAll(int pageNumber, String sortField, String sortDir, String keyword);
 
 }
