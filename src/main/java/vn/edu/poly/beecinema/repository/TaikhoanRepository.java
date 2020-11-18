@@ -15,4 +15,9 @@ import vn.edu.poly.beecinema.entity.Taikhoan;
 public interface TaikhoanRepository extends PagingAndSortingRepository<Taikhoan, String>, JpaSpecificationExecutor<Taikhoan> {
     @Query("SELECT p FROM Taikhoan p WHERE CONCAT(p.username, ' ',p.ten) LIKE %?1%")
     public Page<Taikhoan> findAll(String keyword, Pageable pageable);
+
+    @Query("SELECT p FROM Taikhoan p WHERE p.email = ?1")
+    public Taikhoan findByEmail(String email);
+
+    public Taikhoan findByResetPasswordToken(String token);
 }

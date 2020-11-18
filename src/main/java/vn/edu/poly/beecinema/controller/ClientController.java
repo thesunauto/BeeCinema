@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.edu.poly.beecinema.entity.Taikhoan;
 import vn.edu.poly.beecinema.service.TaikhoanService;
-
 import javax.validation.Valid;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -48,11 +47,6 @@ public class ClientController {
     public String envent(){
         return "client/list-event";
     }
-
-//    @RequestMapping("/profile-client")
-//    public String Profile(Model model) {
-//        return "client/Profile";
-//    }
 
     @GetMapping(value = "/profile-client")
     public String editMovieType(Model model, Authentication authentication){

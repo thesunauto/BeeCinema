@@ -69,6 +69,9 @@ public class Taikhoan implements Serializable {
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
+    @Column (name ="reset_password_token")
+    private String resetPasswordToken;
+
     @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
