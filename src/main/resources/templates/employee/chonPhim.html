@@ -70,6 +70,7 @@
                 var film = listFilm[i];
                 var pp = 'background: url(/api/employee/getResourse/'+film.hinhanh+') no-repeat center center;background-size: cover;';
                 content += '<div class="col-md-12 col-lg-6 mb-3 mx-auto waves-effect">\n' +
+                    '                <div class="rounded" style="background: url(/img/MOBG.jpg) no-repeat center center;background-size: cover;" >\n' +
                     '                <div class="card card-image"\n' +
                     '                     style="'+pp+'">\n' +
                     '\n' +
@@ -83,7 +84,7 @@
                     '                        </div>\n' +
                     '                    </div>\n' +
                     '\n' +
-                    '                </div>\n' +
+                    '                </div>\n' +'                </div>\n' +
                     '            </div>';
             }
             $('#dataFilm').html(content);

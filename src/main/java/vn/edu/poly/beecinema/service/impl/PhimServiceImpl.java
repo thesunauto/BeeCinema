@@ -10,6 +10,8 @@ import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.repository.PhimRepository;
 import vn.edu.poly.beecinema.service.PhimService;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +21,18 @@ public class PhimServiceImpl implements PhimService {
     @Override
     public List<Phim> getAllPhim() {
         return (List<Phim>) phimRepository.findAll();
+    }
+
+    @Override
+    public List<Phim> getAllPhimAlive() {
+
+       List<Phim> phims = new ArrayList<>();
+        phimRepository.findAllByTrangthai(0).forEach(phim -> {
+           if(LocalDateTime.now().compareTo(phim.getNgaybatdau())>=0 && LocalDateTime.now().compareTo(phim.getNgayketthuc())<=0){
+               phims.add(phim);
+           }
+       });
+        return phims;
     }
 
     @Override

@@ -4,25 +4,27 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "veonline")
-@IdClass(VeonlineID.class)
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Veonline implements Serializable {
 
-    @Id
+    @EmbeddedId
+    private  VeonlineID veonlineID;
+
     @ManyToOne
-    @JoinColumn(name = "idsuatchieu", nullable = false)
+    @JoinColumn(name = "idsuatchieu", nullable = false,insertable = false, updatable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Suatchieu suatchieu;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "idghe", nullable = false)
+    @JoinColumn(name = "idghe", nullable = false,insertable = false, updatable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Ghe ghe;
@@ -39,7 +41,10 @@ public class Veonline implements Serializable {
     @ToString.Exclude
     private Sukien sukien;
 
+    @Column(name = "ngaytao", nullable = false)
+    private LocalDateTime ngaytao;
+
     @Column(name = "trangthai", nullable = false)
-    private String trangthai;
+    private Integer trangthai;
 
 }

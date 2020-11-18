@@ -5,6 +5,7 @@ import vn.edu.poly.beecinema.entity.Khunggio;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Sukien;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,8 @@ public interface SuatChieuService {
     List<Suatchieu> getAllSuatChieu();
 
     List<Suatchieu> getAllSuatChieuByPhim(String idphim);
+
+    List<Suatchieu> getAllSuatChieuByPhimAndToday(String idphim);
 
     void saveSuatChieu(Suatchieu suatChieu);
 

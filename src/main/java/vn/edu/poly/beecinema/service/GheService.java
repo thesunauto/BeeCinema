@@ -20,4 +20,5 @@ public interface GheService {
     Optional<Ghe> findGheById(Integer id);
 
     Page<Ghe> listAll(int pageNumber, String sortField, String sortDir, String keyword);
+
 }

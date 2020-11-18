@@ -11,8 +11,14 @@ import vn.edu.poly.beecinema.entity.LoaiPhim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Ve;
 
+import java.util.List;
+
+
 public interface VeRepository extends JpaRepository<Ve, String>, JpaSpecificationExecutor<Ve>, PagingAndSortingRepository<Ve, String> {
     Ve findByGheAndSuatchieu(Ghe ghe, Suatchieu suatchieu);
     @Query("SELECT p FROM Ve p WHERE CONCAT(p.suatchieu.phim.ten, ' ',p.suatchieu.ngaychieu, ' ', p.suatchieu.khunggio.batdau, p.suatchieu.khunggio.ketthuc,' ',p.suatchieu.phong.ten, ' ',p.sukien.ten, ' ', p.taikhoan.ten, ' ', p.suatchieu.dongia) LIKE %?1%")
     public Page<Ve> findAll(String keyword, Pageable pageable);
+    List<Ve> findAllBySuatchieu(Suatchieu suatchieu);
+    List<Ve> findAllByTrangthai(Integer trangthai);
+
 }

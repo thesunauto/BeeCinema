@@ -27,8 +27,6 @@ public class GheServiceImpl implements GheService {
         return GheRepository.findByPhongAndDaygheOrderByCol(phongRepository.getOne(idphong),daygheRepository.getOne(idDayGhe));
     }
 
-
-
     @Override
     public List<Ghe> getAllGhe() {
         return (List<Ghe>) GheRepository.findAll();

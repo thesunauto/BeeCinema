@@ -1,17 +1,22 @@
 package vn.edu.poly.beecinema.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vn.edu.poly.beecinema.commons.VeResponse;
 import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
+import vn.edu.poly.beecinema.service.TaikhoanService;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,16 +25,18 @@ import java.util.List;
 public class EmployeeController {
     @Autowired private PhimService phimService;
     @Autowired private SuatChieuService suatChieuService;
+@Autowired private TaikhoanService taikhoanService;
+
     @GetMapping("/chonphim")
     public String chonphim(){
         return "employee/chonPhim";
     }
-    @GetMapping("/chonghe")
+    @GetMapping("/lichsu")
     public String chonGhe(){
-        return "employee/chonghe";
+        return "employee/lichsu";
     }
     @GetMapping("/xacnhanve")
-    public String xacNhanVe(){
+    public String xacNhanVe(Model model){model.addAttribute("localTime", LocalTime.now());
         return "employee/xacnhanve";
     }
 
@@ -41,7 +48,10 @@ public class EmployeeController {
         List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
         httpSession.setAttribute("veresponse",veResponses);
         model.addAttribute("film", phimService.findPhimById(id));
-        model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhim(id));
+        model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhimAndToday(id));
         return "employee/datghe";
     }
+
+
+
 }
