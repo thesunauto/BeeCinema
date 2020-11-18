@@ -6,6 +6,10 @@ import vn.edu.poly.beecinema.entity.Ghe;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Ve;
 
+import java.util.List;
+
 public interface VeRepository extends JpaRepository<Ve, String>, JpaSpecificationExecutor<Ve> {
     Ve findByGheAndSuatchieu(Ghe ghe, Suatchieu suatchieu);
+    List<Ve> findAllBySuatchieu(Suatchieu suatchieu);
+    List<Ve> findAllByTrangthai(Integer trangthai);
 }

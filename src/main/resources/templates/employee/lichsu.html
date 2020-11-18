@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{employee/layout}">
+
+<head>
+
+    <title>History</title>
+
+</head>
+
+<body>
+
+
+<main layout:fragment="content">
+    <!-- Mega menu -->
+    <div class="container-fluid" style="margin: 0;padding: 0;"
+         th:style="'background-image:url(' + @{/img/history.jpg} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+        <div id="dataFilm" class="row pt-5 wow fadeIn d-flex justify-content-center" data-wow-delay="0.9s"
+             style="min-height: 93vh;">
+            <div class="col-10 rgba-white-strong rounded mb-4">
+                <table class="table ">
+                    <thead class="black white-text">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Suất chiếu</th>
+                        <th scope="col">Ghế</th>
+                        <th scope="col">Sự kiện</th>
+                        <th scope="col">Loại giao dịch</th>
+                        <th scope="col">Người tạo</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dataH">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Suất chiếu</td>
+                        <td>Ghế</td>
+                        <td>Sự kiện</td>
+                        <td>Loại giao dịch</td>
+                        <td>Người tạo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Suất chiếu</td>
+                        <td>Ghế</td>
+                        <td>Sự kiện</td>
+                        <td>Loại giao dịch</td>
+                        <td>Người tạo</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Suất chiếu</td>
+                        <td>Ghế</td>
+                        <td>Sự kiện</td>
+                        <td>Loại giao dịch</td>
+                        <td>Người tạo</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- Mega menu -->
+
+</main>
+<th:block layout:fragment="script">
+    <script>
+        $(document).ready(function () {
+            $('body').ready(loadHistory());
+            var listH = [];
+            function loadHistory() {
+                $.ajax({
+                    url: '/api/employee/getHistory',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        listH = data;
+                    },
+                    complete: function () {
+fillHistory();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            function fillHistory() {
+                var content ='';
+                for(var i = 0;i<listH.length;i++){
+                    content +='<tr>\n' +
+                        '<th scope="row">'+(i+1)+'</th>\n' +
+                        '<td>'+listH[i].suatchieu+'</td>\n' +
+                        '<td>'+listH[i].ghe+'</td>\n' +
+                        '<td>'+listH[i].sukien+'</td>\n' +
+                        '<td>'+listH[i].loaigiaodich+'</td>\n' +
+                        '<td>'+listH[i].nguoitao+'</td>\n' +
+                        '</tr>';
+                }
+                $('#dataH').html(content);
+            }
+        });
+    </script>
+</th:block>
+
+</body>
+
+
+</html>

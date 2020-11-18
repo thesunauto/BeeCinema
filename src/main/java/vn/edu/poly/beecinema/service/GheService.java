@@ -16,4 +16,6 @@ public interface GheService {
     void deleteGhe(Integer id);
 
     Optional<Ghe> findGheById(Integer id);
+
+
 }
