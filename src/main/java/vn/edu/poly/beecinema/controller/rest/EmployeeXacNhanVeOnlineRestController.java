@@ -8,12 +8,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vn.edu.poly.beecinema.commons.LichSuResponse;
+import vn.edu.poly.beecinema.commons.UserResponse;
 import vn.edu.poly.beecinema.commons.VeonlineResponse;
+import vn.edu.poly.beecinema.entity.Taikhoan;
 import vn.edu.poly.beecinema.entity.Veonline;
 import vn.edu.poly.beecinema.entity.VeonlineID;
+import vn.edu.poly.beecinema.service.TaikhoanService;
 import vn.edu.poly.beecinema.service.VeService;
 import vn.edu.poly.beecinema.service.VeonlineService;
 
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class EmployeeXacNhanVeOnlineRestController {
     @Autowired private VeonlineService veonlineService;
 @Autowired private VeService veService;
+@Autowired private TaikhoanService taikhoanService;
     @PostMapping("/getlistveonline")
     public ResponseEntity getListVeOnline(){
         List<VeonlineResponse> veonlineResponses = new ArrayList<>();
@@ -81,5 +86,21 @@ public class EmployeeXacNhanVeOnlineRestController {
         });
 
         return ResponseEntity.ok().body(lichSuResponses);
+    }
+
+    @PostMapping("/getuser")
+    public ResponseEntity getUser(Authentication authentication){
+        Taikhoan tk = taikhoanService.findTaikhoanById(authentication.getName()).get();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return ResponseEntity.ok().body(UserResponse.builder()
+                .email(tk.getEmail())
+                .gioitinh(tk.getGioitinh())
+                .image(tk.getHinhanh())
+                .ngaysinh(new SimpleDateFormat("dd/MM/yyyy").format(tk.getNgaysinh()))
+                .password(tk.getMatkhau())
+                .sdt(tk.getSodienthoai())
+                .ten(tk.getTen())
+                .username(tk.getUsername())
+                .build());
     }
 }

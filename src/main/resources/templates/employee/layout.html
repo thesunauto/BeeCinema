@@ -29,20 +29,24 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top red lighten-1">
         <div class="container smooth-scroll">
-            <a class="navbar-brand" href="#"><img th:src="@{/img/logo80x160noBG.png}" class="img-fluid flex-center" style="height: 40px;"></a>
+            <a class="navbar-brand" href="#"><img th:src="@{/img/logo80x160noBG.png}" class="img-fluid flex-center"
+                                                  style="height: 40px;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/employee/chonphim'} ? active">
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.requestURI=='/employee/chonphim'} ? active">
                         <a class="nav-link" th:href="@{/employee/chonphim}">Bán vé </a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/employee/xacnhanve'} ? active">
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.requestURI=='/employee/xacnhanve'} ? active">
                         <a class="nav-link" th:href="@{/employee/xacnhanve}" data-offset="60">Xác nhận vé online </a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/employee/lichsu'} ? active">
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.requestURI=='/employee/lichsu'} ? active">
                         <a class="nav-link" th:href="@{/employee/lichsu}" data-offset="60">Lịch sử </a>
                     </li>
                 </ul>
@@ -50,22 +54,23 @@
                     <li class="nav-item">
                         <form class="form-inline">
                             <div class="md-form my-0">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search"
+                                       aria-label="Search">
                             </div>
                         </form>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i>
+                            <img src="" class="img-fluid z-depth-1 rounded-circle"
+                                 alt="Responsive image"> <span id="usernamenav">123</span>
                         </a>
                         <div class="dropdown-menu  dropdown-menu-right dropdown-danger w-75"
                              aria-labelledby="navbarDropdownMenuLink-333">
-                            <button class="dropdown-item">Thông tin</button>
-
-                                <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
-
-
+                            <button class="dropdown-item" data-toggle="modal" data-target="#modalContactForm">Thông
+                                tin
+                            </button>
+                            <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
                         </div>
                     </li>
                 </ul>
@@ -74,7 +79,75 @@
         </div>
     </nav>
     <!-- Navbar -->
+    <!-- Modal: Contact form -->
+    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog cascading-modal" role="document">
+            <!-- Content -->
+            <div class="modal-content">
 
+                <!-- Header -->
+                <div class="modal-header light-blue darken-3 white-text">
+                    <h4 class=""><i class="fas fa-pencil-alt"></i> Thông tin cá nhân</h4>
+                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Body -->
+                <div class="modal-body mb-0">
+                    <div class="md-form form-sm">
+                        <i class="fas fa-user prefix"></i>
+                        <input placeholder="Enter username" type="text" id="username" class="form-control form-control-sm">
+                        <label for="username">USERNAME</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <i class="fas fa-user prefix"></i>
+                        <input placeholder="Enter username" type="password" id="password" class="form-control form-control-sm">
+                        <label for="password">PASSWORD</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <i class="fas fa-user prefix"></i>
+                        <input placeholder="Enter ten" type="text" id="ten" class="form-control form-control-sm">
+                        <label for="ten">NAME</label>
+                    </div>
+                    <select class="mdb-select md-form" id="gioitinh">
+                        <i class="fas fa-user prefix"></i>
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="0">Nam</option>
+                        <option value="1">Nữ</option>
+                    </select>
+                    <div class="md-form form-sm">
+                        <i class="fas fa-user prefix"></i>
+                        <input placeholder="Enter ngaysinh" type="text" id="ngaysinh" class="form-control form-control-sm">
+                        <label for="ngaysinh">BIRTH</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <i class="fas fa-user prefix"></i>
+                        <input placeholder="Enter sdt" type="text" id="sdt" class="form-control form-control-sm">
+                        <label for="sdt">PHONE</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <i class="fas fa-user prefix"></i>
+                        <input placeholder="Enter email" type="text" id="email" class="form-control form-control-sm">
+                        <label for="email">EMAIL</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <i class="fas fa-user prefix"></i>
+                        <input placeholder="Enter image" type="text" id="image" class="form-control form-control-sm">
+                        <label for="image">IMANGE</label>
+                    </div>
+
+                    <div class="text-center mt-1-half">
+                        <button class="btn btn-info mb-2">Send <i class="fas fa-paper-plane ml-1"></i></button>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Content -->
+        </div>
+    </div>
+    <!-- Modal: Contact form -->
 </header>
 <!-- Navigation -->
 <div class="pt-5" layout:fragment="content">
@@ -113,13 +186,41 @@
         // SideNav Initialization
         $(".button-collapse").sideNav();
 
+        loadUser();
+
+        var user = {};
+
+        function loadUser() {
+            $.ajax({
+                url: '/api/employee/getuser',
+                type: 'POST',
+                dataType: 'JSON',
+                success: function (data) {
+                    user = data;
+                },
+                complete: function () {
+                    $("#usernamenav").html(user.ten);
+
+                    $('#username').val(user.username);
+                    $('#password').val(user.password);
+                    $('#ten').val(user.ten);
+                    $('#gioitinh').val(user.gioitinh);
+                    $('#ngaysinh').val(user.ngaysinh);
+                    $('#sdt').val(user.sdt);
+                    $('#email').val(user.email);
+                    $('#image').val(user.image);
+                }
+            })
+        }
+
+
     });
 
-$(window).on('beforeunload',function () {
-    $.ajax({
-        url:'/api/employee/close'
-    });
-})
+    $(window).on('beforeunload', function () {
+        $.ajax({
+            url: '/api/employee/close'
+        });
+    })
 
 
 </script>
