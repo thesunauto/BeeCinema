@@ -29,7 +29,6 @@ public class MainController {
     @Autowired
     private QuyenService quyenService;
 @Autowired private TaikhoanService taikhoanService;
-@Autowired private TaikhoanService taikhoanService;
     @Autowired private PhimService phimService;
     @Autowired private SukienService suKienService;
 
