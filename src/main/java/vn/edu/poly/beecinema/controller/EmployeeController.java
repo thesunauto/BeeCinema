@@ -1,6 +1,7 @@
 package vn.edu.poly.beecinema.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import vn.edu.poly.beecinema.commons.VeResponse;
 import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
+import vn.edu.poly.beecinema.service.TaikhoanService;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -23,6 +25,8 @@ import java.util.List;
 public class EmployeeController {
     @Autowired private PhimService phimService;
     @Autowired private SuatChieuService suatChieuService;
+@Autowired private TaikhoanService taikhoanService;
+
     @GetMapping("/chonphim")
     public String chonphim(){
         return "employee/chonPhim";
@@ -47,6 +51,7 @@ public class EmployeeController {
         model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhimAndToday(id));
         return "employee/datghe";
     }
+
 
 
 }

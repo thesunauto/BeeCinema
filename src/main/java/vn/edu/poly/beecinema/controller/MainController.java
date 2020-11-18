@@ -5,9 +5,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.poly.beecinema.service.QuyenService;
+import vn.edu.poly.beecinema.service.TaikhoanService;
 
+import javax.annotation.PostConstruct;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,6 +19,7 @@ import java.util.stream.Collectors;
 public class MainController {
     @Autowired
     private QuyenService quyenService;
+@Autowired private TaikhoanService taikhoanService;
 
     @RequestMapping("/becinema")
     public String userHomePage(Model model, Authentication authentication) {
@@ -55,5 +60,11 @@ public class MainController {
     @RequestMapping("/index")
     public String index(Model model) {
         return "index";
+    }
+
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserName(Authentication authentication) {
+        return authentication.getName();
     }
 }
