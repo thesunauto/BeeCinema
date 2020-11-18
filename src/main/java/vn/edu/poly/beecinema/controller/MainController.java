@@ -12,12 +12,15 @@ import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.service.GheService;
 import vn.edu.poly.beecinema.service.PhimService;
+import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.poly.beecinema.service.QuyenService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 import vn.edu.poly.beecinema.service.SukienService;
+import vn.edu.poly.beecinema.service.TaikhoanService;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,7 @@ import java.util.stream.Collectors;
 public class MainController {
     @Autowired
     private QuyenService quyenService;
+@Autowired private TaikhoanService taikhoanService;
 @Autowired private TaikhoanService taikhoanService;
     @Autowired private PhimService phimService;
     @Autowired private SukienService suKienService;
