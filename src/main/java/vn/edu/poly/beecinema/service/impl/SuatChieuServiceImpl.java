@@ -39,7 +39,9 @@ public class SuatChieuServiceImpl implements SuatChieuService {
     public List<Suatchieu> getAllSuatChieuByPhimAndToday(String idphim) {
        List<Suatchieu> suatchieus = new ArrayList<>();
         suatchieuRepository.findAllByPhimAndTrangthai(phimService.findPhimById(idphim).get(),0).forEach(suatchieu -> {
-            if(suatchieu.getNgaychieu().equals(LocalDate.now()))
+            System.out.println(LocalDateTime.of(suatchieu.getNgaychieu(),suatchieu.getKhunggio().getBatdau()).compareTo(LocalDateTime.now()));
+
+            if( LocalDateTime.of(suatchieu.getNgaychieu(),suatchieu.getKhunggio().getBatdau()).compareTo(LocalDateTime.now())>0)
             {
                 suatchieus.add(suatchieu);
             }

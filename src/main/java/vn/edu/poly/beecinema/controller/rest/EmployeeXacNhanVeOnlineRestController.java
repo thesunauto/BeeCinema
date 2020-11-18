@@ -73,7 +73,7 @@ public class EmployeeXacNhanVeOnlineRestController {
 
             lichSuResponses.add(LichSuResponse.builder()
                     .ghe(ve.getGhe().getDayghe().getTen()+" - "+ve.getGhe().getCol())
-                    .suatchieu(ve.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter)+" - "+ve.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter)+" | "+ve.getSuatchieu().getPhong().getTen()+" | "+ve.getSuatchieu().getPhim().getTen())
+                    .suatchieu(ve.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter)+" - "+ve.getSuatchieu().getKhunggio().getKetthuc().format(dateTimeFormatter)+" | "+ve.getSuatchieu().getPhong().getTen()+" | "+ve.getSuatchieu().getPhim().getTen())
                     .sukien(ve.getSukien()==null?"Không có":ve.getSukien().getTen())
                     .nguoitao(ve.getTaikhoan().getTen())
                     .loaigiaodich(pp.get().equals("")?"Bán vé":pp.get())
