@@ -54,7 +54,6 @@ public class VeonlineServiceImpl implements VeonlineService {
                 veonlines.addAll(findAllByIdSuatchieu(suatchieu.getId()));
             }
         });
-        veonlines.forEach(veonline -> System.out.println(veonline));
         return veonlines;
     }
 
@@ -66,11 +65,18 @@ public class VeonlineServiceImpl implements VeonlineService {
      */
     @Override
     public Integer getStt(Veonline veonline) {
-        int phuhuyonline = veonline.getSuatchieu().getPhuthuyonline();
+        long phuhuyonline = veonline.getSuatchieu().getPhuthuyonline();
+        System.out.println(phuhuyonline);
+        phuhuyonline = suatchieuRepository.getOne(veonline.getSuatchieu().getId()).getPhuthuyonline();
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime active = LocalDateTime.of(veonline.getSuatchieu().getNgaychieu(), veonline.getSuatchieu().getKhunggio().getBatdau());
-        active.minusMinutes(phuhuyonline);
-        int trangThai = (now.compareTo(active)>0)?2:0;
+        LocalDateTime activeT = LocalDateTime.of(veonline.getSuatchieu().getNgaychieu(), veonline.getSuatchieu().getKhunggio().getBatdau());
+        System.out.println(veonline.getVeonlineID());
+        System.out.println(activeT);
+        LocalDateTime active = activeT.minusMinutes(veonline.getSuatchieu().getPhuthuyonline().longValue());
+
+        System.out.println(active);
+        System.out.println(now.compareTo(active));
+        int trangThai = (now.compareTo(active)>=0)?2:0;
         return (veonline.getTrangthai()==0)?trangThai:1;
     }
 

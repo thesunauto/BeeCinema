@@ -27,7 +27,7 @@
 <header>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top  red lighten-1">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top red lighten-1">
         <div class="container smooth-scroll">
             <a class="navbar-brand" href="#"><img th:src="@{/img/logo80x160noBG.png}" class="img-fluid flex-center" style="height: 40px;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
@@ -46,11 +46,30 @@
                         <a class="nav-link" th:href="@{/employee/lichsu}" data-offset="60">Lịch sử </a>
                     </li>
                 </ul>
-                <form class="form-inline">
-                    <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    </div>
-                </form>
+                <ul class="navbar-nav ml-auto nav-flex-icons">
+                    <li class="nav-item">
+                        <form class="form-inline">
+                            <div class="md-form my-0">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                            </div>
+                        </form>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu  dropdown-menu-right dropdown-danger w-75"
+                             aria-labelledby="navbarDropdownMenuLink-333">
+                            <button class="dropdown-item">Thông tin</button>
+
+                                <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
+
+
+                        </div>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </nav>
