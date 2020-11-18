@@ -107,8 +107,6 @@ public class EventController {
         if(bindingResult.hasErrors()){
 
         }else{
-            sukien.setHinhanh("null");
-            sukien.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
             if(!images.isEmpty()) {
                 Path path = Paths.get("uploads/");
                 try {

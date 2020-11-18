@@ -70,16 +70,7 @@
   
               </div>
               <!-- Grid column -->
-  
-              <!-- Grid column -->
-<!--              <div class="col-lg-3 col-md-6">-->
-<!--  -->
-<!--                <form class="form-inline md-form mt-2 ml-2">-->
-<!--                  <input class="form-control mt-2" type="text" placeholder="Search" style="max-width: 150px;">-->
-<!--                  <button class="btn btn-sm btn-primary ml-2 px-1"><i class="fas fa-search"></i> </button>-->
-<!--                </form>-->
-<!--  -->
-<!--              </div>-->
+
               <div class="col-lg-4 col-md-6">
 
                 <form th:action="@{/admin/movie/page/1}" class="form-inline md-form mt-2 ml-2">
@@ -121,10 +112,12 @@
             <!-- /Card image -->
   
             <div class="px-4">
-              <div th:switch="${messages}">
-                <p th:case="'thanhcong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+              <div th:switch="${messages}" >
+                <p th:case="'themThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+                <p th:case="'suaThanhCong'" class="alert alert-success" role="alert">Sửa thành công!</p>
+                <p th:case="'xoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
               </div>
-              <div class="table-responsive text-nowrap">
+              <div class="table-responsive text-nowrap" style="height:350px;">
                 <!-- Table -->
                 <table class="table table-hover mb-0">
   
@@ -139,14 +132,24 @@
                       <th >
                         <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên Phim<i class="fas fa-sort ml-1"></i></a>
                       </th>
-                      <th ><a class="font-weight-bold">Thể Loại</a></th>
-                      <th ><a class="font-weight-bold">Độ Tuổi</a></th>
-                      <th ><a class="font-weight-bold">Ngôn Ngữ</a></th>
+                      <th >
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=loaiphim.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Thể Loại<i class="fas fa-sort ml-1"></i></a>
+                      </th>
+                      <th >
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=dotuoi.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Độ Tuổi<i class="fas fa-sort ml-1"></i></a>
+                      </th>
+                      <th >
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngonngu.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Ngôn Ngữ<i class="fas fa-sort ml-1"></i></a>
+                      </th>
                       <th ><a class="font-weight-bold">Hình Ảnh</a></th>
                       <th ><a class="font-weight-bold">Độ Dài</a></th>
                       <th ><a class="font-weight-bold">Mô Tả</a></th>
-                      <th ><a class="font-weight-bold">Ngày Bắt đầu</a></th>
-                      <th ><a class="font-weight-bold">Ngày Kết thúc</a></th>
+                      <th >
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngaybatdau&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Ngày Bắt đầu<i class="fas fa-sort ml-1"></i></a>
+                      </th>
+                      <th >
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngayketthuc&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Ngày Kết thúc<i class="fas fa-sort ml-1"></i></a>
+                      </th>
                       <th ><a class="font-weight-bold">Người Tạo</a></th>
                       <th ><a class="font-weight-bold">Ngày Tạo</a></th>
                       <th ><a class="font-weight-bold">Người Sửa</a></th>
@@ -168,7 +171,10 @@
                       <td th:text="${phim2.loaiphim.ten}"></td>
                       <td th:text="${phim2.dotuoi.ten}"></td>
                       <td th:text="${phim2.ngonngu.ten}"></td>
-                      <td th:text="${phim2.hinhanh}"></td>
+                      <td th:switch="${phim2.hinhanh}">
+                        <span th:case="'null'"><img th:src="@{'/getImage/placeholder.jpg'}" alt="User Photo" class="z-depth-1 " style="height: 50px; width: 50px;" /></span>
+                        <span th:case="*"><img id="blah" th:src="@{'/getImage/'+ ${phim2.hinhanh}}" alt="User Photo" class="z-depth-1 " style="height: 50px; width: 50px;" /></span>
+                      </td>
                       <td th:text="${phim2.dodai}"></td>
                       <td th:text="${phim2.mota}"></td>
                       <td th:text="${#temporals.format(phim2.ngaybatdau, 'dd-MM-yyyy | HH:mm:ss')}"></td>

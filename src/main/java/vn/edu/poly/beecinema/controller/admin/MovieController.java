@@ -8,11 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.service.*;
 
 
 import javax.validation.Valid;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,17 +28,10 @@ public class MovieController {
     @Autowired private PhimService phimService;
     @Autowired private TaikhoanService taikhoanService;
 
-//    @GetMapping("/show-movie")
-//    public String showMovie(Model model){
-//        List<Phim> phim = phimService.getAllPhim();
-//        model.addAttribute("phim", phim);
-//        return "admin/movie/show-movie";
-//    }
-
     @GetMapping("/show-movie")
     public String showMovie(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -40,7 +39,8 @@ public class MovieController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<Phim> page = phimService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -53,6 +53,7 @@ public class MovieController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/movie/show-movie";
     }
 
@@ -71,30 +72,52 @@ public class MovieController {
 
     @PostMapping("/add-movie")
     public String saveMovie(@Valid @ModelAttribute("phim") Phim phim, BindingResult bindingResult,
-                            @ModelAttribute("id") String idPhim,
+                            @ModelAttribute("id") String idPhim, @RequestParam("images") MultipartFile images,
                             Model model, Authentication authentication){
         if(bindingResult.hasErrors()){
 
         }else if(phimService.findPhimById(idPhim).isPresent()){
             model.addAttribute("messages", "trungid");
         }else{
-            phim.setHinhanh("a.jpg");
+            phim.setHinhanh("null");
             phim.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
+            if(!images.isEmpty()) {
+                Path path = Paths.get("uploads/");
+                try {
+                    InputStream inputStream = images.getInputStream();
+                    Files.copy(inputStream, path.resolve(images.getOriginalFilename()),
+                            StandardCopyOption.REPLACE_EXISTING);
+                    phim.setHinhanh(images.getOriginalFilename().toLowerCase());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             phimService.savePhim(phim);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
         return "admin/movie/add-movie";
     }
 
     @PostMapping(value = "/edit")
     public String updateMovie(@Valid @ModelAttribute("phim") Phim phim ,
-                              BindingResult bindingResult, Model model,  Authentication authentication){
+                              BindingResult bindingResult, Model model,  Authentication authentication,
+                              @RequestParam("images") MultipartFile images){
         if(bindingResult.hasErrors()){
 
         }else{
-            phim.setHinhanh("a.jpg");
+            if(!images.isEmpty()) {
+                Path path = Paths.get("uploads/");
+                try {
+                    InputStream inputStream = images.getInputStream();
+                    Files.copy(inputStream, path.resolve(images.getOriginalFilename()),
+                            StandardCopyOption.REPLACE_EXISTING);
+                    phim.setHinhanh(images.getOriginalFilename().toLowerCase());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             phimService.savePhim(phim);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
         return "admin/movie/update-movie";
     }
@@ -102,10 +125,7 @@ public class MovieController {
     @RequestMapping(value = "/delete" )
     public String deleteMovie(@RequestParam("id") String phimId, Model model) {
         phimService.deletePhim(phimId);
-        List<Phim> phim = phimService.getAllPhim();
-        model.addAttribute("phim", phim);
-        model.addAttribute("messages", "thanhcong");
-        return "admin/movie/show-movie";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 
 
