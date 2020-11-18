@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.service.*;
@@ -74,6 +75,7 @@ public class ScreeningsController {
         return "admin/screenings/update-screenings";
     }
 
+
     @PostMapping("/add-screenings")
     public String saveScreenings(@ModelAttribute("suatChieu") Suatchieu suatChieu , BindingResult bindingResult,
 
@@ -105,6 +107,7 @@ public class ScreeningsController {
 //        }
         return "admin/screenings/update-screenings";
     }
+
 
     @RequestMapping(value = "/delete" )
     public String deleteScreenings(@PathVariable("id") Integer suatChieuId, Model model) {
