@@ -98,15 +98,14 @@
                     <div class="col-md-6">
                       <div class="md-form mb-0">
                         <input type="text" th:field="*{username}" id="form2" class="form-control " readonly>
-                        <label for="form2" >ID</label>
+                        <label for="form2" >Username</label>
                       </div>
                     </div>
                     <!-- Second column -->
                     <div class="col-md-6">
                       <div class="md-form mb-0">
-                        <input type="text" th:field="*{ten}" id="form2" class="form-control">
+                        <input type="text" th:field="*{ten}" id="form2" class="form-control" required pattern="[A-Za-z]" />
                         <label for="form2" >Họ Tên</label>
-                        <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                       </div>
                     </div>
                   </div>
@@ -149,7 +148,6 @@
                       <div class="md-form mb-0">
                         <input type="email" th:field="*{email}" id="form76" class="form-control ">
                         <label for="form76">Email</label>
-                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger text-center"></p>
                       </div>
                     </div>
                     <!-- Second column -->
@@ -158,7 +156,6 @@
                       <div class="md-form mb-0">
                         <input type="text" th:field="*{sodienthoai}" id="form77" class="form-control">
                         <label for="form77" >Điện thoại</label>
-                        <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}" class="text-danger text-center"></p>
                       </div>
                     </div>
                   </div>
