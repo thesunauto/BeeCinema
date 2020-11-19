@@ -55,16 +55,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item"  th:classappend="${#httpServletRequest.requestURI=='/client/list-film'} ? active">
                         <a class="nav-link" th:href="@{/client/list-film}">Movies <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/list-event'} ? active">
                         <a class="nav-link" th:href="@{/client/list-event}">Events</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/about-us'} ? active">
                         <a class="nav-link" th:href="@{/client/about-us}">About us</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/contact-us'} ? active">
                         <a class="nav-link" th:href="@{/client/contact-us}">Contact us</a>
                     </li>
                 </ul>
@@ -79,7 +79,7 @@
 
                             <!--Trigger-->
                             <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">Login</a>
+                                    aria-haspopup="true" aria-expanded="false">login</a>
 
 
                             <!--Menu-->
@@ -87,8 +87,8 @@
                                 <a class="dropdown-item" th:href="@{/login}">Đăng nhập</a>
                                 <a class="dropdown-item" th:href="@{/signup}">Đăng ký</a>
                                 <a class="dropdown-item" th:href="@{/client/profile-client}">Cập nhật tài khoản</a>
-                                <a class="dropdown-item" href="#">Quên mật khẩu</a>
-                                <form th:action="@{/logout}" method="post">
+                                <a class="dropdown-item" href="#" >Quên mật khẩu</a>
+                                <form th:action="@{/logout}" method="post" th:hidden="true">
                                     <input type="submit" class="dropdown-item" value="Đăng xuất">
                                 </form>
 
