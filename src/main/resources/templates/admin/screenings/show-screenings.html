@@ -111,8 +111,10 @@
           <!-- /Card image -->
 
           <div class="px-4">
-            <div th:switch="${messages}">
-              <p th:case="'thanhcong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+            <div th:switch="${messages}" >
+              <p th:case="'themThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+              <p th:case="'suaThanhCong'" class="alert alert-success" role="alert">Sửa thành công!</p>
+              <p th:case="'xoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
             </div>
             <div class="table-responsive text-nowrap" style="height:350px">
               <!-- Table -->

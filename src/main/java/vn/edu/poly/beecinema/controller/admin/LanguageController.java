@@ -29,7 +29,7 @@ public class LanguageController {
     @GetMapping("/show-language")
     public String showLanguage(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -37,7 +37,8 @@ public class LanguageController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<NgonNgu> page = ngonNguService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -50,6 +51,7 @@ public class LanguageController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/language/show-language";
     }
 
@@ -77,7 +79,7 @@ public class LanguageController {
             ngonNgu.setNgaytao(LocalDateTime.now());
             ngonNgu.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
             ngonNguService.saveNgonNgu(ngonNgu);
-            model.addAttribute("messages", "ThanhCong");
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
         return "admin/language/add-language";
     }
@@ -89,7 +91,7 @@ public class LanguageController {
 
         }else{
             ngonNguService.saveNgonNgu(ngonNgu);
-            model.addAttribute("messages" , "ThanhCong");
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
         return "admin/language/update-language";
     }
@@ -99,8 +101,7 @@ public class LanguageController {
         ngonNguService.deleteNgonNgu(ngonNguID);
         List<NgonNgu> ngonNgu = ngonNguService.getAllNgonNgu();
         model.addAttribute("ngonNgu" , ngonNgu);
-        model.addAttribute("messages" , "ThanhCong");
-        return "admin/language/show-language";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 
 }

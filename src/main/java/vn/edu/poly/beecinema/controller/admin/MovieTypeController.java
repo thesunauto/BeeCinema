@@ -26,7 +26,7 @@ public class MovieTypeController {
     @GetMapping("/show-movie-type")
     public String showMovieType(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -34,7 +34,8 @@ public class MovieTypeController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<LoaiPhim> page = loaiPhimService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -47,6 +48,7 @@ public class MovieTypeController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/movie-type/show-movie-type";
     }
 
@@ -75,7 +77,7 @@ public class MovieTypeController {
             loaiPhim.setNgaytao(LocalDateTime.now());
             loaiPhim.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
             loaiPhimService.saveLoaiPhim(loaiPhim);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
         return "admin/movie-type/add-movie-type";
     }
@@ -87,7 +89,7 @@ public class MovieTypeController {
 
         }else{
             loaiPhimService.saveLoaiPhim(loaiPhim);
-            model.addAttribute("messages", "thanhcong");
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
         return "admin/movie-type/update-movie-type";
     }
@@ -97,8 +99,7 @@ public class MovieTypeController {
         loaiPhimService.deleteLoaiPhim(loaiPhimId);
         List<LoaiPhim> loaiPhim = loaiPhimService.getAllLoaiPhim();
         model.addAttribute("loaiPhim", loaiPhim);
-        model.addAttribute("messages", "thanhcong");
-        return "admin/movie-type/show-movie-type";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 
 
