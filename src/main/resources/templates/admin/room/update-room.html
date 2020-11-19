@@ -11,9 +11,7 @@
 
   <!-- Main layout -->
   <main layout:fragment="content">
-    <form th:action="@{/admin/room/update-room}" th:object="${room}" method="post">
-      <input type="hidden" th:field="*{ngaytao}">
-      <input type="hidden" th:field="*{taikhoan}">
+
     <div class="container-fluid">
 
     
@@ -29,6 +27,13 @@
             <!-- /Card image -->
             <!-- Section heading -->
             <div class="card-body ">
+              <form th:action="@{/admin/room/update-room}" th:object="${room}" method="post">
+                <input type="hidden" th:field="*{ngaytao}">
+                <input type="hidden" th:field="*{taikhoan}">
+
+                <div th:switch="${messages}">
+                  <p th:case="'thanhcong'" class="alert alert-success" role="alert">Cập nhật thành công!</p>
+                </div>
               <!-- Grid row -->
               <div class="row">
 
@@ -38,6 +43,7 @@
                     <i class="fas fa-key prefix"></i>
                     <input  type="text" id="form312" th:field="*{id}" class="form-control" readonly value="100">
                     <label for="form312" class="active">ID</label>
+                    <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
                   </div>
 
                 </div>
@@ -49,6 +55,7 @@
                     <i class="fas fa-door-closed prefix"></i>
                     <input th:field="*{ten}" type="text" id="form311" class="form-control">
                     <label for="form311" class="active">Tên Phòng</label>
+                    <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                   </div>
 
                 </div>
