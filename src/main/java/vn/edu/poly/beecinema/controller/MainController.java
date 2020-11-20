@@ -6,16 +6,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import vn.edu.poly.beecinema.commons.VeResponse;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.entity.Taikhoan;
-import vn.edu.poly.beecinema.service.PhimService;
-import vn.edu.poly.beecinema.service.QuyenService;
-import vn.edu.poly.beecinema.service.SukienService;
-import vn.edu.poly.beecinema.service.TaikhoanService;
+import vn.edu.poly.beecinema.service.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,7 +26,19 @@ public class MainController {
     @Autowired private TaikhoanService taikhoanService;
     @Autowired private PhimService phimService;
     @Autowired private SukienService suKienService;
+@Autowired private SuatChieuService suatChieuService;
 
+    @GetMapping("/datve/{id}")
+    public String datghe(HttpSession httpSession, Model model, @PathVariable String id){
+        if(httpSession.getAttribute("veresponse")==null){
+            httpSession.setAttribute("veresponse", new ArrayList<VeResponse>());
+        }
+        List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
+        httpSession.setAttribute("veresponse",veResponses);
+        model.addAttribute("film", phimService.findPhimById(id));
+        model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhimAndToday(id));
+        return "client/datve";
+    }
 
     @RequestMapping("/becinema")
     public String userHomePage(Model model, Authentication authentication) {
@@ -53,8 +66,10 @@ public class MainController {
     }
 
     @RequestMapping("/login")
-    public String loginPage(Model model) {
-        model.addAttribute("message","");
+    public String loginPage(HttpServletRequest request, Model model) {
+        String referrer = request.getHeader("Referer");
+        request.getSession().setAttribute("url_prior_login", referrer);
+        // some other stuff
         return "client/SignIn";
     }
     @RequestMapping("/loginfail")
