@@ -79,14 +79,17 @@
 
                             <!--Trigger-->
                             <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"><span id="usernamenav" >Tài Khoản</span></a>
+                                    aria-haspopup="true" aria-expanded="false"><img id="blah" class="img-fluid z-depth-1 rounded-circle"
+                                                                                    style="object-fit: cover;  object-position: center;  width: 30px;  height: 30px;"> <span id="usernamenav" >Tài Khoản</span></a>
 
 
                             <!--Menu-->
                             <div class="dropdown-menu dropdown-warning">
-                                <a class="dropdown-item" th:href="@{/login}">Đăng nhập</a>
-                                <a class="dropdown-item" th:href="@{/signup}">Đăng ký</a>
-                                <a class="dropdown-item" href="#" >Quên mật khẩu</a>
+                                <a class="dropdown-item" th:href="@{/client/profile-client}">Cập nhật tài khoản</a>
+                                <form th:action="@{/logout}" method="post" th:hidden="false">
+                                    <input type="submit" class="dropdown-item" value="Đăng xuất">
+                                </form>
+
                             </div>
                         </div>
                     </li>
@@ -234,38 +237,38 @@
         /* WOW.js init */
         new WOW().init();
         // Tooltips Initialization
-        // $(function () {
-        //     $('[data-toggle="tooltip"]').tooltip()
-        // })
-        // $('.mdb-select').materialSelect();
-        // // SideNav Initialization
-        // $(".button-collapse").sideNav();
-        // $('body').ready(loadUser());
-        // var user = {};
-        // var noLogin = true;
-        // function loadUser() {
-        //     $.ajax({
-        //         url: '/api/employee/getuser',
-        //         type: 'POST',
-        //         dataType: 'JSON',
-        //         success: function (data) {
-        //             user = data;
-        //             noLogin = false;
-        //         },
-        //         complete: function () {
-        //             $("#usernamenav").html(user.ten);
-        //             $('#username').val(user.username);
-        //             $('#password').val(user.password);
-        //             $('#ten').val(user.ten);
-        //             $('#gioitinh').val(user.gioitinh);
-        //             $('#ngaysinh').val(user.ngaysinh);
-        //             $('#sdt').val(user.sdt);
-        //             $('#email').val(user.email);
-        //             $('#image').val(user.image);
-        //             $('#blah').attr('src','/api/employee/getResourse/'+user.image);
-        //         }
-        //     })
-        // }
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        $('.mdb-select').materialSelect();
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+        $('body').ready(loadUser());
+        var user = {};
+        var noLogin = true;
+        function loadUser() {
+            $.ajax({
+                url: '/api/employee/getuser',
+                type: 'POST',
+                dataType: 'JSON',
+                success: function (data) {
+                    user = data;
+                    noLogin = false;
+                },
+                complete: function () {
+                    $("#usernamenav").html(user.ten);
+                    $('#username').val(user.username);
+                    $('#password').val(user.password);
+                    $('#ten').val(user.ten);
+                    $('#gioitinh').val(user.gioitinh);
+                    $('#ngaysinh').val(user.ngaysinh);
+                    $('#sdt').val(user.sdt);
+                    $('#email').val(user.email);
+                    $('#image').val(user.image);
+                    $('#blah').attr('src','/api/employee/getResourse/'+user.image);
+                }
+            })
+        }
     });
     $(window).on('beforeunload', function () {
         $.ajax({

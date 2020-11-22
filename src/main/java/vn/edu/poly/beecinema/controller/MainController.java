@@ -26,7 +26,7 @@ public class MainController {
     @Autowired private TaikhoanService taikhoanService;
     @Autowired private PhimService phimService;
     @Autowired private SukienService suKienService;
-@Autowired private SuatChieuService suatChieuService;
+    @Autowired private SuatChieuService suatChieuService;
 
     @GetMapping("/datve/{id}")
     public String datghe(HttpSession httpSession, Model model, @PathVariable String id){
@@ -56,12 +56,24 @@ public class MainController {
         return path;
     }
 
+    public String setLayout(Authentication authentication) {
+        String page = "client/layout";
+        if (authentication != null && authentication.isAuthenticated()){
+            page = "client/layout_da_dang_nhap";
+        }
+        return page;
+    }
+
     @RequestMapping("/")
-    public String userHomePage(Model model) {
+    public String userHomePage(Authentication authentication, Model model) {
         List <Phim> phim = phimService.getAllPhim();
         List <Sukien> suKien = suKienService.getAllSukien();
+        System.out.println(authentication);
         model.addAttribute("suKien", suKien);
+        model.addAttribute("authentication", authentication);
         model.addAttribute("phim", phim);
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         return "client/UserHomePage";
     }
 

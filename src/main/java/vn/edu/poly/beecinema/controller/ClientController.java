@@ -20,6 +20,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +44,19 @@ public class ClientController {
     @GetMapping("/list-film")
     public String listfilm(Model model){
         List <Phim> phim = phimService.getAllPhim();
-        model.addAttribute("phim", phim);
+        List <Phim> phim_sap_chieu =  new ArrayList<Phim>();
+        List <Phim> phim_dang_chieu =  new ArrayList<Phim>();
+        for ( Phim pm : phim) {
+            if(LocalDateTime.now().isBefore(pm.getNgaybatdau())){
+                phim_sap_chieu.add(pm);
+            }
+            else if(LocalDateTime.now().isBefore(pm.getNgayketthuc())){
+                phim_dang_chieu.add(pm);
+            }
+        }
+        System.out.println(phim_sap_chieu);
+        model.addAttribute("phimDangChieu", phim_dang_chieu);
+        model.addAttribute("phimSapchieu", phim_sap_chieu);
         return "client/list-film";
     }
     @GetMapping("/select-seat")
@@ -62,14 +77,12 @@ public class ClientController {
         model.addAttribute("suKien", suKien);
         return "client/list-event";
     }
-
     @GetMapping(value = "/profile-client")
     public String editMovieType(Model model, Authentication authentication){
         Optional<Taikhoan> taiKhoanEdit = taikhoanService.findTaikhoanById(taikhoanService.findTaikhoanById(authentication.getName()).get().getUsername());
         taiKhoanEdit.ifPresent(taikhoan -> model.addAttribute("taikhoan", taikhoan));
         return "client/Profile";
     }
-
     @PostMapping(value = "/profile-client")
     public String updateMovieType(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan, BindingResult bindingResult,
                                   Model model, Authentication authentication, @RequestParam("images") MultipartFile images){
