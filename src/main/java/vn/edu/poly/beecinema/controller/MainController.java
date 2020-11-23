@@ -29,7 +29,9 @@ public class MainController {
     @Autowired private SuatChieuService suatChieuService;
 
     @GetMapping("/datve/{id}")
-    public String datghe(HttpSession httpSession, Model model, @PathVariable String id){
+    public String datghe(Authentication authentication,HttpSession httpSession, Model model, @PathVariable String id){
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         if(httpSession.getAttribute("veresponse")==null){
             httpSession.setAttribute("veresponse", new ArrayList<VeResponse>());
         }
