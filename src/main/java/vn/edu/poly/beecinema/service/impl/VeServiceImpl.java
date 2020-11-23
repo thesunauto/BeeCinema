@@ -75,5 +75,10 @@ public class VeServiceImpl implements VeService {
         return ves;
     }
 
+    @Override
+    public List<Ve> findByVeID(VeID veID) {
+        return veRepository.getVeByVeID(veID);
+    }
+
 
 }

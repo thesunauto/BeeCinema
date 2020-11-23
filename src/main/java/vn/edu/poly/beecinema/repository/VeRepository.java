@@ -17,5 +17,7 @@ public interface VeRepository extends JpaRepository<Ve, String>, JpaSpecificatio
     public Page<Ve> findAll(String keyword, Pageable pageable);
     List<Ve> findAllBySuatchieu(Suatchieu suatchieu);
     List<Ve> findAllByTrangthai(Integer trangthai);
+    List<Ve> getVeByVeID(VeID veID);
+
 
 }
