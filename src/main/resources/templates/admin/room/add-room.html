@@ -27,6 +27,9 @@
           <!-- /Card image -->
           <!-- Section heading -->
           <div class="card-body ">
+            <div th:switch="${messages}">
+              <p th:case="'trungid'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
+            </div>
           <!-- Grid row -->
           <div class="row">
 
@@ -36,6 +39,7 @@
                 <i class="fas fa-key prefix"></i>
                 <input th:field="*{id}" type="text" id="form31" class="form-control">
                 <label for="form31" class="active">ID</label>
+                <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -47,6 +51,7 @@
                 <i class="fas fa-door-closed prefix"></i>
                 <input th:field="*{ten}" type="text" id="form32" class="form-control">
                 <label for="form32" class="active">Tên Phòng</label>
+                <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -57,8 +62,8 @@
 
               <!-- Name -->
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option value="1">Hiện</option>
-                <option value="0">Ẩn</option>
+                <option value="0">Hiện</option>
+                <option value="1">Ẩn</option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>

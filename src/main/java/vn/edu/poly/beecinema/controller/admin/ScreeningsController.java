@@ -27,18 +27,10 @@ public class ScreeningsController {
     @Autowired private PhongService phongService;
     @Autowired private KhungGioService khungGioService;
 
-//    @GetMapping("/show-screenings")
-//    public String showMovieType(Model model){
-//        List<Suatchieu> suatChieu = suatChieuService.getAllSuatChieu();
-//        model.addAttribute("suatChieu", suatChieu);
-//
-//        return "admin/screenings/show-screenings";
-//    }
-
     @GetMapping("/show-screenings")
     public String showScreenings(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -46,7 +38,8 @@ public class ScreeningsController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<Suatchieu> page = suatChieuService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -59,6 +52,7 @@ public class ScreeningsController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/screenings/show-screenings";
     }
 
@@ -77,34 +71,31 @@ public class ScreeningsController {
 
 
     @PostMapping("/add-screenings")
-    public String saveScreenings(@ModelAttribute("suatChieu") Suatchieu suatChieu , BindingResult bindingResult,
-
+    public String saveScreenings(@Valid @ModelAttribute("suatChieu") Suatchieu suatChieu, BindingResult bindingResult,
                                 Model model, Authentication authentication){
-//        if(bindingResult.hasErrors()){
-//
-//        }else if(suatChieuService.findSuatChieuById(suatChieuID).isPresent()){
-//            model.addAttribute("messages", "trungid");
-//        }else{
+         if(bindingResult.hasErrors()){
+
+         }else{
             suatChieu.setPhim(phimService.findPhimById(suatChieu.getPhim().getId()).get());
             suatChieu.setPhong(phongService.findPhongById(suatChieu.getPhong().getId()).get());
             suatChieu.setKhunggio(khungGioService.findKhungGioById(suatChieu.getKhunggio().getId()).get());
             suatChieu.setNgaytao(LocalDate.now());
             suatChieu.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
             suatChieuService.saveSuatChieu(suatChieu);
-            model.addAttribute("messages", "thanhcong");
-//        }
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
+        }
         return "admin/screenings/add-screenings";
     }
 
     @PostMapping(value = "/edit")
-    public String updateScreenings(@ModelAttribute("khungGio") Suatchieu suatChieu ,
+    public String updateScreenings(@Valid @ModelAttribute("khungGio") Suatchieu suatChieu, BindingResult bindingResult,
                                    Model model,  Authentication authentication){
-//        if(bindingResult.hasErrors()){
-//
-//        }else{
+        if(bindingResult.hasErrors()){
+
+        }else{
             suatChieuService.saveSuatChieu(suatChieu);
-            model.addAttribute("messages", "thanhcong");
-//        }
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
+        }
         return "admin/screenings/update-screenings";
     }
 
@@ -112,10 +103,7 @@ public class ScreeningsController {
     @RequestMapping(value = "/delete" )
     public String deleteScreenings(@PathVariable("id") Integer suatChieuId, Model model) {
         suatChieuService.deleteSuatChieu(suatChieuId);
-        List<Suatchieu> suatChieu = suatChieuService.getAllSuatChieu();
-        model.addAttribute("suatChieu", suatChieu);
-        model.addAttribute("messages", "thanhcong");
-        return "admin/screenings/show-screenings";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 
 

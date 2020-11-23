@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.Ghe;
 import vn.edu.poly.beecinema.entity.Loaighe;
@@ -13,6 +14,7 @@ import vn.edu.poly.beecinema.entity.Phong;
 import vn.edu.poly.beecinema.service.PhongService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,17 +24,10 @@ public class RoomController {
     @Autowired private PhongService phongService;
     @Autowired private TaikhoanService taikhoanService;
 
-//    @GetMapping("/show-room")
-//    public String showRoom(Model model){
-//        List<Phong> phong = phongService.getAllPhong();
-//        model.addAttribute("phong", phong);
-//        return "admin/room/show-room";
-//    }
-
     @GetMapping("/show-room")
     public String showRoom(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -40,7 +35,8 @@ public class RoomController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<Phong> page = phongService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -53,6 +49,7 @@ public class RoomController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/room/show-room";
     }
 
@@ -64,13 +61,20 @@ public class RoomController {
     }
 
     @PostMapping("/add-room")
-    public String saveRoom(Authentication authentication, Model model, @ModelAttribute(value = "room") Phong phong){
-        phong.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
-        phong.setNgaytao(LocalDateTime.now());
-        phongService.savePhong(phong);
-        model.addAttribute("messages" , "ThemThanhCong");
-        model.addAttribute("phong",  phongService.getAllPhong());
-        return "admin/room/show-room";
+    public String saveRoom(@Valid @ModelAttribute(value = "room") Phong phong,
+                           BindingResult bindingResult, @ModelAttribute("id") String idPhong,
+                           Authentication authentication, Model model){
+        if(bindingResult.hasErrors()){
+
+        }else if(phongService.findPhongById(idPhong).isPresent()){
+            model.addAttribute("messages", "trungid");
+        }else{
+            phong.setNgaytao(LocalDateTime.now());
+            phong.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
+            phongService.savePhong(phong);
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
+        }
+        return "admin/room/add-room";
     }
     @GetMapping("/update-room/{id}")
     public String findRoom(Model model, @PathVariable(value = "id") String id){
@@ -80,17 +84,22 @@ public class RoomController {
     }
 
     @PostMapping("/update-room")
-    public String updateRoom(Authentication authentication, Model model, @ModelAttribute(value = "room") Phong phong){
-        phongService.savePhong(phong);
-        return "redirect:/admin/room/show-room";
+    public String updateRoom(@Valid @ModelAttribute(value = "room") Phong phong,
+                             BindingResult bindingResult,
+                              Authentication authentication, Model model){
+        if(bindingResult.hasErrors()){
+
+        }else{
+            phongService.savePhong(phong);
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
+        }
+        return "admin/room/update-room";
     }
 
     @GetMapping("/delete-room/{id}")
     public  String deleteroom (@PathVariable(value = "id") String id, Model model){
         phongService.deletePhong(id);
-        model.addAttribute("messages" , "XoaThanhCong");
-        model.addAttribute("phong",  phongService.getAllPhong());
-        return  "admin/room/show-room";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 
 

@@ -34,7 +34,7 @@ public class AgeController {
     @GetMapping("/show-age")
     public String showAge(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -42,7 +42,8 @@ public class AgeController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<DoTuoi> page = doTuoiService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -55,6 +56,7 @@ public class AgeController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/age/show-age";
     }
 
@@ -82,7 +84,7 @@ public class AgeController {
             doTuoi.setNgaytao(LocalDateTime.now());
             doTuoi.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
             doTuoiService.saveDoTuoi(doTuoi);
-            model.addAttribute("messages" , "ThanhCong");
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
         return "/admin/age/add-age";
     }
@@ -94,7 +96,7 @@ public class AgeController {
 
         }else {
             doTuoiService.saveDoTuoi(doTuoi);
-            model.addAttribute("messages","ThanhCong");
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
         return "/admin/age/update-age";
     }
@@ -102,9 +104,6 @@ public class AgeController {
     @RequestMapping (value = "/delete")
     public String deleteUser (@RequestParam("id") String doTuoiID, Model model){
         doTuoiService.deleteDoTuoi(doTuoiID);
-        List<DoTuoi> doTuoi =  doTuoiService.getAllDoTuoi();
-        model.addAttribute("doTuoi" , doTuoi);
-        model.addAttribute("messages" , "thanhCong");
-        return "/admin/age/show-age";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 }

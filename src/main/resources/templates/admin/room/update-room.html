@@ -12,8 +12,6 @@
   <!-- Main layout -->
   <main layout:fragment="content">
     <form th:action="@{/admin/room/update-room}" th:object="${room}" method="post">
-      <input type="hidden" th:field="*{ngaytao}">
-      <input type="hidden" th:field="*{taikhoan}">
     <div class="container-fluid">
 
     
@@ -38,6 +36,7 @@
                     <i class="fas fa-key prefix"></i>
                     <input  type="text" id="form312" th:field="*{id}" class="form-control" readonly value="100">
                     <label for="form312" class="active">ID</label>
+                    <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
                   </div>
 
                 </div>
@@ -49,6 +48,7 @@
                     <i class="fas fa-door-closed prefix"></i>
                     <input th:field="*{ten}" type="text" id="form311" class="form-control">
                     <label for="form311" class="active">Tên Phòng</label>
+                    <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                   </div>
 
                 </div>
@@ -59,8 +59,8 @@
 
                   <!-- Name -->
                   <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                    <option value="1">Hiện</option>
-                    <option value="0">Ẩn</option>
+                    <option value="0">Hiện</option>
+                    <option value="1">Ẩn</option>
                   </select><label class="mdb-main-label active">Trạng thái</label>
 
                 </div>
@@ -68,6 +68,56 @@
 
               </div>
               <!-- Grid row -->
+
+              <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-4">
+                  <div class="md-form md-outline">
+                    <i class="fas fa-user-plus prefix"></i>
+                    <input type="text" th:field="*{taikhoan.username}" id="form31" class="form-control" readonly>
+                    <label for="form31" class="active">Người Tạo</label>
+                  </div>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-4">
+                  <div class="md-form md-outline">
+                    <i class="fas fa-calendar-plus prefix"></i>
+                    <input type="datetime-local" th:field="*{ngaytao}" id="form31" class="form-control" readonly>
+                    <label for="form31" class="active">Ngày Tạo</label>
+                  </div>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-4">
+                  <div class="md-form md-outline">
+                    <i class="fas fa-user-edit prefix"></i>
+                    <input type="text" id="form31" class="form-control" readonly>
+                    <label for="form31" class="active">Người Sửa</label>
+                  </div>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-4">
+                  <div class="md-form md-outline">
+                    <i class="fas fa-calendar-alt prefix"></i>
+                    <input type="date" id="form31" class="form-control" readonly>
+                    <label for="form31" class="active">Ngày Sửa</label>
+                  </div>
+
+                </div>
+                <!-- Grid column -->
+
+
+
+              </div>
 
 
               <hr/>

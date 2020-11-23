@@ -32,8 +32,9 @@
                   <div class="col-md-5 mb-4">
                     <div class="md-form md-outline">
                       <i class="fas fa-chair prefix"></i>
-                      <input th:field="*{col}" type="text" id="form31z" class="form-control">
+                      <input th:field="*{col}" type="number" id="form31z" class="form-control" min="0" step="1">
                       <label for="form31z" class="active">Cột</label>
+                      <p th:if="${#fields.hasErrors('col')}" th:errors="*{col}" class="text-danger text-center"></p>
                     </div>
 
                   </div>

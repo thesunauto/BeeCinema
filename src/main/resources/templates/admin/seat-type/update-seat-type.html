@@ -12,7 +12,6 @@
   <!-- Main layout -->
   <main layout:fragment="content">
     <form th:action="@{/admin/seat-type/update-seat-type/}" th:object="${seatType}" method="post">
-      <input type="hidden" th:field="*{ngaytao}">
     <div class="container-fluid">
 
     
@@ -35,7 +34,7 @@
             <div class="col-md-2 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
-                <input  type="text" id="form312" th:field="*{id}" class="form-control" readonly value="100">
+                <input  type="text" id="form312" th:field="*{id}" class="form-control" readonly >
                 <label for="form312" class="active">ID</label>
               </div>
 
@@ -48,6 +47,7 @@
                 <i class="fas fa-chair prefix"></i>
                 <input type="text" id="form1" th:field="*{ten}" class="form-control">
                 <label for="form1" class="active">Tên Loại Ghế</label>
+                <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -57,8 +57,9 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-money-bill prefix"></i>
-                <input  type="text" th:field="*{gia}" id="form311" class="form-control" min="0" step="1000">
+                <input  type="number" th:field="*{gia}" id="form311" class="form-control" min="0" step="1000">
                 <label for="form311" class="active">Giá</label>
+                <p th:if="${#fields.hasErrors('gia')}" th:errors="*{gia}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -69,8 +70,8 @@
 
               <!-- Name -->
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option value="2">Hiện</option>
-                <option value="3">Ẩn</option>
+                <option value="0">Hiện</option>
+                <option value="1">Ẩn</option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>
@@ -79,9 +80,57 @@
           </div>
           <!-- Grid row -->
 
-          <!-- Grid row -->
+            <!-- Grid row -->
 
-          <!-- Grid row -->
+            <div class="row">
+
+              <!-- Grid column -->
+              <div class="col-md-3 mb-4">
+                <div class="md-form md-outline">
+                  <i class="fas fa-user-plus prefix"></i>
+                  <input type="text"  id="form31" class="form-control" readonly>
+                  <label for="form31" class="active">Người Tạo</label>
+                </div>
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-3 mb-4">
+                <div class="md-form md-outline">
+                  <i class="fas fa-calendar-plus prefix"></i>
+                  <input type="datetime-local" th:field="*{ngaytao}" id="form31" class="form-control" readonly>
+                  <label for="form31" class="active">Ngày Tạo</label>
+                </div>
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-3 mb-4">
+                <div class="md-form md-outline">
+                  <i class="fas fa-user-edit prefix"></i>
+                  <input type="text" id="form31" class="form-control" readonly>
+                  <label for="form31" class="active">Người Sửa</label>
+                </div>
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-3 mb-4">
+                <div class="md-form md-outline">
+                  <i class="fas fa-calendar-alt prefix"></i>
+                  <input type="date" id="form31" class="form-control" readonly>
+                  <label for="form31" class="active">Ngày Sửa</label>
+                </div>
+
+              </div>
+              <!-- Grid column -->
+
+
+
+            </div>
           <hr/>
            <!-- Grid row -->
            <div class="row">
