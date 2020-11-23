@@ -35,14 +35,25 @@ public class ClientController {
     private PhimService phimService;
     @Autowired
     private SukienService suKienService;
+
+    public String setLayout(Authentication authentication) {
+        String page = "client/layout";
+        if (authentication != null && authentication.isAuthenticated()){
+            page = "client/layout_da_dang_nhap";
+        }
+        return page;
+    }
+
     @GetMapping("/detail-film/{id}")
-    public String detailfilm(Model model, @PathVariable(value = "id") String id){
+    public String detailfilm(Model model, Authentication authentication, @PathVariable(value = "id") String id){
         Phim phim = phimService.findPhimById(id).get();
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         model.addAttribute("phim", phim);
         return "client/detail-film";
     }
     @GetMapping("/list-film")
-    public String listfilm(Model model){
+    public String listfilm(Model model, Authentication authentication){
         List <Phim> phim = phimService.getAllPhim();
         List <Phim> phim_sap_chieu =  new ArrayList<Phim>();
         List <Phim> phim_dang_chieu =  new ArrayList<Phim>();
@@ -55,30 +66,42 @@ public class ClientController {
             }
         }
         System.out.println(phim_sap_chieu);
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         model.addAttribute("phimDangChieu", phim_dang_chieu);
         model.addAttribute("phimSapchieu", phim_sap_chieu);
         return "client/list-film";
     }
     @GetMapping("/select-seat")
-    public String selectseat(){
+    public String selectseat(Authentication authentication, Model model){
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         return "client/select-seat";
     }
     @GetMapping("/about-us")
-    public String aboutus(){
+    public String aboutus(Authentication authentication, Model model){
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         return "client/about-us";
     }
     @GetMapping("/contact-us")
-    public String contactus(){
+    public String contactus(Authentication authentication, Model model){
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         return "client/contact-us";
     }
     @GetMapping("/list-event")
-    public String envent(Model model){
+    public String envent(Model model, Authentication authentication){
         List <Sukien> suKien = suKienService.getAllSukien();
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         model.addAttribute("suKien", suKien);
         return "client/list-event";
     }
     @GetMapping(value = "/profile-client")
     public String editMovieType(Model model, Authentication authentication){
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         Optional<Taikhoan> taiKhoanEdit = taikhoanService.findTaikhoanById(taikhoanService.findTaikhoanById(authentication.getName()).get().getUsername());
         taiKhoanEdit.ifPresent(taikhoan -> model.addAttribute("taikhoan", taikhoan));
         return "client/Profile";
@@ -104,6 +127,8 @@ public class ClientController {
             }
         }
         taikhoanService.saveTaikhoan(taikhoan);
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         model.addAttribute("messages", "thanhcong");
         return "client/Profile";
     }

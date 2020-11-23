@@ -67,25 +67,38 @@ public class MainController {
     @RequestMapping("/")
     public String userHomePage(Authentication authentication, Model model) {
         List <Phim> phim = phimService.getAllPhim();
+        List <Phim> phim_sap_chieu =  new ArrayList<Phim>();
+        List <Phim> phim_dang_chieu =  new ArrayList<Phim>();
+        for ( Phim pm : phim) {
+            if(LocalDateTime.now().isBefore(pm.getNgaybatdau())){
+                phim_sap_chieu.add(pm);
+            }
+            else if(LocalDateTime.now().isBefore(pm.getNgayketthuc())){
+                phim_dang_chieu.add(pm);
+            }
+        }
+        model.addAttribute("phimDangChieu", phim_dang_chieu);
+        model.addAttribute("phimSapchieu", phim_sap_chieu);
         List <Sukien> suKien = suKienService.getAllSukien();
-        System.out.println(authentication);
         model.addAttribute("suKien", suKien);
         model.addAttribute("authentication", authentication);
-        model.addAttribute("phim", phim);
         String trang = setLayout(authentication);
         model.addAttribute("trang", trang);
         return "client/UserHomePage";
     }
 
     @RequestMapping("/login")
-    public String loginPage(HttpServletRequest request, Model model) {
+    public String loginPage(HttpServletRequest request, Model model, Authentication authentication) {
         String referrer = request.getHeader("Referer");
         request.getSession().setAttribute("url_prior_login", referrer);
-        // some other stuff
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         return "client/SignIn";
     }
     @RequestMapping("/loginfail")
-    public String loginfPage(Model model) {
+    public String loginfPage(Model model, Authentication authentication) {
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         model.addAttribute("message","toastr.error('Tài khoản mật khẩu không đúng', '', {positionClass: 'md-toast-top-right'});$('#toast-container').attr('class','md-toast-top-right');");
         return "client/SignIn";
     }
@@ -95,7 +108,9 @@ public class MainController {
 //    }
 
     @RequestMapping("/signup")
-    public String signUpPage(Model model){
+    public String signUpPage(Model model, Authentication authentication){
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         model.addAttribute("taikhoan", new Taikhoan());
         return "client/SignUp";
     }
@@ -119,6 +134,8 @@ public class MainController {
             taikhoan.setNgaytao(LocalDateTime.now());
             taikhoan.setHinhanh("a.jpg");
             taikhoanService.saveTaikhoan(taikhoan);
+            String trang = setLayout(authentication);
+            model.addAttribute("trang", trang);
             model.addAttribute("messages", "thanhcong");
         }
         return "client/SignUp";

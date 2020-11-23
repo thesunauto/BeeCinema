@@ -86,7 +86,7 @@
                             <div class="dropdown-menu dropdown-warning">
                                 <a class="dropdown-item" th:href="@{/login}">Đăng nhập</a>
                                 <a class="dropdown-item" th:href="@{/signup}">Đăng ký</a>
-                                <a class="dropdown-item" href="#" >Quên mật khẩu</a>
+                                <a class="dropdown-item" th:href="@{/forgot-pass}" >Quên mật khẩu</a>
                             </div>
                         </div>
                     </li>
@@ -107,8 +107,8 @@
                                 to Bee Cinema</strong></h1>
                             <hr class="hr-light mt-4 wow fadeInDown" data-wow-delay="0.4s">
                             <h5 class="text-uppercase mb-5 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Where you can enjoy</strong></h5>
-                            <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">Movies</a>
-                            <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">Events</a>
+                            <a class="btn btn-outline-white wow fadeInDown" th:href="@{/client/list-film}" data-wow-delay="0.4s">Movies</a>
+                            <a class="btn btn-outline-white wow fadeInDown" th:href="@{/client/list-event}" data-wow-delay="0.4s">Events</a>
                         </div>
                     </div>
                 </div>
@@ -233,39 +233,7 @@
     $(document).ready(function () {
         /* WOW.js init */
         new WOW().init();
-        // Tooltips Initialization
-        // $(function () {
-        //     $('[data-toggle="tooltip"]').tooltip()
-        // })
-        // $('.mdb-select').materialSelect();
-        // // SideNav Initialization
-        // $(".button-collapse").sideNav();
-        // $('body').ready(loadUser());
-        // var user = {};
-        // var noLogin = true;
-        // function loadUser() {
-        //     $.ajax({
-        //         url: '/api/employee/getuser',
-        //         type: 'POST',
-        //         dataType: 'JSON',
-        //         success: function (data) {
-        //             user = data;
-        //             noLogin = false;
-        //         },
-        //         complete: function () {
-        //             $("#usernamenav").html(user.ten);
-        //             $('#username').val(user.username);
-        //             $('#password').val(user.password);
-        //             $('#ten').val(user.ten);
-        //             $('#gioitinh').val(user.gioitinh);
-        //             $('#ngaysinh').val(user.ngaysinh);
-        //             $('#sdt').val(user.sdt);
-        //             $('#email').val(user.email);
-        //             $('#image').val(user.image);
-        //             $('#blah').attr('src','/api/employee/getResourse/'+user.image);
-        //         }
-        //     })
-        // }
+
     });
     $(window).on('beforeunload', function () {
         $.ajax({

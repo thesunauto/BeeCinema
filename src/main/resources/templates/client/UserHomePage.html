@@ -69,9 +69,8 @@
               </div>
             </div>
 
-            <div class="carousel-item" th:each="phim : ${phim}" >
+            <div class="carousel-item" th:each="phim : ${phimDangChieu}" >
               <div class="col-12 col-sm-12 col-md-6 mb-4">
-
                 <!-- Card -->
                 <div class="card card-image" th:style="'background-image:url(' +@{'/api/employee/getResourse/'+${phim.hinhanh}} + ')'">
 
