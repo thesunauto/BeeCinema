@@ -5,6 +5,8 @@ import vn.edu.poly.beecinema.entity.Khunggio;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Sukien;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
@@ -26,4 +28,5 @@ public interface SuatChieuService {
 
     Page<Suatchieu> listAll(int pageNumber, String sortField, String sortDir, String keyword);
 
+    List<Suatchieu> findAllByPhimAndDate(String idPhim,LocalDate ngayChieu);
 }

@@ -13,6 +13,7 @@ public class SuatChieuResponse {
     private Integer id;
     private String idphim;
     private String idphong;
+    private String tenphong;
     private String batdau;
     private String ketthuc;
     private Double dongia;

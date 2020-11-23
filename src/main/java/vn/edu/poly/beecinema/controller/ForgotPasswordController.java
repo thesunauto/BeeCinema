@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,14 +29,24 @@ public class ForgotPasswordController {
     @Autowired
     private JavaMailSender mailSender;
 
+    public String setLayout(Authentication authentication) {
+        String page = "client/layout";
+        if (authentication != null && authentication.isAuthenticated()){
+            page = "client/layout_da_dang_nhap";
+        }
+        return page;
+    }
+
     @GetMapping("/forgot-pass")
-    public String resetPass(Model model) {
+    public String resetPass(Model model, Authentication authentication) {
         model.addAttribute("pageTitle", "Quên mật khẩu");
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         return "client/forgot-password";
     }
 
     @PostMapping("/forgot-pass")
-    public String resetPass(HttpServletRequest request, Model model) {
+    public String resetPass(HttpServletRequest request, Model model, Authentication authentication) {
         String email = request.getParameter("email");
         String token = RandomString.make(45);
         try {
@@ -49,6 +60,8 @@ public class ForgotPasswordController {
         } catch (UnsupportedEncodingException | MessagingException e) {
             model.addAttribute("error", "Lỗi khi gửi email");
         }
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         model.addAttribute("pageTitle", "Quên mật khẩu");
         return "client/forgot-password";
     }
@@ -76,10 +89,11 @@ public class ForgotPasswordController {
 
     @GetMapping("/reset_password")
     public String changePass(@Param(value = "token") String token,
-                             Model model){
+                             Model model, Authentication authentication){
         Taikhoan taikhoan = taikhoanService.getByResetPasswordToken(token);
         model.addAttribute("token", token);
-
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         if (taikhoan == null) {
             model.addAttribute("message", "Mã không hợp lệ");
             return "message";
@@ -88,7 +102,7 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/reset_password")
-    public String processResetPassword(HttpServletRequest request, Model model) {
+    public String processResetPassword(HttpServletRequest request, Model model, Authentication authentication) {
         String token = request.getParameter("token");
         String password = request.getParameter("password");
 
@@ -103,7 +117,8 @@ public class ForgotPasswordController {
 
             model.addAttribute("message", "Bạn đã thay đổi thành công mật khẩu của bạn.");
         }
-
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         return "client/forgot-password";
     }
 }

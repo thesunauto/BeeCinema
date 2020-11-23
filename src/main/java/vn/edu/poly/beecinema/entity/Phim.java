@@ -72,6 +72,9 @@ public class Phim implements Serializable {
     @Column(name = "mota")
     private String mota;
 
+    @Column(name = "linktrailer")
+    private String linktrailer;
+
     @Column(name = "trangthai", nullable = false)
     private Integer trangthai;
 
