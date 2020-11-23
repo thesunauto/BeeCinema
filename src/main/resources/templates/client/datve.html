@@ -4,7 +4,7 @@
       layout:decorate="~{client/layout}">
 
 <head>
-    <title>Sign in</title>
+    <title>Đặt vé</title>
 </head>
 
 <body th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
@@ -13,6 +13,7 @@
     <!-- Mega menu -->
     <div class="container-fluid pt-5"
          th:style="'background-image:url(/api/employee/getResourse/' + ${film.get().getHinhanh()} + ');background-repeat: repeat-x; background-size: contain; background-position: center center;background-attachment: fixed;'">
+        <input th:value="${film.get().getId()}" type="hidden" id="idphim">
         <div class="row mx-1 pt-5 wow fadeIn" data-wow-delay="0.3s" style="min-height: 93vh;">
             <div class="card mb-4 col-12 rgba-black-strong white-text">
                 <div class="card-body">
@@ -21,18 +22,19 @@
                             <div class="col-12">
                                 <label class="h4 rgba-black-light p-1 rounded">Suất chiếu: </label>
                                 <div class="btn-group d-flex justify-content-center" data-toggle="buttons">
-                                    <label th:if="${suatchieu.isEmpty()}"
-                                           class="d-flex justify-content-center btn btn-danger">Không có suất chiếu
-                                        nào</label>
-                                    <option class="btn btn-danger mx-1 rdoSuatChieu"
-                                            th:each="sc : ${suatchieu}" th:value="${sc.getId()}">
-                                        <input type="radio" name="options" autocomplete="off">
-                                        <div th:text="${sc.phong.getTen()}"></div>
-                                        |
-                                        <div th:text="${sc.khunggio.getBatdau() +' - '+sc.khunggio.getKetthuc()}"></div>
 
+                                    <option class="btn btn-danger mx-1 rdoNgayChieu"
+                                            th:each="lp : ${LichPhim}" th:value="${lp}">
+                                        <input type="radio" name="optionsa1" autocomplete="off">
+                                        <div th:text="${lp.getDayOfWeek()+' '+lp.getDayOfMonth()+'/'+lp.getMonthValue()+'/'+(lp.getYear()-2000)}"></div>
                                     </option>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="dataSuatChieu" class="col-12">
+
+
                             </div>
                         </div>
                         <div class="row">
@@ -67,6 +69,9 @@
 
                     </div>
                 </div>
+                <div class="card-footer">
+                    <h5>Lưu ý: Bạn chỉ có thể đặt trước 4 vé</h5>
+                </div>
             </div>
         </div>
         <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -96,8 +101,8 @@
                                     </h3>
                                 </div>
                             </div>
-
                         </div>
+
                         <label>Sự kiện:</label>
                         <select class="mdb-select" id="thanhtoanSukien">
                             <option value="" disabled>Choose option</option>
@@ -109,7 +114,8 @@
 
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
-                        <button id="submitdatve" class="btn btn-unique">Xác nhận <i class="fas fa-paper-plane-o ml-1"></i></button>
+                        <button id="submitdatve" class="btn btn-unique">Xác nhận <i
+                                class="fas fa-paper-plane-o ml-1"></i></button>
                     </div>
                 </div>
             </div>
@@ -117,13 +123,13 @@
     </div>
     <!-- Mega menu -->
 </main>
-<th:block layout:fragment="script">
+<th:block layout:fragment="optional">
     <script>
         $(document).ready(function () {
 
             $(window).on('beforeunload', function () {
                 $.ajax({
-                    url: '/api/employee/close',
+                    url: '/api/datve/close',
                     type: 'GET'
                 });
             })
@@ -133,10 +139,11 @@
             var idSukien = 'noevent';
             var listGhe = [];
 
+
             function loadGhe() {
-                if (idSuatChieu != null) {
+                if (idSuatChieu != -1) {
                     $.ajax({
-                        url: '/api/employee/loadghebysuatchieu=' + idSuatChieu,
+                        url: '/api/datve/loadghebysuatchieu=' + idSuatChieu,
                         type: 'POST',
                         dataType: 'JSON',
                         contentType: 'application/json',
@@ -166,17 +173,21 @@
                             toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
                         }
                     });
+                } else {
+                    listDayGhe = []
+                    listGhe = [];
+                    fillGhe();
                 }
             };
 
             function loadStt() {
-                if(listGhefocus.length==0){
+                if (listGhefocus.length == 0) {
                     $('#btnthanhtoan').hide();
-                }else{
+                } else {
                     $('#btnthanhtoan').show();
                 }
                 $.ajax({
-                    url: '/api/employee/gettrangthaighebysuatchieu=' + idSuatChieu,
+                    url: '/api/datve/gettrangthaighebysuatchieu=' + idSuatChieu,
                     type: 'POST',
                     dataType: 'JSON',
                     contentType: 'application/json',
@@ -258,7 +269,7 @@
 
             function loadTongCong(idsukien) {
                 $.ajax({
-                    url: '/api/employee/getTotal?idsukien=' + idsukien,
+                    url: '/api/datve/getTotal?idsukien=' + idsukien,
                     type: 'POST',
                     dataType: 'JSON',
                     contentType: 'application/json',
@@ -302,18 +313,23 @@
 
             $(document).on('click', 'option.ActionGhe', function () {
 
+                var so = 0;
+                $.ajax({
+                    url: '/api/datve/getVeonlineUntil/' + idSuatChieu,
+                    type: 'POST',
+                    success: function (data) {
+                        so += data;
+                    }
+                })
+
+
                 var ghe = findGheByID($(this).val());
-
-
                 var listGheforDay = [];
-
-                for(var t =0;t<listGhefocus.length;t++){
-                    if(ghe.idDay == listGhefocus[t].idDay){
+                for (var t = 0; t < listGhefocus.length; t++) {
+                    if (ghe.idDay == listGhefocus[t].idDay) {
                         listGheforDay.push(listGhefocus[t]);
                     }
                 }
-
-
                 var MinandMax = getMinandMaxGhe(listGheforDay);
 
                 var index = listGhefocus.indexOf(ghe);
@@ -329,29 +345,28 @@
                         listGhefocus.push(ghe);
                         focus(ghe.id);
                     } else if (listGhefocus[0].idLoaiGhe == ghe.idLoaiGhe) {
-
-
-                        if(listGheforDay.length==0){
+                        if (listGheforDay.length == 0) {
                             listGhefocus.push(ghe);
                             focus(ghe.id);
-                        }else
-
-                        if (ghe.col == MinandMax[0] || ghe.col == MinandMax[1]) {
+                        } else if (ghe.col == MinandMax[0] || ghe.col == MinandMax[1]) {
                             listGhefocus.push(ghe);
                             focus(ghe.id);
-                        }else{
+                        } else {
                             toastr.warning('Hãy chọn ghế liền nhau!', '', {positionClass: 'md-toast-top-center'});
                         }
-                    }else{
+                    } else {
                         toastr.warning('Hãy chọn ghế cùng loại!', '', {positionClass: 'md-toast-top-center'});
                     }
+
                 }
+
+
             });
 
 
             function focus(idghe) {
                 $.ajax({
-                    url: "/api/employee/setghefocus",
+                    url: "/api/datve/setghefocus",
                     type: "POST",
                     cache: false,
                     async: true,
@@ -373,12 +388,14 @@
 
             $(document).on('click', 'option.rdoSuatChieu', function () {
                 $.ajax({
-                    url: '/api/employee/clearsession',
+                    url: '/api/datve/clearsession',
                     type: 'GET'
                 });
                 idSuatChieu = $(this).val();
                 loadGhe();
             });
+
+
             $('#btnthanhtoan').click(function () {
 
                 $('#thanhtoanSukien').val('noevent');
@@ -386,7 +403,7 @@
                 var suatchieu = {};
                 var gheChoosen = [];
                 $.ajax({
-                    url: '/api/employee/getSuatChieu/' + idSuatChieu,
+                    url: '/api/datve/getSuatChieu/' + idSuatChieu,
                     type: 'POST',
                     dataType: 'JSON',
                     contentType: 'application/json',
@@ -404,7 +421,7 @@
                 });
 
                 $.ajax({
-                    url: '/api/employee/getGheChoosen',
+                    url: '/api/datve/getGheChoosen',
                     type: 'POST',
                     dataType: 'JSON',
                     contentType: 'application/json',
@@ -434,16 +451,16 @@
 
             $('#submitdatve').click(function () {
                 $.ajax({
-                    url: '/api/employee/saveTicket?idsukien=' + idSukien,
+                    url: '/api/datve/saveTicket?idsukien=' + idSukien,
                     type: 'POST',
                     dataType: 'JSON',
                     contentType: 'application/json',
                     processData: false,
                     success: function (data) {
                         var bo = data;
-                        if(bo){
+                        if (bo) {
                             toastr.success('Xuất vé thành công', '', {positionClass: 'md-toast-top-right'});
-                        }else {
+                        } else {
                             toastr.error('Xuất vé thất bại', '', {positionClass: 'md-toast-top-right'});
                         }
                     },
@@ -454,6 +471,51 @@
                     }
                 });
             });
+
+            var listSuatChieu = [];
+            $(document).on('click', 'option.rdoNgayChieu', function () {
+                $.ajax({
+                    url: '/api/datve/clearsession',
+                    type: 'GET'
+                });
+                $.ajax({
+                    url: '/api/datve/close',
+                    type: 'GET'
+                });
+                listGhefocus = [];
+                idSuatChieu = -1;
+                loadGhe();
+                $.ajax({
+                    url: '/api/datve/getSuatChieuByPhimAndDate/' + $('#idphim').val() + '/' + $(this).val(),
+                    type: 'post',
+                    success: function (data) {
+                        listSuatChieu = data;
+                    },
+                    error: function () {
+                        toastr.error('Tải dữ liệu thất bại!', '', {positionClass: 'md-toast-top-right'});
+
+                    },
+                    complete: function () {
+                        fillSuatChieu();
+                    }
+                })
+            })
+
+            function fillSuatChieu() {
+                var content = '<label class="h4 rgba-black-light p-1 rounded">Suất chiếu: </label>\n' +
+                    '                                <div class="btn-group d-flex justify-content-center"\n' +
+                    '                                     data-toggle="buttons">';
+                if (listSuatChieu.length == 0) {
+                    content += '<label class="d-flex justify-content-center btn btn-danger">Không có suất chiếu nào</label>';
+                }
+
+                for (var i = 0; i < listSuatChieu.length; i++) {
+                    content += '<option class="btn btn-danger mx-1 rdoSuatChieu" value="' + listSuatChieu[i].id + '"> <input type="radio" name="optionszxc" autocomplete="off"/> ' + listSuatChieu[i].tenphong + ' | ' + listSuatChieu[i].batdau + '-' + listSuatChieu[i].ketthuc + '</option>';
+                }
+                content += '</div>'
+                $('#dataSuatChieu').html(content);
+            }
+
         })
     </script>
 </th:block>

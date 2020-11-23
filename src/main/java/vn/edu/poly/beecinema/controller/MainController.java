@@ -33,10 +33,16 @@ public class MainController {
         if(httpSession.getAttribute("veresponse")==null){
             httpSession.setAttribute("veresponse", new ArrayList<VeResponse>());
         }
+
         List<VeResponse> veResponses = (List<VeResponse>) httpSession.getAttribute("veresponse");
         httpSession.setAttribute("veresponse",veResponses);
         model.addAttribute("film", phimService.findPhimById(id));
         model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhimAndToday(id));
+        List<LocalDateTime> localDateTimes = new ArrayList<>();
+        for(int i = 0; i<8;i++){
+            localDateTimes.add(LocalDateTime.now().plusDays(i));
+        }
+        model.addAttribute("LichPhim", localDateTimes);
         return "client/datve";
     }
 

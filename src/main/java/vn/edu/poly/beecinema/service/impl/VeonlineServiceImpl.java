@@ -7,6 +7,7 @@ import vn.edu.poly.beecinema.repository.GheRepository;
 import vn.edu.poly.beecinema.repository.SuatchieuRepository;
 import vn.edu.poly.beecinema.repository.TaikhoanRepository;
 import vn.edu.poly.beecinema.repository.VeonlineRepository;
+import vn.edu.poly.beecinema.service.SukienService;
 import vn.edu.poly.beecinema.service.VeonlineService;
 
 import java.time.LocalDate;
@@ -25,25 +26,33 @@ public class VeonlineServiceImpl implements VeonlineService {
     private GheRepository gheRepository;
     @Autowired
     private TaikhoanRepository taikhoanRepository;
+    @Autowired
+    private SukienService sukienService;
 
     @Override
     public List<Veonline> findAllByIdSuatchieu(Integer idsuatchieu) {
         return veonlineRepository.findAllBySuatchieu(suatchieuRepository.getOne(idsuatchieu));
     }
 
-
-
     @Override
-    public void insert(Integer idsuatchieu, Integer idghe) {
+    public Boolean insert(Integer idsuatchieu, Integer idghe, String idsukien, String username) {
+        Sukien sukien = idsukien.equals("noevent") ? null : sukienService.findSukienById(idsukien).get();
         Suatchieu suatchieu = suatchieuRepository.findById(idsuatchieu).get();
         Ghe ghe = gheRepository.findById(idghe).get();
+        Taikhoan taikhoan = taikhoanRepository.findById(username).get();
+        if(veonlineRepository.findAllBySuatchieuAndTaikhoan(suatchieu,taikhoan).size()>3){
+            return false;
+        }
         veonlineRepository.save(Veonline.builder()
                 .veonlineID(VeonlineID.builder().idghe(idghe).idsuatchieu(idsuatchieu).build())
                 .trangthai(0)
+                .sukien(sukien)
                 .ngaytao(LocalDateTime.now())
-                .taikhoan(taikhoanRepository.findById("nhanpt").get())
+                .taikhoan(taikhoan)
                 .build());
+        return true;
     }
+
 
     @Override
     public List<Veonline> findAllByToday() {
@@ -60,24 +69,18 @@ public class VeonlineServiceImpl implements VeonlineService {
 
     /**
      * @return 0: chưa xác nhận
-     *         1: đã xác nhận
-     *         2: hết hạn
+     * 1: đã xác nhận
+     * 2: hết hạn
      */
     @Override
     public Integer getStt(Veonline veonline) {
         long phuhuyonline = veonline.getSuatchieu().getPhuthuyonline();
-        System.out.println(phuhuyonline);
         phuhuyonline = suatchieuRepository.getOne(veonline.getSuatchieu().getId()).getPhuthuyonline();
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime activeT = LocalDateTime.of(veonline.getSuatchieu().getNgaychieu(), veonline.getSuatchieu().getKhunggio().getBatdau());
-        System.out.println(veonline.getVeonlineID());
-        System.out.println(activeT);
         LocalDateTime active = activeT.minusMinutes(veonline.getSuatchieu().getPhuthuyonline().longValue());
-
-        System.out.println(active);
-        System.out.println(now.compareTo(active));
-        int trangThai = (now.compareTo(active)>=0)?2:0;
-        return (veonline.getTrangthai()==0)?trangThai:1;
+        int trangThai = (now.compareTo(active) >= 0) ? 2 : 0;
+        return (veonline.getTrangthai() == 0) ? trangThai : 1;
     }
 
     @Override
@@ -87,6 +90,6 @@ public class VeonlineServiceImpl implements VeonlineService {
 
     @Override
     public void save(Veonline veonline) {
-       veonlineRepository.save(veonline);
+        veonlineRepository.save(veonline);
     }
 }
