@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface VeonlineService {
     List<Veonline> findAllByIdSuatchieu(Integer idsuatchieu);
-    void insert(Integer idsuatchieu,Integer idghe);
+    Boolean insert(Integer idsuatchieu,Integer idghe, String idsukien, String username);
     List<Veonline> findAllByToday();
     Integer getStt(Veonline veonline);
     Veonline findByVeonlineID(VeonlineID veonlineID);

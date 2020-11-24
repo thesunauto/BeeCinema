@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.Dayghe;
 import vn.edu.poly.beecinema.entity.Ghe;
@@ -13,6 +14,7 @@ import vn.edu.poly.beecinema.entity.Loaighe;
 import vn.edu.poly.beecinema.service.GheService;
 import vn.edu.poly.beecinema.service.LoaiGheService;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class SeatTypeController {
     @GetMapping("/show-seat-type")
     public String showTypeSeat(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -32,7 +34,8 @@ public class SeatTypeController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<Loaighe> page = loaiGheService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -45,23 +48,30 @@ public class SeatTypeController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/seat-type/show-seat-type";
     }
 
     @GetMapping("/add-seat-type")
-    public String addseattype(Model model){
+    public String addSeatType(Model model){
         Loaighe loaighe = new Loaighe();
         model.addAttribute("seatType",loaighe);
         return "admin/seat-type/add-seat-type";
     }
 
     @PostMapping("/add-seat-type")
-    public String saveseat(Model model, @ModelAttribute(value = "seatType") Loaighe loaighe){
-        loaighe.setNgaytao(LocalDateTime.now());
-        loaiGheService.saveLoaiGhe(loaighe);
-        model.addAttribute("messages" , "ThemThanhCong");
-        model.addAttribute("loaiGhe", loaiGheService.getAllLoaiGhe());
-        return "admin/seat-type/show-seat-type";
+    public String saveSeat(@Valid @ModelAttribute(value = "seatType") Loaighe loaighe,
+                           BindingResult bindingResult, @ModelAttribute("id") String idLoaiGhe, Model model){
+        if(bindingResult.hasErrors()){
+
+        }else if(loaiGheService.findLoaiGheById(idLoaiGhe).isPresent()){
+            model.addAttribute("messages", "trungid");
+        }else{
+            loaighe.setNgaytao(LocalDateTime.now());
+            loaiGheService.saveLoaiGhe(loaighe);
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
+        }
+        return "admin/seat-type/add-seat-type";
     }
     @GetMapping("/update-seat-type/{id}")
     public String findSeatType(Model model, @PathVariable(value = "id") String id){
@@ -71,16 +81,20 @@ public class SeatTypeController {
     }
 
     @PostMapping("/update-seat-type")
-    public String updateSeatType(Model model, @ModelAttribute(value = "seatType") Loaighe loaighe){
-        loaiGheService.saveLoaiGhe(loaighe);
-        return "redirect:/admin/seat-type/show-seat-type";
+    public String updateSeatType(@Valid @ModelAttribute(value = "seatType") Loaighe loaighe,
+                                 BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+
+        }else{
+            loaiGheService.saveLoaiGhe(loaighe);
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
+        }
+        return "admin/seat-type/update-seat-type";
     }
     @GetMapping("/delete-seat-type/{id}")
     public  String deleteSeatType (@PathVariable(value = "id") String id, Model model){
         loaiGheService.deleteLoaiGhe(id);
-        model.addAttribute("messages" , "XoaThanhCong");
-        model.addAttribute("loaiGhe", loaiGheService.getAllLoaiGhe());
-        return "admin/seat-type/show-seat-type";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 
 

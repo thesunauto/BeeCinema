@@ -6,10 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import vn.edu.poly.beecinema.entity.Ghe;
-import vn.edu.poly.beecinema.entity.LoaiPhim;
-import vn.edu.poly.beecinema.entity.Suatchieu;
-import vn.edu.poly.beecinema.entity.Ve;
+import vn.edu.poly.beecinema.entity.*;
 
 import java.util.List;
 
@@ -20,5 +17,7 @@ public interface VeRepository extends JpaRepository<Ve, String>, JpaSpecificatio
     public Page<Ve> findAll(String keyword, Pageable pageable);
     List<Ve> findAllBySuatchieu(Suatchieu suatchieu);
     List<Ve> findAllByTrangthai(Integer trangthai);
+    List<Ve> getVeByVeID(VeID veID);
+
 
 }

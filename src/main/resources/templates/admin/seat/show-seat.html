@@ -96,16 +96,17 @@
             <h4 class="white-text font-weight-bold">Danh sách Ghế</h4>
 
             <div>
-              <a  class="btn btn-outline-white btn-rounded btn-sm px-2" th:href="@{/admin/seat/add-seat}"><i class="fas fa-pencil-alt mt-0"></i></a>
+              <a  class="btn btn-outline-white btn-rounded btn-sm px-2" th:href="@{/admin/seat/add-seat}"><i class="fas fa-plus-circle"></i></a>
               </div>
 
           </div>
           <!-- /Card image -->
 
           <div class="px-4">
-            <div th:switch="${messages}">
-              <p th:case="'ThemThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
-              <p th:case="'XoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+            <div th:switch="${messages}" >
+              <p th:case="'themThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+              <p th:case="'suaThanhCong'" class="alert alert-success" role="alert">Sửa thành công!</p>
+              <p th:case="'xoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
             </div>
             <div class="table-responsive text-nowrap" style="height:350px">
               <!-- Table -->

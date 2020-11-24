@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{client/layout}">
+      layout:decorate="~{${trang}}">
 
 <head>
   <title>Homepage</title>
@@ -34,9 +34,7 @@
 <body th:style="'background-image:url(' + @{/img/images/bkg_cinema.png} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
 <!-- Main layout -->
 <main layout:fragment="content">
-
-  <div class="container-fluid">
-
+  <div class="container mt-5">
     <!-- Section: Blog v.2 -->
     <section class="text-center my-5 wow fadeIn rgba-black-strong white-text p-3 rounded" data-wow-delay="0.3s">
 
@@ -45,24 +43,23 @@
       <!-- Section description -->
       <!-- Grid row -->
       <div class="row">
-        <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+        <div id="carousel-example-multi" class="col-sm-12 col-md-12 carousel slide carousel-multi-item v-2" data-ride="carousel">
            <!--/.Indicators-->
           <div class="carousel-inner v-2"  role="listbox">
-            <div class="carousel-item active" style="max-height: 266.8px">
-              <div class="col-md-6 mb-4">
+
+            <div class="carousel-item active" >
+
+              <div class="col-12 col-sm-12 col-md-6 mb-4">
                 <!-- Card -->
                 <div class="card card-image" th:style="'background-image:url(' + @{/img/images/movie.jpg} + ')'">
 
                   <!-- Content -->
                   <div class="text-white d-flex justify-content-center rgba-black-strong py-5 ">
                     <div>
-                      <h2 class="amber-text font-weight-bold"><strong> Bee Movies</strong></h2>
-                      <h4 class="card-title pt-4 pb-3 font-weight-bold">Thế giới điện ảnh</h4>
-                      <div class="d-flex justify-content-center">
+                      <h2 class="amber-text font-weight-bold p-0"><strong> Bee Movies</strong></h2>
+                      <h4 class="card-title py-3 font-weight-bold">Thế giới điện ảnh</h4>
                         <a class="btn blue-gradient btn-rounded" ><i class="fas fa-film"></i> Movies</a>
                         <a class="btn btn-pink btn-rounded"><i class="far fa-eye"></i>  Xem trailer</a>
-                      </div>
-
                     </div>
                   </div>
                   <!-- Content -->
@@ -72,9 +69,8 @@
               </div>
             </div>
 
-            <div class="carousel-item" th:each="phim : ${phim}" style="max-height: 266.8px">
-              <div class="col-sm-12 col-md-6 mb-4">
-
+            <div class="carousel-item" th:each="phim : ${phimDangChieu}" >
+              <div class="col-12 col-sm-12 col-md-6 mb-4">
                 <!-- Card -->
                 <div class="card card-image" th:style="'background-image:url(' +@{'/api/employee/getResourse/'+${phim.hinhanh}} + ')'">
 
@@ -93,15 +89,15 @@
 
               </div>
             </div>
+
           </div>
-          <div class="controls-top">
+          <div class="controls top">
             <a class="btn-floating" href="#carousel-example-multi" data-slide="prev"><i
                     class="fas fa-chevron-left"></i></a>
             <a class="btn-floating" href="#carousel-example-multi" data-slide="next"><i
                     class="fas fa-chevron-right"></i></a>
           </div>
-        </div>
-
+          </div>
       </div>
       <!-- Grid row -->
 
@@ -113,19 +109,19 @@
       <!-- Section description -->
       <!-- Grid row -->
       <div class="row">
-        <div id="carousel-example-multii" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+        <div id="carousel-example-multii" class="col-12 col-sm-12 col-md-12 carousel slide carousel-multi-item v-2" data-ride="carousel">
           <!--/.Indicators-->
-          <div class="carousel-inner v-2"  role="listbox">
-            <div class="carousel-item active" style="max-height: 266.8px">
-              <div class="col-md-6 mb-4">
+          <div class="carousel-inner v-2"  role="listbox" >
+            <div class="carousel-item active">
+              <div class="col-12 col-sm-12 col-md-6 mb-4">
                 <!-- Card -->
                 <div class="card card-image" th:style="'background-image:url(' + @{/img/images/event.jpg} + ')'">
 
                   <!-- Content -->
-                  <div class="text-white d-flex justify-content-center rgba-black-strong py-5 ">
+                  <div class="text-white d-flex justify-content-center rgba-black-strong py-5 " style="min-height: 304px">
                     <div>
                       <h2 class="amber-text font-weight-bold"><strong> Bee Events</strong></h2>
-                      <h4 class="card-title pt-4 pb-3 font-weight-bold">Sự kiện hấp dẫn</h4>
+                      <h4 class="card-title py-3 font-weight-bold">Sự kiện hấp dẫn</h4>
                       <div class="d-flex justify-content-center">
                         <a class="btn blue-gradient btn-rounded "><i class="fas fa-film"></i> Events</a>
                         <a class="btn btn-pink btn-rounded"><i class="far fa-eye"></i>  Xem trailer</a>
@@ -140,19 +136,18 @@
               </div>
             </div>
 
-            <div class="carousel-item" th:each="suKien : ${suKien}" style="max-height: 266.8px">
-              <div class="col-sm-12 col-md-6 mb-4">
+            <div class="carousel-item" th:each="suKien : ${suKien}">
+              <div class="col-12 col-sm-12 col-md-6 mb-4">
 
                 <!-- Card -->
                 <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
 
                   <!-- Content -->
-                  <div class="text-white text-center rgba-black-strong py-5 ">
+                  <div class="text-white text-center rgba-black-strong py-5 " style="min-height: 304px">
                     <div>
                       <h6 class="amber-text "><i class="fas fa-hand-holding-usd p-2"></i><strong th:text=" 'Giảm giá: '+${suKien.giam} +' VNĐ'"> </strong></h6>
-                      <h3 class="card-title pt-4 pb-3 font-weight-bold" th:text="${suKien.ten}"></h3>
+                      <h3 class="card-title py-3 font-weight-bold" th:text="${suKien.ten}"></h3>
                       <a class="btn blue-gradient btn-rounded pl-4"><i class="fas fa-film"></i> Xem chi tiết</a>
-                      <a class="btn btn-pink btn-rounded"><i class="far fa-eye"></i>  Xem trailer</a>
                     </div>
                   </div>
                   <!-- Content -->

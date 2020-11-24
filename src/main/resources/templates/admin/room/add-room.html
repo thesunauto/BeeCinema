@@ -27,11 +27,17 @@
           <!-- /Card image -->
           <!-- Section heading -->
           <div class="card-body ">
+<<<<<<< HEAD
             <form th:action="@{/admin/room/add-room}" th:object="${room}" method="post">
               <div th:switch="${messages}">
                 <p th:case="'thanhcong'" class="alert alert-success" role="alert">Thêm thành công!</p>
                 <p th:case="'trungid'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
               </div>
+=======
+            <div th:switch="${messages}">
+              <p th:case="'trungid'" class="alert alert-danger" role="alert">ID đã tồn tại</p>
+            </div>
+>>>>>>> origin/master
           <!-- Grid row -->
           <div class="row">
 
@@ -64,8 +70,8 @@
 
               <!-- Name -->
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option value="1">Hiện</option>
-                <option value="0">Ẩn</option>
+                <option value="0">Hiện</option>
+                <option value="1">Ẩn</option>
               </select><label class="mdb-main-label active">Trạng thái</label>
 
             </div>

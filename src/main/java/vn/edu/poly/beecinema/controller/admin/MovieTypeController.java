@@ -66,7 +66,7 @@ public class MovieTypeController {
     }
 
     @PostMapping("/add-movie-type")
-    public String saveMovieType(@Valid @ModelAttribute("loaiPhim") LoaiPhim loaiPhim ,BindingResult bindingResult,
+    public String saveMovieType(@Valid @ModelAttribute("loaiPhim") LoaiPhim loaiPhim, BindingResult bindingResult,
                                 @ModelAttribute("id") String idLoaiPhim,
                                  Model model,  Authentication authentication){
         if(bindingResult.hasErrors()){
@@ -97,8 +97,11 @@ public class MovieTypeController {
     @RequestMapping(value = "/delete" )
     public String deleteUser(@RequestParam("id") String loaiPhimId, Model model) {
         loaiPhimService.deleteLoaiPhim(loaiPhimId);
+<<<<<<< HEAD
         List<LoaiPhim> loaiPhim = loaiPhimService.getAllLoaiPhim();
         model.addAttribute("loaiPhim", loaiPhim);
+=======
+>>>>>>> origin/master
         return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 

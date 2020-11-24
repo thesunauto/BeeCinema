@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{client/layout}">
+      layout:decorate="~{${trang}}">
 
 <head>
   <title>Sign in</title>
@@ -30,7 +30,7 @@
             <!-- Text -->
             <p class="card-text" th:text="${suKien.mota}">
             </p>
-            <a href="#" class="btn btn-pink btn-rounded">Đặt vé</a>
+            <a href="#" class="btn btn-pink btn-rounded">Xem chi tiết</a>
           </div>
 
         </div>

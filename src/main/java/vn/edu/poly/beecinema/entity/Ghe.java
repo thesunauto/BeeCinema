@@ -1,9 +1,11 @@
 package vn.edu.poly.beecinema.entity;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -33,6 +35,7 @@ public class Ghe implements Serializable {
     @ToString.Exclude
     private Dayghe dayghe;
 
+    @NotNull(message = "Vui lòng nhập số Ghế")
     @Column(name = "col", nullable = false)
     private Integer col;
 
@@ -52,6 +55,7 @@ public class Ghe implements Serializable {
     private LocalDateTime ngaytao;
 
     @Column(name = "trangthai", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Integer trangthai;
 
     @OneToMany(mappedBy = "ghe",cascade = CascadeType.ALL)

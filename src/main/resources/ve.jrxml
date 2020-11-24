@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Coffee_Table_Based" pageWidth="300" pageHeight="400" whenNoDataType="AllSectionsNoDetail" columnWidth="260" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="868819c0-2e1e-457b-84c5-82067f527855">
+    <style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+    <style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+    <style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+    <style name="Detail" fontName="DejaVu Serif" fontSize="12"/>
+    <style name="Row" mode="Transparent">
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+            <style backcolor="#E6DAC3"/>
+        </conditionalStyle>
+    </style>
+    <field name="ngaytao" class="java.time.LocalDateTime">
+    </field>
+    <field name="taikhoan.ten" class="java.lang.String">
+    </field>
+    <field name="suatchieu.phim.dotuoi.ten" class="java.lang.String">
+    </field>
+    <field name="suatchieu.phim.ten" class="java.lang.String">
+    </field>
+    <field name="suatchieu.ngaychieu" class="java.time.LocalDate">
+    </field>
+    <field name="suatchieu.khunggio.batdau" class="java.time.LocalTime">
+    </field>
+    <field name="suatchieu.khunggio.ketthuc" class="java.time.LocalTime">
+    </field>
+    <field name="suatchieu.phong.ten" class="java.lang.String">
+    </field>
+    <field name="ghe.dayghe.ten" class="java.lang.String">
+    </field>
+    <field name="ghe.col" class="java.lang.Integer">
+    </field>
+    <field name="suatchieu.dongia" class="java.lang.Float">
+    </field>
+    <detail>
+        <band height="298" splitType="Stretch">
+            <property name="local_mesure_unitheight" value="pixel"/>
+            <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+            <image>
+                <reportElement x="50" y="-8" width="160" height="70" uuid="a99ca527-ea7f-4851-9c5a-7e55ae326eea"/>
+                <imageExpression><![CDATA["C:/Users/ndc10/IdeaProjects/beecinema/src/main/resources/static/img/logo80x160noBG.png"]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="0" y="70" width="70" height="20" uuid="762fda9d-1806-4192-95d9-9a3b909409d2"/>
+                <textElement>
+                    <font fontName="DejaVu Serif" pdfEncoding="Cp1258" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Bee Cinema]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="95" width="50" height="20" uuid="de44a80e-b5b6-482b-9cb7-7917466b3f45"/>
+                <textElement>
+                    <font fontName="Times New Roman" pdfEncoding="Cp1258" />
+                </textElement>
+                <text><![CDATA[Nhân viên: ]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="104" width="271" height="16" uuid="cf39f353-10bd-4278-91af-14f522828009">
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
+                </reportElement>
+                <textElement>
+                    <font fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
+                </textElement>
+                <text><![CDATA[-----------------------------------------------------------------------------]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="133" y="130" width="20" height="20" uuid="ae938901-05df-4b68-8447-ca56c095cd42">
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement>
+                    <font fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
+                </textElement>
+                <text><![CDATA[-]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="190" y="201" width="30" height="20" uuid="5dcf48d7-8a9a-4cea-b3ae-1c0835f97424">
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
+                </reportElement>
+                <textElement>
+                    <font fontName="Times New Roman" pdfEncoding="Cp1258" />
+                </textElement>
+                <text><![CDATA[Tổng:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="150" width="271" height="16" uuid="ff7909e5-06c3-4739-ae67-30e1a19cee48">
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
+                </reportElement>
+                <textElement>
+                    <font fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
+                </textElement>
+                <text><![CDATA[-----------------------------------------------------------------------------]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="167" width="40" height="20" uuid="52c44323-e065-46ad-8034-4552c1e4283b">
+                </reportElement>
+                <textElement>
+                    <font fontName="DejaVu Serif" pdfEncoding="Cp1258" />
+                </textElement>
+                <text><![CDATA[Sự kiện:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="184" width="271" height="16" uuid="9cc76933-4732-453b-8605-2c0cc54655aa"/>
+                <textElement>
+                    <font fontName="DejaVu Sans"/>
+                </textElement>
+                <text><![CDATA[-----------------------------------------------------------------------------]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="83" width="101" height="20" uuid="91590449-5ea5-4a4b-93cf-bcf69d7d277b">
+                </reportElement>
+                <textElement>
+                    <font fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{ngaytao}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="47" y="95" width="140" height="20" uuid="b9ebb119-d66a-4e75-a293-966b00b5037c">
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{taikhoan.ten}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="117" width="30" height="20" uuid="02dcc6fd-5ba9-4659-82db-10e8af3c8a0d">
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{suatchieu.phim.dotuoi.ten}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="26" y="117" width="245" height="20" uuid="d4abccd1-0917-4744-b1bf-f7589f2d3705">
+                </reportElement>
+                <textElement>
+                    <font isBold="true" fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{suatchieu.phim.ten}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="130" width="71" height="20" uuid="c4b087d6-4fdb-4f6a-b1cc-10df8cd7a9fd">
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{suatchieu.ngaychieu}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="85" y="130" width="53" height="20" uuid="154b5ddf-1a2a-4d4a-8d5b-cedaaa9c99c0">
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{suatchieu.khunggio.batdau}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="144" y="130" width="53" height="20" uuid="14bc8a28-c423-4e73-8d1b-f853efbeee7a">
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{suatchieu.khunggio.ketthuc}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="142" width="47" height="20" uuid="7764f56a-5cd6-4536-9823-d9534ca8ab23">
+                </reportElement>
+                <textElement>
+                    <font isBold="true" fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{suatchieu.phong.ten}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="50" y="142" width="30" height="20" uuid="8bb56701-a6f0-483d-ab14-0241d418e726">
+                </reportElement>
+                <textElement>
+                    <font isBold="true" fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{ghe.dayghe.ten}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="39" y="167" width="200" height="20" uuid="0f0496c3-ebe7-440e-828a-6ad9cfe4efa3">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{ghe.col}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="220" y="201" width="36" height="20" uuid="56e3c372-8f8c-4c9f-ae0e-fe8165baa6ab">
+                </reportElement>
+                <textElement>
+                    <font isBold="true" fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{suatchieu.dongia}+$F{suatchieu.dongia}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

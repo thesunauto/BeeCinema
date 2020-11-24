@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.Dayghe;
 import vn.edu.poly.beecinema.entity.Ghe;
@@ -13,6 +14,7 @@ import vn.edu.poly.beecinema.entity.LoaiPhim;
 import vn.edu.poly.beecinema.service.DayGheService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class RowSeatController {
     @GetMapping("/show-row-seat")
     public String showRowSeat(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword);
+        return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -33,7 +35,8 @@ public class RowSeatController {
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
-                             @Param("keyword") String keyword) {
+                             @Param("keyword") String keyword,
+                             String messages) {
         Page<Dayghe> page = dayGheService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
@@ -46,6 +49,7 @@ public class RowSeatController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("keyword", keyword);
+        model.addAttribute("messages", messages);
         return "admin/row-seat/show-row-seat";
     }
 
@@ -57,12 +61,18 @@ public class RowSeatController {
     }
 
     @PostMapping("/add-row-seat")
-    public String saverowseat(Authentication authentication, Model model, @ModelAttribute(value = "rowSeat") Dayghe DayGhe){
-        DayGhe.setNgaytao(LocalDateTime.now());
-        dayGheService.saveDayGhe(DayGhe);
-        model.addAttribute("messages" , "ThemThanhCong");
-        model.addAttribute("dayGhe", dayGheService.getAllDayGhe());
-        return "admin/row-seat/show-row-seat";
+    public String saverowseat(@Valid @ModelAttribute(value = "rowSeat") Dayghe dayGhe, BindingResult bindingResult,
+                              @ModelAttribute("id") String idDayGhe, Authentication authentication, Model model){
+        if(bindingResult.hasErrors()){
+
+        }else if(dayGheService.findDayGheByID(idDayGhe).isPresent()){
+            model.addAttribute("messages", "trungid");
+        }else{
+            dayGhe.setNgaytao(LocalDateTime.now());
+            dayGheService.saveDayGhe(dayGhe);
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
+        }
+        return "admin/row-seat/add-row-seat";
     }
     @GetMapping("/update-row-seat/{id}")
     public String findrowseat(Model model, @PathVariable(value = "id") String id){
@@ -72,18 +82,22 @@ public class RowSeatController {
     }
 
     @PostMapping("/update-row-seat")
-    public String updaterowseat(Model model, @ModelAttribute(value = "rowSeat") Dayghe DayGhe){
-        dayGheService.saveDayGhe(DayGhe);
-        return "redirect:/admin/row-seat/show-row-seat";
+    public String updaterowseat(@Valid @ModelAttribute(value = "rowSeat") Dayghe dayGhe,
+                                BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+
+        }else{
+            dayGheService.saveDayGhe(dayGhe);
+            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
+        }
+        return "admin/row-seat/update-row-seat";
     }
 
 
     @GetMapping("/delete-row-seat/{id}")
     public  String deleteRowSeat (@PathVariable(value = "id") String id, Model model){
         dayGheService.deleteDayGhe(id);
-        model.addAttribute("messages" , "XoaThanhCong");
-        model.addAttribute("dayGhe", dayGheService.getAllDayGhe());
-        return "admin/row-seat/show-row-seat";
+        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 
 

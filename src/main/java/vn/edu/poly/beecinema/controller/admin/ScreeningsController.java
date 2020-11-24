@@ -27,14 +27,6 @@ public class ScreeningsController {
     @Autowired private PhongService phongService;
     @Autowired private KhungGioService khungGioService;
 
-//    @GetMapping("/show-screenings")
-//    public String showMovieType(Model model){
-//        List<Suatchieu> suatChieu = suatChieuService.getAllSuatChieu();
-//        model.addAttribute("suatChieu", suatChieu);
-//
-//        return "admin/screenings/show-screenings";
-//    }
-
     @GetMapping("/show-screenings")
     public String showScreenings(Model model){
         String keyword = null;
@@ -79,6 +71,7 @@ public class ScreeningsController {
 
 
     @PostMapping("/add-screenings")
+<<<<<<< HEAD
     public String saveScreenings(@Valid @ModelAttribute("suatChieu") Suatchieu suatChieu , BindingResult bindingResult,
                                  @ModelAttribute("id") Integer idSuatchieu,
                                 Model model, Authentication authentication){
@@ -87,19 +80,34 @@ public class ScreeningsController {
         }else if(suatChieuService.findSuatChieuById(idSuatchieu).isPresent()){
             model.addAttribute("messages", "trungid");
         }else{
+=======
+    public String saveScreenings(@Valid @ModelAttribute("suatChieu") Suatchieu suatChieu, BindingResult bindingResult,
+                                Model model, Authentication authentication){
+         if(bindingResult.hasErrors()){
+
+         }else{
+>>>>>>> origin/master
             suatChieu.setPhim(phimService.findPhimById(suatChieu.getPhim().getId()).get());
             suatChieu.setPhong(phongService.findPhongById(suatChieu.getPhong().getId()).get());
             suatChieu.setKhunggio(khungGioService.findKhungGioById(suatChieu.getKhunggio().getId()).get());
             suatChieu.setNgaytao(LocalDate.now());
             suatChieu.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
             suatChieuService.saveSuatChieu(suatChieu);
+<<<<<<< HEAD
         return listByPage(model, 1, "id", "asc", null, "themThanhCong");
+=======
+            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
+>>>>>>> origin/master
         }
         return "admin/screenings/add-screenings";
     }
 
     @PostMapping(value = "/edit")
+<<<<<<< HEAD
     public String updateScreenings(@Valid @ModelAttribute("khungGio") Suatchieu suatChieu ,BindingResult bindingResult,
+=======
+    public String updateScreenings(@Valid @ModelAttribute("khungGio") Suatchieu suatChieu, BindingResult bindingResult,
+>>>>>>> origin/master
                                    Model model,  Authentication authentication){
         if(bindingResult.hasErrors()){
 
@@ -114,8 +122,11 @@ public class ScreeningsController {
     @RequestMapping(value = "/delete" )
     public String deleteScreenings(@PathVariable("id") Integer suatChieuId, Model model) {
         suatChieuService.deleteSuatChieu(suatChieuId);
+<<<<<<< HEAD
         List<Suatchieu> suatChieu = suatChieuService.getAllSuatChieu();
         model.addAttribute("suatChieu", suatChieu);
+=======
+>>>>>>> origin/master
         return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 

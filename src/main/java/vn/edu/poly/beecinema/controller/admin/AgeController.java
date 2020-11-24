@@ -104,8 +104,11 @@ public class AgeController {
     @RequestMapping (value = "/delete")
     public String deleteUser (@RequestParam("id") String doTuoiID, Model model){
         doTuoiService.deleteDoTuoi(doTuoiID);
+<<<<<<< HEAD
         List<DoTuoi> doTuoi =  doTuoiService.getAllDoTuoi();
         model.addAttribute("doTuoi" , doTuoi);
+=======
+>>>>>>> origin/master
         return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 }

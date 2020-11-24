@@ -99,8 +99,11 @@ public class LanguageController {
     @RequestMapping (value = "/delete")
     public  String deleteUser (@RequestParam("id") String ngonNguID, Model model ){
         ngonNguService.deleteNgonNgu(ngonNguID);
+<<<<<<< HEAD
         List<NgonNgu> ngonNgu = ngonNguService.getAllNgonNgu();
         model.addAttribute("ngonNgu" , ngonNgu);
+=======
+>>>>>>> origin/master
         return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 

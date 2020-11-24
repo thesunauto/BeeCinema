@@ -1,30 +1,44 @@
 package vn.edu.poly.beecinema.controller;
 
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vn.edu.poly.beecinema.commons.VeResponse;
+import vn.edu.poly.beecinema.entity.Ve;
+import vn.edu.poly.beecinema.entity.VeID;
 import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
+import vn.edu.poly.beecinema.service.VeService;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired private PhimService phimService;
     @Autowired private SuatChieuService suatChieuService;
+    @Autowired private VeService veService;
 @Autowired private TaikhoanService taikhoanService;
 
     @GetMapping("/chonphim")
@@ -50,6 +64,23 @@ public class EmployeeController {
         model.addAttribute("film", phimService.findPhimById(id));
         model.addAttribute("suatchieu", suatChieuService.getAllSuatChieuByPhimAndToday(id));
         return "employee/datghe";
+    }
+
+    @GetMapping("/xuatve/{idsuatchieu}|{idghe}")
+    public void xuatVePDF(HttpServletResponse response, @PathVariable Integer idsuatchieu, @PathVariable Integer idghe) throws FileNotFoundException, JRException, IOException {
+        List<Ve> ve = veService.findByVeID(new VeID(idsuatchieu,idghe));
+        File file = ResourceUtils.getFile("classpath:ve.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(ve);
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("createdBy", "Java Techie");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", String.format("inline; filename=\"ve.pdf\""));
+        OutputStream out = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, out);
+
+//        return "employee/datghe";
     }
 
 
