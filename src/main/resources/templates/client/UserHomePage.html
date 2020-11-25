@@ -94,6 +94,19 @@
                 <!-- Card -->
 
               </div>
+              <div class="col-lg-3 col-sm-4 col-md-12 mb-4"  th:each="phim12 : ${phimSapchieu}">
+
+                <div class="view overlay zoom">
+                  <img th:src="@{${'/api/employee/getResourse/'+phim12.getHinhanh()}}" class="img-fluid " alt="smaple image">
+                  <div class="mask rgba-black-strong">
+                    <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim12.dotuoi.ten}"> </strong></h6>
+                    <h3 class="card-title pt-4 pb-3 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim12.ten}"></h3>
+                    <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim12.id}}"><i class="fas fa-film"></i> Xem chi tiết</a>
+                    <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-pink btn-rounded">Xem trailer</a>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
@@ -101,10 +114,10 @@
       </div>
     </section>
 
-    <section class="mb-5">
+    <section>
       <h3 class="border-bottom border-danger">SỰ KIỆN</h3>
       <div class="row">
-        <div class="col-lg-3 col-sm-4 col-md-6 mb-4">
+        <div class="col-lg-3 col-sm-4 col-md-6">
           <div class="view overlay zoom">
             <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20(131).jpg" class="img-fluid " alt="smaple image">
             <div class="mask flex-center">
