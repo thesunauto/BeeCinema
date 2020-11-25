@@ -10,4 +10,5 @@ public interface VeonlineRepository extends JpaRepository<Veonline, String>, Jpa
     List<Veonline> findAllBySuatchieu(Suatchieu suatchieu);
     Veonline getVeonlineByVeonlineID(VeonlineID veonlineID);
     List<Veonline> findAllBySuatchieuAndTaikhoan(Suatchieu suatchieu,Taikhoan taikhoan);
+    List<Veonline> findAllByOrderByNgaytaoDesc();
 }

@@ -127,19 +127,195 @@
     <script>
         $(document).ready(function () {
 
-            $(window).on('beforeunload', function () {
-                $.ajax({
-                    url: '/api/datve/close',
-                    type: 'GET'
-                });
-            })
-
             var listDayGhe = [];
             var idSuatChieu = -1;
             var idSukien = 'noevent';
             var listGhe = [];
+            var listGhefocus = [];
+            var listSuatChieu = [];
+
+            $(document).on('click', 'option.ActionGhe', function () {
+
+                var so = 0;
+                $.ajax({
+                    url: '/api/datve/getVeonlineUntil/' + idSuatChieu,
+                    type: 'POST',
+                    success: function (data) {
+                        so += data;
+                    }
+                })
 
 
+                var ghe = findGheByID($(this).val());
+                var listGheforDay = [];
+                for (var t = 0; t < listGhefocus.length; t++) {
+                    if (ghe.idDay == listGhefocus[t].idDay) {
+                        listGheforDay.push(listGhefocus[t]);
+                    }
+                }
+                var MinandMax = getMinandMaxGhe(listGheforDay);
+
+                var index = listGhefocus.indexOf(ghe);
+                if (index != -1) {
+                    if (!(ghe.col > MinandMax[0] + 1 && ghe.col < MinandMax[1] - 1)) {
+                        listGhefocus.splice(index, 1);
+                        focus(ghe.id);
+                    } else {
+                        toastr.warning('không thể hủy ghế ở giữa!', '', {positionClass: 'md-toast-top-center'});
+                    }
+                } else {
+                    if (listGhefocus.length == 0) {
+                        listGhefocus.push(ghe);
+                        focus(ghe.id);
+                    } else if (listGhefocus[0].idLoaiGhe == ghe.idLoaiGhe) {
+                        if (listGheforDay.length == 0) {
+                            listGhefocus.push(ghe);
+                            focus(ghe.id);
+                        } else if (ghe.col == MinandMax[0] || ghe.col == MinandMax[1]) {
+                            listGhefocus.push(ghe);
+                            focus(ghe.id);
+                        } else {
+                            toastr.warning('Hãy chọn ghế liền nhau!', '', {positionClass: 'md-toast-top-center'});
+                        }
+                    } else {
+                        toastr.warning('Hãy chọn ghế cùng loại!', '', {positionClass: 'md-toast-top-center'});
+                    }
+
+                }
+
+
+            });
+            $(document).on('click', 'option.rdoSuatChieu', function () {
+                $.ajax({
+                    url: '/api/datve/clearsession',
+                    type: 'GET'
+                });
+                idSuatChieu = $(this).val();
+                loadGhe();
+            });
+            $('#btnthanhtoan').click(function () {
+
+                $('#thanhtoanSukien').val('noevent');
+                idSukien = 'noevent';
+                var suatchieu = {};
+                var gheChoosen = [];
+                $.ajax({
+                    url: '/api/datve/getSuatChieu/' + idSuatChieu,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (data) {
+                        suatchieu = data;
+                    },
+                    complete: function () {
+                        $('#timeSuatChieu').text(suatchieu.batdau + ' - ' + suatchieu.ketthuc);
+                        $('#thanhtoanTenPhim').text(suatchieu.idphim)
+                    },
+                    error: function () {
+                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+
+                $.ajax({
+                    url: '/api/datve/getGheChoosen',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (result) {
+                        gheChoosen = result;
+                    },
+                    complete: function () {
+                        var content = '';
+                        for (var ii = 0; ii < gheChoosen.length; ii++) {
+                            content += '<div class="col-6 mx-auto p-1">\n' +
+                                '<div class="btn btn-warning"><i class="fas fa-chair text-center"></i> ' + (gheChoosen[ii].gheResponse.tenDay + gheChoosen[ii].gheResponse.col) + '</div>\n' +
+                                '</div>';
+                        }
+                        $('#ghechoosen').html(content);
+                    },
+                    error: function () {
+                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+                loadTongCong(idSukien);
+            });
+            $('#thanhtoanSukien').change(function () {
+                idSukien = $(this).val();
+                loadTongCong(idSukien);
+            });
+            $('#submitdatve').click(function () {
+                $.ajax({
+                    url: '/api/datve/saveTicket?idsukien=' + idSukien,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (data) {
+                        var bo = data;
+                        if (bo) {
+                            toastr.success('Đặt vé thành công', '', {positionClass: 'md-toast-top-right'});
+                        } else {
+                            toastr.error('Đặt vé thất bại', 'Có thể bạn đã vượt quá giới hạn vé đặt', {positionClass: 'md-toast-top-right'});
+                        }
+                    },
+                    complete: function () {
+                        $('#modalContactForm').modal('toggle');
+                        listGhefocus = [];
+                        loadGhe();
+                    }
+                });
+            });
+            $(document).on('click', 'option.rdoNgayChieu', function () {
+                $.ajax({
+                    url: '/api/datve/clearsession',
+                    type: 'GET'
+                });
+                $.ajax({
+                    url: '/api/datve/close',
+                    type: 'GET'
+                });
+                listGhefocus = [];
+                idSuatChieu = -1;
+                loadGhe();
+                $.ajax({
+                    url: '/api/datve/getSuatChieuByPhimAndDate/' + $('#idphim').val() + '/' + $(this).val(),
+                    type: 'post',
+                    success: function (data) {
+                        listSuatChieu = data;
+                    },
+                    error: function () {
+                        toastr.error('Tải dữ liệu thất bại!', '', {positionClass: 'md-toast-top-right'});
+
+                    },
+                    complete: function () {
+                        fillSuatChieu();
+                    }
+                })
+            });
+
+            function focus(idghe) {
+                $.ajax({
+                    url: "/api/datve/setghefocus",
+                    type: "POST",
+                    cache: false,
+                    async: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify({
+                        "idsuatchieu": parseInt(idSuatChieu),
+                        "idghe": parseInt(idghe),
+                        "stt": 2
+                    }),
+                    datatype: "json",
+                    success: function (data) {
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(XMLHttpRequest.status + " : " + errorThrown);
+                    }
+                });
+            };
             function loadGhe() {
                 if (idSuatChieu != -1) {
                     $.ajax({
@@ -179,7 +355,6 @@
                     fillGhe();
                 }
             };
-
             function loadStt() {
                 if (listGhefocus.length == 0) {
                     $('#btnthanhtoan').hide();
@@ -240,11 +415,21 @@
                         toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
                     }
                 });
-            }
+            };
+            function fillSuatChieu() {
+                var content = '<label class="h4 rgba-black-light p-1 rounded">Suất chiếu: </label>\n' +
+                    '                                <div class="btn-group d-flex justify-content-center"\n' +
+                    '                                     data-toggle="buttons">';
+                if (listSuatChieu.length == 0) {
+                    content += '<label class="d-flex justify-content-center btn btn-danger">Không có suất chiếu nào</label>';
+                }
 
-            setInterval(loadStt, 200);
-
-
+                for (var i = 0; i < listSuatChieu.length; i++) {
+                    content += '<option class="btn btn-danger mx-1 rdoSuatChieu" value="' + listSuatChieu[i].id + '"> <input type="radio" name="optionszxc" autocomplete="off"/> ' + listSuatChieu[i].tenphong + ' | ' + listSuatChieu[i].batdau + '-' + listSuatChieu[i].ketthuc + '</option>';
+                }
+                content += '</div>'
+                $('#dataSuatChieu').html(content);
+            };
             function fillGhe() {
                 var content = '';
                 for (var i = 0; i < listDayGhe.length; i++) {
@@ -266,7 +451,6 @@
 
                 $('#dataGhe').html(content);
             };
-
             function loadTongCong(idsukien) {
                 $.ajax({
                     url: '/api/datve/getTotal?idsukien=' + idsukien,
@@ -285,8 +469,6 @@
                     }
                 });
             };
-
-
             function findGheByID(idghe) {
                 for (var i = 0; i < listGhe.length; i++) {
                     if (parseInt(idghe) == listGhe[i].id) {
@@ -295,11 +477,9 @@
                 }
                 return 'Can';
             };
-
             function sortNumber(a, b) {
                 return a - b;
-            }
-
+            };
             function getMinandMaxGhe(list) {
                 var array = [];
                 for (var i = 0; i < list.length; i++) {
@@ -307,215 +487,14 @@
                 }
                 array.sort(sortNumber);
                 return [array[0] - 1, array[array.length - 1] + 1];
-            }
-
-            var listGhefocus = [];
-
-            $(document).on('click', 'option.ActionGhe', function () {
-
-                var so = 0;
-                $.ajax({
-                    url: '/api/datve/getVeonlineUntil/' + idSuatChieu,
-                    type: 'POST',
-                    success: function (data) {
-                        so += data;
-                    }
-                })
-
-
-                var ghe = findGheByID($(this).val());
-                var listGheforDay = [];
-                for (var t = 0; t < listGhefocus.length; t++) {
-                    if (ghe.idDay == listGhefocus[t].idDay) {
-                        listGheforDay.push(listGhefocus[t]);
-                    }
-                }
-                var MinandMax = getMinandMaxGhe(listGheforDay);
-
-                var index = listGhefocus.indexOf(ghe);
-                if (index != -1) {
-                    if (!(ghe.col > MinandMax[0] + 1 && ghe.col < MinandMax[1] - 1)) {
-                        listGhefocus.splice(index, 1);
-                        focus(ghe.id);
-                    } else {
-                        toastr.warning('không thể hủy ghế ở giữa!', '', {positionClass: 'md-toast-top-center'});
-                    }
-                } else {
-                    if (listGhefocus.length == 0) {
-                        listGhefocus.push(ghe);
-                        focus(ghe.id);
-                    } else if (listGhefocus[0].idLoaiGhe == ghe.idLoaiGhe) {
-                        if (listGheforDay.length == 0) {
-                            listGhefocus.push(ghe);
-                            focus(ghe.id);
-                        } else if (ghe.col == MinandMax[0] || ghe.col == MinandMax[1]) {
-                            listGhefocus.push(ghe);
-                            focus(ghe.id);
-                        } else {
-                            toastr.warning('Hãy chọn ghế liền nhau!', '', {positionClass: 'md-toast-top-center'});
-                        }
-                    } else {
-                        toastr.warning('Hãy chọn ghế cùng loại!', '', {positionClass: 'md-toast-top-center'});
-                    }
-
-                }
-
-
-            });
-
-
-            function focus(idghe) {
-                $.ajax({
-                    url: "/api/datve/setghefocus",
-                    type: "POST",
-                    cache: false,
-                    async: true,
-                    contentType: "application/json; charset=UTF-8",
-                    data: JSON.stringify({
-                        "idsuatchieu": parseInt(idSuatChieu),
-                        "idghe": parseInt(idghe),
-                        "stt": 2
-                    }),
-                    datatype: "json",
-                    success: function (data) {
-
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        alert(XMLHttpRequest.status + " : " + errorThrown);
-                    }
-                });
-            }
-
-            $(document).on('click', 'option.rdoSuatChieu', function () {
-                $.ajax({
-                    url: '/api/datve/clearsession',
-                    type: 'GET'
-                });
-                idSuatChieu = $(this).val();
-                loadGhe();
-            });
-
-
-            $('#btnthanhtoan').click(function () {
-
-                $('#thanhtoanSukien').val('noevent');
-                idSukien = 'noevent';
-                var suatchieu = {};
-                var gheChoosen = [];
-                $.ajax({
-                    url: '/api/datve/getSuatChieu/' + idSuatChieu,
-                    type: 'POST',
-                    dataType: 'JSON',
-                    contentType: 'application/json',
-                    processData: false,
-                    success: function (data) {
-                        suatchieu = data;
-                    },
-                    complete: function () {
-                        $('#timeSuatChieu').text(suatchieu.batdau + ' - ' + suatchieu.ketthuc);
-                        $('#thanhtoanTenPhim').text(suatchieu.idphim)
-                    },
-                    error: function () {
-                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
-                    }
-                });
-
-                $.ajax({
-                    url: '/api/datve/getGheChoosen',
-                    type: 'POST',
-                    dataType: 'JSON',
-                    contentType: 'application/json',
-                    processData: false,
-                    success: function (result) {
-                        gheChoosen = result;
-                    },
-                    complete: function () {
-                        var content = '';
-                        for (var ii = 0; ii < gheChoosen.length; ii++) {
-                            content += '<div class="col-6 mx-auto p-1">\n' +
-                                '<div class="btn btn-warning"><i class="fas fa-chair text-center"></i> ' + (gheChoosen[ii].gheResponse.tenDay + gheChoosen[ii].gheResponse.col) + '</div>\n' +
-                                '</div>';
-                        }
-                        $('#ghechoosen').html(content);
-                    },
-                    error: function () {
-                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
-                    }
-                });
-                loadTongCong(idSukien);
-            });
-            $('#thanhtoanSukien').change(function () {
-                idSukien = $(this).val();
-                loadTongCong(idSukien);
-            });
-
-            $('#submitdatve').click(function () {
-                $.ajax({
-                    url: '/api/datve/saveTicket?idsukien=' + idSukien,
-                    type: 'POST',
-                    dataType: 'JSON',
-                    contentType: 'application/json',
-                    processData: false,
-                    success: function (data) {
-                        var bo = data;
-                        if (bo) {
-                            toastr.success('Xuất vé thành công', '', {positionClass: 'md-toast-top-right'});
-                        } else {
-                            toastr.error('Xuất vé thất bại', '', {positionClass: 'md-toast-top-right'});
-                        }
-                    },
-                    complete: function () {
-                        $('#modalContactForm').modal('toggle');
-                        listGhefocus = [];
-                        loadGhe();
-                    }
-                });
-            });
-
-            var listSuatChieu = [];
-            $(document).on('click', 'option.rdoNgayChieu', function () {
-                $.ajax({
-                    url: '/api/datve/clearsession',
-                    type: 'GET'
-                });
+            };
+            setInterval(loadStt, 200);
+            $(window).on('beforeunload', function () {
                 $.ajax({
                     url: '/api/datve/close',
                     type: 'GET'
                 });
-                listGhefocus = [];
-                idSuatChieu = -1;
-                loadGhe();
-                $.ajax({
-                    url: '/api/datve/getSuatChieuByPhimAndDate/' + $('#idphim').val() + '/' + $(this).val(),
-                    type: 'post',
-                    success: function (data) {
-                        listSuatChieu = data;
-                    },
-                    error: function () {
-                        toastr.error('Tải dữ liệu thất bại!', '', {positionClass: 'md-toast-top-right'});
-
-                    },
-                    complete: function () {
-                        fillSuatChieu();
-                    }
-                })
-            })
-
-            function fillSuatChieu() {
-                var content = '<label class="h4 rgba-black-light p-1 rounded">Suất chiếu: </label>\n' +
-                    '                                <div class="btn-group d-flex justify-content-center"\n' +
-                    '                                     data-toggle="buttons">';
-                if (listSuatChieu.length == 0) {
-                    content += '<label class="d-flex justify-content-center btn btn-danger">Không có suất chiếu nào</label>';
-                }
-
-                for (var i = 0; i < listSuatChieu.length; i++) {
-                    content += '<option class="btn btn-danger mx-1 rdoSuatChieu" value="' + listSuatChieu[i].id + '"> <input type="radio" name="optionszxc" autocomplete="off"/> ' + listSuatChieu[i].tenphong + ' | ' + listSuatChieu[i].batdau + '-' + listSuatChieu[i].ketthuc + '</option>';
-                }
-                content += '</div>'
-                $('#dataSuatChieu').html(content);
-            }
-
+            });
         })
     </script>
 </th:block>

@@ -26,23 +26,27 @@ import java.util.concurrent.atomic.AtomicReference;
 @RestController
 @RequestMapping("/api/employee")
 public class EmployeeXacNhanVeOnlineRestController {
-    @Autowired private VeonlineService veonlineService;
-@Autowired private VeService veService;
-@Autowired private TaikhoanService taikhoanService;
+    @Autowired
+    private VeonlineService veonlineService;
+    @Autowired
+    private VeService veService;
+    @Autowired
+    private TaikhoanService taikhoanService;
+
     @PostMapping("/getlistveonline")
-    public ResponseEntity getListVeOnline(){
+    public ResponseEntity getListVeOnline() {
         List<VeonlineResponse> veonlineResponses = new ArrayList<>();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         DateTimeFormatter dateTimeFormatter2 = DateTimeFormatter.ofPattern("HH:mm");
         veonlineService.findAllByToday().forEach(veonline -> {
             veonlineResponses.add(VeonlineResponse.builder()
-                    .idsuatchieughe(String.valueOf(veonline.getSuatchieu().getId()+"|"+String.valueOf(veonline.getGhe().getId())))
-                    .ngaytao(veonline.getNgaytao().getHour()+":"+veonline.getNgaytao().getMinute()+" - "+veonline.getNgaytao().getDayOfMonth()+'/'+veonline.getNgaytao().getMonthValue())
+                    .idsuatchieughe(String.valueOf(veonline.getSuatchieu().getId() + "|" + String.valueOf(veonline.getGhe().getId())))
+                    .ngaytao(veonline.getNgaytao().getHour() + ":" + veonline.getNgaytao().getMinute() + " - " + veonline.getNgaytao().getDayOfMonth() + '/' + veonline.getNgaytao().getMonthValue())
                     .SDT(veonline.getTaikhoan().getSodienthoai())
-                    .suatchieu(veonline.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter2)+" - "+veonline.getSuatchieu().getKhunggio().getKetthuc().format(dateTimeFormatter2))
+                    .suatchieu(veonline.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter2) + " - " + veonline.getSuatchieu().getKhunggio().getKetthuc().format(dateTimeFormatter2))
                     .tenkhachhang(veonline.getTaikhoan().getTen())
                     .tenphim(veonline.getSuatchieu().getPhim().getTen())
-                    .hethan((veonline.getSuatchieu().getKhunggio().getBatdau().minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).getHour())+":"+(veonline.getSuatchieu().getKhunggio().getBatdau().minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).getMinute())+" - "+veonline.getSuatchieu().getNgaychieu().getDayOfMonth()+'/'+veonline.getSuatchieu().getNgaychieu().getMonthValue())
+                    .hethan((veonline.getSuatchieu().getKhunggio().getBatdau().minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).getHour()) + ":" + (veonline.getSuatchieu().getKhunggio().getBatdau().minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).getMinute()) + " - " + veonline.getSuatchieu().getNgaychieu().getDayOfMonth() + '/' + veonline.getSuatchieu().getNgaychieu().getMonthValue())
                     .trangthai(veonlineService.getStt(veonline))
                     .build());
         });
@@ -50,38 +54,46 @@ public class EmployeeXacNhanVeOnlineRestController {
     }
 
     @PostMapping("/xacnhanve{idsuatchieu}|{idghe}")
-    public ResponseEntity xacnhanve(Authentication authentication, @PathVariable Integer idsuatchieu, @PathVariable Integer idghe){
-      try {
-          Veonline veonline = veonlineService.findByVeonlineID(new VeonlineID(idsuatchieu,idghe));
-          veonline.setTrangthai(1);
-          veonlineService.save(veonline);
-          veService.insert(veonline.getSuatchieu().getId(),veonline.getGhe().getId(),veonline.getSukien()==null?"noevent":veonline.getSukien().getId(),authentication.getName());
-          return ResponseEntity.ok().body(true);
-      }catch (Exception e){
-          e.printStackTrace();
-      }
-        return ResponseEntity.ok().body(false);
+    public ResponseEntity xacnhanve(Authentication authentication, @PathVariable Integer idsuatchieu, @PathVariable Integer idghe) {
+        List<Integer> veon2 = new ArrayList<>();
+        veon2.add(idghe);
+        veon2.add(idsuatchieu); try {
+            Veonline veonline = veonlineService.findByVeonlineID(new VeonlineID(idsuatchieu, idghe));
+            veonline.setTrangthai(1);
+            veonlineService.save(veonline);
+
+
+            veService.insert(veonline.getSuatchieu().getId(), veonline.getGhe().getId(), veonline.getSukien() == null ? "noevent" : veonline.getSukien().getId(), authentication.getName());
+            return ResponseEntity.ok().body(veon2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().body(veon2);
     }
 
     @PostMapping("/getHistory")
-    public ResponseEntity getHistory(){
+    public ResponseEntity getHistory() {
+
+
+
+
         List<LichSuResponse> lichSuResponses = new ArrayList<>();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         List<Veonline> veonlines = veonlineService.findAllByToday();
         veService.findAllByToDay().forEach(ve -> {
             AtomicReference<String> pp = new AtomicReference<>("");
             veonlines.forEach(veonline -> {
-                if(veonline.getVeonlineID().getIdghe().equals(ve.getVeID().getIdghe()) && ve.getVeID().getIdsuatchieu().equals(veonline.getVeonlineID().getIdsuatchieu())){
+                if (veonline.getVeonlineID().getIdghe().equals(ve.getVeID().getIdghe()) && ve.getVeID().getIdsuatchieu().equals(veonline.getVeonlineID().getIdsuatchieu())) {
                     pp.set("Xác nhận vé");
                 }
             });
 
             lichSuResponses.add(LichSuResponse.builder()
-                    .ghe(ve.getGhe().getDayghe().getTen()+" - "+ve.getGhe().getCol())
-                    .suatchieu(ve.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter)+" - "+ve.getSuatchieu().getKhunggio().getKetthuc().format(dateTimeFormatter)+" | "+ve.getSuatchieu().getPhong().getTen()+" | "+ve.getSuatchieu().getPhim().getTen())
-                    .sukien(ve.getSukien()==null?"Không có":ve.getSukien().getTen())
+                    .ghe(ve.getGhe().getDayghe().getTen() + " - " + ve.getGhe().getCol())
+                    .suatchieu(ve.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter) + " - " + ve.getSuatchieu().getKhunggio().getKetthuc().format(dateTimeFormatter) + " | " + ve.getSuatchieu().getPhong().getTen() + " | " + ve.getSuatchieu().getPhim().getTen())
+                    .sukien(ve.getSukien() == null ? "Không có" : ve.getSukien().getTen())
                     .nguoitao(ve.getTaikhoan().getTen())
-                    .loaigiaodich(pp.get().equals("")?"Bán vé":pp.get())
+                    .loaigiaodich(pp.get().equals("") ? "Bán vé" : pp.get())
                     .build());
         });
 
@@ -89,7 +101,7 @@ public class EmployeeXacNhanVeOnlineRestController {
     }
 
     @PostMapping("/getuser")
-    public ResponseEntity getUser(Authentication authentication){
+    public ResponseEntity getUser(Authentication authentication) {
         Taikhoan tk = taikhoanService.findTaikhoanById(authentication.getName()).get();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return ResponseEntity.ok().body(UserResponse.builder()
