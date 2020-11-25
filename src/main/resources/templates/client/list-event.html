@@ -26,20 +26,54 @@
           <!-- Card content -->
           <div class="card-body">
             <!-- Title -->
-            <h4 class="card-title"><strong th:text="${suKien.ten}"> </strong></h4>
+            <h4 class="card-title" style="min-height: 85px"><strong th:text="${suKien.ten}"> </strong></h4>
             <!-- Text -->
-            <p class="card-text" th:text="${suKien.mota}">
             </p>
-            <a href="#" class="btn btn-pink btn-rounded">Xem chi tiết</a>
+            <a href="#" class="btn btn-primary btn-rounded" data-toggle="modal" th:attr="data-target='#customerModel'+${suKien.id}" >Xem chi tiết</a>
           </div>
 
         </div>
         <!-- Card -->
-
       </div>
 
 
     </section>
+    <div class="modal fade" th:each="suKien : ${suKien}" th:id="'customerModel'+${suKien.id}" tabindex="1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog cascading-modal" role="document">
+        <!-- Content -->
+        <div class="modal-content">
+          <div class="card card-cascade">
+              <!-- Card image -->
+              <div class="view view-cascade gradient-card-header blue-gradient">
+                <h2 class="card-header-title font-weight-bold amber-text" th:text="${suKien.ten}">Event Name</h2>
+              <div class="d-flex flex-wrap justify-content-center"> <i class="fas fa-calendar-alt fa-lg"></i> &nbsp <p class="p-0" th:text="'Ngày Kết Thúc: '+${#temporals.format(suKien.ngayketthuc, 'dd-MM-yyyy')}"><i class="fas fa-calendar"></i></p>
+              </div>
+              </div>
+              <!-- Card image -->
+
+              <!-- Card content -->
+              <div class="card-body card-body-cascade text-center">
+
+                <h6 class="blue-grey-text  pb-2" th:text="${suKien.mota}">
+                </h6>
+                <!-- Twitter -->
+                <div class="text-right mt-1-half">
+                  <button class="btn btn-info mb-1" data-dismiss="modal">Close<i class="fas fa-times ml-2"></i></button>
+                </div>
+              </div>
+              <!-- Card content -->
+
+            </div>
+            <!-- Card -->
+
+
+
+
+        </div>
+        <!-- Content -->
+      </div>
+    </div>
     <!-- Section: Blog v.2 -->
 
   </div>
