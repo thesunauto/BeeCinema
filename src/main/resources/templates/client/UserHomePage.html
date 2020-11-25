@@ -80,7 +80,7 @@
                       <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim.dotuoi.ten}"> </strong></h6>
                       <h3 class="card-title pt-4 pb-3 font-weight-bold" th:text="${phim.ten}"></h3>
                       <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim.id}}"><i class="fas fa-film"></i> Xem chi tiết</a>
-                      <a class="btn btn-pink btn-rounded"><i class="far fa-eye"></i>  Xem trailer</a>
+                      <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim.id}" class="btn btn-pink btn-rounded">Xem trailer</a>
                     </div>
                   </div>
                   <!-- Content -->
@@ -121,7 +121,7 @@
                   <div class="text-white d-flex justify-content-center rgba-black-strong py-5 " style="min-height: 304px">
                     <div>
                       <h2 class="amber-text font-weight-bold"><strong> Bee Events</strong></h2>
-                      <h4 class="card-title py-3 font-weight-bold">Sự kiện hấp dẫn</h4>
+                      <h4 class="card-title py-3 font-weight-bold" style="min-height: 98px">Sự kiện hấp dẫn</h4>
                       <div class="d-flex justify-content-center">
                         <a class="btn blue-gradient btn-rounded "><i class="fas fa-film"></i> Events</a>
                         <a class="btn btn-pink btn-rounded"><i class="far fa-eye"></i>  Xem trailer</a>
@@ -146,8 +146,8 @@
                   <div class="text-white text-center rgba-black-strong py-5 " style="min-height: 304px">
                     <div>
                       <h6 class="amber-text "><i class="fas fa-hand-holding-usd p-2"></i><strong th:text=" 'Giảm giá: '+${suKien.giam} +' VNĐ'"> </strong></h6>
-                      <h3 class="card-title py-3 font-weight-bold" th:text="${suKien.ten}"></h3>
-                      <a class="btn blue-gradient btn-rounded pl-4"><i class="fas fa-film"></i> Xem chi tiết</a>
+                      <h3 class="card-title py-3 font-weight-bold" style="min-height: 98px" th:text="${suKien.ten}"></h3>
+                      <a href="#" class="btn btn-primary btn-rounded" data-toggle="modal" th:attr="data-target='#customerModel'+${suKien.id}" >Xem chi tiết</a>
                     </div>
                   </div>
                   <!-- Content -->
@@ -169,6 +169,73 @@
       <!-- Grid row -->
 
     </section>
+    <div class="modal fade mt-5" th:each="phim : ${phim}" th:id="'filmModal'+${phim.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+
+        <!--Content-->
+        <div class="modal-content">
+
+          <!--Body-->
+          <div class="modal-body mb-0 p-0">
+
+            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A3PDXmYoF5U"
+                      allowfullscreen></iframe>
+            </div>
+
+          </div>
+
+          <!--Footer-->
+          <div class="modal-footer justify-content-center flex-column flex-md-row">
+            <span class="mr-4">Bản quyền thuộc Bee Cinema Group!</span>
+            <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
+                    data-dismiss="modal">Close</button>
+
+
+          </div>
+
+        </div>
+        <!--/.Content-->
+
+      </div>
+    </div>
+    <div class="modal fade" th:each="suKien : ${suKien}" th:id="'customerModel'+${suKien.id}" tabindex="1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog cascading-modal" role="document">
+        <!-- Content -->
+        <div class="modal-content">
+          <div class="card card-cascade">
+            <!-- Card image -->
+            <div class="view view-cascade gradient-card-header blue-gradient">
+              <h2 class="card-header-title font-weight-bold amber-text" th:text="${suKien.ten}">Event Name</h2>
+              <div class="d-flex flex-wrap justify-content-center"> <i class="fas fa-calendar-alt fa-lg"></i> &nbsp <p class="p-0" th:text="'Ngày Kết Thúc: '+${#temporals.format(suKien.ngayketthuc, 'dd-MM-yyyy')}"><i class="fas fa-calendar"></i></p>
+              </div>
+            </div>
+            <!-- Card image -->
+
+            <!-- Card content -->
+            <div class="card-body card-body-cascade text-center">
+
+              <h6 class="blue-grey-text  pb-2" th:text="${suKien.mota}">
+              </h6>
+              <!-- Twitter -->
+              <div class="text-right mt-1-half">
+                <button class="btn btn-info mb-1" data-dismiss="modal">Close<i class="fas fa-times ml-2"></i></button>
+              </div>
+            </div>
+            <!-- Card content -->
+
+          </div>
+          <!-- Card -->
+
+
+
+
+        </div>
+        <!-- Content -->
+      </div>
+    </div>
   </div>
 
 </main>
