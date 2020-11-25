@@ -33,72 +33,72 @@
                 <ul class="collapsible collapsible-accordion">
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-user"></i> User<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-user"></i><span th:text="#{secondWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/user/show-user}" class="waves-effect">Danh sách User</a>
+                                    <a th:href="@{/admin/user/show-user}" class="waves-effect" th:text="#{thirdWord}" ></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/user/add-user}"class="waves-effect">Thêm User</a>
+                                    <a th:href="@{/admin/user/add-user}"class="waves-effect" th:text="#{fourthWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-film"></i>Movie<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="w-fa fas fa-film"></i><span th:text="#{fifthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/movie/show-movie}" class="waves-effect">Danh sách Movie</a>
+                                    <a th:href="@{/admin/movie/show-movie}" class="waves-effect" th:text="#{sixthWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/movie/add-movie}" class="waves-effect">Thêm Movie</a>
+                                    <a th:href="@{/admin/movie/add-movie}" class="waves-effect" th:text="#{seventhWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Movie Type<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="w-fa fas fa-image"></i><span th:text="#{eighthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/movie-type/show-movie-type}" class="waves-effect">Danh sách Movie Type</a>
+                                    <a th:href="@{/admin/movie-type/show-movie-type}" class="waves-effect" th:text="#{ninthWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/movie-type/add-movie-type}" class="waves-effect">Thêm Movie Type</a>
+                                    <a th:href="@{/admin/movie-type/add-movie-type}" class="waves-effect" th:text="#{tenthWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-globe"></i>Language<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="w-fa fas fa-globe"></i><span th:text="#{eleventhWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/language/show-language}" class="waves-effect">Danh sách Language</a>
+                                    <a th:href="@{/admin/language/show-language}" class="waves-effect" th:text="#{twelfthWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/language/add-language}" class="waves-effect">Thêm Language</a>
+                                    <a th:href="@{/admin/language/add-language}" class="waves-effect" th:text="#{thirteenthWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-comment"></i>Comment<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="w-fa fas fa-comment"></i><span th:text="#{fourteenthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/comment/show-comment}" class="waves-effect">Danh sách Comment</a>
+                                    <a th:href="@{/admin/comment/show-comment}" class="waves-effect" th:text="#{fifteenthWord}"></a>
                                 </li>
 <!--                                <li>-->
 <!--                                    <a th:href="@{/admin/comment/add-comment}" class="waves-effect">Thêm Comment</a>-->
@@ -108,120 +108,120 @@
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-image"></i>Age<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="w-fa fas fa-image"></i><span th:text="#{sixteenthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/age/show-age}" class="waves-effect">Danh sách Age</a>
+                                    <a th:href="@{/admin/age/show-age}" class="waves-effect" th:text="#{seventeenthWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/age/add-age}" class="waves-effect">Thêm Age</a>
+                                    <a th:href="@{/admin/age/add-age}" class="waves-effect" th:text="#{eighteenthWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-calendar-week"></i> Event<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-calendar-week"></i><span th:text="#{nineteenthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/event/show-event}" class="waves-effect">Danh sách Event</a>
+                                    <a th:href="@{/admin/event/show-event}" class="waves-effect" th:text="#{twentiethWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/event/add-event}" class="waves-effect">Thêm Event</a>
+                                    <a th:href="@{/admin/event/add-event}" class="waves-effect" th:text="#{twenty-FirstWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-person-booth"></i>Room<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-person-booth"></i><span th:text="#{twenty-SecondWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/room/show-room}" class="waves-effect">Danh sách Room</a>
+                                    <a th:href="@{/admin/room/show-room}" class="waves-effect" th:text="#{twenty-ThirdWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/room/add-room}" class="waves-effect">Thêm Room</a>
+                                    <a th:href="@{/admin/room/add-room}" class="waves-effect" th:text="#{twenty-FourthWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="far fa-caret-square-left"></i>Screenings<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="far fa-caret-square-left"></i><span th:text="#{twenty-FifthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/screenings/show-screenings}" class="waves-effect">Danh sách Screenings</a>
+                                    <a th:href="@{/admin/screenings/show-screenings}" class="waves-effect" th:text="#{twenty-SixthWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/screenings/add-screenings}" class="waves-effect">Thêm Screenings</a>
+                                    <a th:href="@{/admin/screenings/add-screenings}" class="waves-effect" th:text="#{twenty-SeventhWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-clock"></i>Showtime<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-clock"></i><span th:text="#{twenty-EighthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/showtime/show-showtime}" class="waves-effect">Danh sách Showtime</a>
+                                    <a th:href="@{/admin/showtime/show-showtime}" class="waves-effect" th:text="#{twenty-NinthWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/showtime/add-showtime}" class="waves-effect">Thêm Showtime</a>
+                                    <a th:href="@{/admin/showtime/add-showtime}" class="waves-effect" th:text="#{thirtiethWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-chair"></i> Seat <i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-chair"></i><span th:text="#{thirty-FirstWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/seat/show-seat}" class="waves-effect">Danh sách Seat</a>
+                                    <a th:href="@{/admin/seat/show-seat}" class="waves-effect" th:text="#{thirty-SecondWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/seat/add-seat}" class="waves-effect">Thêm Seat</a>
+                                    <a th:href="@{/admin/seat/add-seat}" class="waves-effect" th:text="#{thirty-ThirdWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-couch"></i>Row Seat<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-couch"></i><span th:text="#{thirty-FourthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/row-seat/show-row-seat}" class="waves-effect">Danh sách Row Seat</a>
+                                    <a th:href="@{/admin/row-seat/show-row-seat}" class="waves-effect" th:text="#{thirty-FifthWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/row-seat/add-row-seat}" class="waves-effect">Thêm Row Seat</a>
+                                    <a th:href="@{/admin/row-seat/add-row-seat}" class="waves-effect" th:text="#{thirty-SixthWord}"></a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-wheelchair"></i>Seat Type<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="fas fa-wheelchair"></i><span th:text="#{thirty-SeventhWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a th:href="@{/admin/seat-type/show-seat-type}" class="waves-effect">Danh sách Seat Type</a>
+                                    <a th:href="@{/admin/seat-type/show-seat-type}" class="waves-effect" th:text="#{thirty-EighthWord}"></a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/admin/seat-type/add-seat-type}" class="waves-effect">Thêm Seat Type</a>
+                                    <a th:href="@{/admin/seat-type/add-seat-type}" class="waves-effect" th:text="#{thirty-NinthWord}"></a>
                                 </li>
                             </ul>
                         </div>
@@ -251,6 +251,13 @@
         <!-- Breadcrumb -->
         <div class="breadcrumb-dn mr-auto">
             <p class="font-weight-bold">Tài Khoản</p>
+        </div>
+
+        <div class="breadcrumb-dn mr-auto">
+            <a href="/admin/user/show-user?lang=vi" >VI</a>
+        </div>
+        <div class="breadcrumb-dn mr-auto">
+            <a href="/admin/user/show-user?lang=en" >EN</a>
         </div>
 
         <!-- Navbar links -->

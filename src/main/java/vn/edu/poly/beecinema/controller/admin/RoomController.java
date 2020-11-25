@@ -29,12 +29,7 @@ public class RoomController {
     @GetMapping("/show-room")
     public String showRoom(Model model){
         String keyword = null;
-<<<<<<< HEAD
-        String messages = null;
-        return listByPage(model, 1, "id", "asc", keyword, messages);
-=======
         return listByPage(model, 1, "id", "asc", keyword, null);
->>>>>>> origin/master
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -68,35 +63,21 @@ public class RoomController {
     }
 
     @PostMapping("/add-room")
-<<<<<<< HEAD
-    public String saveRoom(@Valid @ModelAttribute("room") Phong phong, BindingResult bindingResult,
-                           @ModelAttribute("id") String idPhong,
-                           Model model, Authentication authentication){
-=======
     public String saveRoom(@Valid @ModelAttribute(value = "room") Phong phong,
                            BindingResult bindingResult, @ModelAttribute("id") String idPhong,
                            Authentication authentication, Model model){
->>>>>>> origin/master
         if(bindingResult.hasErrors()){
 
         }else if(phongService.findPhongById(idPhong).isPresent()){
             model.addAttribute("messages", "trungid");
-<<<<<<< HEAD
-        }else {
-            phong.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
-            phong.setNgaytao(LocalDateTime.now());
-            model.addAttribute("phong", phongService.getAllPhong());
-=======
         }else{
             phong.setNgaytao(LocalDateTime.now());
             phong.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
->>>>>>> origin/master
             phongService.savePhong(phong);
             return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
         return "admin/room/add-room";
     }
-
     @GetMapping("/update-room/{id}")
     public String findRoom(Model model, @PathVariable(value = "id") String id){
         Phong phong =  phongService.findPhongById(id).get();
@@ -105,21 +86,12 @@ public class RoomController {
     }
 
     @PostMapping("/update-room")
-<<<<<<< HEAD
-    public String updateRoom(@Valid @ModelAttribute("room") Phong phong ,
-                             BindingResult bindingResult,
-                             Model model,  Authentication authentication){
-        if(bindingResult.hasErrors()){
-
-        }else {
-=======
     public String updateRoom(@Valid @ModelAttribute(value = "room") Phong phong,
                              BindingResult bindingResult,
-                              Authentication authentication, Model model){
+                             Authentication authentication, Model model){
         if(bindingResult.hasErrors()){
 
         }else{
->>>>>>> origin/master
             phongService.savePhong(phong);
             return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
@@ -129,12 +101,9 @@ public class RoomController {
     @GetMapping("/delete-room/{id}")
     public  String deleteroom (@PathVariable(value = "id") String id, Model model){
         phongService.deletePhong(id);
-<<<<<<< HEAD
-        model.addAttribute("phong",  phongService.getAllPhong());
-=======
->>>>>>> origin/master
         return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
+
 
 
 
