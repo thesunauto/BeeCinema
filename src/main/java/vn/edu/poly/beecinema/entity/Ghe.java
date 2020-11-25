@@ -52,10 +52,10 @@ public class Ghe implements Serializable {
     private Taikhoan taikhoan;
 
     @Column(name = "ngaytao", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime ngaytao;
 
     @Column(name = "trangthai", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Integer trangthai;
 
     @OneToMany(mappedBy = "ghe",cascade = CascadeType.ALL)
