@@ -21,20 +21,25 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin/screenings")
 public class ScreeningsController {
-    @Autowired private SuatChieuService suatChieuService;
-    @Autowired private TaikhoanService taiKhoanService;
-    @Autowired private PhimService phimService;
-    @Autowired private PhongService phongService;
-    @Autowired private KhungGioService khungGioService;
+    @Autowired
+    private SuatChieuService suatChieuService;
+    @Autowired
+    private TaikhoanService taiKhoanService;
+    @Autowired
+    private PhimService phimService;
+    @Autowired
+    private PhongService phongService;
+    @Autowired
+    private KhungGioService khungGioService;
 
     @GetMapping("/show-screenings")
-    public String showScreenings(Model model){
+    public String showScreenings(Model model) {
         String keyword = null;
         return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
-    public String listByPage(Model model ,
+    public String listByPage(Model model,
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
@@ -57,13 +62,13 @@ public class ScreeningsController {
     }
 
     @RequestMapping("/add-screenings")
-    public String addScreenings(Model model){
+    public String addScreenings(Model model) {
         model.addAttribute("suatChieu", new Suatchieu());
         return "admin/screenings/add-screenings";
     }
 
     @GetMapping(value = "/edit")
-    public String editScreenings(Model model, @RequestParam("id") Integer suatChieuId){
+    public String editScreenings(Model model, @RequestParam("id") Integer suatChieuId) {
         Optional<Suatchieu> suatChieuEdit = suatChieuService.findSuatChieuById(suatChieuId);
         suatChieuEdit.ifPresent(suatChieu -> model.addAttribute("suatChieu", suatChieu));
         return "admin/screenings/update-screenings";
@@ -72,10 +77,10 @@ public class ScreeningsController {
 
     @PostMapping("/add-screenings")
     public String saveScreenings(@Valid @ModelAttribute("suatChieu") Suatchieu suatChieu, BindingResult bindingResult,
-                                Model model, Authentication authentication){
-         if(bindingResult.hasErrors()){
+                                 Model model, Authentication authentication) {
+        if (bindingResult.hasErrors()) {
 
-         }else{
+        } else {
             suatChieu.setPhim(phimService.findPhimById(suatChieu.getPhim().getId()).get());
             suatChieu.setPhong(phongService.findPhongById(suatChieu.getPhong().getId()).get());
             suatChieu.setKhunggio(khungGioService.findKhungGioById(suatChieu.getKhunggio().getId()).get());
@@ -89,10 +94,10 @@ public class ScreeningsController {
 
     @PostMapping(value = "/edit")
     public String updateScreenings(@Valid @ModelAttribute("khungGio") Suatchieu suatChieu, BindingResult bindingResult,
-                                   Model model,  Authentication authentication){
-        if(bindingResult.hasErrors()){
+                                   Model model, Authentication authentication) {
+        if (bindingResult.hasErrors()) {
 
-        }else{
+        } else {
             suatChieuService.saveSuatChieu(suatChieu);
             return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
@@ -100,13 +105,10 @@ public class ScreeningsController {
     }
 
 
-    @RequestMapping(value = "/delete" )
+    @RequestMapping(value = "/delete")
     public String deleteScreenings(@PathVariable("id") Integer suatChieuId, Model model) {
         suatChieuService.deleteSuatChieu(suatChieuId);
         return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
-
-
-
 }
 
