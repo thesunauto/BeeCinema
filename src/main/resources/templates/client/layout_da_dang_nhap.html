@@ -86,8 +86,10 @@
                             <!--Menu-->
                             <div class="dropdown-menu dropdown-warning">
                                 <a class="dropdown-item" th:href="@{/client/profile-client}">Cập nhật tài khoản</a>
-                                <a class="dropdown-item" th:href="@{/client/manager-ticket}">Quản lí vé</a>
-                                <a class="dropdown-item" th:href="@{/logout}">Cập nhật tài khoản</a>
+                                <form th:action="@{/logout}" method="post" th:hidden="false">
+                                    <input type="submit" class="dropdown-item" value="Đăng xuất">
+                                </form>
+
                             </div>
                         </div>
                     </li>

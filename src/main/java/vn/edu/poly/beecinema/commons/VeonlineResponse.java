@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,7 +18,4 @@ public class VeonlineResponse {
     private String suatchieu;
     private Integer trangthai;
     private String hethan;
-    private LocalDateTime ngaytaoLDT;
-
-
 }

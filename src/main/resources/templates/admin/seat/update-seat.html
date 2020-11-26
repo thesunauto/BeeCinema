@@ -12,7 +12,7 @@
   <!-- Main layout -->
   <main layout:fragment="content">
     <form th:action="@{/admin/seat/update-seat/}" th:object="${seat}" method="post">
-      <input type="hidden" th:field="*{id}">
+      <input type="text" th:field="*{id}" readonly>
       <div class="container-fluid">
         <!-- Section: Inputs -->
         <section >
@@ -28,11 +28,20 @@
                 <!-- Grid row -->
                 <div class="row col-10 m-auto">
 
+                  <div class="col-md-3 mb-4">
+                    <div class="md-form md-outline">
+                      <i class="fas fa-key prefix"></i>
+                      <input th:field="*{id}" type="text" id="form31" readonly class="form-control">
+                      <label for="form31" class="active">ID</label>
+                    </div>
+
+                  </div>
+
                   <!-- Grid column -->
                   <div class="col-md-5 mb-4">
                     <div class="md-form md-outline">
                       <i class="fas fa-chair prefix"></i>
-                      <input th:field="*{col}" type="number" id="form31z" class="form-control" min="0" step="1">
+                      <input th:field="*{col}" type="number" id="form31z" class="form-control" min="0" max="15"  step="1">
                       <label for="form31z" class="active">Ghế</label>
                       <p th:if="${#fields.hasErrors('col')}" th:errors="*{col}" class="text-danger text-center"></p>
                     </div>

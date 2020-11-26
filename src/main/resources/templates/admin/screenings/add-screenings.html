@@ -37,11 +37,6 @@
 
             <!-- Grid column -->
             <div class="col-md-2 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-key prefix"></i>
-                <input  type="text" th:field="*{id}" id="form31" class="form-control"  >
-                <label for="form31" class="active">ID</label>
-              </div>
 
             </div>
             <!-- Grid column -->
@@ -90,6 +85,7 @@
                 <i class="fas fa-calendar-day prefix"></i>
                 <input type="date" th:field="*{ngaychieu}" id="form31" class="form-control">
                 <label for="form31" class="active">Ngày Chiếu</label>
+                <p th:if="${#fields.hasErrors('ngaychieu')}" th:errors="*{ngaychieu}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -110,6 +106,7 @@
                 <i class="fas fa-money-bill prefix"></i>
                 <input  type="number" th:field="*{dongia}" id="form32" class="form-control" min="0" step="1000" >
                 <label for="form32" class="active">Đơn Giá</label>
+                <p th:if="${#fields.hasErrors('dongia')}" th:errors="*{dongia}" class="text-danger text-center"></p>
               </div>
 
             </div>
@@ -122,6 +119,7 @@
                 <i class="fas fa-money-bill prefix"></i>
                 <input  type="number" th:field="*{phuthuyonline}" id="form33" class="form-control">
                 <label for="form33" class="active">Phút Hủy Online</label>
+                <p th:if="${#fields.hasErrors('phuthuyonline')}" th:errors="*{phuthuyonline}" class="text-danger text-center"></p>
               </div>
 
             </div>
