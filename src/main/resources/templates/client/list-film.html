@@ -7,72 +7,77 @@
   <title>Sign in</title>
 </head>
 
-<body th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+<body>
 
 <main layout:fragment="content" style="padding: 0;">
-  <div class="container pt-5 mt-5">
+  <div class="container-fluid pt-5 mt-5">
 
     <!-- Section: Blog v.2 -->
-    <section class="wow fadeIn rgba-stylish-strong mb-3" data-wow-delay="0.3s">
-      <h2 class="text-center pt-3 mt-3 white-text pb-0 mb-0">Phim đang chiếu</h2>
-      <div class="row py-2 d-flex justify-content-center mx-auto" >
-        <!-- Card -->
+    <section class="wow fadeIn mb-3" data-wow-delay="0.3s">
+      <!-- Card -->
+      <div class="card card-cascade wider reverse">
 
-        <div class="card col-sm-12 col-md-3 p-0 m-4" th:each="phim : ${phimDangChieu}" >
-
-          <!-- Card image -->
-
-          <img class="card-img-top" th:src="@{'/api/employee/getResourse/'+${phim.hinhanh}}" style="max-height: 300px"
+        <!-- Card image -->
+        <div class="view view-cascade overlay">
+          <img class="card-img-top" th:src="@{/img/images/NowShowing.png}"  style="object-fit: cover;  object-position: center;  width: 100%;  max-height: 200px;"
                alt="Card image cap">
-
-          <!-- Card content -->
-          <div class="card-body">
-            <!-- Title -->
-            <h4 class="card-title"><strong th:text="${phim.ten}"> </strong></h4>
-            <!-- Text -->
-            <p class="card-text" th:text="${phim.dotuoi.ten}">
-            </p>
-            <div class="d-flex flex-wrap">
-            <a th:href="@{${'/client/detail-film/'+phim.id}}" class="btn btn-outline-primary btn-rounded btn-md">Detail</a>
-            <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim.id}" class="btn btn-outline-success btn-rounded btn-md">trailer</a></div>
-          </div>
-
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
         </div>
-        <!-- Card -->
+
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
+          <div class="row">
+            <div class="col-lg-3 col-sm-4 col-md-12 mb-4"  th:each="phim1 : ${phimDangChieu}">
+
+              <div class="view overlay zoom">
+                <img th:src="@{${'/api/employee/getResourse/'+phim1.getHinhanh()}}" style="max-height: 414px; width: 100%" class="img-fluid " alt="smaple image">
+                <div class="mask rgba-black-strong py-5 text-center justify-content-center">
+                  <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim1.dotuoi.ten}"> </strong></h6>
+                  <h3 class="card-title white-text p-2 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim1.ten}"></h3>
+                  <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim1.id}}"><i class="fas fa-eye"></i>&nbsp Xem chi tiết</a>
+                  <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-pink btn-rounded"><i class="fab fa-youtube"></i>&nbsp Xem trailer</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
 
       </div>
-
+      <!-- Card -->
     </section>
-    <section class="wow fadeIn mb-3 rgba-stylish-strong " data-wow-delay="0.3s">
-      <h2 class="text-center my-3 white-text h1">Phim sắp chiếu</h2>
-      <div class="row py-2 d-flex justify-content-center mx-auto" >
-        <!-- Card -->
+<!--    <section class="wow fadeIn mb-3" data-wow-delay="0.3s">-->
+<!--      <h2 class="text-center my-3 white-text h1">Phim sắp chiếu</h2>-->
+<!--      <div class="row py-2 d-flex justify-content-center mx-auto" >-->
+<!--        &lt;!&ndash; Card &ndash;&gt;-->
 
-        <div class="card col-sm-12 col-md-3 p-0 m-4" th:each="phim : ${phimSapchieu}" >
+<!--        <div class="card col-sm-12 col-md-3 p-0 m-4" th:each="phim : ${phimSapchieu}" >-->
 
-          <!-- Card image -->
+<!--          &lt;!&ndash; Card image &ndash;&gt;-->
 
-          <img class="card-img-top" th:src="@{'/api/employee/getResourse/'+${phim.hinhanh}}" style="max-height: 300px"
-               alt="Card image cap">
+<!--          <img class="card-img-top" th:src="@{'/api/employee/getResourse/'+${phim.hinhanh}}" style="max-height: 300px"-->
+<!--               alt="Card image cap">-->
 
-          <!-- Card content -->
-          <div class="card-body">
-            <!-- Title -->
-            <h4 class="card-title"><strong th:text="${phim.ten}"> </strong></h4>
-            <!-- Text -->
-            <p class="card-text" th:text="${phim.dotuoi.ten}">
-            </p>
-            <div class="d-flex flex-wrap">
-              <a th:href="@{${'/client/detail-film/'+phim.id}}" class="btn btn-outline-primary btn-rounded btn-md">Detail</a>
-              <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim.id}" class="btn btn-outline-success btn-rounded btn-md">trailer</a></div>
-          </div>
+<!--          &lt;!&ndash; Card content &ndash;&gt;-->
+<!--          <div class="card-body">-->
+<!--            &lt;!&ndash; Title &ndash;&gt;-->
+<!--            <h4 class="card-title"><strong th:text="${phim.ten}"> </strong></h4>-->
+<!--            &lt;!&ndash; Text &ndash;&gt;-->
+<!--            <p class="card-text" th:text="${phim.dotuoi.ten}">-->
+<!--            </p>-->
+<!--            <div class="d-flex flex-wrap">-->
+<!--              <a th:href="@{${'/client/detail-film/'+phim.id}}" class="btn btn-outline-primary btn-rounded btn-md">Detail</a>-->
+<!--              <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim.id}" class="btn btn-outline-success btn-rounded btn-md">trailer</a></div>-->
+<!--          </div>-->
 
-        </div>
-        <!-- Card -->
+<!--        </div>-->
+<!--        &lt;!&ndash; Card &ndash;&gt;-->
 
-      </div>
+<!--      </div>-->
 
-    </section>
+<!--    </section>-->
     <div class="modal fade mt-5" th:each="phim : ${phim}" th:id="'filmModal'+${phim.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">

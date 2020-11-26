@@ -46,9 +46,9 @@
 <!-- Main Navigation -->
 <header th:style="${#httpServletRequest.requestURI!='/'}?'width:0;'">
 
-    <nav class="navbar navbar-expand-lg navbar-dark p-0 fixed-top scrolling-navbar" style="background-color: #253f5c">
+    <nav class="navbar navbar-expand-lg p-0 red-text fixed-top scrolling-navbar" style="background-color: #fff; border-bottom: 5px solid #ff4757;">
         <div class="container">
-            <a class="navbar-brand" th:href="@{/}"><img th:src="@{/img/icon/logo80x160noBG.png}" height="60" alt="mdb logo"></a>
+            <a class="navbar-brand" th:href="@{/}"><img th:src="@{/img/icon/logo80x160noBkg.png}" height="60" alt="mdb logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -56,16 +56,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"  th:classappend="${#httpServletRequest.requestURI=='/client/list-film'} ? active">
-                        <a class="nav-link" th:href="@{/client/list-film}">Movies <span class="sr-only">(current)</span></a>
+                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/list-film}">Movies <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/list-event'} ? active">
-                        <a class="nav-link" th:href="@{/client/list-event}">Events</a>
+                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/list-event}">Events</a>
                     </li>
                     <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/about-us'} ? active">
-                        <a class="nav-link" th:href="@{/client/about-us}">About us</a>
+                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/about-us}">About us</a>
                     </li>
                     <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/contact-us'} ? active">
-                        <a class="nav-link" th:href="@{/client/contact-us}">Contact us</a>
+                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/contact-us}">Contact us</a>
                     </li>
                 </ul>
                 <form class="form-inline">
@@ -95,7 +95,6 @@
             </div>
         </div>
     </nav>
-
     <!-- Intro Section -->
     <div  th:if="${#httpServletRequest.requestURI=='/'}" class="view jarallax" data-jarallax='{"speed": 0.2}' style="margin: 0;padding: 0;"
           th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
