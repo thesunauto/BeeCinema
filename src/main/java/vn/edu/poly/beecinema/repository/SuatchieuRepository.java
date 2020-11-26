@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Sukien;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public interface SuatchieuRepository extends JpaRepository<Suatchieu, Integer>, JpaSpecificationExecutor<Suatchieu> , PagingAndSortingRepository<Suatchieu, Integer> {
@@ -17,6 +19,6 @@ public interface SuatchieuRepository extends JpaRepository<Suatchieu, Integer>, 
     List<Suatchieu> findAllByPhimAndTrangthai(Phim phim,Integer trangthai);
     @Query("SELECT p FROM Suatchieu p WHERE CONCAT(p.id, ' ',p.phim.ten, ' ', p.phong.ten, ' ', p.ngaychieu, ' ', p.khunggio.batdau, ' ', p.khunggio.ketthuc ) LIKE %?1%")
     public Page<Suatchieu> findAll(String keyword, Pageable pageable);
-
+    List<Suatchieu> findAllByNgaychieuAndTrangthai(LocalDate ngaychieu,Integer trangthai);
 
 }
