@@ -141,6 +141,7 @@ public class MainController {
             Quyen quyen = quyenService.getQuyenById("3");
             taikhoan.setQuyen(quyen);
             System.out.println("test lan 2");
+            System.out.println("test lan 3");
             taikhoan.setMota(null);
             taikhoan.setDiachi(null);
             taikhoan.setTrangthai(0);
