@@ -18,6 +18,6 @@ public interface VeRepository extends JpaRepository<Ve, String>, JpaSpecificatio
     List<Ve> findAllBySuatchieu(Suatchieu suatchieu);
     List<Ve> findAllByTrangthai(Integer trangthai);
     List<Ve> getVeByVeID(VeID veID);
-
+    List<Ve> findAllByTrangthaiOrderByNgaytaoDesc(Integer trangthai);
 
 }

@@ -37,8 +37,8 @@ public class ClientDatVeChonGheRestController {
     private GheService gheService;
     @Autowired
     private VeService veService;
-@Autowired
-private VeonlineRepository veonlineRepository;
+    @Autowired
+    private VeonlineRepository veonlineRepository;
     @Autowired
     private VeonlineService veonlineService;
     @Autowired
@@ -261,22 +261,24 @@ private VeonlineRepository veonlineRepository;
 
         try {
             List<VeResponse> veResponsesCurent = (List<VeResponse>) session.getAttribute("veresponse");
-if((veResponsesCurent.size()+veonlineRepository.findAllBySuatchieuAndTaikhoan(suatChieuService.findById(veResponsesCurent.get(0).getIdsuatchieu()),taikhoanService.findTaikhoanById(authentication.getName()).get()).size())<=4){
-    for (VeResponse veResponse : veResponsesCurent) {
-        if (!veonlineService.insert(veResponsesCurent.get(0).getIdsuatchieu(), veResponse.getIdghe(), idsukien, authentication.getName())) {
-            session.setAttribute("veresponse", new ArrayList<VeResponse>());
-            return ResponseEntity.ok().body(false);
-        }
-    }
-    session.setAttribute("veresponse", new ArrayList<VeResponse>());
-    return ResponseEntity.ok().body(true);
-}else{
-    return ResponseEntity.ok().body(false);
-}
+            if ((veResponsesCurent.size() + veonlineRepository.findAllBySuatchieuAndTaikhoan(suatChieuService.findById(veResponsesCurent.get(0).getIdsuatchieu()), taikhoanService.findTaikhoanById(authentication.getName()).get()).size()) <= 4) {
+                for (VeResponse veResponse : veResponsesCurent) {
+                    if (!veonlineService.insert(veResponsesCurent.get(0).getIdsuatchieu(), veResponse.getIdghe(), idsukien, authentication.getName())) {
+                        session.setAttribute("veresponse", new ArrayList<VeResponse>());
+                        return ResponseEntity.ok().body(false);
+                    }
+                }
+                session.setAttribute("veresponse", new ArrayList<VeResponse>());
+                return ResponseEntity.ok().body(true);
+            } else {
+                session.setAttribute("veresponse", new ArrayList<VeResponse>());
+                return ResponseEntity.ok().body(false);
+            }
 
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+        session.setAttribute("veresponse", new ArrayList<VeResponse>());
         return ResponseEntity.ok().body(false);
     }
 
@@ -294,7 +296,7 @@ if((veResponsesCurent.size()+veonlineRepository.findAllBySuatchieuAndTaikhoan(su
     public ResponseEntity getSuatChieuByDate(@PathVariable String idphim, @PathVariable String date) {
         List<SuatChieuResponse> suatChieuResponses = new ArrayList<>();
         suatChieuService.findAllByPhimAndDate(idphim, LocalDateTime.parse(date).toLocalDate()).forEach(suatchieu -> {
-            if(LocalDateTime.of(suatchieu.getNgaychieu(),suatchieu.getKhunggio().getBatdau()).minusMinutes(suatchieu.getPhuthuyonline()).compareTo(LocalDateTime.now())>0){
+            if (LocalDateTime.of(suatchieu.getNgaychieu(), suatchieu.getKhunggio().getBatdau()).minusMinutes(suatchieu.getPhuthuyonline()).compareTo(LocalDateTime.now()) > 0) {
                 suatChieuResponses.add(SuatChieuResponse.builder()
                         .id(suatchieu.getId())
                         .batdau(suatchieu.getKhunggio().getBatdau().toString())
@@ -310,7 +312,7 @@ if((veResponsesCurent.size()+veonlineRepository.findAllBySuatchieuAndTaikhoan(su
     }
 
     @PostMapping("/getVeonlineUntil/{idsuatchieu}")
-    public ResponseEntity getVeonlineUntil(Authentication authentication,@PathVariable Integer idsuatchieu){
-        return ResponseEntity.ok().body(veonlineRepository.findAllBySuatchieuAndTaikhoan(suatChieuService.findById(idsuatchieu),taikhoanService.findTaikhoanById(authentication.getName()).get()).size());
+    public ResponseEntity getVeonlineUntil(Authentication authentication, @PathVariable Integer idsuatchieu) {
+        return ResponseEntity.ok().body(veonlineRepository.findAllBySuatchieuAndTaikhoan(suatChieuService.findById(idsuatchieu), taikhoanService.findTaikhoanById(authentication.getName()).get()).size());
     }
 }

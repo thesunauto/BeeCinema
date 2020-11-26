@@ -70,6 +70,7 @@ public class ClientController {
         model.addAttribute("trang", trang);
         model.addAttribute("phimDangChieu", phim_dang_chieu);
         model.addAttribute("phimSapchieu", phim_sap_chieu);
+        model.addAttribute("phim", phim);
         return "client/list-film";
     }
     @GetMapping("/select-seat")

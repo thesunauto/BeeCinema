@@ -167,9 +167,10 @@
                     dataType:'JSON',
                     success:function (data) {
                         var nbo = data;
-                        if(nbo){
+                        console.log(nbo)
+                        if(nbo.minScrollbarLength!=0){
                             toastr.success('xác nhận hoàn tất', '', {positionClass: 'md-toast-top-right'});
-                            window.open("http://localhost:8080/employee/xuatve/6|33");
+                            window.open('/employee/xuatve/'+nbo[1]+'|'+nbo[0]);
                         }else{
                             toastr.error('xác nhận thất bại', '', {positionClass: 'md-toast-top-right'});
                         }

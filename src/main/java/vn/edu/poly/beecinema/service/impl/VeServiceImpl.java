@@ -67,7 +67,7 @@ public class VeServiceImpl implements VeService {
     @Override
     public List<Ve> findAllByToDay() {
         List<Ve>ves = new ArrayList<>();
-        veRepository.findAllByTrangthai(0).forEach(ve -> {
+        veRepository.findAllByTrangthaiOrderByNgaytaoDesc(0).forEach(ve -> {
             if(ve.getNgaytao().toLocalDate().equals(LocalDate.now())){
                 ves.add(ve);
             }

@@ -57,6 +57,7 @@ public class VeonlineServiceImpl implements VeonlineService {
     @Override
     public List<Veonline> findAllByToday() {
         List<Veonline> veonlines = new ArrayList<>();
+
         suatchieuRepository.findAll().forEach(suatchieu -> {
 
             if (suatchieu.getNgaychieu().equals(LocalDate.now())) {

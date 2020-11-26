@@ -91,6 +91,7 @@ public class MainController {
         List <Sukien> suKien = suKienService.getAllSukien();
         model.addAttribute("suKien", suKien);
         model.addAttribute("authentication", authentication);
+        model.addAttribute("phim", phim);
         String trang = setLayout(authentication);
         model.addAttribute("trang", trang);
         return "client/UserHomePage";
