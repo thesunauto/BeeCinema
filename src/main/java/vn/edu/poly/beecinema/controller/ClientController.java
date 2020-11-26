@@ -44,13 +44,6 @@ public class ClientController {
         return page;
     }
 
-    @GetMapping("/manager-ticket")
-    public String ticketManager(Model model, Authentication authentication){
-        String trang = setLayout(authentication);
-        model.addAttribute("trang", trang);
-        return "client/ticketManager";
-    }
-
     @GetMapping("/detail-film/{id}")
     public String detailfilm(Model model, Authentication authentication, @PathVariable(value = "id") String id){
         Phim phim = phimService.findPhimById(id).get();

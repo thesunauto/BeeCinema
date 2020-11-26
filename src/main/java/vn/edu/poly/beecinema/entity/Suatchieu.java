@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -15,6 +17,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class Suatchieu implements Serializable {
 
+    @NotNull(message = "Vui lòng nhập ID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -47,13 +50,16 @@ public class Suatchieu implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate ngaytao;
 
+    @NotNull(message = "Vui lòng chọn Ngày chiếu")
     @Column(name = "ngaychieu", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate ngaychieu;
 
+    @NotNull(message = "Vui lòng nhập Đơn giá")
     @Column(name = "dongia", nullable = false)
     private Float dongia;
 
+    @NotNull(message = "Vui lòng nhập Phút hủy online")
     @Column(name = "phuthuyonline", nullable = false)
     private Integer phuthuyonline;
 

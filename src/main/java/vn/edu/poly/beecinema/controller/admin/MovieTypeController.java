@@ -97,6 +97,8 @@ public class MovieTypeController {
     @RequestMapping(value = "/delete" )
     public String deleteUser(@RequestParam("id") String loaiPhimId, Model model) {
         loaiPhimService.deleteLoaiPhim(loaiPhimId);
+        List<LoaiPhim> loaiPhim = loaiPhimService.getAllLoaiPhim();
+        model.addAttribute("loaiPhim", loaiPhim);
         return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }
 

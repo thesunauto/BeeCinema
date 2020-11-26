@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import vn.edu.poly.beecinema.entity.Ghe;
 import vn.edu.poly.beecinema.entity.Loaighe;
 import vn.edu.poly.beecinema.entity.Phong;
+import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.service.PhongService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
@@ -86,7 +88,7 @@ public class RoomController {
     @PostMapping("/update-room")
     public String updateRoom(@Valid @ModelAttribute(value = "room") Phong phong,
                              BindingResult bindingResult,
-                              Authentication authentication, Model model){
+                             Authentication authentication, Model model){
         if(bindingResult.hasErrors()){
 
         }else{

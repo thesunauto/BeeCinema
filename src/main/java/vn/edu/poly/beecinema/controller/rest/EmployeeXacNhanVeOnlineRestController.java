@@ -20,7 +20,6 @@ import vn.edu.poly.beecinema.service.VeonlineService;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -49,13 +48,8 @@ public class EmployeeXacNhanVeOnlineRestController {
                     .tenphim(veonline.getSuatchieu().getPhim().getTen())
                     .hethan((veonline.getSuatchieu().getKhunggio().getBatdau().minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).getHour()) + ":" + (veonline.getSuatchieu().getKhunggio().getBatdau().minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).getMinute()) + " - " + veonline.getSuatchieu().getNgaychieu().getDayOfMonth() + '/' + veonline.getSuatchieu().getNgaychieu().getMonthValue())
                     .trangthai(veonlineService.getStt(veonline))
-                    .ngaytaoLDT(veonline.getNgaytao())
                     .build());
         });
-
-        Collections.sort(veonlineResponses,(o1, o2) -> o2.getNgaytaoLDT().compareTo(o1.getNgaytaoLDT()));
-
-
         return ResponseEntity.ok().body(veonlineResponses);
     }
 
