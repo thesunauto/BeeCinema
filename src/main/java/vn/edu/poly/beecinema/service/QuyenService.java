@@ -2,7 +2,6 @@ package vn.edu.poly.beecinema.service;
 
 import vn.edu.poly.beecinema.entity.Quyen;
 
-
 import java.util.List;
 import java.util.Optional;
 
