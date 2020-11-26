@@ -17,13 +17,7 @@ public interface TaikhoanRepository extends PagingAndSortingRepository<Taikhoan,
     public Page<Taikhoan> findAll(String keyword, Pageable pageable);
 
     @Query("SELECT p FROM Taikhoan p WHERE p.email = ?1")
-
     public Taikhoan findByEmail(String email);
 
     public Taikhoan findByResetPasswordToken(String token);
-
-    Taikhoan getTaikhoanByEmail(String email);
-
-    Taikhoan findTaikhoanByUsernameAndEmail(String username, String email);
-
 }

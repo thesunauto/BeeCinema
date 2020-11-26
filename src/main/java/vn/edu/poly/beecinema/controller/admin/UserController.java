@@ -72,7 +72,7 @@ public class UserController {
     }
     @PostMapping("/add-user")
     public String saveUser(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan, BindingResult bindingResult,
-                           @ModelAttribute("username") String idTaikhoan, @RequestParam("images") MultipartFile images,
+                           @ModelAttribute("id") String idTaikhoan, @RequestParam("images") MultipartFile images,
                            Model model, Authentication authentication){
         if(bindingResult.hasErrors()){
 

@@ -37,10 +37,10 @@
         <band height="298" splitType="Stretch">
             <property name="local_mesure_unitheight" value="pixel"/>
             <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
-<!--            <image>-->
-<!--                <reportElement x="50" y="-8" width="160" height="70" uuid="a99ca527-ea7f-4851-9c5a-7e55ae326eea"/>-->
-<!--                <imageExpression><![CDATA["C:/Users/ndc10/IdeaProjects/beecinema/src/main/resources/static/img/logo80x160noBG.png"]]></imageExpression>-->
-<!--            </image>-->
+            <image>
+                <reportElement x="50" y="-8" width="160" height="70" uuid="a99ca527-ea7f-4851-9c5a-7e55ae326eea"/>
+                <imageExpression><![CDATA["C:/Users/ndc10/IdeaProjects/beecinema/src/main/resources/static/img/logo80x160noBG.png"]]></imageExpression>
+            </image>
             <staticText>
                 <reportElement x="0" y="70" width="70" height="20" uuid="762fda9d-1806-4192-95d9-9a3b909409d2"/>
                 <textElement>
@@ -81,7 +81,7 @@
                 <textElement>
                     <font fontName="Times New Roman" pdfEncoding="Cp1258" />
                 </textElement>
-                <text><![CDATA[Total: ]]></text>
+                <text><![CDATA[Tổng:]]></text>
             </staticText>
             <staticText>
                 <reportElement x="0" y="150" width="271" height="16" uuid="ff7909e5-06c3-4739-ae67-30e1a19cee48">
@@ -163,14 +163,14 @@
                 <textElement>
                     <font isBold="true" fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{ghe.dayghe.ten}$F{ghe.col}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{ghe.dayghe.ten}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="39" y="167" width="200" height="20" uuid="0f0496c3-ebe7-440e-828a-6ad9cfe4efa3">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{ghe.col}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="220" y="201" width="36" height="20" uuid="56e3c372-8f8c-4c9f-ae0e-fe8165baa6ab">

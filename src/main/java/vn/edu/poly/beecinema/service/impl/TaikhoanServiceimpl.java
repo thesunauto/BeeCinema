@@ -85,15 +85,4 @@ public class TaikhoanServiceimpl implements TaikhoanService {
         taikhoanRepository.save(taikhoan);
     }
 
-    @Override
-    public Taikhoan findByEmail(String email) {
-        return taikhoanRepository.getTaikhoanByEmail(email);
-    }
-
-    @Override
-    public Taikhoan findTaikhoanByUsernameAndEmail(String username, String email) {
-        return taikhoanRepository.findTaikhoanByUsernameAndEmail(username, email);
-    }
-
-
 }

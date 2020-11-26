@@ -38,9 +38,4 @@ public class QuyenServiceImpl implements QuyenService {
     public Optional<Quyen> findQuyenById(String id) {
         return quyenRepository.findById(id);
     }
-
-    @Override
-    public Quyen getQuyenById(String id) {
-        return quyenRepository.getQuyenById(id);
-    }
 }
