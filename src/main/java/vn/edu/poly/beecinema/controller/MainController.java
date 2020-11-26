@@ -140,6 +140,7 @@ public class MainController {
         }else{
             Quyen quyen = quyenService.getQuyenById("3");
             taikhoan.setQuyen(quyen);
+            System.out.println("a");
             taikhoan.setMota(null);
             taikhoan.setDiachi(null);
             taikhoan.setTrangthai(0);
