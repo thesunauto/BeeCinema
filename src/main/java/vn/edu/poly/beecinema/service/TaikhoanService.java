@@ -23,4 +23,9 @@ public interface TaikhoanService {
     Taikhoan getByResetPasswordToken(String token);
 
     void updatePassword(Taikhoan taikhoan, String newPassword);
+
+    Taikhoan findByEmail(String email);
+
+    Taikhoan findTaikhoanByUsernameAndEmail(String username, String email);
+
 }

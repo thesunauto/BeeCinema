@@ -11,7 +11,11 @@
 
   <!-- Main layout -->
   <main layout:fragment="content">
+<<<<<<< HEAD
+
+=======
     <form th:action="@{/admin/room/update-room}" th:object="${room}" method="post">
+>>>>>>> origin/master
     <div class="container-fluid">
 
     
@@ -27,6 +31,13 @@
             <!-- /Card image -->
             <!-- Section heading -->
             <div class="card-body ">
+              <form th:action="@{/admin/room/update-room}" th:object="${room}" method="post">
+                <input type="hidden" th:field="*{ngaytao}">
+                <input type="hidden" th:field="*{taikhoan}">
+
+                <div th:switch="${messages}">
+                  <p th:case="'thanhcong'" class="alert alert-success" role="alert">Cập nhật thành công!</p>
+                </div>
               <!-- Grid row -->
               <div class="row">
 
