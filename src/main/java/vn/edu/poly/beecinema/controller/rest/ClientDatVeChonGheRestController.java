@@ -10,7 +10,6 @@ import vn.edu.poly.beecinema.config.HttpSessionConfig;
 import vn.edu.poly.beecinema.entity.Ghe;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
-import vn.edu.poly.beecinema.entity.Veonline;
 import vn.edu.poly.beecinema.repository.VeonlineRepository;
 import vn.edu.poly.beecinema.service.*;
 import vn.edu.poly.beecinema.storage.StorageService;
@@ -315,27 +314,5 @@ public class ClientDatVeChonGheRestController {
     @PostMapping("/getVeonlineUntil/{idsuatchieu}")
     public ResponseEntity getVeonlineUntil(Authentication authentication, @PathVariable Integer idsuatchieu) {
         return ResponseEntity.ok().body(veonlineRepository.findAllBySuatchieuAndTaikhoan(suatChieuService.findById(idsuatchieu), taikhoanService.findTaikhoanById(authentication.getName()).get()).size());
-    }
-
-    @PostMapping("/listTicketManage/{page}")
-    public ResponseEntity listTicketManage(Authentication authentication,@PathVariable Integer page){
-        List<VeonlineResponse> veonlineResponses = new ArrayList<>();
-        veonlineService.getListByUser(taikhoanService.findTaikhoanById(authentication.getName()).get(),page,10).forEach(veonline -> {
-            veonlineResponses.add(VeonlineResponse.builder()
-                    .idsuatchieughe(veonline.getSuatchieu().getKhunggio().getBatdau()+"-"+veonline.getSuatchieu().getKhunggio().getKetthuc()+" | "+veonline.getGhe().getDayghe().getTen()+"-"+veonline.getGhe().getCol())
-                    .ngaytao(veonline.getNgaytao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-                    .hethan(LocalDateTime.of(veonline.getSuatchieu().getNgaychieu(),veonline.getSuatchieu().getKhunggio().getBatdau()).minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).format(DateTimeFormatter.ofPattern("HH/mm dd/MM/yyyy")))
-                    .tenphim(veonline.getSuatchieu().getPhim().getTen())
-                    .trangthai((veonline.getTrangthai()==0&&(LocalDateTime.of(veonline.getSuatchieu().getNgaychieu(),veonline.getSuatchieu().getKhunggio().getBatdau()).compareTo(LocalDateTime.now())<0))?2:(veonline.getTrangthai()==1)?1:0)
-                    .build());
-        });
-
-
-        return ResponseEntity.ok().body(veonlineResponses);
-    }
-
-    @PostMapping("/listTicketManageSize")
-    public ResponseEntity listTicketManageSize(Authentication authentication){
-        return ResponseEntity.ok().body(veonlineService.getListByUser(taikhoanService.findTaikhoanById(authentication.getName()).get()).size());
     }
 }
