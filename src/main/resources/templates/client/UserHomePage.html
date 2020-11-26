@@ -54,55 +54,32 @@
         <div class="tab-content card" id="myClassicTabContentOrange">
           <div class="tab-pane fade active show" id="profile-classic-orange" role="tabpanel" aria-labelledby="profile-tab-classic-orange">
             <div class="row">
-              <div class="col-lg-3 col-sm-4 col-md-12 mb-4"  th:each="phim : ${phimDangChieu}">
-                <!-- Card -->
-                <div class="card card-image" th:style="'background-image:url(' +@{'/api/employee/getResourse/'+${phim.hinhanh}} + ')'">
+              <div class="col-lg-3 col-sm-4 col-md-12 mb-4"  th:each="phim1 : ${phimDangChieu}">
 
-                  <!-- Content -->
-                  <div class="text-white text-center d-flex justify-content-center rgba-black-strong py-5 ">
-                    <div>
-                      <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim.dotuoi.ten}"> </strong></h6>
-                      <h3 class="card-title pt-4 pb-3 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim.ten}"></h3>
-                      <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim.id}}"><i class="fas fa-film"></i> Xem chi tiết</a>
-                      <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim.id}" class="btn btn-pink btn-rounded">Xem trailer</a>
-                    </div>
+                <div class="view overlay zoom">
+                  <img th:src="@{${'/api/employee/getResourse/'+phim1.getHinhanh()}}" style="max-height: 414px; width: 100%" class="img-fluid " alt="smaple image">
+                  <div class="mask rgba-black-strong py-5 text-center justify-content-center">
+                    <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim1.dotuoi.ten}"> </strong></h6>
+                    <h3 class="card-title white-text pt-4 pb-3 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim1.ten}"></h3>
+                    <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim1.id}}"><i class="fas fa-eye"></i>&nbsp Xem chi tiết</a>
+                    <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-pink btn-rounded"><i class="fab fa-youtube"></i>&nbsp Xem trailer</a>
                   </div>
-                  <!-- Content -->
                 </div>
-                <!-- Card -->
 
               </div>
             </div>
           </div>
           <div class="tab-pane fade" id="follow-classic-orange" role="tabpanel" aria-labelledby="follow-tab-classic-orange">
             <div class="row">
-              <div class="col-lg-3 col-sm-4 col-md-12 mb-4"  th:each="phim : ${phimSapchieu}">
-                <!-- Card -->
-                <div class="card card-image" th:style="'background-image:url(' +@{'/api/employee/getResourse/'+${phim.hinhanh}} + ')'">
-
-                  <!-- Content -->
-                  <div class="text-white text-center d-flex justify-content-center rgba-black-strong py-5 ">
-                    <div>
-                      <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim.dotuoi.ten}"> </strong></h6>
-                      <h3 class="card-title pt-4 pb-3 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim.ten}"></h3>
-                      <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim.id}}"><i class="fas fa-film"></i> Xem chi tiết</a>
-                      <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim.id}" class="btn btn-pink btn-rounded">Xem trailer</a>
-                    </div>
-                  </div>
-                  <!-- Content -->
-                </div>
-                <!-- Card -->
-
-              </div>
               <div class="col-lg-3 col-sm-4 col-md-12 mb-4"  th:each="phim12 : ${phimSapchieu}">
 
                 <div class="view overlay zoom">
                   <img th:src="@{${'/api/employee/getResourse/'+phim12.getHinhanh()}}" class="img-fluid " alt="smaple image">
-                  <div class="mask rgba-black-strong">
+                  <div class="mask rgba-black-strong py-5 text-center justify-content-center">
                     <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim12.dotuoi.ten}"> </strong></h6>
-                    <h3 class="card-title pt-4 pb-3 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim12.ten}"></h3>
-                    <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim12.id}}"><i class="fas fa-film"></i> Xem chi tiết</a>
-                    <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-pink btn-rounded">Xem trailer</a>
+                    <h3 class="card-title white-text pt-4 pb-3 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim12.ten}"></h3>
+                    <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim12.id}}"><i class="fas fa-eye"></i>&nbsp Xem chi tiết</a>
+                    <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-pink btn-rounded"><i class="fas fa-video"></i>&nbsp Xem trailer</a>
                   </div>
                 </div>
 
@@ -115,37 +92,16 @@
     </section>
 
     <section>
-      <h3 class="border-bottom border-danger">SỰ KIỆN</h3>
-      <div class="row">
-        <div class="col-lg-3 col-sm-4 col-md-6">
+      <h3 class="font-weight-bold pb-1" style="border-bottom: 3px solid #ff4757;">SỰ KIỆN</h3>
+      <div class="row mb-4">
+        <div class="col-lg-3 col-sm-4 col-md-6" th:each="suKien : ${suKien}">
           <div class="view overlay zoom">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20(131).jpg" class="img-fluid " alt="smaple image">
-            <div class="mask flex-center">
-              <p class="white-text">Zoom effect</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-4 col-md-6">
-          <div class="view overlay zoom">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20(131).jpg" class="img-fluid " alt="smaple image">
-            <div class="mask flex-center">
-              <p class="white-text">Zoom effect</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-4 col-md-6">
-          <div class="view overlay zoom">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20(131).jpg" class="img-fluid " alt="smaple image">
-            <div class="mask flex-center">
-              <p class="white-text">Zoom effect</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-4 col-md-6">
-          <div class="view overlay zoom">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20(131).jpg" class="img-fluid " alt="smaple image">
-            <div class="mask flex-center">
-              <p class="white-text">Zoom effect</p>
+            <img th:src="@{${'/api/employee/getResourse/'+suKien.getHinhanh()}}" style="height: 350px; width: 100%" class="img-fluid " alt="smaple image">
+            <div class="mask rgba-black-strong py-5 text-center justify-content-center">
+
+              <h3 class="card-title white-text  p-3 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${suKien.ten}"></h3>
+              <a href="#" data-toggle="modal"  th:attr="data-target='#customerModel'+${suKien.id}"  class="btn btn-pink btn-rounded"></i>&nbsp Xem chi tiết</a>
+
             </div>
           </div>
         </div>
@@ -166,15 +122,14 @@
           <div class="modal-body mb-0 p-0">
 
             <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A3PDXmYoF5U"
-                      allowfullscreen></iframe>
+              <iframe width="853" height="480" th:src="${phim.linktrailer}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
           </div>
 
           <!--Footer-->
           <div class="modal-footer justify-content-center flex-column flex-md-row">
-            <span class="mr-4">Bản quyền thuộc Bee Cinema Group!</span>
+            <span class="mr-4">Hãy thư giãn cùng Bee Cinema nhé!</span>
             <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
                     data-dismiss="modal">Close</button>
 
