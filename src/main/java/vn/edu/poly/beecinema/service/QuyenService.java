@@ -15,4 +15,7 @@ public interface QuyenService {
     void deleteQuyen(String id);
 
     Optional<Quyen> findQuyenById(String id);
+
+    Quyen getQuyenById(String id);
+
 }

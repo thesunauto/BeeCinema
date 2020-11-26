@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.commons.VeResponse;
 import vn.edu.poly.beecinema.entity.Phim;
+import vn.edu.poly.beecinema.entity.Quyen;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.entity.Taikhoan;
 import vn.edu.poly.beecinema.service.*;
@@ -125,28 +126,31 @@ public class MainController {
     }
 
     @PostMapping("/signup")
-    public String saveSignUpPage(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan,BindingResult bindingResult,
-                                 @ModelAttribute("id") String idTaikhoan,
+    public String saveSignUpPage(@ModelAttribute("taikhoan") Taikhoan taikhoan,
+                                 @ModelAttribute("username") String idTaikhoan, @ModelAttribute("email") String email,
                                  Model model, Authentication authentication){
-        if(bindingResult.hasErrors()){
-
-        }else if(taikhoanService.findTaikhoanById(idTaikhoan).isPresent()){
+//        Taikhoan checkMail = taikhoanService.findByEmail(email);
+//        if(taikhoanService.findTaikhoanById(idTaikhoan).isPresent()){
+//            model.addAttribute("messages", "trungid");
+//        }else if(checkMail != null){
+//            model.addAttribute("messages", "trungemail");
+        Taikhoan taikhoan1 = taikhoanService.findTaikhoanByUsernameAndEmail(idTaikhoan, email);
+        if(taikhoan1 != null){
             model.addAttribute("messages", "trungid");
         }else{
-//            taikhoan.setGioitinh(null);
-//            taikhoan.setTrangthai(null);
-//            taikhoan.setNgaysinh(null);
-//            taikhoan.setDiachi(null);
-//            taikhoan.setSodienthoai(null);
-//            taikhoan.setMota(null);
-//            taikhoan.setQuyen(null);
+            Quyen quyen = quyenService.getQuyenById("3");
+            taikhoan.setQuyen(quyen);
+            taikhoan.setMota(null);
+            taikhoan.setDiachi(null);
+            taikhoan.setTrangthai(0);
+            taikhoan.setResetPasswordToken(null);
             taikhoan.setNgaytao(LocalDateTime.now());
-            taikhoan.setHinhanh("a.jpg");
+            taikhoan.setHinhanh("null");
             taikhoanService.saveTaikhoan(taikhoan);
-            String trang = setLayout(authentication);
-            model.addAttribute("trang", trang);
             model.addAttribute("messages", "thanhcong");
         }
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
         return "client/SignUp";
     }
 
