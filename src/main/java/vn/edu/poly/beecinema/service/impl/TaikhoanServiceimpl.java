@@ -86,8 +86,9 @@ public class TaikhoanServiceimpl implements TaikhoanService {
     }
 
     @Override
-    public Taikhoan findByEmail(String email) {
-        return taikhoanRepository.getTaikhoanByEmail(email);
+    public List<Taikhoan> findByEmail(String email) {
+        return taikhoanRepository.findByEmailOrderByUsername(email);
+
     }
 
     @Override

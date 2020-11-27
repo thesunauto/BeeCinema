@@ -9,6 +9,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.entity.Taikhoan;
 
+import java.util.List;
+import java.util.Optional;
+
 //public interface TaikhoanRepository extends JpaRepository<Taikhoan, String>, JpaSpecificationExecutor<Taikhoan> {
 //
 //}
@@ -22,7 +25,8 @@ public interface TaikhoanRepository extends PagingAndSortingRepository<Taikhoan,
 
     public Taikhoan findByResetPasswordToken(String token);
 
-    Taikhoan getTaikhoanByEmail(String email);
+    List<Taikhoan> findByEmailOrderByUsername(String email);
+
 
     Taikhoan findTaikhoanByUsernameAndEmail(String username, String email);
 
