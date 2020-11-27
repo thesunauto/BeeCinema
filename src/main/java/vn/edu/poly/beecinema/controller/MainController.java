@@ -2,9 +2,10 @@ package vn.edu.poly.beecinema.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.commons.VeResponse;
 import vn.edu.poly.beecinema.entity.Phim;
@@ -15,7 +16,6 @@ import vn.edu.poly.beecinema.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,12 @@ public class MainController {
     @Autowired private PhimService phimService;
     @Autowired private SukienService suKienService;
     @Autowired private SuatChieuService suatChieuService;
+    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
+    @Autowired
+    public MainController(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
+        this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
+    }
+
 
     @GetMapping("/datve/{id}")
     public String datghe(Authentication authentication,HttpSession httpSession, Model model, @PathVariable String id){
@@ -147,8 +153,14 @@ public class MainController {
             taikhoan.setNgaytao(LocalDateTime.now());
             taikhoan.setHinhanh("null");
             taikhoanService.saveTaikhoan(taikhoan);
+            inMemoryUserDetailsManager.createUser(User.withDefaultPasswordEncoder()
+                    .username(taikhoan.getUsername())
+                    .password(taikhoan.getMatkhau())
+                    .roles(taikhoan.getQuyen().getTen())
+                    .build());
             model.addAttribute("messages", "thanhcong");
         }
+
         String trang = setLayout(authentication);
         model.addAttribute("trang", trang);
         return "client/SignUp";
