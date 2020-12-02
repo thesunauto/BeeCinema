@@ -10,33 +10,41 @@
 <body th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
 
 <main layout:fragment="content" style="padding: 0;">
-  <div class="container pt-5 mt-5">
+  <div class="container-fluid pt-5 mt-5">
 
     <!-- Section: Blog v.2 -->
-    <section class="wow fadeIn" data-wow-delay="0.3s">
+    <section class="wow fadeIn mb-3" data-wow-delay="0.3s">
+      <!-- Card -->
+      <div class="card card-cascade wider reverse">
 
-      <div class="row py-2 d-flex justify-content-center rgba-stylish-strong mx-auto" >
-        <!-- Card -->
-        <div class="card col-sm-12 col-md-3 p-0 m-4" th:each="suKien : ${suKien}" >
-
-          <!-- Card image -->
-          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg"
+        <!-- Card image -->
+        <div class="view view-cascade overlay">
+          <img class="card-img-top" th:src="@{/img/images/BeeEvents.png}"  style="object-fit: cover;  object-position: center;  width: 100%;  max-height: 200px;"
                alt="Card image cap">
-
-          <!-- Card content -->
-          <div class="card-body">
-            <!-- Title -->
-            <h4 class="card-title" style="min-height: 85px"><strong th:text="${suKien.ten}"> </strong></h4>
-            <!-- Text -->
-            </p>
-            <a href="#" class="btn btn-primary btn-rounded" data-toggle="modal" th:attr="data-target='#customerModel'+${suKien.id}" >Xem chi tiết</a>
-          </div>
-
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
         </div>
-        <!-- Card -->
+
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
+          <div class="row">
+            <div class="col-lg-3 col-sm-4 col-md-6" th:each="suKien : ${suKien}">
+              <div class="view overlay zoom">
+                <img th:src="@{${'/api/employee/getResourse/'+suKien.getHinhanh()}}" style="height: 350px; width: 100%" class="img-fluid " alt="smaple image">
+                <div class="mask rgba-black-strong py-5 text-center justify-content-center">
+
+                  <h3 class="card-title white-text  p-3 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${suKien.ten}"></h3>
+                  <a href="#" data-toggle="modal"  th:attr="data-target='#customerModel'+${suKien.id}"  class="btn btn-pink btn-rounded"></i>&nbsp Xem chi tiết</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-
-
+      <!-- Card -->
     </section>
     <div class="modal fade" th:each="suKien : ${suKien}" th:id="'customerModel'+${suKien.id}" tabindex="1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
@@ -66,10 +74,6 @@
 
             </div>
             <!-- Card -->
-
-
-
-
         </div>
         <!-- Content -->
       </div>

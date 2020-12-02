@@ -48,36 +48,40 @@
       </div>
       <!-- Card -->
     </section>
-<!--    <section class="wow fadeIn mb-3" data-wow-delay="0.3s">-->
-<!--      <h2 class="text-center my-3 white-text h1">Phim sắp chiếu</h2>-->
-<!--      <div class="row py-2 d-flex justify-content-center mx-auto" >-->
-<!--        &lt;!&ndash; Card &ndash;&gt;-->
+    <section class="my-5 wow fadeIn" data-wow-delay="0.3s">
+      <!-- Grid column -->
+        <!-- Card -->
+        <div class="card card-cascade narrower">
 
-<!--        <div class="card col-sm-12 col-md-3 p-0 m-4" th:each="phim : ${phimSapchieu}" >-->
+          <!-- Card image -->
+          <div class="view view-cascade gradient-card-header danger-color">
+            <h2 class="card-header-title font-weight-bold m-0">PHIM SẮP CHIẾU</h2>
+          </div>
+          <!-- Card image -->
+          <!-- Card content -->
+          <div class="card-body card-body-cascade text-center">
+            <div class="row">
+              <div class="col-lg-3 col-sm-4 col-md-12 mb-4"  th:each="phim1 : ${phimSapchieu}">
 
-<!--          &lt;!&ndash; Card image &ndash;&gt;-->
+                <div class="view overlay zoom">
+                  <img th:src="@{${'/api/employee/getResourse/'+phim1.getHinhanh()}}" style="max-height: 414px; width: 100%" class="img-fluid " alt="smaple image">
+                  <div class="mask rgba-black-strong py-5 text-center justify-content-center">
+                    <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim1.dotuoi.ten}"> </strong></h6>
+                    <h3 class="card-title white-text p-2 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim1.ten}"></h3>
+                    <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim1.id}}"><i class="fas fa-eye"></i>&nbsp Xem chi tiết</a>
+                    <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-pink btn-rounded"><i class="fab fa-youtube"></i>&nbsp Xem trailer</a>
+                  </div>
+                </div>
 
-<!--          <img class="card-img-top" th:src="@{'/api/employee/getResourse/'+${phim.hinhanh}}" style="max-height: 300px"-->
-<!--               alt="Card image cap">-->
+              </div>
+            </div>
+          </div>
+          <!-- Card content -->
 
-<!--          &lt;!&ndash; Card content &ndash;&gt;-->
-<!--          <div class="card-body">-->
-<!--            &lt;!&ndash; Title &ndash;&gt;-->
-<!--            <h4 class="card-title"><strong th:text="${phim.ten}"> </strong></h4>-->
-<!--            &lt;!&ndash; Text &ndash;&gt;-->
-<!--            <p class="card-text" th:text="${phim.dotuoi.ten}">-->
-<!--            </p>-->
-<!--            <div class="d-flex flex-wrap">-->
-<!--              <a th:href="@{${'/client/detail-film/'+phim.id}}" class="btn btn-outline-primary btn-rounded btn-md">Detail</a>-->
-<!--              <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim.id}" class="btn btn-outline-success btn-rounded btn-md">trailer</a></div>-->
-<!--          </div>-->
-
-<!--        </div>-->
-<!--        &lt;!&ndash; Card &ndash;&gt;-->
-
-<!--      </div>-->
-
-<!--    </section>-->
+        </div>
+        <!-- Card -->
+      <!-- Grid column -->
+    </section>
     <div class="modal fade mt-5" th:each="phim : ${phim}" th:id="'filmModal'+${phim.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
