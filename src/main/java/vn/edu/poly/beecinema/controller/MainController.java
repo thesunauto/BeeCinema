@@ -142,13 +142,14 @@ public class MainController {
         }else if(taikhoanService.findTaikhoanById(idTaikhoan).isPresent()){
             model.addAttribute("messages", "trungid");
         }else{
-//            taikhoan.setGioitinh(null);
-//            taikhoan.setTrangthai(null);
-//            taikhoan.setNgaysinh(null);
-//            taikhoan.setDiachi(null);
-//            taikhoan.setSodienthoai(null);
-//            taikhoan.setMota(null);
-//            taikhoan.setQuyen(null);
+            Quyen quyen = quyenService.getQuyenById("3");
+            taikhoan.setQuyen(quyen);
+            System.out.println("test lan 2");
+            System.out.println("test lan 3");
+            taikhoan.setMota(null);
+            taikhoan.setDiachi(null);
+            taikhoan.setTrangthai(0);
+            taikhoan.setResetPasswordToken(null);
             taikhoan.setNgaytao(LocalDateTime.now());
             taikhoan.setHinhanh("a.jpg");
             taikhoanService.saveTaikhoan(taikhoan);
