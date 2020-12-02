@@ -45,21 +45,24 @@
                                     <!-- First column -->
                                     <div class="col-md-4">
                                         <div class="md-form mb-0">
-                                            <input type="text" th:field="*{username}" id="form2" class="form-control ">
-                                            <label for="form2" >Tên tài khoản</label>
+                                            <input type="text" th:field="*{username}" id="form21" class="form-control ">
+                                            <label for="form21" >Tên tài khoản</label>
+                                            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger text-center">
                                         </div>
                                     </div>
                                     <!-- Second column -->
                                     <div class="col-md-4">
                                         <div class="md-form mb-0">
-                                            <input type="text" th:field="*{ten}" id="form2" class="form-control" required pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$">
-                                            <label for="form2" >Họ Tên</label>
+                                            <input type="text" th:field="*{ten}" id="form22" class="form-control">
+                                            <label for="form22" >Họ Tên</label>
+                                            <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="md-form mb-0">
-                                            <input type="password" th:field="*{matkhau}" id="form82" class="form-control " required>
-                                            <label for="form82" >Mật khẩu</label>
+                                            <input type="password" th:field="*{matkhau}" id="form823" class="form-control ">
+                                            <label for="form823" >Mật khẩu</label>
+                                            <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center">
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +75,7 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <div class="form-check form-check-inline">
-                                                <input type="radio" th:field="*{gioitinh}" value="0" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample" required>
+                                                <input type="radio" th:field="*{gioitinh}" value="0" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample" checked>
                                                 <label class="form-check-label" for="materialInline1">Nam</label>
                                             </div>
 
@@ -88,7 +91,7 @@
                                     <!-- Second column -->
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <input type="date" th:field="*{ngaysinh}" id="form82" class="form-control " required>
+                                            <input type="date" th:field="*{ngaysinh}" id="form82" class="form-control ">
                                             <label for="form82" >Ngày sinh</label>
                                         </div>
                                     </div>
@@ -101,21 +104,59 @@
                                     <!-- First column -->
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <input type="email" th:field="*{email}" id="form76" class="form-control " required>
+                                            <input type="email" th:field="*{email}" id="form76" class="form-control ">
                                             <label for="form76">Email</label>
+                                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger text-center"></p>
                                         </div>
                                     </div>
                                     <!-- Second column -->
 
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <input type="text" th:field="*{sodienthoai}" id="form77" class="form-control" required>
+                                            <input type="text" th:field="*{sodienthoai}" id="form77" class="form-control">
                                             <label for="form77" >Điện thoại</label>
+                                            <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}" class="text-danger text-center"></p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Second row -->
 
+                                <!-- Second row -->
+                                <div class="row">
+
+                                    <!-- First column -->
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <textarea type="text" th:field="*{diachi}" id="form718" class="md-textarea form-control" rows="3"></textarea>
+                                            <label for="form718">Địa chỉ</label>
+                                        </div>
+                                    </div>
+                                    <!-- Second column -->
+
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <textarea type="text" th:field="*{mota}" id="form728" class="md-textarea form-control" rows="3"></textarea>
+                                            <label for="form728">Mô tả</label>
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-6 mb-2">-->
+<!--                                        <select th:field="*{quyen}" class="mdb-select md-form colorful-select dropdown-primary initialized">-->
+<!--                                            <option th:each="quyen1 : ${@quyenServiceImpl.getAllQuyen()}" th:value="${quyen1.id}" th:text="${quyen1.ten}">Hiện</option>-->
+<!--                                        </select><label class="mdb-main-label active">Quyền</label>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-6 mb-4">-->
+
+<!--                                        &lt;!&ndash; Name &ndash;&gt;-->
+<!--                                        <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">-->
+<!--                                            <option th:value="'0'" th:text="Hiện" ></option>-->
+<!--                                            <option th:value="'1'" th:text="Ẩn"></option>-->
+<!--                                        </select><label class="mdb-main-label active">Trạng thái</label>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <!-- Second row -->
 
                                 <div class="row">
                                     <div class="col-md-12 text-center my-4">

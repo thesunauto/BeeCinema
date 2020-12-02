@@ -1,6 +1,9 @@
 package vn.edu.poly.beecinema.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.edu.poly.beecinema.entity.*;
 import vn.edu.poly.beecinema.repository.GheRepository;
@@ -59,7 +62,6 @@ public class VeonlineServiceImpl implements VeonlineService {
         List<Veonline> veonlines = new ArrayList<>();
 
         suatchieuRepository.findAll().forEach(suatchieu -> {
-
             if (suatchieu.getNgaychieu().equals(LocalDate.now())) {
                 veonlines.addAll(findAllByIdSuatchieu(suatchieu.getId()));
             }
@@ -92,5 +94,15 @@ public class VeonlineServiceImpl implements VeonlineService {
     @Override
     public void save(Veonline veonline) {
         veonlineRepository.save(veonline);
+    }
+
+    @Override
+    public List<Veonline> getListByUser(Taikhoan taikhoan, Integer page, Integer limit) {
+        return veonlineRepository.findAllByTaikhoanOrderByNgaytaoDesc(taikhoan, PageRequest.of(page,limit)).getContent();
+    }
+
+    @Override
+    public List<Veonline> getListByUser(Taikhoan taikhoan) {
+        return veonlineRepository.findAllByTaikhoan(taikhoan);
     }
 }

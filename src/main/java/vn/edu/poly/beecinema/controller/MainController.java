@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.commons.VeResponse;
 import vn.edu.poly.beecinema.entity.Phim;
@@ -16,6 +17,7 @@ import vn.edu.poly.beecinema.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,47 +134,28 @@ public class MainController {
     }
 
     @PostMapping("/signup")
-    public String saveSignUpPage(@ModelAttribute("taikhoan") Taikhoan taikhoan,
-                                 @ModelAttribute("username") String idTaikhoan, @ModelAttribute("email") String email,
+    public String saveSignUpPage(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan,BindingResult bindingResult,
+                                 @ModelAttribute("id") String idTaikhoan,
                                  Model model, Authentication authentication){
+        if(bindingResult.hasErrors()){
 
-//        Taikhoan checkMail = taikhoanService.findByEmail(email);
-//        if(taikhoanService.findTaikhoanById(idTaikhoan).isPresent()){
-//            model.addAttribute("messages", "trungid");
-//        }else if(checkMail != null){
-//            model.addAttribute("messages", "trungemail");
-        if(taikhoanService.findByEmail(email).size()>0){
-            model.addAttribute("messages", "trungemail");
-            String trang = setLayout(authentication);
-            model.addAttribute("trang", trang);
-            return "client/SignUp";
-        }
-
-        if(taikhoanService.findTaikhoanById(idTaikhoan).orElse(null)!=null){
+        }else if(taikhoanService.findTaikhoanById(idTaikhoan).isPresent()){
             model.addAttribute("messages", "trungid");
+        }else{
+//            taikhoan.setGioitinh(null);
+//            taikhoan.setTrangthai(null);
+//            taikhoan.setNgaysinh(null);
+//            taikhoan.setDiachi(null);
+//            taikhoan.setSodienthoai(null);
+//            taikhoan.setMota(null);
+//            taikhoan.setQuyen(null);
+            taikhoan.setNgaytao(LocalDateTime.now());
+            taikhoan.setHinhanh("a.jpg");
+            taikhoanService.saveTaikhoan(taikhoan);
             String trang = setLayout(authentication);
             model.addAttribute("trang", trang);
-            return "client/SignUp";
+            model.addAttribute("messages", "thanhcong");
         }
-
-        Quyen quyen = quyenService.getQuyenById("3");
-        taikhoan.setQuyen(quyen);
-        taikhoan.setMota(null);
-        taikhoan.setDiachi(null);
-        taikhoan.setTrangthai(0);
-        taikhoan.setResetPasswordToken(null);
-        taikhoan.setNgaytao(LocalDateTime.now());
-        taikhoan.setHinhanh("null");
-        taikhoanService.saveTaikhoan(taikhoan);
-        inMemoryUserDetailsManager.createUser(User.withDefaultPasswordEncoder()
-                .username(taikhoan.getUsername())
-                .password(taikhoan.getMatkhau())
-                .roles(taikhoan.getQuyen().getTen())
-                .build());
-        model.addAttribute("messages", "thanhcong");
-
-        String trang = setLayout(authentication);
-        model.addAttribute("trang", trang);
         return "client/SignUp";
     }
 

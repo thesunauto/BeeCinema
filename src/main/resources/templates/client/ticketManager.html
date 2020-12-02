@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{${trang}}">
+
+<head>
+    <title>Sign in</title>
+</head>
+
+<body th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+
+<main layout:fragment="content" style="padding: 0;">
+    <div class="container pt-5 my-5">
+        <div class="card">
+            <div class="card-body">
+
+                <!-- Table -->
+                <table class="table">
+
+                    <!-- Table head -->
+                    <thead class="mdb-color darken-3">
+                    <tr class="text-white">
+                        <th>#</th>
+                        <th>Suất chiếu | Ghế</th>
+                        <th>Phim</th>
+                        <th>Ngày tạo</th>
+                        <th>Hết hạn</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                    </thead>
+                    <!-- Table head -->
+
+                    <!-- Table body -->
+                    <tbody id="dataVeon">
+                    <tr class="text-white">
+                        <th>#</th>
+                        <th>Suất chiếu | Ghế</th>
+                        <th>Phim</th>
+                        <th>Ngày tạo</th>
+                        <th>Hết hạn</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                    </tbody>
+                    <!-- Table body -->
+                </table>
+                <!-- Table -->
+                <nav id="dataPage">
+                    <ul class="pagination pg-dark">
+                        <!-- Arrow left -->
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+
+                        <!-- Numbers -->
+                        <li class="page-item active"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item"><a class="page-link">4</a></li>
+                        <li class="page-item"><a class="page-link">5</a></li>
+
+                        <!-- Arrow right -->
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block layout:fragment="optional">
+    <script>
+        $(document).ready(function () {
+            var pageC = 0;
+            var fullListSize = 0;
+            $('body').ready(loadVeonline(0));
+            var listVeonline = [];
+            function loadVeonline(page) {
+                $.ajax({
+                    url:'/api/datve/listTicketManage/'+page,
+                    type:'POST',
+                    dataType: 'JSON',
+                    success:function (data) {
+                        listVeonline = data
+                        console.log(listVeonline)
+                    },
+                    error: function (e) {
+                        toastr.warning('Lỗi load dữ liệu từ máy chủ!', '', {positionClass: 'md-toast-top-center'});
+                    },
+                    complete: function () {
+                        fillVeonline();
+                    }
+                });
+
+                $.ajax({
+                    url:'/api/datve/listTicketManageSize',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (dataa) {
+                        fullListSize = dataa;
+                        console.log(fullListSize)
+                    },error: function (e) {
+                        toastr.warning('Lỗi load dữ liệu từ máy chủ!', '', {positionClass: 'md-toast-top-center'});
+                    },complete: function () {
+                        fillVeonlinePage();
+                    }
+                })
+            }
+            function fillVeonline() {
+                var content = '';
+                for(var i = 0;i<listVeonline.length;i++){
+                    content+='<tr class="text-white">\n' +
+                        '                        <td scope="row">'+(i+1)+'</td>' +
+                        '                        <td>'+listVeonline[i].idsuatchieughe+'</td>\n' +
+                        '                        <td>'+listVeonline[i].tenphim+'</td>\n' +
+                        '                        <td>'+listVeonline[i].ngaytao+'</td>\n' +
+                        '                        <td>'+listVeonline[i].hethan+'</td>\n' +
+                        '                        <td>'+listVeonline[i].trangthai+'</td>\n' +
+                        '                    </tr>';
+                }
+                $('#dataVeon').html(content);
+            }
+            function fillVeonlinePage() {
+                var content2 = '<ul class="pagination pg-dark">\n' +
+                    '                        <!-- Arrow left -->\n' +
+                    '                        <li class="page-item">\n' +
+                    '                            <a class="page-link" aria-label="Previous">\n' +
+                    '                                <span aria-hidden="true">&laquo;</span>\n' +
+                    '                                <span class="sr-only">Previous</span>\n' +
+                    '                            </a>\n' +
+                    '                        </li>';
+                for(var ii = 0;ii<fullListSize/10;ii++){
+                    var ac = (pageC==ii)?'active':'';
+                    content2+='<li class="page-item '+ac+'"><option value="'+ii+'" class="page-link">'+(ii+1)+'</option></li>'
+                }
+                content2+=' <li class="page-item">\n' +
+                    '                            <a class="page-link" aria-label="Next">\n' +
+                    '                                <span aria-hidden="true">&raquo;</span>\n' +
+                    '                                <span class="sr-only">Next</span>\n' +
+                    '                            </a>\n' +
+                    '                        </li>\n' +
+                    '                    </ul>';
+                $('#dataPage').html(content2);
+            }
+
+            $(document).on('click','option.page-link',function () {
+                pageC = $(this).val();
+                loadVeonline(pageC);
+            });
+        });
+    </script>
+</th:block>
+</body>
+
+</html>
