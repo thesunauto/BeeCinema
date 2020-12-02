@@ -63,6 +63,7 @@ public class ScreeningsController {
 
     @RequestMapping("/add-screenings")
     public String addScreenings(Model model) {
+        System.out.println("-G-  /add-screenings");
         model.addAttribute("suatChieu", new Suatchieu());
         return "admin/screenings/add-screenings";
     }
@@ -78,8 +79,9 @@ public class ScreeningsController {
     @PostMapping("/add-screenings")
     public String saveScreenings(@Valid @ModelAttribute("suatChieu") Suatchieu suatChieu, BindingResult bindingResult,
                                  Model model, Authentication authentication) {
+        System.out.println("-P-  /add-screenings");
         if (bindingResult.hasErrors()) {
-
+            System.out.println("-P-hasErrors  /add-screenings");
         } else {
             suatChieu.setPhim(phimService.findPhimById(suatChieu.getPhim().getId()).get());
             suatChieu.setPhong(phongService.findPhongById(suatChieu.getPhong().getId()).get());

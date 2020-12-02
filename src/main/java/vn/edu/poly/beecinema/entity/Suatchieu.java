@@ -17,7 +17,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class Suatchieu implements Serializable {
 
-    @NotNull(message = "Vui lòng nhập ID")
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,6 +28,7 @@ public class Suatchieu implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Phim phim;
+
     @ManyToOne
     @JoinColumn(name = "idphong", nullable = false)
     @EqualsAndHashCode.Exclude
