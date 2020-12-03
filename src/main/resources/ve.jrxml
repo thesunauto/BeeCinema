@@ -33,14 +33,22 @@
     </field>
     <field name="suatchieu.dongia" class="java.lang.Float">
     </field>
+    <field name="sukien.ten" class="java.lang.String">
+    </field>
+    <field name="ghe.dayghe.gia" class="java.lang.Float">
+    </field>
+    <field name="ghe.loaighe.gia" class="java.lang.Float">
+    </field>
+    <field name="sukien.giam" class="java.lang.Float">
+    </field>
     <detail>
         <band height="298" splitType="Stretch">
             <property name="local_mesure_unitheight" value="pixel"/>
             <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
-<!--            <image>-->
-<!--                <reportElement x="50" y="-8" width="160" height="70" uuid="a99ca527-ea7f-4851-9c5a-7e55ae326eea"/>-->
-<!--                <imageExpression><![CDATA["C:/Users/ndc10/IdeaProjects/beecinema/src/main/resources/static/img/logo80x160noBG.png"]]></imageExpression>-->
-<!--            </image>-->
+            <image>
+                <reportElement x="50" y="-8" width="160" height="70" uuid="a99ca527-ea7f-4851-9c5a-7e55ae326eea"/>
+                <imageExpression><![CDATA["https://lh3.googleusercontent.com/lca5WkSavhSSRpQhtKOI_ykztY9KZaDlRCYWGp4o_By3bvi1Zw2UwWpp62DHQSHFwulpMf13HhZK4Wu3pM0jc4XQtJoMGXUwA0W9WlZrfv7po-NfLdJnqDPS9UG6xpQShOYTn3frDNElu5yOuwY1mhBxRdddC5w7PQAGjK6Kb5HQwp-6eqetjaad_mrb8UUAAcnSM8nJTj6D3sqDWxw5oHSFEwWCBjdQuoWmjJEo_eci2C0DoRXNacL9SXRXoIH13w1tdeIDvZX04d8m9gAOxz-0ZJGaV2Zg0a9aLks3yG9cKpTcmrFYcL4MM6ivjTWDF-ZHAcp_q9ewtAAuv0nRBrQ3RXtyXX74cOMLTSIAIvB0z6cWqyzUBGF6RBNl-rDQJWXxONNJRUQrgtw3I9bVqasuJXX2aSdtMlQq6X6UmLff-pmcyWVyZpSZkxEkg3Jr2IgCOZawNsCLHBNK_KE92VCTtO0JL_AIxUyp6nZo1LBfCoMFW36CU6jwrKeK7mTXo6sOkMuniMumHqmZnXAxoP-zQer3_5jdN7FOlFzQxxNbU29R0FlpxwS53aKYAA2Q4Dgl2R3AYhF8U1Sp7wZLfcU0PfonW1gQnF6rUJAdktn8wh3OmihNM-dGXqYC5P6E0jeVNMiO7o6JUDlQOuA10Qs7x-r4NGEhbDTl6a3YnXOt9O8922aMnw=w160-h80-no?authuser=0"]]></imageExpression>
+            </image>
             <staticText>
                 <reportElement x="0" y="70" width="70" height="20" uuid="762fda9d-1806-4192-95d9-9a3b909409d2"/>
                 <textElement>
@@ -65,7 +73,7 @@
                 <text><![CDATA[-----------------------------------------------------------------------------]]></text>
             </staticText>
             <staticText>
-                <reportElement x="133" y="130" width="20" height="20" uuid="ae938901-05df-4b68-8447-ca56c095cd42">
+                <reportElement x="115" y="130" width="20" height="20" uuid="ae938901-05df-4b68-8447-ca56c095cd42">
                     <property name="com.jaspersoft.studio.unit.y" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
@@ -99,7 +107,7 @@
                 <textElement>
                     <font fontName="DejaVu Serif" pdfEncoding="Cp1258" />
                 </textElement>
-                <text><![CDATA[Sự kiện:]]></text>
+                <text><![CDATA[Event:]]></text>
             </staticText>
             <staticText>
                 <reportElement x="0" y="184" width="271" height="16" uuid="9cc76933-4732-453b-8605-2c0cc54655aa"/>
@@ -114,10 +122,10 @@
                 <textElement>
                     <font fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{ngaytao}]]></textFieldExpression>
+                <textFieldExpression ><![CDATA[$F{ngaytao}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="47" y="95" width="140" height="20" uuid="b9ebb119-d66a-4e75-a293-966b00b5037c">
+                <reportElement x="49" y="95" width="140" height="20" uuid="b9ebb119-d66a-4e75-a293-966b00b5037c">
                 </reportElement>
                 <textFieldExpression><![CDATA[$F{taikhoan.ten}]]></textFieldExpression>
             </textField>
@@ -134,7 +142,7 @@
                 </textElement>
                 <textFieldExpression><![CDATA[$F{suatchieu.phim.ten}]]></textFieldExpression>
             </textField>
-            <textField>
+            <textField pattern="dd/MM/yyyy">
                 <reportElement x="0" y="130" width="71" height="20" uuid="c4b087d6-4fdb-4f6a-b1cc-10df8cd7a9fd">
                 </reportElement>
                 <textFieldExpression><![CDATA[$F{suatchieu.ngaychieu}]]></textFieldExpression>
@@ -145,7 +153,7 @@
                 <textFieldExpression><![CDATA[$F{suatchieu.khunggio.batdau}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="144" y="130" width="53" height="20" uuid="14bc8a28-c423-4e73-8d1b-f853efbeee7a">
+                <reportElement x="125" y="130" width="53" height="20" uuid="14bc8a28-c423-4e73-8d1b-f853efbeee7a">
                 </reportElement>
                 <textFieldExpression><![CDATA[$F{suatchieu.khunggio.ketthuc}]]></textFieldExpression>
             </textField>
@@ -163,14 +171,17 @@
                 <textElement>
                     <font isBold="true" fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{ghe.dayghe.ten}$F{ghe.col}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{ghe.dayghe.ten}+$F{ghe.col}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="39" y="167" width="200" height="20" uuid="0f0496c3-ebe7-440e-828a-6ad9cfe4efa3">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[]]></textFieldExpression>
+                <textElement>
+                    <font fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{sukien.ten} == null ? ' ' : $F{sukien.ten}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="220" y="201" width="36" height="20" uuid="56e3c372-8f8c-4c9f-ae0e-fe8165baa6ab">
@@ -178,7 +189,7 @@
                 <textElement>
                     <font isBold="true" fontName="DejaVu Serif" pdfEncoding="Cp1258"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{suatchieu.dongia}+$F{suatchieu.dongia}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{suatchieu.dongia}+$F{ghe.dayghe.gia}+$F{ghe.loaighe.gia}-($F{sukien.giam} == null ? 0 : $F{sukien.giam})]]></textFieldExpression>
             </textField>
         </band>
     </detail>
