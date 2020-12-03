@@ -79,7 +79,7 @@
 
                             <!--Trigger-->
                             <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"><img id="blah" class="img-fluid z-depth-1 rounded-circle"
+                                    aria-haspopup="true" aria-expanded="false"><img id="blahza" class="img-fluid z-depth-1 rounded-circle"
                                                                                     style="object-fit: cover;  object-position: center;  width: 30px;  height: 30px;"> <span id="usernamenav" >Account</span></a>
 
 
@@ -301,6 +301,13 @@
                     noLogin = false;
                 },
                 complete: function () {
+
+                    if(user.image==null||user.image==''||user.image=='null'){
+                        $('#blahza').attr('src','/img/empty.png');
+                    }else {
+                        $('#blahza').attr('src','/api/employee/getResourse/'+user.image);
+                    }
+
                     $("#usernamenav").html(user.ten);
                     $('#username').val(user.username);
                     $('#password').val(user.password);
@@ -310,7 +317,7 @@
                     $('#sdt').val(user.sdt);
                     $('#email').val(user.email);
                     $('#image').val(user.image);
-                    $('#blah').attr('src','/api/employee/getResourse/'+user.image);
+
                 }
             })
         }

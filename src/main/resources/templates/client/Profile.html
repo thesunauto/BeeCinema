@@ -15,7 +15,8 @@
 
         <!-- Section: Blog v.2 -->
         <section class="section">
-            <form th:object="${taikhoan}" th:action="@{/client/profile-client}" action="#" enctype="multipart/form-data" method="post">
+            <form th:object="${taikhoan}" th:action="@{/client/profile-client}" action="#" enctype="multipart/form-data"
+                  method="post">
                 <div th:switch="${messages}">
                     <p th:case="'thanhcong'" class="alert alert-success" role="alert">Cập nhật thành công!</p>
                 </div>
@@ -38,8 +39,11 @@
                             <!-- Card content -->
                             <div class="card-body card-body-cascade text-center">
                                 <div class="file-field">
-                                    <div >
-                                        <img id="blah" th:src="@{'/getImage/'+ ${taikhoan.hinhanh}}" alt="User Photo" class="z-depth-1 mb-3 mx-auto" style="height: 100px; width: 100px;" />
+                                    <div>
+                                        <img id="blah"
+                                             th:src="@{${(taikhoan.hinhanh.isEmpty() || taikhoan.hinhanh=='' || taikhoan.hinhanh=='null')?'/img/empty.png':('/getImage/'+taikhoan.hinhanh)}}"
+                                             alt="User Photo" class="z-depth-1 mb-3 mx-auto"
+                                             style="height: 100px; width: 100px;"/>
                                     </div>
                                     <!--                  <div id="blah" th:unless="${taikhoan.hinhanh}">-->
                                     <!--                    <img th:src="@{'/getImage/placeholder.jpg'}" alt="User Photo" class="z-depth-1 mb-3 mx-auto" style="height: 100px; width: 100px;" />-->
@@ -88,16 +92,18 @@
                                     <!-- First column -->
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <input type="text" th:field="*{username}" id="form2" class="form-control " readonly>
-                                            <label for="form2" >ID</label>
+                                            <input type="text" th:field="*{username}" id="form32" class="form-control "
+                                                   readonly>
+                                            <label for="form32">ID</label>
                                         </div>
                                     </div>
                                     <!-- Second column -->
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <input type="text" th:field="*{ten}" id="form2" class="form-control">
-                                            <label for="form2" >Họ Tên</label>
-                                            <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
+                                            <input type="text" th:field="*{ten}" id="form21" class="form-control">
+                                            <label for="form21">Họ Tên</label>
+                                            <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}"
+                                               class="text-danger text-center"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -109,16 +115,21 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <div class="form-check form-check-inline">
-                                                <input type="radio" th:field="*{gioitinh}" value="0" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample" checked>
+                                                <input type="radio" th:field="*{gioitinh}" value="0"
+                                                       class="form-check-input" id="materialInline1"
+                                                       name="inlineMaterialRadiosExample" checked>
                                                 <label class="form-check-label" for="materialInline1">Nam</label>
                                             </div>
 
                                             <!-- Material inline 2 -->
                                             <div class="form-check form-check-inline">
-                                                <input type="radio" th:field="*{gioitinh}" value="1" class="form-check-input" id="materialInline2" name="inlineMaterialRadiosExample">
+                                                <input type="radio" th:field="*{gioitinh}" value="1"
+                                                       class="form-check-input" id="materialInline2"
+                                                       name="inlineMaterialRadiosExample">
                                                 <label class="form-check-label" for="materialInline2">Nữ</label>
                                             </div>
-                                            <label for="materialInline2" data-error="wrong" data-success="right">Giới tính:</label>
+                                            <label for="materialInline2" data-error="wrong" data-success="right">Giới
+                                                tính:</label>
                                         </div>
                                     </div>
 
@@ -126,7 +137,7 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <input type="date" th:field="*{ngaysinh}" id="form82" class="form-control ">
-                                            <label for="form82" >Ngày sinh</label>
+                                            <label for="form82">Ngày sinh</label>
                                         </div>
                                     </div>
                                 </div>
@@ -140,16 +151,19 @@
                                         <div class="md-form mb-0">
                                             <input type="email" th:field="*{email}" id="form76" class="form-control ">
                                             <label for="form76">Email</label>
-                                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger text-center"></p>
+                                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                               class="text-danger text-center"></p>
                                         </div>
                                     </div>
                                     <!-- Second column -->
 
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <input type="text" th:field="*{sodienthoai}" id="form77" class="form-control">
-                                            <label for="form77" >Điện thoại</label>
-                                            <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}" class="text-danger text-center"></p>
+                                            <input type="text" th:field="*{sodienthoai}" id="form77"
+                                                   class="form-control">
+                                            <label for="form77">Điện thoại</label>
+                                            <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}"
+                                               class="text-danger text-center"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +175,8 @@
                                     <!-- First column -->
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <textarea type="text" th:field="*{diachi}" id="form78" class="md-textarea form-control" rows="3"></textarea>
+                                            <textarea type="text" th:field="*{diachi}" id="form78"
+                                                      class="md-textarea form-control" rows="3"></textarea>
                                             <label for="form78">Địa chỉ</label>
                                         </div>
                                     </div>
@@ -169,7 +184,8 @@
 
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <textarea type="text" th:field="*{mota}" id="form78" class="md-textarea form-control" rows="3"></textarea>
+                                            <textarea type="text" th:field="*{mota}" id="form78"
+                                                      class="md-textarea form-control" rows="3"></textarea>
                                             <label for="form78">Mô tả</label>
                                         </div>
                                     </div>
@@ -202,7 +218,27 @@
 
     </div>
 </main>
+<th:block layout:fragment="optional">
+    <script>
+$(document).ready(function () {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
 
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $('#imgInp').change(function() {
+        readURL(this);
+
+    });
+});
+    </script>
+</th:block>
 </body>
 
 </html>
