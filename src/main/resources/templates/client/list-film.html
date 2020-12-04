@@ -29,15 +29,28 @@
         <!-- Card content -->
         <div class="card-body card-body-cascade text-center">
           <div class="row">
-            <div class="col-lg-3 col-sm-4 col-md-12 mb-4"  th:each="phim1 : ${phimDangChieu}">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4" th:each="phim1 : ${phimDangChieu}">
 
               <div class="view overlay zoom">
-                <img th:src="@{${'/api/employee/getResourse/'+phim1.getHinhanh()}}" style="max-height: 414px; width: 100%" class="img-fluid " alt="smaple image">
+                <img th:src="@{${'/api/employee/getResourse/'+phim1.getHinhanh()}}"
+                     style="object-fit: cover;  object-position: center;  width: 100%;  height: 300px;"
+                     class="img-fluid" alt="smaple image">
                 <div class="mask rgba-black-strong py-5 text-center justify-content-center">
-                  <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim1.dotuoi.ten}"> </strong></h6>
-                  <h3 class="card-title white-text p-2 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim1.ten}"></h3>
-                  <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim1.id}}"><i class="fas fa-eye"></i>&nbsp Xem chi tiết</a>
-                  <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-pink btn-rounded"><i class="fab fa-youtube"></i>&nbsp Xem trailer</a>
+                  <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong
+                          th:text=" ${phim1.dotuoi.ten}"> </strong></h6>
+                  <h3 class="card-title white-text pt-4 pb-3 font-weight-bold text-uppercase"
+                      th:text="${phim1.ten}"></h3>
+                  <div class="row">
+
+                    <div class="col-sm p-0">
+                      <a class="btn btn-outline-white waves-effect float-right"
+                         th:href="@{${'/client/detail-film/'+phim1.id}}">Chi tiết</a>
+                    </div>
+                    <div class="col-sm p-0">
+                      <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-outline-white waves-effect float-left">Trailer</a>
+                    </div>
+
+                  </div>
                 </div>
               </div>
 
@@ -61,15 +74,27 @@
           <!-- Card content -->
           <div class="card-body card-body-cascade text-center">
             <div class="row">
-              <div class="col-lg-3 col-sm-4 col-md-12 mb-4"  th:each="phim1 : ${phimSapchieu}">
+              <div class="col-lg-4 col-md-6 col-sm-12 mb-4" th:each="phim12 : ${phimSapchieu}">
 
                 <div class="view overlay zoom">
-                  <img th:src="@{${'/api/employee/getResourse/'+phim1.getHinhanh()}}" style="max-height: 414px; width: 100%" class="img-fluid " alt="smaple image">
+                  <img th:src="@{${'/api/employee/getResourse/'+phim12.getHinhanh()}}"
+                       class="img-fluid"
+                       style="object-fit: cover;  object-position: center;  width: 100%;  height: 300px;"
+                       alt="smaple image">
                   <div class="mask rgba-black-strong py-5 text-center justify-content-center">
-                    <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong th:text=" ${phim1.dotuoi.ten}"> </strong></h6>
-                    <h3 class="card-title white-text p-2 font-weight-bold text-uppercase" style="min-height: 160px" th:text="${phim1.ten}"></h3>
-                    <a class="btn blue-gradient btn-rounded pl-4" th:href="@{${'/client/detail-film/'+phim1.id}}"><i class="fas fa-eye"></i>&nbsp Xem chi tiết</a>
-                    <a href="#" data-toggle="modal"  th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-pink btn-rounded"><i class="fab fa-youtube"></i>&nbsp Xem trailer</a>
+                    <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong
+                            th:text=" ${phim12.dotuoi.ten}"> </strong></h6>
+                    <h3 class="card-title white-text pt-4 pb-3 font-weight-bold text-uppercase"
+                        th:text="${phim12.ten}"></h3>
+                    <div class="row">
+                      <div class="col-sm p-0">
+                        <a class="btn btn-outline-white waves-effect float-right"
+                           th:href="@{${'/client/detail-film/'+phim12.id}}">Chi tiết</a>
+                      </div>
+                      <div class="col-sm p-0">
+                        <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-outline-white waves-effect float-left">Trailer</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -82,7 +107,8 @@
         <!-- Card -->
       <!-- Grid column -->
     </section>
-    <div class="modal fade mt-5" th:each="phim : ${phim}" th:id="'filmModal'+${phim.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade mt-5" th:each="phim : ${phim}" th:id="'filmModal'+${phim.id}" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel"
          aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
 
@@ -93,7 +119,8 @@
           <div class="modal-body mb-0 p-0">
 
             <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A3PDXmYoF5U"
+              <iframe width="853" height="480" th:src="${phim.linktrailer}" frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowfullscreen></iframe>
             </div>
 
@@ -101,9 +128,10 @@
 
           <!--Footer-->
           <div class="modal-footer justify-content-center flex-column flex-md-row">
-            <span class="mr-4">Bản quyền thuộc Bee Cinema Group!</span>
+            <span class="mr-4">Hãy thư giãn cùng Bee Cinema nhé!</span>
             <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
-                    data-dismiss="modal">Close</button>
+                    data-dismiss="modal">Close
+            </button>
 
 
           </div>
