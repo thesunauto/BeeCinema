@@ -27,16 +27,16 @@
                     <li class="nav-item">
                         <a class="nav-link  waves-light active show" id="profile-tab-classic-orange" data-toggle="tab"
                            href="#profile-classic-orange"
-                           role="tab" aria-controls="profile-classic-orange" aria-selected="true"><i
+                           role="tab" aria-controls="profile-classic-orange" aria-selected="true" ><i
                                 class="fas fa-film fa-2x pb-2"
-                                aria-hidden="true"></i><br>Phim đang chiếu</a>
+                                aria-hidden="true"></i><br th:text="#{chin}"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link waves-light" id="follow-tab-classic-orange" data-toggle="tab"
                            href="#follow-classic-orange"
                            role="tab" aria-controls="follow-classic-orange" aria-selected="false"><i
                                 class="fas fa-film fa-2x pb-2"
-                                aria-hidden="true"></i><br>Phim sắp chiếu</a>
+                                aria-hidden="true"></i><br th:text="#{muoi}"></a>
                     </li>
                 </ul>
 
@@ -59,7 +59,7 @@
 
                                             <div class="col-sm p-0">
                                               <a class="btn btn-outline-white waves-effect float-right"
-                                                                          th:href="@{${'/client/detail-film/'+phim1.id}}">Chi tiết</a>
+                                                                          th:href="@{${'/client/detail-film/'+phim1.id}}" th:text="#{banam}"></a>
                                             </div>
                                             <div class="col-sm p-0">
                                                 <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-outline-white waves-effect float-left">Trailer</a>
@@ -90,7 +90,7 @@
                                         <div class="row">
                                             <div class="col-sm p-0">
                                                 <a class="btn btn-outline-white waves-effect float-right"
-                                                   th:href="@{${'/client/detail-film/'+phim12.id}}">Chi tiết</a>
+                                                   th:href="@{${'/client/detail-film/'+phim12.id}}" th:text="#{banam}"></a>
                                             </div>
                                             <div class="col-sm p-0">
                                                 <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-outline-white waves-effect float-left">Trailer</a>
@@ -108,7 +108,7 @@
         </section>
 
         <section>
-            <h3 class="font-weight-bold pb-1" style="border-bottom: 3px solid #ff4757;">SỰ KIỆN</h3>
+            <h3 class="font-weight-bold pb-1" style="border-bottom: 3px solid #ff4757;" th:text="#{motbon}"></h3>
             <div class="row mb-4">
                 <div class="col-lg-3 col-sm-4 col-md-6" th:each="suKien : ${suKien}">
                     <div class="view overlay zoom">
@@ -120,7 +120,7 @@
                             <h3 class="card-title white-text  p-3 font-weight-bold text-uppercase"
                                 style="min-height: 160px" th:text="${suKien.ten}"></h3>
                             <a href="#" data-toggle="modal" th:attr="data-target='#customerModel'+${suKien.id}"
-                               class="btn btn-pink btn-rounded"></i>&nbsp Xem chi tiết</a>
+                               class="btn btn-pink btn-rounded" th:text="#{basau}"></i>&nbsp </a>
 
                         </div>
                     </div>
@@ -130,10 +130,10 @@
 
         <section class="my-5">
             <h3 class="font-weight-bold pb-1" style="border-bottom: 3px solid #ff4757;">BEECINEMA</h3>
-            <p>BEECINEMA là nơi mà bạn có thể yên tâm với việc hết vé và vị trí ngồi không như ý muốn. BEECINEMA là website hỗ trợ đặt vé trực tuyến.</p>
-            <p>Hổ trợ bạn có một cái nhìn khách quan nhất trước khi đặt vé ở phần bình luận phim</p>
-            <p>Không sợ bị mất vị trí lí tưởng với cách đặt ''nhanh tay thì còn chậm tay thì hết của chúng tôi'' khi bạn chọn 1 ghế ngồi trong suất chiếu, ghế đó sẽ không thể chọn đến khi bạn rời đi</p>
-            <p>Đặt tối đa 4 vé đáp ứng đủ nhu cầu cơ bản đối với gia đình</p>
+            <p th:text="#{motnam}"></p>
+            <p th:text="#{motsau}"></p>
+            <p th:text="#{motbay}"></p>
+            <p th:text="#{mottam}"></p>
             <p></p>
         </section>
         <!-- Section: Blog v.2 -->
