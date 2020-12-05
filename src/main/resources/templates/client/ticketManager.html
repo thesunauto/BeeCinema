@@ -21,11 +21,15 @@
                     <thead class="mdb-color darken-3">
                     <tr class="text-white">
                         <th>#</th>
-                        <th>Suất chiếu | Ghế</th>
+                        <th>Suất chiếu</th>
+                        <th>Ngày Chiếu</th>
+                        <th>Phòng</th>
+                        <th>Ghế</th>
                         <th>Phim</th>
                         <th>Ngày tạo</th>
                         <th>Hết hạn</th>
                         <th>Trạng thái</th>
+                        <th>Chức năng</th>
                     </tr>
                     </thead>
                     <!-- Table head -->
@@ -117,11 +121,15 @@
                 for(var i = 0;i<listVeonline.length;i++){
                     content+='<tr class="text-white">\n' +
                         '                        <td scope="row">'+(i+1)+'</td>' +
-                        '                        <td>'+listVeonline[i].idsuatchieughe+'</td>\n' +
+                        '                        <td>'+listVeonline[i].suatchieu+'</td>\n' +
+                        '                        <td>'+listVeonline[i].ngaychieu+'</td>\n' +
+                        '                        <td>'+listVeonline[i].phong+'</td>\n' +
+                        '                        <td>'+listVeonline[i].ghe+'</td>\n' +
                         '                        <td>'+listVeonline[i].tenphim+'</td>\n' +
                         '                        <td>'+listVeonline[i].ngaytao+'</td>\n' +
                         '                        <td>'+listVeonline[i].hethan+'</td>\n' +
-                        '                        <td>'+listVeonline[i].trangthai+'</td>\n' +
+                        '                        <td>'+(listVeonline[i].trangthai==0?'Chưa xác nhận':listVeonline[i].trangthai==1?'Đã xác nhận':'Hết hạn')+'</td>\n' +
+                        '                        <td>'+(listVeonline[i].trangthai==0?' <option value="'+listVeonline[i].idsuatchieughe+'" class="subHoanTac btn btn-sm btn-elegant">Hủy</option>':listVeonline[i].trangthai==1?'':'')+'</td>\n' +
                         '                    </tr>';
                 }
                 $('#dataVeon').html(content);
@@ -152,6 +160,23 @@
             $(document).on('click','option.page-link',function () {
                 pageC = $(this).val();
                 loadVeonline(pageC);
+            });
+
+            $(document).on('click','option.subHoanTac',function () {
+               console.log($(this).val())
+                $.ajax({
+                    url:'/api/datve/deleteTicketOnline/'+$(this).val(),
+                    type: 'POST',
+                    success:function () {
+                        toastr.success('Hủy vé thành công!', '', {positionClass: 'md-toast-top-center'});
+                    },
+                    error: function () {
+                        toastr.error('Hủy vé thất bại!', '', {positionClass: 'md-toast-top-center'});
+                    },
+                    complete: function () {
+                        loadVeonline(pageC);
+                    }
+                })
             });
         });
     </script>
