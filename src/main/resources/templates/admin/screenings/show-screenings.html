@@ -101,7 +101,7 @@
               <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-columns mt-0"></i></button>
             </div>
 
-            <h4 class="white-text font-weight-bold">Danh sách Suất Chiếu</h4>
+            <h4 class="white-text font-weight-bold" th:text="#{one-hundred-and-twentyoneWord}"></h4>
 
             <div>
               <a th:href="@{/admin/screenings/add-screenings}"class="btn-floating btn-sm btn-primary"><i class="fas fa-plus-circle"></i></a>
@@ -126,21 +126,21 @@
                     <th >
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/screenings/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">ID <i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/screenings/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-twentytwoWord}"> <i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/screenings/page/' + ${currentPage} + '?sortField=phim.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên Phim<i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/screenings/page/' + ${currentPage} + '?sortField=phim.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-twentythreeWord}"><i class="fas fa-sort ml-1"></i></a>
                     </th>
-                    <th ><a class="font-weight-bold">Tên Phòng</a></th>
-                    <th ><a class="font-weight-bold">Ngày Chiếu</a></th>
-                    <th ><a class="font-weight-bold">Khung Giờ</a></th>
-                    <th ><a class="font-weight-bold">Đơn Giá</a></th>
-                    <th ><a class="font-weight-bold">Thời Gian Hủy</a></th>
-                    <th ><a class="font-weight-bold">Người Tạo</a></th>
-                    <th ><a class="font-weight-bold">Ngày Tạo</a></th>
-                    <th ><a class="font-weight-bold">Người Sửa</a></th>
-                    <th ><a class="font-weight-bold">Ngày Sửa</a></th>
-                    <th ><a class="font-weight-bold">Trạng thái </th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twentyfourWord }"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twentyfiveWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twentysixWord }"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twentysevenWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twentyeightWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twentynineWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtyWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtyoneWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtytwoWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtythreeWord}"></th>
                   </tr>
                 </thead>
                 <!-- Table head -->

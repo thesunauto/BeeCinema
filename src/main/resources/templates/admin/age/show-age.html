@@ -16,7 +16,7 @@
         <!-- Section: Basic examples -->
         <section>
   
-          <h5 class="my-4 dark-grey-text font-weight-bold">QUẢN LÝ ĐỘ TUỔI</h5>
+          <h5 class="my-4 dark-grey-text font-weight-bold" th:text="#{ninety-ThirdWord }"></h5>
   
           <!-- Top Table UI -->
           <div class="card p-2 mb-5">
@@ -109,7 +109,7 @@
 
               </div>
   
-              <h4 class="white-text font-weight-bold">Danh Sách Độ Tuổi</h4>
+              <h4 class="white-text font-weight-bold" th:text="#{ninety-FourthWord}"></h4>
   
               <div>
 
@@ -135,17 +135,17 @@
                       <th >
                       </th>
                       <th >
-                        <a class="font-weight-bold" th:href="@{'/admin/age/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">ID <i class="fas fa-sort ml-1"></i></a>
+                        <a class="font-weight-bold" th:href="@{'/admin/age/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{ninety-FifthWord}"> <i class="fas fa-sort ml-1"></i></a>
                       </th>
                       <th >
-                        <a class="font-weight-bold" th:href="@{'/admin/age/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Độ Tuổi <i class="fas fa-sort ml-1"></i></a>
+                        <a class="font-weight-bold" th:href="@{'/admin/age/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{ninety-SixthWord}"><i class="fas fa-sort ml-1"></i></a>
                       </th>
-                      <th ><a class="font-weight-bold">Mô Tả</a></th>
-                      <th ><a class="font-weight-bold">Người Tạo</a></th>
-                      <th ><a class="font-weight-bold">Ngày Tạo</a></th>
-                      <th ><a class="font-weight-bold">Người Sửa</a></th>
-                      <th ><a class="font-weight-bold">Ngày Sửa</a></th>
-                      <th ><a class="font-weight-bold">Trạng Thái</a></th>
+                      <th ><a class="font-weight-bold" th:text="#{ninety-SeventhWord}"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{ninety-EighthWord}"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{ninety-NinthWord}"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{one-hundredthWord }"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{one-hundred-and-oneWord}"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twoWord}"></a></th>
                     </tr>
                   </thead>
                   <!-- Table head -->

@@ -109,7 +109,7 @@
               <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-columns mt-0"></i></button>
             </div>
 
-            <h4 class="white-text font-weight-bold">Danh sách Sự kiện</h4>
+            <h4 class="white-text font-weight-bold" th:text="#{one-hundred-and-threeWord}"></h4>
 
             <div>
               <a th:href="@{/admin/event/add-event}"class="btn-floating btn-sm btn-primary"><i class="fas fa-plus-circle"></i></a>
@@ -134,20 +134,20 @@
                     <th >
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/event/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">ID <i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/event/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-fourWord}"> <i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/event/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên <i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/event/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-fiveWord}"> <i class="fas fa-sort ml-1"></i></a>
                     </th>
-                    <th ><a class="font-weight-bold">Hình ảnh</a></th>
-                    <th ><a class="font-weight-bold">Mô tả</a></th>
-                    <th ><a class="font-weight-bold">Giảm</a></th>
-                    <th ><a class="font-weight-bold">Người tạo</a></th>
-                    <th ><a class="font-weight-bold">Ngày bắt đầu</a></th>
-                    <th ><a class="font-weight-bold">Ngày kết thúc</a></th>
-                    <th ><a class="font-weight-bold">Người sửa</a></th>
-                    <th ><a class="font-weight-bold">Ngày sửa</a></th>
-                    <th ><a class="font-weight-bold">Trạng thái </a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-sixWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-sevenWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-eightWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-nineWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-tenWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-elevenWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twelveWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-thirteenWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-fourteenWord}"> </a></th>
                   </tr>
                 </thead>
                 <!-- Table head -->
