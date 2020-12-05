@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{employee/layout}">
+
+<head>
+
+    <title>Cập Nhật Thông Tin</title>
+    <style>
+        .card.card-cascade .view.gradient-card-header {
+            padding: 1.1rem 1rem;
+        }
+
+        .card.card-cascade .view {
+            box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+
+<body>
+
+
+<main layout:fragment="content">
+    <!-- Mega menu -->
+    <div class="container-fluid pt-5 mt-5">
+
+        <!-- Section: Blog v.2 -->
+        <section class="section">
+            <form th:object="${taikhoan}" th:action="@{/employee/update-profile}" action="#" enctype="multipart/form-data"
+                  method="post">
+                <div th:switch="${messages}">
+                    <p th:case="'thanhcong'" class="alert alert-success" role="alert">Cập nhật thành công!</p>
+                </div>
+                <!-- First row -->
+                <div class="row">
+                    <!-- First column -->
+
+
+                    <div class="col-lg-4 mb-4">
+
+                        <!-- Card -->
+                        <div class="card card-cascade narrower">
+
+                            <!-- Card image -->
+                            <div class="view view-cascade gradient-card-header blue-gradient  ">
+                                <h5 class="mb-0 font-weight-bold">Cập nhật ảnh</h5>
+                            </div>
+                            <!-- Card image -->
+
+                            <!-- Card content -->
+                            <div class="card-body card-body-cascade text-center">
+                                <div class="file-field">
+                                    <div >
+                                        <img id="blah" th:src="@{'/getImage/'+ ${taikhoan.hinhanh}}" alt="User Photo" class="z-depth-1 mb-3 mx-auto" style="height: 100px; width: 100px;" />
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="btn btn-info btn-rounded btn-sm">
+                                            <span>THAY ĐỔI</span>
+                                            <input type="file" id="imgInp" name="images">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card content -->
+
+                        </div>
+                        <!-- Card -->
+
+                    </div>
+                    <!-- First column -->
+
+                    <!-- Second column -->
+                    <div class="col-lg-8 mb-4">
+
+                        <!-- Card -->
+                        <div class="card card-cascade narrower">
+
+                            <!-- Card image -->
+                            <div class="view view-cascade gradient-card-header blue-gradient">
+                                <h5 class="mb-0 font-weight-bold">Cập Nhật Thông Tin</h5>
+                            </div>
+                            <!-- Card image -->
+
+                            <!-- Card content -->
+                            <div class="card-body card-body-cascade text-center">
+
+                                <!-- Edit Form -->
+
+                                <!-- First row -->
+
+                                <div class="row">
+
+                                    <!-- First column -->
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <input type="text" th:field="*{username}" id="form2" class="form-control " readonly>
+                                            <label for="form2" >Username</label>
+                                        </div>
+                                    </div>
+                                    <!-- Second column -->
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <input type="text" th:field="*{ten}" id="form2" class="form-control" required pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$" />
+                                            <label for="form2" >Họ Tên</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- First row -->
+
+                                <!-- First row -->
+                                <div class="row">
+                                    <!-- First column -->
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-5">
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" th:field="*{gioitinh}" value="0" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample" checked>
+                                                <label class="form-check-label" for="materialInline1">Nam</label>
+                                            </div>
+
+                                            <!-- Material inline 2 -->
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" th:field="*{gioitinh}" value="1" class="form-check-input" id="materialInline2" name="inlineMaterialRadiosExample">
+                                                <label class="form-check-label" for="materialInline2">Nữ</label>
+                                            </div>
+                                            <label for="materialInline2" data-error="wrong" data-success="right">Giới tính:</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Second column -->
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <input type="date" th:field="*{ngaysinh}" id="form82" class="form-control" >
+                                            <label for="form82" >Ngày sinh</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- First row -->
+
+                                <!-- Second row -->
+                                <div class="row">
+
+                                    <!-- First column -->
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <input type="email" th:field="*{email}" id="form76" class="form-control " required >
+                                            <label for="form76">Email</label>
+                                        </div>
+                                    </div>
+                                    <!-- Second column -->
+
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <input type="text" th:field="*{sodienthoai}" id="form77" class="form-control" required pattern="(09|03|07|08|05)+([0-9]{8})">
+                                            <label for="form77" >Điện thoại</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Second row -->
+
+                                <!-- Second row -->
+                                <div class="row">
+
+                                    <!-- First column -->
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <textarea type="text" th:field="*{diachi}" id="form78" class="md-textarea form-control" rows="3"></textarea>
+                                            <label for="form78">Địa chỉ</label>
+                                        </div>
+                                    </div>
+                                    <!-- Second column -->
+
+                                    <div class="col-md-6">
+                                        <div class="md-form mb-0">
+                                            <textarea type="text" th:field="*{mota}" id="form78" class="md-textarea form-control" rows="3"></textarea>
+                                            <label for="form78">Mô tả</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Second row -->
+
+                                <div class="row">
+                                    <div class="col-md-12 text-center my-4">
+                                        <button type="submit" class="btn blue-gradient btn-rounded">CẬP NHẬT</button>
+                                    </div>
+                                </div>
+                                <!-- Fourth row -->
+
+                                <!-- Edit Form -->
+
+                            </div>
+                            <!-- Card content -->
+
+                        </div>
+                        <!-- Card -->
+
+                    </div>
+                    <!-- Second column -->
+
+                </div>
+                <!-- First row -->
+            </form>
+        </section>
+        <!-- Section: Blog v.2 -->
+
+    </div>
+    <!-- Mega menu -->
+
+</main>
+<th:block layout:fragment="optional">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $('#imgInp').change(function() {
+            readURL(this);
+
+        });
+    </script>
+</th:block>
+</body>
+
+
+</html>
