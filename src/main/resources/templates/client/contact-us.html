@@ -14,10 +14,10 @@
 
     <!-- Section: Blog v.2 -->
     <section class="wow fadeIn rgba-stylish-strong p-5 mb-4" data-wow-delay="0.3s">
-      <h2 class="text-center amber-text my-3 h1">Contact us</h2>
+      <h2 class="text-center amber-text my-3 h1" th:text="#{bon}"></h2>
 
       <!-- Section description -->
-      <p class="text-center mb-3 w-responsive mx-auto white-text">Hãy cho chúng tôi xin những ý kiến của bạn để giúp cho trải nghiệm luôn là tốt nhất.</p>
+      <p class="text-center mb-3 w-responsive mx-auto white-text" th:text="#{babay}"></p>
 
       <div class="row">
 
@@ -32,14 +32,14 @@
               <div class="col-md-6">
                 <div class="md-form mb-0">
                   <input type="text" id="contact-name" class="form-control">
-                  <label for="contact-name" class="amber-text">Your name</label>
+                  <label for="contact-name" class="amber-text" th:text="#{batam}"></label>
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="md-form mb-0">
                   <input type="text" id="contact-email" class="form-control">
-                  <label for="contact-email" class="amber-text">Your email</label>
+                  <label for="contact-email" class="amber-text" th:text="#{bachin}"></label>
                 </div>
               </div>
               <!-- Grid column -->
@@ -52,7 +52,7 @@
               <div class="col-md-12">
                 <div class="md-form mb-0">
                   <input type="text" id="contact-Subject" class="form-control">
-                  <label for="contact-Subject" class="amber-text">Subject</label>
+                  <label for="contact-Subject" class="amber-text" th:text="#{bonmot}"></label>
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
 
                 <div class="md-form mb-0">
                   <textarea type="text" id="contact-message" class="md-textarea form-control" rows="3"></textarea>
-                  <label for="contact-message" class="amber-text">Your message</label>
+                  <label for="contact-message" class="amber-text" th:text="#{bonhai}"></label>
                 </div>
 
               </div>
@@ -76,7 +76,7 @@
           </form>
 
           <div class="text-center text-md-left mb-4">
-            <a class="btn btn-amber">Send</a>
+            <a class="btn btn-amber" th:text="#{bonba}"></a>
           </div>
         </div>
         <!-- Grid column -->

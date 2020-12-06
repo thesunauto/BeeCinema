@@ -44,7 +44,7 @@
 
                     <div class="col-sm p-0">
                       <a class="btn btn-outline-white waves-effect float-right"
-                         th:href="@{${'/client/detail-film/'+phim1.id}}">Chi tiết</a>
+                         th:href="@{${'/client/detail-film/'+phim1.id}}" th:text="#{banam}"></a>
                     </div>
                     <div class="col-sm p-0">
                       <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-outline-white waves-effect float-left">Trailer</a>
@@ -68,7 +68,7 @@
 
           <!-- Card image -->
           <div class="view view-cascade gradient-card-header danger-color">
-            <h2 class="card-header-title font-weight-bold m-0">PHIM SẮP CHIẾU</h2>
+            <h2 class="card-header-title font-weight-bold m-0" th:text="#{muoi}"></h2>
           </div>
           <!-- Card image -->
           <!-- Card content -->
@@ -89,7 +89,7 @@
                     <div class="row">
                       <div class="col-sm p-0">
                         <a class="btn btn-outline-white waves-effect float-right"
-                           th:href="@{${'/client/detail-film/'+phim12.id}}">Chi tiết</a>
+                           th:href="@{${'/client/detail-film/'+phim12.id}}" th:text="#{banam}"></a>
                       </div>
                       <div class="col-sm p-0">
                         <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-outline-white waves-effect float-left">Trailer</a>
