@@ -47,7 +47,7 @@
             <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
             <image>
                 <reportElement x="50" y="-8" width="160" height="70" uuid="a99ca527-ea7f-4851-9c5a-7e55ae326eea"/>
-                <imageExpression><![CDATA["https://lh3.googleusercontent.com/lca5WkSavhSSRpQhtKOI_ykztY9KZaDlRCYWGp4o_By3bvi1Zw2UwWpp62DHQSHFwulpMf13HhZK4Wu3pM0jc4XQtJoMGXUwA0W9WlZrfv7po-NfLdJnqDPS9UG6xpQShOYTn3frDNElu5yOuwY1mhBxRdddC5w7PQAGjK6Kb5HQwp-6eqetjaad_mrb8UUAAcnSM8nJTj6D3sqDWxw5oHSFEwWCBjdQuoWmjJEo_eci2C0DoRXNacL9SXRXoIH13w1tdeIDvZX04d8m9gAOxz-0ZJGaV2Zg0a9aLks3yG9cKpTcmrFYcL4MM6ivjTWDF-ZHAcp_q9ewtAAuv0nRBrQ3RXtyXX74cOMLTSIAIvB0z6cWqyzUBGF6RBNl-rDQJWXxONNJRUQrgtw3I9bVqasuJXX2aSdtMlQq6X6UmLff-pmcyWVyZpSZkxEkg3Jr2IgCOZawNsCLHBNK_KE92VCTtO0JL_AIxUyp6nZo1LBfCoMFW36CU6jwrKeK7mTXo6sOkMuniMumHqmZnXAxoP-zQer3_5jdN7FOlFzQxxNbU29R0FlpxwS53aKYAA2Q4Dgl2R3AYhF8U1Sp7wZLfcU0PfonW1gQnF6rUJAdktn8wh3OmihNM-dGXqYC5P6E0jeVNMiO7o6JUDlQOuA10Qs7x-r4NGEhbDTl6a3YnXOt9O8922aMnw=w160-h80-no?authuser=0"]]></imageExpression>
+                <imageExpression><![CDATA["http://localhost:8080/img/logo80x160noBG.png"]]></imageExpression>
             </image>
             <staticText>
                 <reportElement x="0" y="70" width="70" height="20" uuid="762fda9d-1806-4192-95d9-9a3b909409d2"/>

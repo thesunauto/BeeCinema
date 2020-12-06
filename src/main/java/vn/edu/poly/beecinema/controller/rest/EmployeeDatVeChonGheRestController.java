@@ -261,17 +261,20 @@ public class EmployeeDatVeChonGheRestController {
 
     @PostMapping("/saveTicket")
     public ResponseEntity saveTicket(Authentication authentication,HttpSession session, @RequestParam(value = "idsukien",required = false)  String idsukien){
+        List<String[]> veon2 = new ArrayList<>();
         try{
+
             List<VeResponse> veResponsesCurent =(List<VeResponse>) session.getAttribute("veresponse");
 
             for (VeResponse veResponse:veResponsesCurent) {
+                String[] ob = new String[]{veResponse.getIdghe().toString(),veResponse.getIdsuatchieu().toString()};
+                veon2.add(ob);
                 veService.insert(veResponsesCurent.get(0).getIdsuatchieu(),veResponse.getIdghe(),idsukien,authentication.getName());
             } session.setAttribute("veresponse",new ArrayList<VeResponse>());
-            return ResponseEntity.ok().body(true);
         }catch (Exception exception){
             exception.printStackTrace();
         }
-        return ResponseEntity.ok().body(false);
+        return ResponseEntity.ok().body(veon2);
     }
 
     @GetMapping("/clearsession")

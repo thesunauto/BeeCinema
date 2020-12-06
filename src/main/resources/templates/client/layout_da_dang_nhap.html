@@ -69,14 +69,16 @@
                     </li>
                 </ul>
 
-                <div class="breadcrumb-dn mr-auto">
-                    <a href="/?lang=vi" >VI</a>
-                </div>
-                <div class="breadcrumb-dn mr-auto">
-                    <a href="/?lang=en" >EN</a>
-                </div>
+
 
                 <ul class="navbar-nav">
+                    <li class="nav-item d-flex align-items-center m-1">
+                        <a th:href="@{${#httpServletRequest.requestURI+'?lang=vi'}}"><img style="height: 20px;"
+                                                 th:src="@{/img/icon/vietnam-flag-icon-free-download.jpg}" alt="VN"></a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center m-1">
+                        <a th:href="@{${#httpServletRequest.requestURI+'?lang=en'}}"><img style="height: 20px;" th:src="@{/img/icon/icon-english.png}" alt="EN"></a>
+                    </li>
                     <li class="nav-item active">
                         <div class="dropdown">
 
