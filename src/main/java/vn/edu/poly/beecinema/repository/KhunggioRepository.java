@@ -16,4 +16,6 @@ import vn.edu.poly.beecinema.entity.Sukien;
 public interface KhunggioRepository extends PagingAndSortingRepository<Khunggio, String>, JpaSpecificationExecutor<Khunggio> {
     @Query("SELECT p FROM Khunggio p WHERE CONCAT(p.id, ' ',p.batdau, '' ,p.ketthuc) LIKE %?1%")
     public Page<Khunggio> findAll(String keyword, Pageable pageable);
+
+
 }

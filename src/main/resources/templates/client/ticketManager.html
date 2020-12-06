@@ -77,6 +77,27 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn thật sự muốn hủy vé này?
+                    <input type="hidden" id="idVeHuy" value="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                    <button id="subHuy" type="button" class="btn btn-danger" data-dismiss="modal">Có</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <th:block layout:fragment="optional">
     <script>
@@ -85,12 +106,13 @@
             var fullListSize = 0;
             $('body').ready(loadVeonline(0));
             var listVeonline = [];
+
             function loadVeonline(page) {
                 $.ajax({
-                    url:'/api/datve/listTicketManage/'+page,
-                    type:'POST',
+                    url: '/api/datve/listTicketManage/' + page,
+                    type: 'POST',
                     dataType: 'JSON',
-                    success:function (data) {
+                    success: function (data) {
                         listVeonline = data
                         console.log(listVeonline)
                     },
@@ -103,37 +125,39 @@
                 });
 
                 $.ajax({
-                    url:'/api/datve/listTicketManageSize',
+                    url: '/api/datve/listTicketManageSize',
                     type: 'POST',
                     dataType: 'JSON',
                     success: function (dataa) {
                         fullListSize = dataa;
                         console.log(fullListSize)
-                    },error: function (e) {
+                    }, error: function (e) {
                         toastr.warning('Lỗi load dữ liệu từ máy chủ!', '', {positionClass: 'md-toast-top-center'});
-                    },complete: function () {
+                    }, complete: function () {
                         fillVeonlinePage();
                     }
                 })
             }
+
             function fillVeonline() {
                 var content = '';
-                for(var i = 0;i<listVeonline.length;i++){
-                    content+='<tr class="text-white">\n' +
-                        '                        <td scope="row">'+(i+1)+'</td>' +
-                        '                        <td>'+listVeonline[i].suatchieu+'</td>\n' +
-                        '                        <td>'+listVeonline[i].ngaychieu+'</td>\n' +
-                        '                        <td>'+listVeonline[i].phong+'</td>\n' +
-                        '                        <td>'+listVeonline[i].ghe+'</td>\n' +
-                        '                        <td>'+listVeonline[i].tenphim+'</td>\n' +
-                        '                        <td>'+listVeonline[i].ngaytao+'</td>\n' +
-                        '                        <td>'+listVeonline[i].hethan+'</td>\n' +
-                        '                        <td>'+(listVeonline[i].trangthai==0?'Chưa xác nhận':listVeonline[i].trangthai==1?'Đã xác nhận':'Hết hạn')+'</td>\n' +
-                        '                        <td>'+(listVeonline[i].trangthai==0?' <option value="'+listVeonline[i].idsuatchieughe+'" class="subHoanTac btn btn-sm btn-elegant">Hủy</option>':listVeonline[i].trangthai==1?'':'')+'</td>\n' +
+                for (var i = 0; i < listVeonline.length; i++) {
+                    content += '<tr class="text-white">\n' +
+                        '                        <td scope="row">' + (i + 1) + '</td>' +
+                        '                        <td>' + listVeonline[i].suatchieu + '</td>\n' +
+                        '                        <td>' + listVeonline[i].ngaychieu + '</td>\n' +
+                        '                        <td>' + listVeonline[i].phong + '</td>\n' +
+                        '                        <td>' + listVeonline[i].ghe + '</td>\n' +
+                        '                        <td>' + listVeonline[i].tenphim + '</td>\n' +
+                        '                        <td>' + listVeonline[i].ngaytao + '</td>\n' +
+                        '                        <td>' + listVeonline[i].hethan + '</td>\n' +
+                        '                        <td>' + (listVeonline[i].trangthai == 0 ? 'Chưa xác nhận' : listVeonline[i].trangthai == 1 ? 'Đã xác nhận' : 'Hết hạn') + '</td>\n' +
+                        '                        <td>' + (listVeonline[i].trangthai == 0 ? ' <option value="' + listVeonline[i].idsuatchieughe + '" class="subHoanTac btn btn-sm btn-elegant"  data-toggle="modal" data-target="#basicExampleModal">Hủy</option>' : listVeonline[i].trangthai == 1 ? '' : '') + '</td>\n' +
                         '                    </tr>';
                 }
                 $('#dataVeon').html(content);
             }
+
             function fillVeonlinePage() {
                 var content2 = '<ul class="pagination pg-dark">\n' +
                     '                        <!-- Arrow left -->\n' +
@@ -143,11 +167,11 @@
                     '                                <span class="sr-only">Previous</span>\n' +
                     '                            </a>\n' +
                     '                        </li>';
-                for(var ii = 0;ii<fullListSize/10;ii++){
-                    var ac = (pageC==ii)?'active':'';
-                    content2+='<li class="page-item '+ac+'"><option value="'+ii+'" class="page-link">'+(ii+1)+'</option></li>'
+                for (var ii = 0; ii < fullListSize / 10; ii++) {
+                    var ac = (pageC == ii) ? 'active' : '';
+                    content2 += '<li class="page-item ' + ac + '"><option value="' + ii + '" class="page-link">' + (ii + 1) + '</option></li>'
                 }
-                content2+=' <li class="page-item">\n' +
+                content2 += ' <li class="page-item">\n' +
                     '                            <a class="page-link" aria-label="Next">\n' +
                     '                                <span aria-hidden="true">&raquo;</span>\n' +
                     '                                <span class="sr-only">Next</span>\n' +
@@ -157,17 +181,24 @@
                 $('#dataPage').html(content2);
             }
 
-            $(document).on('click','option.page-link',function () {
+            $(document).on('click', 'option.page-link', function () {
                 pageC = $(this).val();
                 loadVeonline(pageC);
             });
 
-            $(document).on('click','option.subHoanTac',function () {
-               console.log($(this).val())
+            $(document).on('click', 'option.subHoanTac', function () {
+                $('#idVeHuy').val($(this).val());
+            });
+
+            $(document).on('click', '#subHuy', function () {
+                deleteVeonline($('#idVeHuy').val());
+            });
+
+            function deleteVeonline(id) {
                 $.ajax({
-                    url:'/api/datve/deleteTicketOnline/'+$(this).val(),
+                    url: '/api/datve/deleteTicketOnline/' + id,
                     type: 'POST',
-                    success:function () {
+                    success: function () {
                         toastr.success('Hủy vé thành công!', '', {positionClass: 'md-toast-top-center'});
                     },
                     error: function () {
@@ -177,7 +208,7 @@
                         loadVeonline(pageC);
                     }
                 })
-            });
+            }
         });
     </script>
 </th:block>

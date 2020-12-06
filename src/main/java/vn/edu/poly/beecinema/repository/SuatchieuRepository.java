@@ -15,8 +15,8 @@ import java.util.List;
 public interface SuatchieuRepository extends JpaRepository<Suatchieu, Integer>, JpaSpecificationExecutor<Suatchieu> , PagingAndSortingRepository<Suatchieu, Integer> {
     List<Suatchieu> findAllByTrangthai(Integer trangthai);
     List<Suatchieu> findAllByPhimAndTrangthai(Phim phim,Integer trangthai);
-    @Query("SELECT p FROM Suatchieu p WHERE CONCAT(p.id, ' ',p.phim.ten, ' ', p.phong.ten, ' ', p.ngaychieu, ' ', p.khunggio.batdau, ' ', p.khunggio.ketthuc ) LIKE %?1%")
-    public Page<Suatchieu> findAll(String keyword, Pageable pageable);
+    @Query("SELECT p FROM Suatchieu p WHERE CONCAT(p.id, ' ',p.phim.ten, ' ', p.phong.ten, ' ', p.ngaychieu, ' ', p.khunggio.batdau, ' ', p.khunggio.ketthuc ) LIKE %?1% ORDER BY p.id DESC")
+    Page<Suatchieu> findAll(String keyword, Pageable pageable);
 
 
 }

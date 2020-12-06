@@ -253,16 +253,15 @@
             <p class="font-weight-bold">Tài Khoản</p>
         </div>
 
-        <div class="breadcrumb-dn mr-auto">
-            <a href="/admin/user/show-user?lang=vi" >VI</a>
-        </div>
-        <div class="breadcrumb-dn mr-auto">
-            <a href="/admin/user/show-user?lang=en" >EN</a>
-        </div>
-
         <!-- Navbar links -->
         <ul class="nav navbar-nav nav-flex-icons ml-auto">
-
+            <li class="nav-item d-flex align-items-center m-1">
+                <a th:href="@{${#httpServletRequest.requestURI+'?lang=vi'}}"><img style="height: 20px;"
+                                                                                  th:src="@{/img/icon/vietnam-flag-icon-free-download.jpg}" alt="VN"></a>
+            </li>
+            <li class="nav-item d-flex align-items-center m-1">
+                <a th:href="@{${#httpServletRequest.requestURI+'?lang=en'}}"><img style="height: 20px;" th:src="@{/img/icon/icon-english.png}" alt="EN"></a>
+            </li>
             <!-- Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
@@ -270,11 +269,8 @@
                     <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Tài Khoản</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" class="dropdown-item" value="Log Out">
-                    </form>
                     <a class="dropdown-item" th:href="@{/admin/profile/update-profile}" >Cập nhật Tài khoản</a>
+                    <a class="dropdown-item" th:href="@{/logout}" >Đăng xuất</a>
                 </div>
             </li>
 

@@ -7,7 +7,7 @@
  <title>Thêm suất chiếu</title>
 </head>
 
-<body>
+<body th:attr="onload=${mess}">
 
   <!-- Main layout -->
   <main layout:fragment="content">
@@ -83,8 +83,8 @@
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-day prefix"></i>
-                <input type="date" th:field="*{ngaychieu}" id="form31" class="form-control">
-                <label for="form31" class="active">Ngày Chiếu</label>
+                <input type="date" th:field="*{ngaychieu}" id="datePicker" class="form-control" value="">
+                <label for="datePicker" class="active">Ngày Chiếu</label>
                 <p th:if="${#fields.hasErrors('ngaychieu')}" th:errors="*{ngaychieu}" class="text-danger text-center"></p>
               </div>
 
@@ -152,8 +152,14 @@
 
     </div>
   </main>
-  <!-- Main layout -->
 
+  <!-- Main layout -->
+  <th:block layout:fragment="optional">
+
+    <script>
+      document.getElementById('datePicker').valueAsDate = new Date();
+    </script>
+  </th:block>
 </body>
 
 </html>

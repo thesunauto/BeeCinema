@@ -138,9 +138,7 @@
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twentyeightWord}"></a></th>
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twentynineWord}"></a></th>
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtyWord}"></a></th>
-                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtyoneWord}"></a></th>
-                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtytwoWord}"></a></th>
-                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtythreeWord}"></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtythreeWord}"></a></th>
                   </tr>
                 </thead>
                 <!-- Table head -->
@@ -159,9 +157,7 @@
                     <td th:text="${suatChieu.dongia}"></td>
                     <td th:text="${suatChieu.phuthuyonline}"></td>
                     <td th:text="${suatChieu.taikhoan.ten}"></td>
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
+                    <td th:text="${suatChieu.ngaytao}"></td>
                     <td th:switch="${suatChieu.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
                   </tr>
                 </tbody>
