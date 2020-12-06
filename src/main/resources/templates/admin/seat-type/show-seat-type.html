@@ -92,7 +92,7 @@
 
             </div>
 
-            <h4 class="white-text font-weight-bold">Danh sách Loại Ghế</h4>
+            <h4 class="white-text font-weight-bold" th:text="#{one-hundred-and-FivetynineWord}"></h4>
 
             <div>
               <a th:href="@{/admin/seat-type/add-seat-type}"class="btn-floating btn-sm btn-primary" th:title="Sửa"><i class="fas fa-plus-circle" th:title="Xóa"></i></a>
@@ -117,16 +117,16 @@
                     <th >
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">ID <i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-SixtyWord}"> <i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên<i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-SixtyoneWord}"><i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=gia&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Giá<i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=gia&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-SixtytwoWord}"><i class="fas fa-sort ml-1"></i></a>
                     </th>
-                    <th ><a class="font-weight-bold">Ngày Tạo</a></th>
-                    <th ><a class="font-weight-bold">Trạng thái </a> </th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-SixtythreeWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-SixtyfourWord}"> </a> </th>
                   </tr>
                 </thead>
                 <!-- Table head -->
