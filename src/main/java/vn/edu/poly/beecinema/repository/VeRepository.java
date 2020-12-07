@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import vn.edu.poly.beecinema.entity.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -19,5 +20,9 @@ public interface VeRepository extends JpaRepository<Ve, String>, JpaSpecificatio
     List<Ve> findAllByTrangthai(Integer trangthai);
     List<Ve> getVeByVeID(VeID veID);
     List<Ve> findAllByTrangthaiOrderByNgaytaoDesc(Integer trangthai);
+
+
+//    Thong ke
+    List<Ve> findAllByTrangthaiAndSuatchieuNgaychieu(Integer trangthai, LocalDate ngaychieu);
 
 }
