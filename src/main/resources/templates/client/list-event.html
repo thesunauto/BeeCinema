@@ -7,7 +7,7 @@
   <title>Sign in</title>
 </head>
 
-<body th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+<body th:style="'background-image:url(' + @{/img/neon-cinema-logos.jpg} + ');background-repeat: repeat; background-size: contain; background-position: center center;background-attachment: fixed;'">
 
 <main layout:fragment="content" style="padding: 0;">
   <div class="container-fluid pt-5 mt-5">
@@ -19,7 +19,7 @@
 
         <!-- Card image -->
         <div class="view view-cascade overlay">
-          <img class="card-img-top" th:src="@{/img/images/BeeEvents.png}"  style="object-fit: cover;  object-position: center;  width: 100%;  max-height: 200px;"
+          <img class="card-img-top" th:src="@{/img/event.png}"  style="object-fit: cover;  object-position: center;  width: 100%;  max-height: 400px;"
                alt="Card image cap">
           <a href="#!">
             <div class="mask rgba-white-slight"></div>
@@ -27,7 +27,7 @@
         </div>
 
         <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
+        <div class="card-body card-body-cascade text-center rgba-white-strong">
           <div class="row">
             <div class="col-lg-3 col-sm-4 col-md-6" th:each="suKien : ${suKien}">
               <div class="view overlay zoom">

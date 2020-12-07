@@ -38,7 +38,7 @@
                 height: 100vh;
             }
         }
-        
+
     </style>
 </head>
 
@@ -46,9 +46,9 @@
 <!-- Main Navigation -->
 <header th:style="${#httpServletRequest.requestURI!='/'}?'width:0;'">
 
-    <nav class="navbar navbar-expand-lg p-0 red-text fixed-top scrolling-navbar" style="background-color: #fff; border-bottom: 5px solid #ff4757;">
+    <nav class="navbar navbar-expand-lg p-0 red-text fixed-top scrolling-navbar" style="background-color: #fff; background-image: url('/img/nav-bg.png'); background-size: cover;background-repeat: no-repeat; background-position: center top; border-bottom: 5px solid #ff4757;">
         <div class="container">
-            <a class="navbar-brand" th:href="@{/}"><img th:src="@{/img/icon/logo80x160noBkg.png}" height="60" alt="mdb logo"></a>
+            <a class="navbar-brand rgba-white-strong border-left border-right border-danger px-2" th:href="@{/}"><img th:src="@{/img/icon/logo80x160noBkg.png}" height="60" alt="mdb logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -71,7 +71,7 @@
 
 
 
-                <ul class="navbar-nav">
+                <ul class="navbar-nav px-2">
                     <li class="nav-item d-flex align-items-center m-1">
                         <a th:href="@{${#httpServletRequest.requestURI+'?lang=vi'}}"><img style="height: 20px;"
                                                  th:src="@{/img/icon/vietnam-flag-icon-free-download.jpg}" alt="VN"></a>
@@ -85,7 +85,7 @@
                             <!--Trigger-->
                             <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false"><img id="blahza" class="img-fluid z-depth-1 rounded-circle"
-                                                                                    style="object-fit: cover;  object-position: center;  width: 30px;  height: 30px;"> <span id="usernamenav" >Account</span></a>
+                                                                                    style="object-fit: cover;  object-position: center;  width: 30px;  height: 30px;"> <span id="usernamenav" class="font-weight-bold"> Account</span></a>
 
 
                             <!--Menu-->
@@ -103,7 +103,7 @@
 
     <!-- Intro Section -->
     <div  th:if="${#httpServletRequest.requestURI=='/'}" class="view jarallax" data-jarallax='{"speed": 0.2}' style="margin: 0;padding: 0;"
-          th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+          th:style="'background-image:url(' + @{/img/bg-neon.png} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
         <div class="mask rgba-black-light">
             <div class="container h-100 d-flex justify-content-center align-items-center">
                 <div class="row pt-5 mt-3">

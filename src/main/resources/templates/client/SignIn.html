@@ -54,7 +54,7 @@
     <!--Section: Content-->
     <section class="p-5 my-md-5 text-center">
 
-      <form class="my-5 mx-md-5" action="">
+      <div class="my-5 mx-md-5">
 
         <div class="row">
           <div class="col-md-6 mx-auto">
@@ -65,7 +65,7 @@
               <div class="card-body text-left rgba-white-light">
 
                 <!-- Form -->
-                <form th:action="@{/login}" method="post">
+                <form th:action="@{/login}" method="POST">
                   <p class="h3 font-weight-bold text-center deep-purple-text rgba-white-strong rounded border-bottom border-danger" th:text="#{sauhai}"></p>
 
                   <div class="md-form">
@@ -99,7 +99,7 @@
           </div>
         </div>
 
-      </form>
+      </div>
 
     </section>
     <!--Section: Content-->
