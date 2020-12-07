@@ -15,4 +15,5 @@ public interface VeonlineService {
     void save(Veonline veonline);
     List<Veonline> getListByUser(Taikhoan taikhoan,Integer page,Integer limit);
     List<Veonline> getListByUser(Taikhoan taikhoan);
+    void delete(VeonlineID veonlineID);
 }

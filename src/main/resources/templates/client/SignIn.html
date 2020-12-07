@@ -28,28 +28,28 @@
                 <div class="d-flex align-items-center justify-content-center rgba-black-strong h-100 w-50">
                   <!-- Login form -->
                   <form th:action="@{/login}" method="post">
-                    <p class="h3 font-weight-bold text-center">Sign in</p>
+                    <p class="h3 font-weight-bold text-center" th:text="#{namtam}"></p>
 
                     <div class="md-form">
                       <i class="fas fa-envelope prefix"></i>
                       <input type="text" id="defaultForm-email" class="form-control white-text" name="username" required>
-                      <label for="defaultForm-email">Your username</label>
+                      <label for="defaultForm-email" th:text="#{namchin}"></label>
                     </div>
 
                     <div class="md-form">
                       <i class="fas fa-lock prefix"></i>
                       <input type="password" id="defaultForm-pass" class="form-control white-text" name="password" required>
-                      <label for="defaultForm-pass">Your password</label>
+                      <label for="defaultForm-pass" th:text="#{saumot}"></label>
                     </div>
 
                     <div class="text-center mt-4">
-                      <button type="submit" class="btn btn-default">Login</button>
+                      <button type="submit" class="btn btn-default" th:text="#{sauhai}"></button>
                     </div>
                     <div class="offset-xl-1">
 
                     </div>
                     <div style="font-size: small; text-align: center">
-                      <a th:href="@{/forgot-pass}" class="blue-text">Bạn muốn tìm lại mật khẩu?</a>
+                      <a th:href="@{/forgot-pass}" class="blue-text" th:text="#{sauba}"></a>
                     </div>
                   </form>
                   <!-- Login form -->

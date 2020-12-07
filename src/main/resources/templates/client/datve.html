@@ -20,7 +20,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
-                                <label class="h4 rgba-black-light p-1 rounded">Suất chiếu: </label>
+                                <label class="h4 rgba-black-light p-1 rounded" th:text="#{bontam}"></label>
                                 <div class="btn-group d-flex justify-content-center" data-toggle="buttons">
 
                                     <option class="btn btn-danger mx-1 rdoNgayChieu"
@@ -39,20 +39,20 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="h4 rgba-black-light p-1 rounded">Phòng: </label>
+                                <label class="h4 rgba-black-light p-1 rounded" th:text="#{bonchin}"></label>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                         <tr class="text-center white-text">
-                                            <th class="h4" colspan="100%"><i class="fas fa-desktop"></i> MÀN HÌNH <i
+                                            <th class="h4" colspan="100%"><i class="fas fa-desktop" th:text="#{nammot}"></i> <i
                                                     class="fas fa-desktop"></i></th>
                                         </tr>
                                         </thead>
                                         <tbody id="dataGhe">
                                         <tr class="text-center">
-                                            <td class="white-text">Dãy A</td>
+                                            <td class="white-text" th:text="#{namhai}"></td>
                                             <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td class="white-text">Dãy A</td>
+                                            <td class="white-text" th:text="#{namhai}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <button id="btnthanhtoan" class="float-right btn purple-gradient" data-toggle="modal"
-                                        data-target="#modalContactForm">XUẤT VÉ
+                                        data-target="#modalContactForm" th:text="#{namba}">
                                 </button>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <h5>Lưu ý: Bạn chỉ có thể đặt trước 4 vé</h5>
+                    <h5 th:text="#{nambon}"></h5>
                 </div>
             </div>
         </div>

@@ -7,11 +7,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import vn.edu.poly.beecinema.commons.VeResponse;
+import vn.edu.poly.beecinema.entity.Taikhoan;
 import vn.edu.poly.beecinema.entity.Ve;
 import vn.edu.poly.beecinema.entity.VeID;
 import vn.edu.poly.beecinema.service.PhimService;
@@ -22,16 +21,14 @@ import vn.edu.poly.beecinema.service.VeService;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/employee")
@@ -81,6 +78,38 @@ public class EmployeeController {
         JasperExportManager.exportReportToPdfStream(jasperPrint, out);
 
 //        return "employee/datghe";
+    }
+
+    @GetMapping(value = "/update-profile")
+    public String editProfileType(Model model, Authentication authentication){
+        Optional<Taikhoan> taiKhoanEdit = taikhoanService.findTaikhoanById(taikhoanService.findTaikhoanById(authentication.getName()).get().getUsername());
+        taiKhoanEdit.ifPresent(taikhoan -> model.addAttribute("taikhoan", taikhoan));
+        return "employee/profile";
+    }
+
+    @PostMapping(value = "/update-profile")
+    public String updateProfileType( @ModelAttribute("taikhoan") Taikhoan taikhoan,
+                                     Model model,  Authentication authentication, @RequestParam("images") MultipartFile images){
+
+        taikhoan.setMatkhau(taikhoanService.findTaikhoanById(authentication.getName()).get().getMatkhau());
+        taikhoan.setNgaytao(taikhoanService.findTaikhoanById(authentication.getName()).get().getNgaytao());
+        taikhoan.setQuyen(taikhoanService.findTaikhoanById(authentication.getName()).get().getQuyen());
+        taikhoan.setHinhanh(taikhoanService.findTaikhoanById(authentication.getName()).get().getHinhanh());
+        taikhoan.setTrangthai(taikhoanService.findTaikhoanById(authentication.getName()).get().getTrangthai());
+        if(!images.isEmpty()){
+            Path path = Paths.get("uploads/");
+            try{
+                InputStream inputStream = images.getInputStream();
+                Files.copy(inputStream, path.resolve(images.getOriginalFilename()),
+                        StandardCopyOption.REPLACE_EXISTING);
+                taikhoan.setHinhanh(images.getOriginalFilename().toLowerCase());
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        taikhoanService.saveTaikhoan(taikhoan);
+        model.addAttribute("messages", "thanhcong");
+        return "employee/profile";
     }
 
 

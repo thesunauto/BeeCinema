@@ -85,7 +85,7 @@
            <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-day prefix"></i>
                 <input type="date" th:field="*{ngaychieu}" id="form31" class="form-control">
@@ -97,7 +97,7 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
               <select th:field="*{khunggio}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:each="khunggio : ${@khungGioServiceImpl.getAllKhungGio()}" th:value="${khunggio.id}" th:text="${khunggio.batdau} + ' - ' + ${khunggio.ketthuc}"></option>
               </select><label class="mdb-main-label active">Khung Giờ</label>
@@ -106,7 +106,7 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-money-bill prefix"></i>
                 <input type="number" th:field="*{dongia}" id="form31" class="form-control" min="0" step="1000">
@@ -117,27 +117,27 @@
             </div>
             <!-- Grid column -->
 
-             <!-- Grid column -->
-             <div class="col-md-3 mb-4">
 
-               <div class="md-form md-outline">
-                 <i class="fas fa-money-bill prefix"></i>
-                 <input  type="number" th:field="*{phuthuyonline}" id="form31" class="form-control">
-                 <label for="form31" class="active">Phút Hủy Online</label>
-                 <p th:if="${#fields.hasErrors('phuthuyonline')}" th:errors="*{phuthuyonline}" class="text-danger text-center"></p>
-               </div>
-
-             </div>
-             <!-- Grid column -->
 
           </div>
           <!-- Grid row -->
 
           <!-- Grid row -->
           <div class="row">
-
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
+
+              <div class="md-form md-outline">
+                <i class="fas fa-money-bill prefix"></i>
+                <input  type="number" th:field="*{phuthuyonline}" id="form31" class="form-control">
+                <label for="form31" class="active">Phút Hủy Online</label>
+                <p th:if="${#fields.hasErrors('phuthuyonline')}" th:errors="*{phuthuyonline}" class="text-danger text-center"></p>
+              </div>
+
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-md-4 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-user-plus prefix"></i>
                 <input type="text" th:field="*{taikhoan.username}" id="form31" class="form-control" readonly>
@@ -148,40 +148,15 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-plus prefix"></i>
-                <input type="date" th:field="*{ngaytao}"id="form31" class="form-control" readonly>
-                <label for="form31" class="active">Ngày Tạo</label>
+                <input type="date" th:field="*{ngaytao}"id="form131" class="form-control" readonly>
+                <label for="form131" class="active">Ngày Tạo</label>
               </div>
 
             </div>
             <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-user-edit prefix"></i>
-                <input type="text" id="form31" class="form-control" readonly>
-                <label for="form31" class="active">Người Sửa</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-calendar-alt prefix"></i>
-                <input type="date" id="form31" class="form-control" readonly>
-                <label for="form31" class="active">Ngày Sửa</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-
-
           </div>
           <!-- Grid row -->
           <hr/>

@@ -22,6 +22,7 @@
         .jarallax {
             height: 700px;
         }
+
         @media (max-width: 740px) {
             html,
             body,
@@ -30,6 +31,7 @@
                 height: 100vh;
             }
         }
+
         @media (min-width: 800px) and (max-width: 850px) {
             html,
             body,
@@ -46,45 +48,59 @@
 <!-- Main Navigation -->
 <header th:style="${#httpServletRequest.requestURI!='/'}?'width:0;'">
 
-    <nav class="navbar navbar-expand-lg p-0 red-text fixed-top scrolling-navbar" style="background-color: #fff; border-bottom: 5px solid #ff4757;">
+    <nav class="navbar navbar-expand-lg p-0 red-text fixed-top scrolling-navbar"
+         style="background-color: #fff; border-bottom: 5px solid #ff4757;">
         <div class="container">
-            <a class="navbar-brand" th:href="@{/}"><img th:src="@{/img/icon/logo80x160noBkg.png}" height="60" alt="mdb logo"></a>
+            <a class="navbar-brand" th:href="@{/}"><img th:src="@{/img/icon/logo80x160noBkg.png}" height="60"
+                                                        alt="mdb logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"  th:classappend="${#httpServletRequest.requestURI=='/client/list-film'} ? active">
-                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/list-film}">Movies <span class="sr-only">(current)</span></a>
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.requestURI=='/client/list-film'} ? active">
+                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/list-film}"
+                           th:text="#{hai}"><span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/list-event'} ? active">
-                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/list-event}">Events</a>
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.requestURI=='/client/list-event'} ? active">
+                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/list-event}"
+                           th:text="#{mot}"></a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/about-us'} ? active">
-                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/about-us}">About us</a>
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.requestURI=='/client/about-us'} ? active">
+                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/about-us}"
+                           th:text="#{ba}"></a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/contact-us'} ? active">
-                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/contact-us}">Contact us</a>
+                    <li class="nav-item"
+                        th:classappend="${#httpServletRequest.requestURI=='/client/contact-us'} ? active">
+                        <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/contact-us}"
+                           th:text="#{bon}"></a>
                     </li>
                 </ul>
-                <form class="form-inline">
-                    <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    </div>
-                </form>
+
+
                 <ul class="navbar-nav">
+                    <li class="nav-item d-flex align-items-center m-1">
+                        <a th:href="@{${#httpServletRequest.requestURI+'?lang=vi'}}"><img style="height: 20px;"
+                                                                                          th:src="@{/img/icon/vietnam-flag-icon-free-download.jpg}" alt="VN"></a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center m-1">
+                        <a th:href="@{${#httpServletRequest.requestURI+'?lang=en'}}"><img style="height: 20px;" th:src="@{/img/icon/icon-english.png}" alt="EN"></a>
+                    </li>
                     <li class="nav-item active">
                         <div class="dropdown">
 
                             <!--Trigger-->
                             <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"><span id="usernamenav" >Tài Khoản</span></a>
+                               aria-haspopup="true" aria-expanded="false"><span id="usernamenav">Tài Khoản</span></a>
                             <!--Menu-->
                             <div class="dropdown-menu dropdown-warning">
-                                <a class="dropdown-item" th:href="@{/login}">Đăng nhập</a>
-                                <a class="dropdown-item" th:href="@{/signup}">Đăng ký</a>
-                                <a class="dropdown-item" th:href="@{/forgot-pass}" >Quên mật khẩu</a>
+                                <a class="dropdown-item" th:href="@{/login}" th:text="#{namnam}"></a>
+                                <a class="dropdown-item" th:href="@{/signup}" th:text="#{namsau}"></a>
+                                <a class="dropdown-item" th:href="@{/forgot-pass}" th:text="#{nambay}"></a>
                             </div>
                         </div>
                     </li>
@@ -94,19 +110,24 @@
     </nav>
 
     <!-- Intro Section -->
-    <div  th:if="${#httpServletRequest.requestURI=='/'}" class="view jarallax" data-jarallax='{"speed": 0.2}' style="margin: 0;padding: 0;"
-          th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+    <div th:if="${#httpServletRequest.requestURI=='/'}" class="view jarallax" data-jarallax='{"speed": 0.2}'
+         style="margin: 0;padding: 0;"
+         th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
         <div class="mask rgba-black-light">
             <div class="container h-100 d-flex justify-content-center align-items-center">
                 <div class="row pt-5 mt-3">
                     <div class="col-md-12">
                         <div class="text-center">
-                            <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-3 wow fadeInDown" data-wow-delay="0.3s"><strong>welcome
+                            <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-3 wow fadeInDown"
+                                data-wow-delay="0.3s"><strong>welcome
                                 to Bee Cinema</strong></h1>
                             <hr class="hr-light mt-4 wow fadeInDown" data-wow-delay="0.4s">
-                            <h5 class="text-uppercase mb-5 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Where you can enjoy</strong></h5>
-                            <a class="btn btn-outline-white wow fadeInDown" th:href="@{/client/list-film}" data-wow-delay="0.4s">Movies</a>
-                            <a class="btn btn-outline-white wow fadeInDown" th:href="@{/client/list-event}" data-wow-delay="0.4s">Events</a>
+                            <h5 class="text-uppercase mb-5 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Where
+                                you can enjoy</strong></h5>
+                            <a class="btn btn-outline-white wow fadeInDown" th:href="@{/client/list-film}"
+                               data-wow-delay="0.4s">Movies</a>
+                            <a class="btn btn-outline-white wow fadeInDown" th:href="@{/client/list-event}"
+                               data-wow-delay="0.4s">Events</a>
                         </div>
                     </div>
                 </div>
@@ -180,71 +201,71 @@
         <!-- Grid row-->
         <div class="row pb-3">
 
-                    <!-- Facebook -->
-                    <a class="fb-ic">
-                        <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!-- Twitter -->
-                    <a class="tw-ic">
-                        <i class="fab fa-twitter fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!-- Google +-->
-                    <a class="gplus-ic">
-                        <i class="fab fa-google-plus-g fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Linkedin -->
-                    <a class="li-ic">
-                        <i class="fab fa-linkedin-in fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Instagram-->
-                    <a class="ins-ic">
-                        <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Pinterest-->
-                    <a class="pin-ic">
-                        <i class="fab fa-pinterest fa-lg white-text"> </i>
-                    </a>
+            <!-- Facebook -->
+            <a class="fb-ic">
+                <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
+            </a>
+            <!-- Twitter -->
+            <a class="tw-ic">
+                <i class="fab fa-twitter fa-lg white-text mr-4"> </i>
+            </a>
+            <!-- Google +-->
+            <a class="gplus-ic">
+                <i class="fab fa-google-plus-g fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Linkedin -->
+            <a class="li-ic">
+                <i class="fab fa-linkedin-in fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Instagram-->
+            <a class="ins-ic">
+                <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Pinterest-->
+            <a class="pin-ic">
+                <i class="fab fa-pinterest fa-lg white-text"> </i>
+            </a>
 
-                </div>
+        </div>
 
-            </div>
-            <!-- Grid column -->
-            <div class="col-md-12">
+    </div>
+    <!-- Grid column -->
+    <div class="col-md-12">
 
-                <div class="mb-5 flex-center">
+        <div class="mb-5 flex-center">
 
-                    <!-- Facebook -->
-                    <a class="fb-ic">
-                        <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!-- Twitter -->
-                    <a class="tw-ic">
-                        <i class="fab fa-twitter fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!-- Google +-->
-                    <a class="gplus-ic">
-                        <i class="fab fa-google-plus-g fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Linkedin -->
-                    <a class="li-ic">
-                        <i class="fab fa-linkedin-in fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Instagram-->
-                    <a class="ins-ic">
-                        <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Pinterest-->
-                    <a class="pin-ic">
-                        <i class="fab fa-pinterest fa-lg white-text"> </i>
-                    </a>
+            <!-- Facebook -->
+            <a class="fb-ic">
+                <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
+            </a>
+            <!-- Twitter -->
+            <a class="tw-ic">
+                <i class="fab fa-twitter fa-lg white-text mr-4"> </i>
+            </a>
+            <!-- Google +-->
+            <a class="gplus-ic">
+                <i class="fab fa-google-plus-g fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Linkedin -->
+            <a class="li-ic">
+                <i class="fab fa-linkedin-in fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Instagram-->
+            <a class="ins-ic">
+                <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Pinterest-->
+            <a class="pin-ic">
+                <i class="fab fa-pinterest fa-lg white-text"> </i>
+            </a>
 
-                </div>
+        </div>
 
-            </div>
-            <!-- Grid column -->
-            <div class="col-md-12">
+    </div>
+    <!-- Grid column -->
+    <div class="col-md-12">
 
-                <div class="mb-5 flex-center">
+        <div class="mb-5 flex-center">
 
         </div>
         <!-- Grid row-->
@@ -285,7 +306,8 @@
         });
     })
     $(document).ready(function () {
-        $(function () {new WOW().init();
+        $(function () {
+            new WOW().init();
             $('[data-toggle="tooltip"]').tooltip()
         })
         $('.mdb-select').materialSelect();

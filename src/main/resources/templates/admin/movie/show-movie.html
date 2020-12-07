@@ -16,7 +16,7 @@
         <!-- Section: Basic examples -->
         <section>
   
-          <h5 class="my-4 dark-grey-text font-weight-bold">QUẢN LÝ PHIM</h5>
+          <h5 class="my-4 dark-grey-text font-weight-bold" th:text="#{fifty-SeventhWord}"  ></h5>
   
           <!-- Top Table UI -->
           <div class="card p-2 mb-5">
@@ -100,7 +100,7 @@
                 <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-columns mt-0"></i></button>
               </div>
   
-              <h4 class="white-text font-weight-bold">Danh Sách Phim</h4>
+              <h4 class="white-text font-weight-bold" th:text="#{fifty-EighthWord}"></h4>
   
               <div>
                 <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-pencil-alt mt-0"></i></button>
@@ -127,34 +127,34 @@
                       <th >
                       </th>
                       <th >
-                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">ID <i class="fas fa-sort ml-1"></i></a>
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{fifty-NinthWord}"><i class="fas fa-sort ml-1"></i></a>
                       </th>
                       <th >
-                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Tên Phim<i class="fas fa-sort ml-1"></i></a>
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{sixtiethWord}"><i class="fas fa-sort ml-1"></i></a>
                       </th>
                       <th >
-                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=loaiphim.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Thể Loại<i class="fas fa-sort ml-1"></i></a>
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=loaiphim.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{sixty-FirstWord}"><i class="fas fa-sort ml-1"></i></a>
                       </th>
                       <th >
-                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=dotuoi.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Độ Tuổi<i class="fas fa-sort ml-1"></i></a>
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=dotuoi.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"  th:text="#{sixty-SecondWord}" ><i class="fas fa-sort ml-1"></i></a>
                       </th>
                       <th >
-                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngonngu.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Ngôn Ngữ<i class="fas fa-sort ml-1"></i></a>
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngonngu.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{sixty-ThirdWord}" ><i class="fas fa-sort ml-1"></i></a>
                       </th>
-                      <th ><a class="font-weight-bold">Hình Ảnh</a></th>
-                      <th ><a class="font-weight-bold">Độ Dài</a></th>
-                      <th ><a class="font-weight-bold">Mô Tả</a></th>
+                      <th ><a class="font-weight-bold" th:text="#{sixty-FourthWord}" ></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{sixty-FifthWord}"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{sixty-SixthWord}"></a></th>
                       <th >
-                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngaybatdau&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Ngày Bắt đầu<i class="fas fa-sort ml-1"></i></a>
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngaybatdau&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{sixty-SeventhWord}"><i class="fas fa-sort ml-1"></i></a>
                       </th>
                       <th >
-                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngayketthuc&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Ngày Kết thúc<i class="fas fa-sort ml-1"></i></a>
+                        <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngayketthuc&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{sixty-EighthWord}" ><i class="fas fa-sort ml-1"></i></a>
                       </th>
-                      <th ><a class="font-weight-bold">Người Tạo</a></th>
-                      <th ><a class="font-weight-bold">Ngày Tạo</a></th>
-                      <th ><a class="font-weight-bold">Người Sửa</a></th>
-                      <th ><a class="font-weight-bold">Ngày Sửa</a></th>
-                      <th ><a class="font-weight-bold">Trạng Thái</a></th>
+                      <th ><a class="font-weight-bold" th:text="#{sixty-NinthWord}" ></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{seventiethWord}"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{seventy-FirstWord }"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{seventy-SecondWord}"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{seventy-ThirdWord}"></a></th>
                     </tr>
                   </thead>
                   <!-- Table head -->

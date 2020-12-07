@@ -18,6 +18,9 @@ public class VeonlineResponse {
     private String SDT;
     private String tenphim;
     private String suatchieu;
+    private String ngaychieu;
+    private String ghe;
+    private String phong;
     private Integer trangthai;
     private String hethan;
     private LocalDateTime ngaytaoLDT;

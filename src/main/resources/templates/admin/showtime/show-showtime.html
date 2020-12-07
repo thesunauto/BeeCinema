@@ -101,7 +101,7 @@
               <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2"><i class="fas fa-columns mt-0"></i></button>
             </div>
 
-            <h4 class="white-text font-weight-bold">Danh sách Khung Giờ</h4>
+            <h4 class="white-text font-weight-bold" th:text="#{one-hundred-and-ThirdtyfourWord}"></h4>
 
             <div>
               <a th:href="@{/admin/showtime/add-showtime}"class="btn-floating btn-sm btn-primary"><i class="fas fa-plus-circle"></i></a>
@@ -127,16 +127,16 @@
                     <th >
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/showtime/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">ID <i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/showtime/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-ThirdtyfiveWord}"> <i class="fas fa-sort ml-1"></i></a>
                     </th>
-                    <th ><a class="font-weight-bold">Tên</a></th>
-                    <th ><a class="font-weight-bold">Bắt đầu</a></th>
-                    <th ><a class="font-weight-bold">Kết thúc</a></th>
-                    <th ><a class="font-weight-bold">Người Tạo</a></th>
-                    <th ><a class="font-weight-bold">Ngày Tạo</a></th>
-                    <th ><a class="font-weight-bold">Người Sửa</a></th>
-                    <th ><a class="font-weight-bold">Ngày Sửa</a></th>
-                    <th ><a class="font-weight-bold">Trạng thái </a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtysixWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtysevenWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtyeightWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-ThirdtynineWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-FourtyWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-FourtyoneWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-FourtytwoWord}"></a></th>
+                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-FourtythreeWord}"></a></th>
                   </tr>
                 </thead>
                 <!-- Table head -->
