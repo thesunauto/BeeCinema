@@ -8,69 +8,105 @@
 </head>
 
 <body th:attr="onload=${message}"
-      th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');;background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+      th:style="'background-image:url(' + @{/img/bg-neon-movie.jpg} + ');;background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
 
-<main layout:fragment="content" style="padding: 0;">
-  <div class="container-fluid pt-5 mt-5">
+<main layout:fragment="content" style="padding: 0; margin-top: 20vh;">
+<!--  <div class="container-fluid pt-5 mt-5">-->
 
-    <!-- Section: Blog v.2 -->
-    <section class="wow fadeIn" data-wow-delay="0.3s">
+<!--    &lt;!&ndash; Section: Blog v.2 &ndash;&gt;-->
+<!--    <section class="wow fadeIn" data-wow-delay="0.3s">-->
 
-      <!-- Grid row -->
-      <div class="row">
+<!--      &lt;!&ndash; Grid row &ndash;&gt;-->
+<!--      <div class="row">-->
 
-        <div class="col-12">
-          <div class="d-flex align-items-center justify-content-center"  style="height: 51vh">
-            <!--Card -->
-            <div class="card rgba-black-light white-text rounded h-100 w-100">
-              <!--Card content -->
-              <div class="card-body d-flex align-items-center justify-content-center">
-                <div class="d-flex align-items-center justify-content-center rgba-black-strong h-100 w-50">
-                  <!-- Login form -->
-                  <form th:action="@{/login}" method="post">
-                    <p class="h3 font-weight-bold text-center" th:text="#{namtam}"></p>
+<!--        <div class="col-12">-->
+<!--          <div class="d-flex align-items-center justify-content-center"  style="height: 51vh">-->
+<!--            &lt;!&ndash;Card &ndash;&gt;-->
+<!--            <div class="card rgba-black-light white-text rounded h-100 w-100">-->
+<!--              &lt;!&ndash;Card content &ndash;&gt;-->
+<!--              <div class="card-body d-flex align-items-center justify-content-center">-->
+<!--                <div class="d-flex align-items-center justify-content-center rgba-black-strong h-100 w-50">-->
+<!--                  &lt;!&ndash; Login form &ndash;&gt;-->
 
-                    <div class="md-form">
-                      <i class="fas fa-envelope prefix"></i>
-                      <input type="text" id="defaultForm-email" class="form-control white-text" name="username" required>
-                      <label for="defaultForm-email" th:text="#{namchin}"></label>
-                    </div>
+<!--                  &lt;!&ndash; Login form &ndash;&gt;-->
+<!--                </div>-->
 
-                    <div class="md-form">
-                      <i class="fas fa-lock prefix"></i>
-                      <input type="password" id="defaultForm-pass" class="form-control white-text" name="password" required>
-                      <label for="defaultForm-pass" th:text="#{saumot}"></label>
-                    </div>
 
-                    <div class="text-center mt-4">
-                      <button type="submit" class="btn btn-default" th:text="#{sauhai}"></button>
-                    </div>
-                    <div class="offset-xl-1">
+<!--              </div>-->
 
-                    </div>
-                    <div style="font-size: small; text-align: center">
-                      <a th:href="@{/forgot-pass}" class="blue-text" th:text="#{sauba}"></a>
-                    </div>
-                  </form>
-                  <!-- Login form -->
-                </div>
+<!--            </div>-->
+<!--            &lt;!&ndash;Card &ndash;&gt;-->
+<!--          </div>-->
 
+<!--        </div>-->
+
+<!--      </div>-->
+<!--      &lt;!&ndash; Grid row &ndash;&gt;-->
+
+<!--    </section>-->
+<!--    &lt;!&ndash; Section: Blog v.2 &ndash;&gt;-->
+
+<!--  </div>-->
+
+
+  <div class="container my-5 px-0 z-depth-1">
+
+    <!--Section: Content-->
+    <section class="p-5 my-md-5 text-center">
+
+      <div class="my-5 mx-md-5">
+
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <!-- Material form login -->
+            <div class="card rgba-white-strong">
+
+              <!--Card content-->
+              <div class="card-body text-left rgba-white-light">
+
+                <!-- Form -->
+                <form th:action="@{/login}" method="POST">
+                  <p class="h3 font-weight-bold text-center deep-purple-text rgba-white-strong rounded border-bottom border-danger" th:text="#{sauhai}"></p>
+
+                  <div class="md-form">
+                    <i class="fas fa-envelope prefix"></i>
+                    <input type="text" id="defaultForm-email" class="form-control white-text" name="username" required>
+                    <label for="defaultForm-email" th:text="#{namchin}"></label>
+                  </div>
+
+                  <div class="md-form">
+                    <i class="fas fa-lock prefix"></i>
+                    <input type="password" id="defaultForm-pass" class="form-control white-text" name="password" required>
+                    <label for="defaultForm-pass" th:text="#{saumot}"></label>
+                  </div>
+
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn white-text font-weight-bold deep-purple accent-4" th:text="#{sauhai}"></button>
+                  </div>
+                  <div class="offset-xl-1">
+
+                  </div>
+                  <div style="font-size: small; text-align: center">
+                    <a th:href="@{/forgot-pass}" class="blue-text" th:text="#{sauba}"></a>
+                  </div>
+                </form>
+                <!-- Form -->
 
               </div>
 
             </div>
-            <!--Card -->
+            <!-- Material form login -->
           </div>
-
         </div>
 
       </div>
-      <!-- Grid row -->
 
     </section>
-    <!-- Section: Blog v.2 -->
+    <!--Section: Content-->
+
 
   </div>
+
 </main>
 
 </body>

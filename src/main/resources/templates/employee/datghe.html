@@ -444,9 +444,14 @@
                     contentType: 'application/json',
                     processData: false,
                     success: function (data) {
-                        var bo = data;
-                        if(bo){
+                        var nbo = data;
+                        if(nbo.minScrollbarLength!=0){
                             toastr.success('Xuất vé thành công', '', {positionClass: 'md-toast-top-right'});
+                            for (var z = 0;z<nbo.length;z++){
+                                window.open('/employee/xuatve/'+nbo[z][1]+'|'+nbo[z][0]);
+                            }
+
+
                         }else {
                             toastr.error('Xuất vé thất bại', '', {positionClass: 'md-toast-top-right'});
                         }

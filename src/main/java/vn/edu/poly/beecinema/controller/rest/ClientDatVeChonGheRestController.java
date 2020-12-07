@@ -10,6 +10,7 @@ import vn.edu.poly.beecinema.config.HttpSessionConfig;
 import vn.edu.poly.beecinema.entity.Ghe;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
+import vn.edu.poly.beecinema.entity.VeonlineID;
 import vn.edu.poly.beecinema.repository.VeonlineRepository;
 import vn.edu.poly.beecinema.service.*;
 import vn.edu.poly.beecinema.storage.StorageService;
@@ -321,11 +322,15 @@ public class ClientDatVeChonGheRestController {
         List<VeonlineResponse> veonlineResponses = new ArrayList<>();
         veonlineService.getListByUser(taikhoanService.findTaikhoanById(authentication.getName()).get(),page,10).forEach(veonline -> {
             veonlineResponses.add(VeonlineResponse.builder()
-                    .idsuatchieughe(veonline.getSuatchieu().getKhunggio().getBatdau()+"-"+veonline.getSuatchieu().getKhunggio().getKetthuc()+" | "+veonline.getGhe().getDayghe().getTen()+"-"+veonline.getGhe().getCol())
+                    .idsuatchieughe(veonline.getSuatchieu().getId()+"-"+veonline.getGhe().getId())
+                    .ghe(veonline.getGhe().getDayghe().getTen()+"-"+veonline.getGhe().getCol())
+                    .suatchieu(veonline.getSuatchieu().getKhunggio().getBatdau().format(DateTimeFormatter.ofPattern("HH:mm"))+"-"+veonline.getSuatchieu().getKhunggio().getKetthuc().format(DateTimeFormatter.ofPattern("HH:mm")))
+                    .phong(veonline.getSuatchieu().getPhong().getTen())
+                    .ngaychieu(veonline.getSuatchieu().getNgaychieu().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                     .ngaytao(veonline.getNgaytao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-                    .hethan(LocalDateTime.of(veonline.getSuatchieu().getNgaychieu(),veonline.getSuatchieu().getKhunggio().getBatdau()).minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).format(DateTimeFormatter.ofPattern("HH/mm dd/MM/yyyy")))
+                    .hethan(LocalDateTime.of(veonline.getSuatchieu().getNgaychieu(),veonline.getSuatchieu().getKhunggio().getBatdau()).minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy")))
                     .tenphim(veonline.getSuatchieu().getPhim().getTen())
-                    .trangthai((veonline.getTrangthai()==0&&(LocalDateTime.of(veonline.getSuatchieu().getNgaychieu(),veonline.getSuatchieu().getKhunggio().getBatdau()).compareTo(LocalDateTime.now())<0))?2:(veonline.getTrangthai()==1)?1:0)
+                    .trangthai((veonline.getTrangthai()==0&&(LocalDateTime.of(veonline.getSuatchieu().getNgaychieu(),veonline.getSuatchieu().getKhunggio().getBatdau()).minusMinutes(veonline.getSuatchieu().getPhuthuyonline()).compareTo(LocalDateTime.now())<0))?2:(veonline.getTrangthai()==1)?1:0)
                     .build());
         });
 
@@ -336,5 +341,18 @@ public class ClientDatVeChonGheRestController {
     @PostMapping("/listTicketManageSize")
     public ResponseEntity listTicketManageSize(Authentication authentication){
         return ResponseEntity.ok().body(veonlineService.getListByUser(taikhoanService.findTaikhoanById(authentication.getName()).get()).size());
+    }
+    @PostMapping("/deleteTicketOnline/{id}")
+    public ResponseEntity deleteTicketOnline(Authentication authentication,@PathVariable String id){
+        try {
+            Integer idghe = Integer.valueOf(id.substring(id.indexOf("-")+1));
+            Integer idsuatchieu = Integer.valueOf(id.substring(0,id.indexOf("-")));
+            veonlineService.delete(VeonlineID.builder().idsuatchieu(idsuatchieu).idghe(idghe).build());
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+       return ResponseEntity.notFound().build();
     }
 }

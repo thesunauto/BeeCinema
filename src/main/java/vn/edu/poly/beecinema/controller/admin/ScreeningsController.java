@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import vn.edu.poly.beecinema.entity.Khunggio;
 import vn.edu.poly.beecinema.entity.Phim;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Sukien;
@@ -88,6 +89,29 @@ public class ScreeningsController {
             suatChieu.setKhunggio(khungGioService.findKhungGioById(suatChieu.getKhunggio().getId()).get());
             suatChieu.setNgaytao(LocalDate.now());
             suatChieu.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
+
+
+            List<Suatchieu> suatchieus = suatChieuService.findAllByPhimAndDate(suatChieu.getPhim().getId(), suatChieu.getNgaychieu());
+            System.out.println("Star check lenght: " + suatchieus.size());
+            for (Suatchieu sc1 : suatchieus) {
+                System.out.println("---");
+                System.out.println(sc1.getKhunggio().getBatdau().compareTo(suatChieu.getKhunggio().getBatdau()));
+                System.out.println(sc1.getKhunggio().getKetthuc().compareTo(suatChieu.getKhunggio().getBatdau()));
+                System.out.println(sc1.getKhunggio().getBatdau().compareTo(suatChieu.getKhunggio().getKetthuc()));
+                System.out.println(sc1.getKhunggio().getKetthuc().compareTo(suatChieu.getKhunggio().getKetthuc()));
+                System.out.println("----");
+                if (sc1.getPhong().getId().equals(suatChieu.getPhong().getId())) {
+                    if (!(suatChieu.getKhunggio().getKetthuc().compareTo(sc1.getKhunggio().getBatdau()) <= 0
+                            || suatChieu.getKhunggio().getBatdau().compareTo(sc1.getKhunggio().getKetthuc()) >= 0)
+                    ) {
+
+                        model.addAttribute("mess", "toastr.error('Khung giờ này đã xung đột với suất chiếu khác của phòng này', '', {positionClass: 'md-toast-top-right'});$('#toast-container').attr('class','md-toast-top-right');");
+                        return "admin/screenings/add-screenings";
+                    }
+                }
+
+            }
+
             suatChieuService.saveSuatChieu(suatChieu);
             return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }

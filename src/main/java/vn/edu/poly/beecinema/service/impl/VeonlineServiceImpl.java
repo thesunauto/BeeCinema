@@ -105,4 +105,9 @@ public class VeonlineServiceImpl implements VeonlineService {
     public List<Veonline> getListByUser(Taikhoan taikhoan) {
         return veonlineRepository.findAllByTaikhoan(taikhoan);
     }
+
+    @Override
+    public void delete(VeonlineID veonlineID) {
+        veonlineRepository.delete(veonlineRepository.getVeonlineByVeonlineID(veonlineID));
+    }
 }
