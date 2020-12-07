@@ -46,7 +46,7 @@
 
                             <!-- Card image -->
                             <div class="view view-cascade gradient-card-header blue-gradient  ">
-                                <h5 class="mb-0 font-weight-bold">Cập nhật ảnh</h5>
+                                <h5 class="mb-0 font-weight-bold" th:text="#{hainam}">Cập nhật ảnh</h5>
                             </div>
                             <!-- Card image -->
 
@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="btn btn-info btn-rounded btn-sm">
-                                            <span>THAY ĐỔI</span>
+                                            <span th:text="#{haisau}">THAY ĐỔI</span>
                                             <input type="file" id="imgInp" name="images">
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
 
                             <!-- Card image -->
                             <div class="view view-cascade gradient-card-header blue-gradient">
-                                <h5 class="mb-0 font-weight-bold">Cập Nhật Thông Tin</h5>
+                                <h5 class="mb-0 font-weight-bold" th:text="#{haibay}">Cập Nhật Thông Tin</h5>
                             </div>
                             <!-- Card image -->
 
@@ -97,14 +97,14 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <input type="text" th:field="*{username}" id="form2" class="form-control " readonly>
-                                            <label for="form2" >Username</label>
+                                            <label for="form2" th:text="#{bayhai}"></label>
                                         </div>
                                     </div>
                                     <!-- Second column -->
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <input type="text" th:field="*{ten}" id="form2" class="form-control" required pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$" />
-                                            <label for="form2" >Họ Tên</label>
+                                            <label for="form2" th:text="#{bayba}"></label>
                                         </div>
                                     </div>
                                 </div>
@@ -117,15 +117,15 @@
                                         <div class="md-form mb-5">
                                             <div class="form-check form-check-inline">
                                                 <input type="radio" th:field="*{gioitinh}" value="0" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample" checked>
-                                                <label class="form-check-label" for="materialInline1">Nam</label>
+                                                <label class="form-check-label" for="materialInline1" th:text="#{baysau}">Nam</label>
                                             </div>
 
                                             <!-- Material inline 2 -->
                                             <div class="form-check form-check-inline">
                                                 <input type="radio" th:field="*{gioitinh}" value="1" class="form-check-input" id="materialInline2" name="inlineMaterialRadiosExample">
-                                                <label class="form-check-label" for="materialInline2">Nữ</label>
+                                                <label class="form-check-label" for="materialInline2" th:text="#{baybay}">Nữ</label>
                                             </div>
-                                            <label for="materialInline2" data-error="wrong" data-success="right">Giới tính:</label>
+                                            <label for="materialInline2" data-error="wrong" data-success="right" th:text="#{baynam}">Giới tính:</label>
                                         </div>
                                     </div>
 
@@ -133,7 +133,7 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <input type="date" th:field="*{ngaysinh}" id="form82" class="form-control" >
-                                            <label for="form82" >Ngày sinh</label>
+                                            <label for="form82" th:text="#{baytam}">Ngày sinh</label>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <input type="text" th:field="*{sodienthoai}" id="form77" class="form-control" required pattern="(09|03|07|08|05)+([0-9]{8})">
-                                            <label for="form77" >Điện thoại</label>
+                                            <label for="form77" th:text="#{baychin}">Điện thoại</label>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <textarea type="text" th:field="*{diachi}" id="form78" class="md-textarea form-control" rows="3"></textarea>
-                                            <label for="form78">Địa chỉ</label>
+                                            <label for="form78" th:text="#{mot5}">Địa chỉ</label>
                                         </div>
                                     </div>
                                     <!-- Second column -->
@@ -175,7 +175,7 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <textarea type="text" th:field="*{mota}" id="form78" class="md-textarea form-control" rows="3"></textarea>
-                                            <label for="form78">Mô tả</label>
+                                            <label for="form78" th:text="#{mot6}">Mô tả</label>
                                         </div>
                                     </div>
                                 </div>
@@ -183,7 +183,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12 text-center my-4">
-                                        <button type="submit" class="btn blue-gradient btn-rounded">CẬP NHẬT</button>
+                                        <button type="submit" class="btn blue-gradient btn-rounded" th:text="#{haitam}">CẬP NHẬT</button>
                                     </div>
                                 </div>
                                 <!-- Fourth row -->

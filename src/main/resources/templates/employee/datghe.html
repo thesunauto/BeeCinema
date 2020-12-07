@@ -22,11 +22,10 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
-                                <label class="h4 rgba-black-light p-1 rounded">Suất chiếu: </label>
+                                <label class="h4 rgba-black-light p-1 rounded" th:text="#{bontam}"> </label>
                                 <div class="btn-group d-flex justify-content-center" data-toggle="buttons">
                                     <label th:if="${suatchieu.isEmpty()}"
-                                           class="d-flex justify-content-center btn btn-danger">Không có suất chiếu
-                                        nào</label>
+                                           class="d-flex justify-content-center btn btn-danger" th:text="#{chinbay}"></label>
                                     <option class="btn btn-danger mx-1 rdoSuatChieu"
                                             th:each="sc : ${suatchieu}" th:value="${sc.getId()}">
                                         <input type="radio" name="options" autocomplete="off">
@@ -40,20 +39,20 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="h4 rgba-black-light p-1 rounded">Phòng: </label>
+                                <label class="h4 rgba-black-light p-1 rounded" th:text="#{bonchin}"> </label>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                         <tr class="text-center white-text">
-                                            <th class="h4" colspan="100%"><i class="fas fa-desktop"></i> MÀN HÌNH <i
+                                            <th class="h4" colspan="100%" th:text="#{nammot}"><i class="fas fa-desktop"></i>  <i
                                                     class="fas fa-desktop"></i></th>
                                         </tr>
                                         </thead>
                                         <tbody id="dataGhe">
                                         <tr class="text-center">
-                                            <td class="white-text">Dãy A</td>
+                                            <td class="white-text" th:text="#{namhai}"> </td>
                                             <td><a class="btn-floating btn-yt"><i class="fas fa-chair"></i></a></td>
-                                            <td class="white-text">Dãy A</td>
+                                            <td class="white-text" th:text="#{namhai}"> </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -63,7 +62,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <button id="btnthanhtoan" class="float-right btn purple-gradient" data-toggle="modal"
-                                        data-target="#modalContactForm">XUẤT VÉ
+                                        data-target="#modalContactForm" th:text="#{namba}">
                                 </button>
                             </div>
                         </div>
@@ -77,7 +76,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <h4 class="modal-title w-100 font-weight-bold">Xuất vé</h4>
+                        <h4 class="modal-title w-100 font-weight-bold" th:text="#{namba}"> </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -112,7 +111,7 @@
 
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
-                        <button id="submitdatve" class="btn btn-unique">Xác nhận <i class="fas fa-paper-plane-o ml-1"></i></button>
+                        <button id="submitdatve" class="btn btn-unique" th:text="#{chinsau}">  <i class="fas fa-paper-plane-o ml-1"></i></button>
                     </div>
                 </div>
             </div>
