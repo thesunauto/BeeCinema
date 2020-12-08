@@ -5,7 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 import vn.edu.poly.beecinema.entity.Taikhoan;
 import vn.edu.poly.beecinema.repository.TaikhoanRepository;
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 @Service
 public class TaikhoanServiceimpl implements TaikhoanService {
+
     @Autowired private TaikhoanRepository taikhoanRepository;
     @Override
     public List<Taikhoan> getAllTaikhoan() {
