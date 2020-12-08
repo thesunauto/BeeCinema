@@ -25,15 +25,15 @@
             <div class="col-sm-12 col-md-8 pt-3 white-text">
               <h3 th:text="${phim.ten}" class="amber-text font-weight-bold">Tên phim</h3>
               <hr class="rgba-white-light">
-              <div class="d-flex flex-wrap py-2"><h5 class="font-weight-bold black-text">Thể loại: </h5>&nbsp<h5 th:text="${phim.loaiphim.ten}"></h5></div>
-              <div class="d-flex flex-wrap py-2"><h5 class="font-weight-bold deep-orange-text">Ngày bắt đầu: </h5>&nbsp<h5 th:text="${#temporals.format(phim.ngaybatdau, 'dd-MM-yyyy')}"></h5></div>
-              <div class="d-flex flex-wrap py-2"><h5 class="font-weight-bold  teal-text">Thời lượng: </h5> &nbsp<h5 th:text="${phim.dodai}"></h5></div>
-              <div class="d-flex flex-wrap py-2"><h5 class="font-weight-bold">Ngôn ngữ: </h5> &nbsp<h5 th:text="${phim.ngonngu.ten}"></h5></div>
-              <a class="btn btn-amber mx-0 p-2 " th:href="@{${'/datve/'+phim.id}}" ><i class="fas fa-ticket-alt"></i> Đặt vé</a>
+              <div class="d-flex flex-wrap py-2"><h5 class="font-weight-bold black-text" th:text="#{saunam}"> </h5>&nbsp<h5 th:text="${phim.loaiphim.ten}"></h5></div>
+              <div class="d-flex flex-wrap py-2"><h5 class="font-weight-bold deep-orange-text" th:text="#{sausau}"> </h5>&nbsp<h5 th:text="${#temporals.format(phim.ngaybatdau, 'dd-MM-yyyy')}"></h5></div>
+              <div class="d-flex flex-wrap py-2"><h5 class="font-weight-bold  teal-text" th:text="#{saubay}"> </h5> &nbsp<h5 th:text="${phim.dodai}"></h5></div>
+              <div class="d-flex flex-wrap py-2"><h5 class="font-weight-bold" th:text="#{sautam}"> </h5> &nbsp<h5 th:text="${phim.ngonngu.ten}"></h5></div>
+              <a class="btn btn-amber mx-0 p-2 " th:href="@{${'/datve/'+phim.id}}" th:text="#{sauchin}" ><i class="fas fa-ticket-alt"></i> </a>
 
             </div>
             <div class="col-12 px-5 pb-3 white-text">
-              <h3 class="text-center font-weight-bold amber-text">Chi tiết phim</h3>
+              <h3 class="text-center font-weight-bold amber-text" th:text="#{baymot}"></h3>
               <h6 th:text="${phim.mota}">
               </h6>
             </div>

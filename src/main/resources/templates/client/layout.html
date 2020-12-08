@@ -119,15 +119,13 @@
                     <div class="col-md-12">
                         <div class="text-center">
                             <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-3 wow fadeInDown"
-                                data-wow-delay="0.3s"><strong>welcome
-                                to Bee Cinema</strong></h1>
+                                data-wow-delay="0.3s"><strong th:text="#{nam}"></strong></h1>
                             <hr class="hr-light mt-4 wow fadeInDown" data-wow-delay="0.4s">
-                            <h5 class="text-uppercase mb-5 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Where
-                                you can enjoy</strong></h5>
+                            <h5 class="text-uppercase mb-5 white-text wow fadeInDown" data-wow-delay="0.4s" th:text="#{sau}"><strong></strong></h5>
                             <a class="btn btn-outline-white wow fadeInDown" th:href="@{/client/list-film}"
-                               data-wow-delay="0.4s">Movies</a>
+                               data-wow-delay="0.4s" th:text="#{bay}"></a>
                             <a class="btn btn-outline-white wow fadeInDown" th:href="@{/client/list-event}"
-                               data-wow-delay="0.4s">Events</a>
+                               data-wow-delay="0.4s" th:text="#{tam}"></a>
                         </div>
                     </div>
                 </div>
@@ -154,7 +152,7 @@
             <!-- Grid column -->
             <div class="col-md-2">
                 <h6 class="text-uppercase font-weight-bold">
-                    <a th:href="@{/}">Home</a>
+                    <a th:href="@{/}" th:text="#{motchin}"></a>
                 </h6>
             </div>
             <!-- Grid column -->
@@ -162,7 +160,7 @@
             <!-- Grid column -->
             <div class="col-md-2">
                 <h6 class="text-uppercase font-weight-bold">
-                    <a th:href="@{/client/list-film}">Movies</a>
+                    <a th:href="@{/client/list-film}" th:text="#{haimot}"></a>
                 </h6>
             </div>
             <!-- Grid column -->
@@ -170,7 +168,7 @@
             <!-- Grid column -->
             <div class="col-md-2">
                 <h6 class="text-uppercase font-weight-bold">
-                    <a th:href="@{/client/list-event}">Events</a>
+                    <a th:href="@{/client/list-event}" th:text="#{haihai}"></a>
                 </h6>
             </div>
             <!-- Grid column -->
@@ -178,15 +176,15 @@
             <!-- Grid column -->
             <div class="col-md-2">
                 <h6 class="text-uppercase font-weight-bold">
-                    <a th:href="@{/client/about-us}">About Us</a>
+                    <a th:href="@{/client/about-us}" th:text="#{haiba}"></a>
                 </h6>
             </div>
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <h6 class="text-uppercase font-weight-bold">
-                    <a th:href="@{/client/contact-us}">Contact Us</a>
+                    <a th:href="@{/client/contact-us}" th:text="#{haibon}"></a>
                 </h6>
             </div>
             <!-- Grid column -->
