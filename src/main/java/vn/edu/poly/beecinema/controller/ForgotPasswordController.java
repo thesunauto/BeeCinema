@@ -7,6 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,11 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 public class ForgotPasswordController {
+    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
+    @Autowired
+    public ForgotPasswordController(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
+        this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
+    }
     @Autowired
     private TaikhoanService taikhoanService;
 
@@ -103,9 +111,9 @@ public class ForgotPasswordController {
 
     @PostMapping("/reset_password")
     public String processResetPassword(HttpServletRequest request, Model model, Authentication authentication) {
+
         String token = request.getParameter("token");
         String password = request.getParameter("password");
-
         Taikhoan taikhoan = taikhoanService.getByResetPasswordToken(token);
 
         if (taikhoan == null) {
@@ -114,6 +122,9 @@ public class ForgotPasswordController {
             return "message";
         } else {
             taikhoanService.updatePassword(taikhoan, password);
+            inMemoryUserDetailsManager.deleteUser(taikhoan.getUsername());
+            inMemoryUserDetailsManager.createUser(User.withDefaultPasswordEncoder().username(taikhoan.getUsername()).password(password).roles(taikhoan.getQuyen().getTen()).build());
+
 
             model.addAttribute("message", "Bạn đã thay đổi thành công mật khẩu của bạn.");
         }

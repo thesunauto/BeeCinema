@@ -186,4 +186,13 @@ public class MainController {
     public String currentUserName(Authentication authentication) {
         return authentication.getName();
     }
+
+    @PostMapping("/changePassword")
+    public String changepassword(@RequestParam String path,@RequestParam String pass,Authentication authentication){
+       Taikhoan taikhoan = taikhoanService.findTaikhoanById(authentication.getName()).get();
+       taikhoanService.updatePassword(taikhoan,pass);
+        inMemoryUserDetailsManager.deleteUser(taikhoan.getUsername());
+        inMemoryUserDetailsManager.createUser(User.withDefaultPasswordEncoder().username(taikhoan.getUsername()).password(pass).roles(taikhoan.getQuyen().getTen()).build());
+        return "redirect:/"+path;
+    }
 }
