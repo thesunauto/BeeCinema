@@ -10,7 +10,7 @@
 <body th:attr="onload=${message}"
       th:style="'background-image:url(' + @{/img/bg-neon-movie.jpg} + ');;background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
 
-<main layout:fragment="content" style="padding: 0; margin-top: 20vh;">
+<main layout:fragment="content" style="padding: 0; margin-top: 10vh;">
 <!--  <div class="container-fluid pt-5 mt-5">-->
 
 <!--    &lt;!&ndash; Section: Blog v.2 &ndash;&gt;-->
@@ -66,17 +66,18 @@
 
                 <!-- Form -->
                 <form th:action="@{/login}" method="POST">
-                  <p class="h3 font-weight-bold text-center deep-purple-text rgba-white-strong rounded border-bottom border-danger" th:text="#{sauhai}"></p>
+                  <img src="/img/logo80x160noBG.png" alt="">
+                  <p class="h3 font-weight-bold text-center deep-purple-text rgba-white-strong rounded border-bottom border-top border-danger p-2" style="font-family: 'Segoe UI';" th:text="#{sauhai}"></p>
 
                   <div class="md-form">
                     <i class="fas fa-envelope prefix"></i>
-                    <input type="text" id="defaultForm-email" class="form-control white-text" name="username" required>
+                    <input type="text" id="defaultForm-email" class="form-control" name="username" required>
                     <label for="defaultForm-email" th:text="#{namchin}"></label>
                   </div>
 
                   <div class="md-form">
                     <i class="fas fa-lock prefix"></i>
-                    <input type="password" id="defaultForm-pass" class="form-control white-text" name="password" required>
+                    <input type="password" id="defaultForm-pass" class="form-control" name="password" required>
                     <label for="defaultForm-pass" th:text="#{saumot}"></label>
                   </div>
 
