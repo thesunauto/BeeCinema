@@ -21,7 +21,7 @@
         <div class="card card-cascade narrower ">
           <!-- Card image -->
           <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
-            <h3 class="card-header-title">Thêm mới Suất Chiếu</h3>  
+            <h3 class="card-header-title" th:text="#{mottramsaumot}"></h3>
           </div>
           <!-- /Card image -->
           <!-- Section heading -->
@@ -45,7 +45,7 @@
             <div class="col-md-4 mb-4">
               <select th:field="*{phim}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:each="phim : ${@phimServiceImpl.getAllPhim()}" th:value="${phim.id}" th:text="${phim.ten}"></option>
-              </select><label class="mdb-main-label active">Tên Phim</label>
+              </select><label class="mdb-main-label active" th:text="#{mottramsaauhai}"></label>
 
             </div>
             <!-- Grid column -->
@@ -56,7 +56,7 @@
               <!-- Name -->
               <select th:field="*{phong}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:each="phong : ${@phongServiceImpl.getAllPhong()}" th:value="${phong.id}" th:text="${phong.ten}"></option>
-              </select><label class="mdb-main-label active">Tên Phòng</label>
+              </select><label class="mdb-main-label active" th:text="#{mottramsauba}"></label>
 
             </div>
             <!-- Grid column -->
@@ -68,7 +68,7 @@
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:value="'0'" th:text="Hiện"  ></option>
                 <option th:value="'1'" th:text="Ẩn" ></option>
-              </select><label class="mdb-main-label active">Trạng thái</label>
+              </select><label class="mdb-main-label active" th:text="#{mottramsautu}"></label>
 
             </div>
             <!-- Grid column -->
@@ -84,7 +84,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-day prefix"></i>
                 <input type="date" th:field="*{ngaychieu}" id="datePicker" class="form-control" value="">
-                <label for="datePicker" class="active">Ngày Chiếu</label>
+                <label for="datePicker" class="active" th:text="#{mottramsaulam}"></label>
                 <p th:if="${#fields.hasErrors('ngaychieu')}" th:errors="*{ngaychieu}" class="text-danger text-center"></p>
               </div>
 
@@ -95,7 +95,7 @@
             <div class="col-md-3 mb-4">
               <select th:field="*{khunggio}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:each="khunggio : ${@khungGioServiceImpl.getAllKhungGio()}" th:value="${khunggio.id}" th:text="${khunggio.batdau} + ' - ' + ${khunggio.ketthuc}"></option>
-              </select><label class="mdb-main-label active">Khung Giờ</label>
+              </select><label class="mdb-main-label active" th:text="#{mottramsausau}"></label>
 
             </div>
             <!-- Grid column -->
@@ -105,7 +105,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-money-bill prefix"></i>
                 <input  type="number" th:field="*{dongia}" id="form32" class="form-control" min="0" step="1000" >
-                <label for="form32" class="active">Đơn Giá</label>
+                <label for="form32" class="active" th:text="#{mottramsaubay}"></label>
                 <p th:if="${#fields.hasErrors('dongia')}" th:errors="*{dongia}" class="text-danger text-center"></p>
               </div>
 
@@ -118,7 +118,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-money-bill prefix"></i>
                 <input  type="number" th:field="*{phuthuyonline}" id="form33" class="form-control">
-                <label for="form33" class="active">Phút Hủy Online</label>
+                <label for="form33" class="active" th:text="#{mottramsautam}"></label>
                 <p th:if="${#fields.hasErrors('phuthuyonline')}" th:errors="*{phuthuyonline}" class="text-danger text-center"></p>
               </div>
 
@@ -135,7 +135,7 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 center">
 
-              <button type="submit" class="btn blue-gradient btn-rounded float-right ">THÊM</button>
+              <button type="submit" class="btn blue-gradient btn-rounded float-right " th:text="#{mottrambamot}"></button>
 
             </div>
             <!-- Grid column -->

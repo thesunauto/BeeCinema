@@ -18,7 +18,7 @@
         <div>
           <div class="card card-cascade narrower ">
             <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
-              <h3 class="card-header-title">Thêm mới Phim</h3>  
+              <h3 class="card-header-title" th:text="#{mottrammuoisau}"></h3>
             </div>
         <div class="card-body">
           <form th:object="${phim}" th:action="@{/admin/movie/add-movie}" action="#" enctype="multipart/form-data" method="post">
@@ -47,7 +47,7 @@
                   <div class="md-form md-outline">
                     <i class="fas fa-key prefix"></i>
                     <input type="text" th:field="*{id}" id="form31" class="form-control">
-                    <label for="form31" class="active">ID</label>
+                    <label for="form31" class="active" th:text="#{mottrammuoibay}"></label>
                     <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                   <div class="md-form md-outline">
                     <i class="fas fa-film prefix"></i>
                     <input type="text" th:field="*{ten}" id="form32" class="form-control">
-                    <label for="form32" class="active">Tên phim</label>
+                    <label for="form32" class="active" th:text="#{mottrammuoitam}"></label>
                     <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
                   <div class="md-form md-outline">
                     <i class="fas fa-clock prefix"></i>
                     <input type="number" th:field="*{dodai}" id="form33" class="form-control" min="0">
-                    <label for="form33" class="active">Độ dài</label>
+                    <label for="form33" class="active" th:text="#{mottrammuoichin}"></label>
                     <p th:if="${#fields.hasErrors('dodai')}" th:errors="*{dodai}" class="text-danger text-center"></p>
                   </div>
                 </div>
@@ -76,19 +76,19 @@
                 <div class="col-md-4 mb-3">
                   <select th:field="*{dotuoi}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                     <option th:each="dotuoi1 : ${@doTuoiServiceImpl.getAllDoTuoi()}" th:value="${dotuoi1.id}" th:text="${dotuoi1.ten}">Hiện</option>
-                  </select><label class="mdb-main-label active">Độ tuổi</label>
+                  </select><label class="mdb-main-label active" th:text="#{mottramhaimuoi}"></label>
                 </div>
 
                 <div class="col-md-4 mb-3">
                   <select th:field="*{ngonngu}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                     <option th:each="ngonngu1 : ${@ngonNguServiceImpl.getAllNgonNgu()}" th:value="${ngonngu1.id}" th:text="${ngonngu1.ten}">Hiện</option>
-                  </select><label class="mdb-main-label active">Ngôn ngữ</label>
+                  </select><label class="mdb-main-label active" th:text="#{motramhaihai}"></label>
                 </div>
 
                 <div class="col-md-4 mb-3">
                   <select th:field="*{loaiphim}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                     <option th:each="loaiphim1 : ${@loaiPhimServiceImpl.getAllLoaiPhim()}" th:value="${loaiphim1.id}" th:text="${loaiphim1.ten}">Hiện</option>
-                  </select><label class="mdb-main-label active">Loại phim</label>
+                  </select><label class="mdb-main-label active" th:text="#{mottramhaiba}"></label>
                 </div>
               </div>
             </div>
@@ -99,7 +99,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-day prefix"></i>
                 <input  type="datetime-local" th:field="*{ngaybatdau}" id="form31" class="form-control">
-                <label for="form31" class="active">Ngày Bắt đầu</label>
+                <label for="form31" class="active" th:text="#{mottramhaitu}"></label>
                 <p th:if="${#fields.hasErrors('ngaybatdau')}" th:errors="*{ngaybatdau}" class="text-danger text-center"></p>
               </div>
             </div>
@@ -108,7 +108,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-day prefix"></i>
                 <input  type="datetime-local" th:field="*{ngayketthuc}" id="form31" class="form-control">
-                <label for="form31" class="active">Ngày Kết thúc</label>
+                <label for="form31" class="active" th:text="#{mottramhailam}"></label>
                 <p th:if="${#fields.hasErrors('ngayketthuc')}" th:errors="*{ngayketthuc}" class="text-danger text-center"></p>
               </div>
             </div>
@@ -118,7 +118,7 @@
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:value="'0'" th:text="Hiện" ></option>
                 <option th:value="'1'" th:text="Ẩn"></option>
-              </select><label class="mdb-main-label active">Trạng thái</label>
+              </select><label class="mdb-main-label active" th:text="#{mottramhaisau}"></label>
 
             </div>
 
@@ -130,7 +130,7 @@
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
                   <textarea type="textarea"  th:field="*{mota}" id="form34" class="form-control"></textarea>
-                  <label for="form34" class="active">Mô tả</label>
+                  <label for="form34" class="active" th:text="#{mottramhaichin}"></label>
                 </div>
   
             </div>
@@ -142,7 +142,7 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="submit" class="btn blue-gradient float-right btn-rounded ">THÊM</button>
+              <button type="submit" class="btn blue-gradient float-right btn-rounded " th:text="#{mottrambamot}"></button>
 
             </div>
             <!-- Grid column -->

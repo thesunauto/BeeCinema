@@ -21,7 +21,7 @@
         <div class="card card-cascade narrower ">
           <!-- Card image -->
           <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
-            <h3 class="card-header-title">Thêm mới Khung Giờ</h3>  
+            <h3 class="card-header-title" th:text="#{mottramsauchin}"></h3>
           </div>
           <!-- /Card image -->
           <!-- Section heading -->
@@ -40,7 +40,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
                 <input  type="text" th:field="*{id}" id="form31" class="form-control">
-                <label for="form31" class="active">ID</label>
+                <label for="form31" class="active" th:text="#{mottrambaymuoi}"></label>
                 <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
               </div>
 
@@ -52,7 +52,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-hourglass-start prefix"></i>
                 <input type="time" th:field="*{batdau}" id="form31" class="form-control">
-                <label for="form31" class="active">Bắt Đầu</label>
+                <label for="form31" class="active" th:text="#{mottrambaymot}"></label>
                 <p th:if="${#fields.hasErrors('batdau')}" th:errors="*{batdau}" class="text-danger text-center"></p>
               </div>
 
@@ -64,7 +64,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-hourglass-end prefix"></i>
                 <input type="time" th:field="*{ketthuc}" id="form31" class="form-control">
-                <label for="form31" class="active">Kết Thúc</label>
+                <label for="form31" class="active" th:text="#{mottrambayhai}"></label>
                 <p th:if="${#fields.hasErrors('ketthuc')}" th:errors="*{ketthuc}" class="text-danger text-center"></p>
               </div>
 
@@ -78,7 +78,7 @@
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:value="'0'" th:text="Hiện"  ></option>
                 <option th:value="'1'" th:text="Ẩn" ></option>
-              </select><label class="mdb-main-label active">Trạng thái</label>
+              </select><label class="mdb-main-label active" th:text="#{mottrambayba}"></label>
 
             </div>
             <!-- Grid column -->
@@ -93,7 +93,7 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="submit" class="btn blue-gradient btn-rounded float-right">Thêm</button>
+              <button type="submit" class="btn blue-gradient btn-rounded float-right" th:text="#{mottramnamsau}"></button>
 
             </div>
             <!-- Grid column -->

@@ -18,7 +18,7 @@
         <div>
           <div class="card card-cascade narrower ">
             <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
-              <h3 class="card-header-title">Thêm mới Loại Phim</h3>  
+              <h3 class="card-header-title" th:text="#{mottrambahai}"></h3>
             </div>
 
         <div class="card-body">
@@ -36,7 +36,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
                 <input type="text" th:field="*{id}" id="form31" class="form-control">
-                <label for="form31" class="active">ID</label>
+                <label for="form31" class="active" th:text="#{mottrambaba}"></label>
                 <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
               </div>
 
@@ -47,7 +47,7 @@
                 <div class="md-form md-outline">
                   <i class="fas fa-film prefix"></i>
                   <input type="text" th:field="*{ten}" id="form32" class="form-control">
-                  <label for="form32" class="active">Tên</label>
+                  <label for="form32" class="active" th:text="#{mottrambatu}"></label>
                   <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                 </div>
 
@@ -58,7 +58,7 @@
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:value="'0'" th:text="Hiện"  ></option>
                 <option th:value="'1'" th:text="Ẩn" ></option>
-              </select><label class="mdb-main-label active">Trạng thái</label>
+              </select><label class="mdb-main-label active" th:text="#{mottrambalam}"></label>
             </div>
             
             <!-- Grid column -->
@@ -71,7 +71,7 @@
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
                   <textarea type="textarea" th:field="*{mota}" id="form33" class="form-control"></textarea>
-                  <label for="form33" class="active">Mô tả</label>
+                  <label for="form33" class="active" th:text="#{mottrambasau}"></label>
                 </div>
   
             </div>
@@ -83,7 +83,7 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="submit" class="btn blue-gradient float-right btn-rounded ">THÊM</button>
+              <button type="submit" class="btn blue-gradient float-right btn-rounded " th:text="#{mottrambabay}"></button>
 
             </div>
             <!-- Grid column -->

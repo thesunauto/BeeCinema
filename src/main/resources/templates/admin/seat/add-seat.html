@@ -19,7 +19,7 @@
             <div class="card card-cascade narrower ">
               <!-- Card image -->
               <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
-                <h3 class="card-header-title">Thêm mới Ghế</h3>
+                <h3 class="card-header-title" th:text="#{mottrambaytu}"></h3>
               </div>
               <!-- /Card image -->
               <!-- Section heading -->
@@ -33,7 +33,7 @@
                     <div class="md-form md-outline">
                       <i class="fas fa-chair prefix"></i>
                       <input th:field="*{col}" type="number" id="form31z" class="form-control" min="0" max="15" step="1">
-                      <label for="form31z" class="active">Cột</label>
+                      <label for="form31z" class="active" th:text="#{mottrambaylam}"></label>
                       <p th:if="${#fields.hasErrors('col')}" th:errors="*{col}" class="text-danger text-center"></p>
                     </div>
 
@@ -44,7 +44,7 @@
                   <div class="col-md-4 mb-4">
                     <select th:field="*{phong}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                       <option th:each="phong : ${@phongServiceImpl.getAllPhong()}" th:value="${phong.id}" th:text="${phong.ten}" >Hiện</option>
-                    </select><label class="mdb-main-label active">Phòng</label>
+                    </select><label class="mdb-main-label active" th:text="#{mottrambaysau}"></label>
                   </div>
                   <!-- Grid column -->
 
@@ -58,7 +58,7 @@
                   <div class="col-md-4 mb-4">
                     <select th:field="*{loaighe}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                       <option th:each="loaighe1 : ${@loaiGheServiceImpl.getAllLoaiGhe()}" th:value="${loaighe1.id}" th:text="${loaighe1.ten}">Hiện</option>
-                    </select><label class="mdb-main-label active">Loại Ghế</label>
+                    </select><label class="mdb-main-label active" th:text="#{mottrambaybay}"></label>
                   </div>
                   <!-- Grid column -->
 
@@ -66,7 +66,7 @@
                   <div class="col-md-4 mb-4">
                     <select th:field="*{dayghe}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                       <option th:each="day : ${@dayGheServiceImpl.getAllDayGhe()}" th:value="${day.id}" th:text="${day.ten}">Hiện</option>
-                    </select><label class="mdb-main-label active">Dãy Ghế</label>
+                    </select><label class="mdb-main-label active" th:text="#{mottrambaytam}"></label>
                   </div>
                   <!-- Grid column -->
 
@@ -77,7 +77,7 @@
                     <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                       <option value="0">Hiện</option>
                       <option value="1">Ẩn</option>
-                    </select><label class="mdb-main-label active">Trạng thái</label>
+                    </select><label class="mdb-main-label active" th:text="#{mottrambaychin}"></label>
                   </div>
                   <!-- Grid column -->
 
@@ -91,7 +91,7 @@
                   <!-- Grid column -->
                   <div class="col-md-12 mb-4 ">
 
-                    <button type="submit" class="btn blue-gradient btn-rounded float-right">Thêm</button>
+                    <button type="submit" class="btn blue-gradient btn-rounded float-right" th:text="#{mottramnamsau}"></button>
 
                   </div>
                   <!-- Grid column -->

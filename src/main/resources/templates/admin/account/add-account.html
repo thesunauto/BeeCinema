@@ -17,7 +17,7 @@
         <div>
           <div class="card card-cascade narrower ">
             <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
-              <h3 class="card-header-title">Thêm mới Tài Khoản</h3>  
+              <h3 class="card-header-title" th:text="#{chinchin}"></h3>
             </div>
         <div class="card-body">
           <form th:object="${taikhoan}" th:action="@{/admin/user/add-user}" action="#" enctype="multipart/form-data" method="post">
@@ -51,7 +51,7 @@
                   <div class="md-form md-outline">
                     <i class="fas fa-key prefix"></i>
                     <input type="text" th:field="*{username}" id="form31" class="form-control">
-                    <label for="form31" class="active">Tài Khoản</label>
+                    <label for="form31" class="active" th:text="#{mottram}"></label>
                     <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger text-center"></p>
                   </div>
 
@@ -61,7 +61,7 @@
                   <div class="md-form md-outline">
                     <i class="fas fa-lock prefix"></i>
                     <input type="password" th:field="*{matkhau}" id="form33" class="form-control">
-                    <label for="form33" class="active">Mật Khẩu</label>
+                    <label for="form33" class="active" th:text="#{motrammot}"></label>
                     <p th:if="${#fields.hasErrors('matkhau')}" th:errors="*{matkhau}" class="text-danger text-center"></p>
                   </div>
 
@@ -69,7 +69,7 @@
                 <div class="col-md-4 mb-2">
                   <select th:field="*{quyen}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                     <option th:each="quyen1 : ${@quyenServiceImpl.getAllQuyen()}" th:value="${quyen1.id}" th:text="${quyen1.ten}">Hiện</option>
-                  </select><label class="mdb-main-label active">Quyền</label>
+                  </select><label class="mdb-main-label active" th:text="#{mottramhai}"></label>
                 </div>
               </div>
 
@@ -78,7 +78,7 @@
                   <div class="md-form md-outline">
                     <i class="fas fa-user prefix"></i>
                     <input type="text" th:field="*{ten}" id="form32" class="form-control">
-                    <label for="form32" class="active">Tên Nhân Viên</label>
+                    <label for="form32" class="active" th:text="#{mottramba}"></label>
                     <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
                   </div>
                 </div>
@@ -89,7 +89,7 @@
                   <div class="md-form md-outline">
                     <i class="fas fa-phone prefix"></i>
                     <input type="number" th:field="*{sodienthoai}" id="form34" class="form-control">
-                    <label for="form34" class="active">Số Điện Thoại</label>
+                    <label for="form34" class="active" th:text="#{mottramtu}"></label>
                     <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}" class="text-danger text-center"></p>
                   </div>
 
@@ -100,7 +100,7 @@
                   <div class="md-form md-outline">
                     <i class="fas fa-envelope prefix"></i>
                     <input type="email"  th:field="*{email}" id="form35" class="form-control">
-                    <label for="form35" class="active">Email</label>
+                    <label for="form35" class="active" th:text="#{mottramnam}"></label>
                     <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger text-center"></p>
                   </div>
 
@@ -116,7 +116,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-alt prefix"></i>
                 <input type="date" th:field="*{ngaysinh}" id="form31" class="form-control">
-                <label for="form31" class="active">Ngày Sinh</label>
+                <label for="form31" class="active" th:text="#{mottramsau}"></label>
                 <p th:if="${#fields.hasErrors('ngaysinh')}" th:errors="*{ngaysinh}" class="text-danger text-center"></p>
               </div>
             </div>
@@ -124,9 +124,9 @@
 
                 <!-- Name -->
                 <select  th:field="*{gioitinh}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                  <option th:value="'0'" th:text="Nam" ></option>
-                  <option th:value="'1'" th:text="Nữ"></option>
-                </select><label class="mdb-main-label active">Giới Tính</label>
+                  <option th:value="'0'" th:text="mottrambay" ></option>
+                  <option th:value="'1'" th:text="mottramtam"></option>
+                </select><label class="mdb-main-label active" th:text="#{mottramchin}"></label>
 
             </div>
 
@@ -134,9 +134,9 @@
 
               <!-- Name -->
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option th:value="'0'" th:text="Hiện" ></option>
-                <option th:value="'1'" th:text="Ẩn"></option>
-              </select><label class="mdb-main-label active">Trạng thái</label>
+                <option th:value="'0'" th:text="mottrammuoi" ></option>
+                <option th:value="'1'" th:text="mottrammuoimot"></option>
+              </select><label class="mdb-main-label active" th:text="#{mottrammuoihai}"></label>
 
             </div>
           </div>
@@ -146,7 +146,7 @@
                 <div class="md-form md-outline">
                   <i class="fas fa-address-card prefix"></i>
                   <textarea type="textarea" th:field="*{diachi}" id="form36" class="form-control"></textarea>
-                  <label for="form36" class="active">Địa Chỉ</label>
+                  <label for="form36" class="active" th:text="#{mottrammuoiba}"></label>
                 </div>
 
             </div>
@@ -155,7 +155,7 @@
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>
                   <textarea type="textarea" th:field="*{mota}" id="form37" class="form-control"></textarea>
-                  <label for="form37" class="active">Mô tả</label>
+                  <label for="form37" class="active" th:text="#{mottrammuoitu}"></label>
                 </div>
 
             </div>
@@ -173,7 +173,7 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 ">
 
-              <button type="submit" class="btn blue-gradient float-right btn-rounded ">THÊM</button>
+              <button type="submit" class="btn blue-gradient float-right btn-rounded " th:text="#{mottrammuoilam}"></button>
 
             </div>
             <!-- Grid column -->

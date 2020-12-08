@@ -21,7 +21,7 @@
         <div class="card card-cascade narrower ">
           <!-- Card image -->
           <div class="view view-cascade gradient-card-header blue-gradient narrower  ">
-            <h3 class="card-header-title">Thêm mới Sự kiện</h3>  
+            <h3 class="card-header-title" th:text="#{mottrambonchin}"></h3>
           </div>
           <!-- /Card image -->
           <!-- Section heading -->
@@ -61,7 +61,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-key prefix"></i>
                 <input  type="text" th:field="*{id}" id="form31" class="form-control" >
-                <label for="form31" class="active">ID</label>
+                <label for="form31" class="active" th:text="#{mottramnammuoi}"></label>
                 <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger text-center"></p>
               </div>
 
@@ -73,7 +73,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-star prefix"></i>
                 <input type="text" th:field="*{ten}" id="form32" class="form-control">
-                <label for="form32" class="active">Tên Sự kiện</label>
+                <label for="form32" class="active" th:text="#{mottramnammot}"></label>
                 <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="text-danger text-center"></p>
               </div>
 
@@ -85,7 +85,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-money-bill prefix"></i>
                 <input  type="text" th:field="*{giam}" id="form33" class="form-control">
-                <label for="form33" class="active">Giảm Giá</label>
+                <label for="form33" class="active" th:text="#{mottramnamhai}"></label>
                 <p th:if="${#fields.hasErrors('giam')}" th:errors="*{giam}" class="text-danger text-center"></p>
               </div>
 
@@ -103,7 +103,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-clipboard prefix"></i>
                 <textarea type="textarea" th:field="*{mota}" id="form34" class="form-control"></textarea>
-                <label for="form34" class="active">Mô tả</label>
+                <label for="form34" class="active" th:text="#{mottramnamba}"></label>
               </div>
 
             </div>
@@ -126,7 +126,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-day prefix"></i>
                 <input type="datetime-local" th:field="*{ngaybatdau}" id="form31" class="form-control">
-                <label for="form31" class="active">Ngày Bắt đầu</label>
+                <label for="form31" class="active" th:text="#{mottramnamtu}"></label>
                 <p th:if="${#fields.hasErrors('ngaybatdau')}" th:errors="*{ngaybatdau}" class="text-danger text-center"></p>
               </div>
 
@@ -138,7 +138,7 @@
               <div class="md-form md-outline">
                 <i class="fas fa-calendar-day prefix"></i>
                 <input  type="datetime-local" th:field="*{ngayketthuc}" id="form31" class="form-control">
-                <label for="form31" class="active">Ngày Kết thúc</label>
+                <label for="form31" class="active" th:text="#{mottramnamtu}"></label>
                   <p th:if="${#fields.hasErrors('ngayketthuc')}" th:errors="*{ngayketthuc}" class="text-danger text-center"></p>
               </div>
 
@@ -152,7 +152,7 @@
               <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                 <option th:value="'0'" th:text="Hiện" ></option>
                 <option th:value="'1'" th:text="Ẩn"></option>
-              </select><label class="mdb-main-label active">Trạng thái</label>
+              </select><label class="mdb-main-label active" th:text="#{mottramnamnam}"></label>
 
             </div>
             <!-- Grid column -->
@@ -167,7 +167,7 @@
             <!-- Grid column -->
             <div class="col-md-12 mb-4 center">
 
-              <button type="submit" class="btn blue-gradient btn-rounded float-right ">THÊM</button>
+              <button type="submit" class="btn blue-gradient btn-rounded float-right " th:text="#{mottramnamsau}"></button>
 
             </div>
             <!-- Grid column -->

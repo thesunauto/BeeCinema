@@ -141,7 +141,7 @@
                     <td th:text="${loaiGhe.ten}"></td>
                     <td th:text="${loaiGhe.gia}"></td>
                     <td th:text="${#temporals.format(loaiGhe.ngaytao, 'dd-MM-yyyy | HH:mm:ss')}"></td>
-                    <td th:switch="${loaiGhe.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
+                    <td th:switch="${loaiGhe.trangthai}"><span th:case="0" th:text="#{chinba}"></span> <span th:case="1" th:text="#{chinlam}"></span></td>
 
                   </tr>
                 </tbody>
@@ -157,7 +157,7 @@
 
               <!-- Name -->
               <div class="my-4">
-                Tổng: [[${totalItem}]] | Trang [[${currentPage}]]/[[${totalPages}]]
+                <a class="" th:text="#{chinlam}"></a>: [[${totalItem}]] | <a class="" th:text="#{chinsau}"></a> [[${currentPage}]]/[[${totalPages}]]
               </div>
 
               <!-- Pagination -->
@@ -167,7 +167,7 @@
                   <!-- First -->
                   <li class="page-item clearfix d-none d-md-block">
                     <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/seat-type/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
-                    <span  class="page-link" th:unless="${currentPage > 1}">First</span>
+                    <span  class="page-link" th:unless="${currentPage > 1}" th:text="#{chinbay}"></span>
                   </li>
 
                   <!-- Arrow left -->
@@ -199,8 +199,8 @@
 
                   <!-- First -->
                   <li class="page-item clearfix d-none d-md-block">
-                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/seat-type/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
-                    <span  class="page-link" th:unless="${currentPage < totalPages}">Last</span>
+                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/seat-type/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{chintam}"></a>
+                    <span  class="page-link" th:unless="${currentPage < totalPages}" th:text="#{chintam}"></span>
                   </li>
                 </ul>
               </nav>

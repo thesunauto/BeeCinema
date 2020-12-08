@@ -250,7 +250,7 @@
 
         <!-- Breadcrumb -->
         <div class="breadcrumb-dn mr-auto">
-            <p class="font-weight-bold">Tài Khoản</p>
+            <p class="font-weight-bold" th:text="#{bayba}"></p>
         </div>
 
         <!-- Navbar links -->
@@ -266,11 +266,11 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Tài Khoản</span>
+                    <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block" th:text="#{baymot}"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" th:href="@{/admin/profile/update-profile}" >Cập nhật Tài khoản</a>
-                    <a class="dropdown-item" th:href="@{/logout}" >Đăng xuất</a>
+                    <a class="dropdown-item" th:href="@{/admin/profile/update-profile}" th:text="#{bayhai}"></a>
+                    <a class="dropdown-item" th:href="@{/logout}" th:text="#{baytu}"></a>
                 </div>
             </li>
 
