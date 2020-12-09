@@ -25,4 +25,14 @@ public interface VeRepository extends JpaRepository<Ve, String>, JpaSpecificatio
 //    Thong ke
     List<Ve> findAllByTrangthaiAndSuatchieuNgaychieu(Integer trangthai, LocalDate ngaychieu);
 
+    @Query(value = "select count(v.idsuatchieu) from ve v where v.ngaytao BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW() and v.trangthai = 0", nativeQuery = true)
+    public Long countVeTheoThang();
+
+    @Query(value = "select sum((s.dongia)) as 'so ve', count(v.idsuatchieu)\n" +
+            "from ve v, suatchieu s, phim p\n" +
+            "where v.idsuatchieu = s.id\n" +
+            "and\ts.idphim = p.id\n" +
+            "and v.ngaytao BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW() and v.trangthai = 0", nativeQuery = true)
+    public Long countDoanhThuTheoThang();
+
 }

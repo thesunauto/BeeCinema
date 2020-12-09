@@ -73,4 +73,25 @@ public class DashBoardsController {
         }
         return ResponseEntity.ok().body(tkVeByPhims);
     }
+
+    @PostMapping("/countSlPhimTheoThang")
+    public ResponseEntity countSlPhimTheoThang() {
+        String countSlPhimTheoThang = String.valueOf(thongKeService.countSlPhimTheoThang());
+
+        return ResponseEntity.ok().body(countSlPhimTheoThang);
+    }
+
+    @PostMapping("/countVeTheoThang")
+    public ResponseEntity countVeTheoThang() {
+        String countVeTheoThang = String.valueOf(thongKeService.countVeTheoThang());
+
+        return ResponseEntity.ok().body(countVeTheoThang);
+    }
+
+    @PostMapping("/countDoanhThuTheoThang")
+    public ResponseEntity countDoanhThuTheoThang() {
+        String countDoanhThuTheoThang = String.valueOf(thongKeService.countDoanhThuTheoThang());
+
+        return ResponseEntity.ok().body(countDoanhThuTheoThang);
+    }
 }
