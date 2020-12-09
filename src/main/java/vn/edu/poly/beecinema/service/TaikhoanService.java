@@ -28,4 +28,6 @@ public interface TaikhoanService {
 
     Taikhoan findTaikhoanByUsernameAndEmail(String username, String email);
 
+    Taikhoan findTaikhoanByUsername(String id);
+
 }

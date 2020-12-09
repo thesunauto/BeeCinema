@@ -4,6 +4,8 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
@@ -18,7 +20,6 @@ import vn.edu.poly.beecinema.service.SuatChieuService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 import vn.edu.poly.beecinema.service.VeService;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
@@ -26,7 +27,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -37,6 +37,13 @@ public class EmployeeController {
     @Autowired private SuatChieuService suatChieuService;
     @Autowired private VeService veService;
 @Autowired private TaikhoanService taikhoanService;
+
+    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
+    @Autowired
+    public EmployeeController(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
+        this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
+    }
+
 
     @GetMapping("/chonphim")
     public String chonphim(){
@@ -110,6 +117,33 @@ public class EmployeeController {
         taikhoanService.saveTaikhoan(taikhoan);
         model.addAttribute("messages", "thanhcong");
         return "employee/profile";
+    }
+
+    @GetMapping("/change-pass")
+    public String changePassword(Model model, Authentication authentication) {
+        return "employee/change-password-emp";
+    }
+    @PostMapping("/change-pass")
+    public String changePassword(
+            @RequestParam("password") String password,
+            @RequestParam("newpassword") String newpassword,
+            @RequestParam("confirmnewpassword") String confirmpassword,
+            Model model, Authentication authentication) {
+        Taikhoan taikhoan = taikhoanService.findTaikhoanByUsername(taikhoanService.findTaikhoanById(authentication.getName()).get().getUsername());
+        if(!password.equals(taikhoanService.findTaikhoanById(authentication.getName()).get().getMatkhau())){
+            model.addAttribute("messages", "saimatkhau");
+        }
+        else if(!newpassword.equals(confirmpassword)){
+            model.addAttribute("messages", "matkhaukhongkhop");
+        }
+        else{
+            taikhoanService.updatePassword(taikhoan, newpassword);
+            inMemoryUserDetailsManager.deleteUser(taikhoan.getUsername());
+            inMemoryUserDetailsManager.createUser(User.withDefaultPasswordEncoder().username(taikhoan.getUsername()).password(taikhoan.getMatkhau()).roles(taikhoan.getQuyen().getTen()).build());
+            model.addAttribute("messages", "thanhcong");
+        }
+
+        return "employee/change-password-emp";
     }
 
 

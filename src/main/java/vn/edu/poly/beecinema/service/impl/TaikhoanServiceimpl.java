@@ -99,5 +99,10 @@ public class TaikhoanServiceimpl implements TaikhoanService {
         return taikhoanRepository.findTaikhoanByUsernameAndEmail(username, email);
     }
 
+    @Override
+    public Taikhoan findTaikhoanByUsername(String id) {
+        return taikhoanRepository.findByUsername(id);
+    }
+
 
 }

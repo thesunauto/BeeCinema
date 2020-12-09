@@ -2,6 +2,9 @@ package vn.edu.poly.beecinema.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +17,7 @@ import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SukienService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -35,6 +39,12 @@ public class ClientController {
     private PhimService phimService;
     @Autowired
     private SukienService suKienService;
+
+    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
+    @Autowired
+    public ClientController(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
+        this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
+    }
 
     public String setLayout(Authentication authentication) {
         String page = "client/layout";
@@ -140,4 +150,36 @@ public class ClientController {
         model.addAttribute("messages", "thanhcong");
         return "client/Profile";
     }
+
+    @GetMapping("/change-pass")
+    public String changePassword(Model model, Authentication authentication) {
+
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
+        return "client/change-password";
+    }
+    @PostMapping("/change-pass")
+    public String changePassword(
+                                 @RequestParam("password") String password,
+                                 @RequestParam("newpassword") String newpassword,
+                                 @RequestParam("confirmnewpassword") String confirmpassword,
+                                 Model model, Authentication authentication) {
+        Taikhoan taikhoan = taikhoanService.findTaikhoanByUsername(taikhoanService.findTaikhoanById(authentication.getName()).get().getUsername());
+        if(!password.equals(taikhoanService.findTaikhoanById(authentication.getName()).get().getMatkhau())){
+            model.addAttribute("messages", "saimatkhau");
+        }
+        else if(!newpassword.equals(confirmpassword)){
+            model.addAttribute("messages", "matkhaukhongkhop");
+        }
+        else{
+            taikhoanService.updatePassword(taikhoan, newpassword);
+            inMemoryUserDetailsManager.deleteUser(taikhoan.getUsername());
+            inMemoryUserDetailsManager.createUser(User.withDefaultPasswordEncoder().username(taikhoan.getUsername()).password(taikhoan.getMatkhau()).roles(taikhoan.getQuyen().getTen()).build());
+            model.addAttribute("messages", "thanhcong");
+        }
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
+        return "client/change-password";
+    }
+
 }
