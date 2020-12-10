@@ -1,7 +1,9 @@
 package vn.edu.poly.beecinema.service;
 
 import org.springframework.data.domain.Page;
+import vn.edu.poly.beecinema.commons.SuatChieuResponse;
 import vn.edu.poly.beecinema.entity.Khunggio;
+import vn.edu.poly.beecinema.entity.Phong;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Sukien;
 
@@ -29,4 +31,6 @@ public interface SuatChieuService {
     Page<Suatchieu> listAll(int pageNumber, String sortField, String sortDir, String keyword);
 
     List<Suatchieu> findAllByPhimAndDate(String idPhim,LocalDate ngayChieu);
+
+    List<SuatChieuResponse> findAllByPhongAndNgayChieu(Phong phong, LocalDate ngaychieu);
 }

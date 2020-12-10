@@ -13,8 +13,12 @@ public class SuatChieuResponse {
     private Integer id;
     private String idphim;
     private String idphong;
+    private String idkhunggio;
     private String tenphong;
+    private String ngaychieu;
     private String batdau;
     private String ketthuc;
     private Double dongia;
+    private Double phuthuyonline;
+    private String trangthai;
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.DateUtils;
 import vn.edu.poly.beecinema.commons.SuatChieuResponse;
 import vn.edu.poly.beecinema.entity.Khunggio;
+import vn.edu.poly.beecinema.entity.Phong;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.repository.PhimRepository;
@@ -20,6 +21,7 @@ import vn.edu.poly.beecinema.service.SuatChieuService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -111,6 +113,23 @@ public class SuatChieuServiceImpl implements SuatChieuService {
             return new ArrayList<>();
         }
 
+    }
+
+    @Override
+    public List<SuatChieuResponse> findAllByPhongAndNgayChieu(Phong phong, LocalDate ngaychieu) {
+        List<SuatChieuResponse> suatChieuResponses = new ArrayList<>();
+        suatchieuRepository.findAllByPhongAndNgaychieuAndTrangthai(phong,ngaychieu,0).forEach(suatchieu -> {
+            suatChieuResponses.add(SuatChieuResponse.builder()
+                    .id(suatchieu.getId())
+                    .tenphong(suatchieu.getPhong().getTen())
+                    .idphong(suatchieu.getPhong().getId())
+                    .idphim(suatchieu.getPhim().getId())
+                    .dongia(Double.valueOf(suatchieu.getDongia()))
+                    .ketthuc(suatchieu.getKhunggio().getKetthuc().format(DateTimeFormatter.ofPattern("HH:mm")))
+                    .batdau(suatchieu.getKhunggio().getBatdau().format(DateTimeFormatter.ofPattern("HH:mm")))
+                    .build());
+        });
+        return suatChieuResponses;
     }
 
 }

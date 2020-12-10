@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+
+<head>
+    <meta charset="utf-8">
+    <title>Danh sách suất chiếu</title>
+</head>
+
+<body>
+
+<!-- Main layout -->
+<main layout:fragment="content">
+    <div class="container-fluid">
+
+        <!-- Section: Basic examples -->
+        <section>
+
+
+            <!-- Top Table UI -->
+            <div class="card p-2 mb-5">
+
+                <!-- Grid row -->
+                <div class="row">
+
+
+                    <!-- Grid column -->
+                    <div class="col-lg-12 col-md-12">
+
+                        <!-- Blue select -->
+                        <div class="md-form">
+                            <input placeholder="Selected date" type="text" id="datepicker"
+                                   class="form-control datepicker text-center">
+                            <label for="datepicker" class="active">Ngày chiếu</label>
+                        </div>
+                        <!-- /Blue select -->
+
+                    </div>
+                    <!-- Grid column -->
+
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Top Table UI -->
+
+            <div class="card card-cascade narrower z-depth-1">
+
+                <!-- Card image -->
+                <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-center align-items-center">
+
+
+                    <h4 class="white-text font-weight-bold" th:text="#{one-hundred-and-twentyoneWord}"></h4>
+
+
+                </div>
+                <!-- /Card image -->
+
+                <div class="container-fluid mb-5" id="dataSC">
+                    <div class="row">
+                        <div class="col-12 text-center">Phòng 1 <a class="btn-floating btn-sm btn-secondary"><i
+                                class="fas fa-plus-circle"></i></a></div>
+
+                        <div class="col-2 d-flex justify-content-center">
+                            <button class="btn btn-warning btn-sm">time-time</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+        <!-- Section: Basic examples -->
+        <section>
+            <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm suất chiếu</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="#" id="addSC">
+                            <input id="idphong" type="hidden" name="idphong">
+                            <input id="ngaychieu" type="hidden" name="ngaychieu">
+                            <div class="modal-body">
+                                <select class="mdb-select md-form" searchable="Search here.." id="idphim" name="idphim">
+                                    <option value="none" disabled selected>Choose film</option>
+                                    <option th:each="df : ${@phimServiceImpl.getAllPhimAlive()}"
+                                            th:value="${df.getId()}"
+                                            th:text="${df.getTen()}"></option>
+                                </select><label class="mdb-main-label active">Phim</label>
+                                <div class="md-form md-outline">
+                                    <i class="fas fa-money-bill prefix"></i>
+                                    <input type="number" name="dongia" id="form31232" class="form-control" min="0"
+                                           step="5000">
+                                    <label for="form31232" class="active">Đơn Giá</label>
+                                </div>
+                                <div class="md-form md-outline">
+                                    <i class="fas fa-money-bill prefix"></i>
+                                    <input type="number" id="form33" class="form-control" name="phuthuyonline">
+                                    <label for="form33" class="active">Phút Hủy Online</label>
+                                </div>
+
+                                <select id="idkhunggio" class="mdb-select md-form" searchable="Search here.." name="idkhunggio">
+                                    <option value="none" disabled selected>Choose time</option>
+                                    <option th:each="khunggio : ${@khungGioServiceImpl.getAllKhungGio()}"
+                                            th:value="${khunggio.id}"
+                                            th:text="${khunggio.getId()} +' | '+${khunggio.batdau} + ' - ' + ${khunggio.ketthuc}"></option>
+                                    <label class="mdb-main-label active">Khung Giờ</label>
+                                </select><label class="mdb-main-label active">Khung giờ</label>
+                                <select id="tthai" class="mdb-select md-form colorful-select dropdown-primary initialized"
+                                        name="trangthai">
+                                    <option th:value="'0'" th:text="Hiện"></option>
+                                    <option th:value="'1'" th:text="Ẩn"></option>
+                                </select><label class="mdb-main-label active">Trạng thái</label>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                <button type="button" id="subaddSC" data-dismiss="modal" class="btn btn-primary">Thêm
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<!-- Main layout -->
+<th:block layout:fragment="optional">
+    <script>
+        $(document).ready(function () {
+            let $input = $('.datepicker').pickadate({format: 'dd/mm/yyyy', formatSubmit: 'dd/mm/yyyy'});
+            let picker = $input.pickadate('picker');
+            let date = new Date();
+            var listSC = [];
+            picker.set('select', date);
+            $('body').ready(loadSuatChieu());
+
+            function loadSuatChieu() {
+                console.log($input.val());
+                $.ajax({
+                    url: '/api/admin/listSuatChieu?date=' + $input.val(),
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        listSC = data;
+                    },
+                    complete: function () {
+                        fillSC();
+                    }
+                })
+            }
+
+            function fillSC() {
+                var container = '';
+                for (var i = 0; i < listSC.length; i++) {
+                    container += '<div class="row d-flex justify-content-center">\n' +
+                        '                        <div class="col-6 text-right my-auto p-0">' + listSC[i].ten + '</div><div class="col-6 p-0"><option value="' + listSC[i].id + '" class="btn-floating btn-sm btn-secondary d-flex align-items-center justify-content-center addSC"  data-toggle="modal" data-target="#basicExampleModal">+</option></div>'
+                    for (var ii = 0; ii < listSC[i].suatChieuResponses.length; ii++) {
+                        container += '                        <div class="col-2 d-flex justify-content-center">\n' +
+                            '                            <button class="btn btn-warning btn-sm">' + listSC[i].suatChieuResponses[ii].batdau + '-' + listSC[i].suatChieuResponses[ii].ketthuc + '</button>\n' +
+                            '                        </div>\n'
+                    }
+                    container += '</div>'
+                }
+                $('#dataSC').html(container);
+            }
+
+            $(document).on('change', '#datepicker', function () {
+                loadSuatChieu();
+            });
+
+            $(document).on('click', 'option.addSC', function () {
+                $('#idphong').val($(this).val());
+                $('#ngaychieu').val($('#datepicker').val());
+            });
+
+            $.fn.serializeObject = function () {
+                var o = {};
+                var a = this.serializeArray();
+                $.each(a, function () {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                return o;
+            };
+
+            $('#subaddSC').click(function () {
+                var dataform = $('#addSC').serializeObject();
+                console.log(dataform);
+                $.ajax({
+                    url: '/api/admin/addSC',
+                    type: 'POST',
+                    data: JSON.stringify(dataform),
+                    dataType: 'JSON',
+                    processData: false,
+                    contentType: "application/json; charset=utf-8",
+                    success: function (chk) {
+                        var bo = chk;
+                        console.log(bo);
+                        if(bo){
+                            toastr.success('successfully', '', {positionClass: 'md-toast-top-right'});
+                        }else {
+                            toastr.error('unsuccessfully', '', {positionClass: 'md-toast-top-right'});
+                        }
+
+                        loadSuatChieu();
+                        $("#idphim").val('none');
+                        $('#form31232').val(0);
+                        $('#form33').val(0);
+                        $('#idkhunggio').val('none');
+                        $('#tthai').val('0');
+                    },
+                    error:function () {
+
+                        loadSuatChieu();
+                    }
+                })
+            });
+        })
+
+
+    </script>
+</th:block>
+</body>
+
+</html>
