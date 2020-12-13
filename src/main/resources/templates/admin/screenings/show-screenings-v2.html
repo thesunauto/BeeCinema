@@ -83,7 +83,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Thêm suất chiếu</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Suất chiếu</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -100,13 +100,13 @@
                                 </select><label class="mdb-main-label active">Phim</label>
                                 <div class="md-form md-outline">
                                     <i class="fas fa-money-bill prefix"></i>
-                                    <input type="number" name="dongia" id="form31232" class="form-control" min="0"
-                                           step="5000">
+                                    <input type="number" name="dongia" placeholder="Đơn Giá" id="form31232" class="form-control" min="0"
+                                          value="50000" step="5000">
                                     <label for="form31232" class="active">Đơn Giá</label>
                                 </div>
                                 <div class="md-form md-outline">
                                     <i class="fas fa-money-bill prefix"></i>
-                                    <input type="number" id="form33" class="form-control" name="phuthuyonline">
+                                    <input type="number" id="form33" value="10" placeholder="Phút Hủy Online" class="form-control" name="phuthuyonline">
                                     <label for="form33" class="active">Phút Hủy Online</label>
                                 </div>
 
@@ -123,13 +123,11 @@
                                     <option th:value="'1'" th:text="Ẩn"></option>
                                 </select><label class="mdb-main-label active">Trạng thái</label>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                <button type="button" id="subaddSC" data-dismiss="modal" class="btn btn-primary">Thêm
-                                </button>
+                            <div id="actionModal" class="modal-footer">
+
                             </div>
                         </form>
-
+                        <input type="hidden" id="idsuatchieucurrent">
                     </div>
                 </div>
             </div>
@@ -169,7 +167,7 @@
                         '                        <div class="col-6 text-right my-auto p-0">' + listSC[i].ten + '</div><div class="col-6 p-0"><option value="' + listSC[i].id + '" class="btn-floating btn-sm btn-secondary d-flex align-items-center justify-content-center addSC"  data-toggle="modal" data-target="#basicExampleModal">+</option></div>'
                     for (var ii = 0; ii < listSC[i].suatChieuResponses.length; ii++) {
                         container += '                        <div class="col-2 d-flex justify-content-center">\n' +
-                            '                            <button class="btn btn-warning btn-sm">' + listSC[i].suatChieuResponses[ii].batdau + '-' + listSC[i].suatChieuResponses[ii].ketthuc + '</button>\n' +
+                            '                            <option data-toggle="modal" data-target="#basicExampleModal" value="'+listSC[i].suatChieuResponses[ii].id+'" class="btn btn-warning btn-sm editSC">' + listSC[i].suatChieuResponses[ii].batdau + '-' + listSC[i].suatChieuResponses[ii].ketthuc + '</option>\n' +
                             '                        </div>\n'
                     }
                     container += '</div>'
@@ -184,6 +182,8 @@
             $(document).on('click', 'option.addSC', function () {
                 $('#idphong').val($(this).val());
                 $('#ngaychieu').val($('#datepicker').val());
+                $('#actionModal').html(' <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>\n' +
+                    '                                <button type="button" id="subaddSC" data-dismiss="modal" class="btn btn-primary">Thêm</button>')
             });
 
             $.fn.serializeObject = function () {
@@ -202,7 +202,7 @@
                 return o;
             };
 
-            $('#subaddSC').click(function () {
+            $(document).on('click','#subaddSC',function () {
                 var dataform = $('#addSC').serializeObject();
                 console.log(dataform);
                 $.ajax({
@@ -216,21 +216,93 @@
                         var bo = chk;
                         console.log(bo);
                         if(bo){
-                            toastr.success('successfully', '', {positionClass: 'md-toast-top-right'});
+                            toastr.success('Thêm thành công', '', {positionClass: 'md-toast-top-right'});
                         }else {
-                            toastr.error('unsuccessfully', '', {positionClass: 'md-toast-top-right'});
+                            toastr.error('Thêm thất bại', '', {positionClass: 'md-toast-top-right'});
                         }
 
                         loadSuatChieu();
-                        $("#idphim").val('none');
-                        $('#form31232').val(0);
-                        $('#form33').val(0);
-                        $('#idkhunggio').val('none');
-                        $('#tthai').val('0');
+                       clearModal();
                     },
                     error:function () {
+                        toastr.error('Thêm thất bại', '', {positionClass: 'md-toast-top-right'});
+                        loadSuatChieu();
+                       clearModal();
+                    }
+                })
+            });
+
+            function clearModal(){
+                $("#idphim").val('none');
+                $('#form31232').val(50000);
+                $('#form33').val(10);
+                $('#idkhunggio').val('none');
+                $('#tthai').val('0');
+            }
+
+            $(document).on('click','option.editSC',function () {
+                console.log($(this).val());
+                for(var i = 0;i<listSC.length;i++){
+                    for(var ii = 0;ii<listSC[i].suatChieuResponses.length;ii++){
+                        if(listSC[i].suatChieuResponses[ii].id == $(this).val()){
+                            $('#idsuatchieucurrent').val($(this).val());
+                            $('#idphong').val(listSC[i].suatChieuResponses[ii].idphong);
+                            $('#ngaychieu').val(listSC[i].suatChieuResponses[ii].ngaychieu);
+                            $('#idphim').val(listSC[i].suatChieuResponses[ii].idphim);
+                            $('#form31232').val(listSC[i].suatChieuResponses[ii].dongia);
+                            $('#form33').val(listSC[i].suatChieuResponses[ii].phuthuyonline);
+                            $('#idkhunggio').val(listSC[i].suatChieuResponses[ii].idkhunggio)
+                            $('#tthai').val(listSC[i].suatChieuResponses[ii].trangthai);
+                            $('#actionModal').html(' <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>\n' +
+                                '                                <button type="button" id="subdelSC" data-dismiss="modal" class="btn btn-primary">Xóa</button>' +
+                                '                                <button type="button" id="subeditSC" data-dismiss="modal" class="btn btn-primary">Lưu</button>');
+                        }
+                    }
+                }
+            });
+
+            $(document).on('click','#subeditSC',function () {
+                var dataform = $('#addSC').serializeObject();
+                console.log(dataform);
+                $.ajax({
+                    url: '/api/admin/editSC?idsuatchieu='+$('#idsuatchieucurrent').val(),
+                    type: 'POST',
+                    data: JSON.stringify(dataform),
+                    dataType: 'JSON',
+                    processData: false,
+                    contentType: "application/json; charset=utf-8",
+                    success: function (chk) {
+                        var bo = chk;
+                        console.log(bo);
+                        if(bo){
+                            toastr.success('Sửa thành công', '', {positionClass: 'md-toast-top-right'});
+                        }else {
+                            toastr.error('Sửa thất bại suất chiếu đã có vé hoặc đã xãy ra xung đột', '', {positionClass: 'md-toast-top-right'});
+                        }
 
                         loadSuatChieu();
+                       clearModal();
+                    },
+                    error:function () {
+                        toastr.error('Sửa thất bại', '', {positionClass: 'md-toast-top-right'});
+                        loadSuatChieu();
+                       clearModal();
+                    }
+                })
+            });
+
+            $(document).on('click','#subdelSC',function () {
+                $.ajax({
+                    url:'/api/admin/delSC?idsuatchieu='+$('#idsuatchieucurrent').val(),
+                    type:'POST',
+                    success: function () {
+                        toastr.success('Xóa thành công', '', {positionClass: 'md-toast-top-right'});
+                        loadSuatChieu();
+                       clearModal();
+                    },
+                    error: function () {
+                        toastr.error('Xóa thất bại suất này đã có vé', '', {positionClass: 'md-toast-top-right'});
+                       clearModal();
                     }
                 })
             });

@@ -18,4 +18,5 @@ public interface SuatchieuRepository extends JpaRepository<Suatchieu, Integer>, 
     Page<Suatchieu> findAll(String keyword, Pageable pageable);
 
     List<Suatchieu> findAllByPhongAndNgaychieuAndTrangthai(Phong phong, LocalDate ngaychieu, Integer trangthai);
+    List<Suatchieu> findAllByPhongAndNgaychieu(Phong phong, LocalDate ngaychieu);
 }

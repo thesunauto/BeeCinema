@@ -8,10 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.commons.*;
 import vn.edu.poly.beecinema.config.HttpSessionConfig;
-import vn.edu.poly.beecinema.entity.Ghe;
-import vn.edu.poly.beecinema.entity.Phim;
-import vn.edu.poly.beecinema.entity.Suatchieu;
-import vn.edu.poly.beecinema.entity.VeonlineID;
+import vn.edu.poly.beecinema.entity.*;
 import vn.edu.poly.beecinema.repository.VeonlineRepository;
 import vn.edu.poly.beecinema.service.*;
 import vn.edu.poly.beecinema.storage.StorageService;
@@ -62,15 +59,15 @@ public class AdminRestController {
         Suatchieu suatChieu = new Suatchieu();
         suatChieu.setPhim(phimService.findPhimById(suatChieuResponse.getIdphim()).get());
 
-        suatChieu.setNgaychieu(LocalDate.parse(suatChieuResponse.getNgaychieu(),DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        suatChieu.setNgaychieu(LocalDate.parse(suatChieuResponse.getNgaychieu(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         suatChieu.setPhong(phongService.findPhongById(suatChieuResponse.getIdphong()).get());
         suatChieu.setKhunggio(khungGioService.findKhungGioById(suatChieuResponse.getIdkhunggio()).get());
         suatChieu.setNgaytao(LocalDate.now());
         suatChieu.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
-suatChieu.setDongia(suatChieuResponse.getDongia().floatValue());
-suatChieu.setPhuthuyonline(suatChieuResponse.getPhuthuyonline().intValue());
-suatChieu.setTrangthai(Integer.valueOf(suatChieuResponse.getTrangthai()));
-        List<Suatchieu> suatchieus = suatChieuService.findAllByPhimAndDate(suatChieu.getPhim().getId(), suatChieu.getNgaychieu());
+        suatChieu.setDongia(suatChieuResponse.getDongia().floatValue());
+        suatChieu.setPhuthuyonline(suatChieuResponse.getPhuthuyonline().intValue());
+        suatChieu.setTrangthai(Integer.valueOf(suatChieuResponse.getTrangthai()));
+        List<Suatchieu> suatchieus = suatChieuService.findAllByNgayChieuAndPhong(suatChieu.getNgaychieu(),suatChieu.getPhong());
         System.out.println("Star check lenght: " + suatchieus.size());
         for (Suatchieu sc1 : suatchieus) {
             if (sc1.getPhong().getId().equals(suatChieu.getPhong().getId())) {
@@ -86,5 +83,58 @@ suatChieu.setTrangthai(Integer.valueOf(suatChieuResponse.getTrangthai()));
         suatChieuService.saveSuatChieu(suatChieu);
         return ResponseEntity.ok().body(true);
 
+    }
+
+
+
+    @PostMapping(value = "/delSC"
+    )
+    public ResponseEntity delSC(@RequestParam String idsuatchieu){
+        Suatchieu suatchieu = suatChieuService.findById(Integer.valueOf(idsuatchieu));
+        if(suatchieu.getVes().size()==0&&suatchieu.getVeonlines().size()==0){
+            suatChieuService.deleteSuatChieu(Integer.valueOf(idsuatchieu));
+            return ResponseEntity.ok().body(null);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping(value = "/editSC",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity editSC(Authentication authentication, @RequestBody SuatChieuResponse suatChieuResponse,@RequestParam String idsuatchieu) {
+        Suatchieu suatChieu = suatChieuService.findById(Integer.valueOf(idsuatchieu));
+        if(suatChieu.getVes().isEmpty()&&suatChieu.getVeonlines().isEmpty()){
+            if(!suatChieu.getKhunggio().getId().equals(suatChieuResponse.getIdkhunggio())){
+                List<Suatchieu> suatchieus = suatChieuService.findAllByNgayChieuAndPhong(suatChieu.getNgaychieu(),suatChieu.getPhong());
+                Khunggio kh = khungGioService.findKhungGioById(suatChieuResponse.getIdkhunggio()).get();
+                for (Suatchieu sc1 : suatchieus) {
+                    if (sc1.getPhong().getId().equals(suatChieuResponse.getIdphong())) {
+                        if (!(kh.getKetthuc().compareTo(sc1.getKhunggio().getBatdau()) <= 0
+                                || kh.getBatdau().compareTo(sc1.getKhunggio().getKetthuc()) >= 0)
+                        ) {
+                            return ResponseEntity.ok().body(false);
+                        }
+                    }
+
+                }
+            }
+            suatChieu.setPhim(phimService.findPhimById(suatChieuResponse.getIdphim()).get());
+
+            suatChieu.setNgaychieu(LocalDate.parse(suatChieuResponse.getNgaychieu(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            suatChieu.setPhong(phongService.findPhongById(suatChieuResponse.getIdphong()).get());
+            suatChieu.setKhunggio(khungGioService.findKhungGioById(suatChieuResponse.getIdkhunggio()).get());
+            suatChieu.setNgaytao(LocalDate.now());
+            suatChieu.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
+            suatChieu.setDongia(suatChieuResponse.getDongia().floatValue());
+            suatChieu.setPhuthuyonline(suatChieuResponse.getPhuthuyonline().intValue());
+            suatChieu.setTrangthai(Integer.valueOf(suatChieuResponse.getTrangthai()));
+
+
+            suatChieuService.saveSuatChieu(suatChieu);
+            return ResponseEntity.ok().body(true);
+        }
+
+        return ResponseEntity.ok().body(false);
     }
 }
