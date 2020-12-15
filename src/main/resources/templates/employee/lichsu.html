@@ -92,6 +92,11 @@ fillHistory();
 
             function fillHistory() {
                 var content ='';
+                if(listH.length==0){
+                    content += '<tr>' +
+                        '<th class="text-center h3 pt-5" colspan="9"> Hôm nay chưa ghi nhận hoạt động nào từ nhân viên </th>' +
+                        '</tr>'
+                }
                 for(var i = 0;i<listH.length;i++){
                     content +='<tr>\n' +
                         '<th scope="row">'+(i+1)+'</th>\n' +

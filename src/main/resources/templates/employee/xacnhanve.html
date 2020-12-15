@@ -139,6 +139,11 @@
 
             function fillVEON() {
                 var content = '';
+                if(listVeon.length==0){
+                    content += '<tr>' +
+                        '<th class="text-center h3" colspan="9"> Hôm nay chưa có vé cần xác nhận </th>' +
+                        '</tr>'
+                }
                 for(var i = 0;i<listVeon.length;i++){
                    content+='<tr>\n' +
                        '<th scope="row">'+(i+1)+'</th>\n' +
