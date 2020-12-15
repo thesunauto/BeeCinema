@@ -1,6 +1,8 @@
 package vn.edu.poly.beecinema.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,16 +12,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import vn.edu.poly.beecinema.entity.Phim;
-import vn.edu.poly.beecinema.entity.Sukien;
-import vn.edu.poly.beecinema.entity.Taikhoan;
+import vn.edu.poly.beecinema.entity.*;
 import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SukienService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
+import vn.edu.poly.beecinema.service.VeonlineService;
+import vn.edu.poly.beecinema.service.impl.TaikhoanNotFoundException;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,6 +50,12 @@ public class ClientController {
     public ClientController(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
         this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
     }
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private VeonlineService veonlineService;
 
     public String setLayout(Authentication authentication) {
         String page = "client/layout";
@@ -180,6 +191,41 @@ public class ClientController {
         String trang = setLayout(authentication);
         model.addAttribute("trang", trang);
         return "client/change-password";
+    }
+    @PostMapping("/contact-us")
+    public String sendContactUS(@ModelAttribute("hoten") String hoten,
+                             @ModelAttribute("email") String email,
+                             @ModelAttribute("chude") String chude,
+                             @ModelAttribute("noidung") String noidung,
+            Authentication authentication, Model model){
+        try {
+            sendContactUS(hoten, email, chude, noidung);
+            model.addAttribute("message", "Cảm ơn bạn đã đóng góp ý kiến để chúng tôi có thể cải thiện tốt nhất!");
+        } catch (UnsupportedEncodingException | MessagingException e) {
+            model.addAttribute("error", "Lỗi khi gửi email");
+        }
+        String trang = setLayout(authentication);
+        model.addAttribute("trang", trang);
+        return "client/contact-us";
+    }
+    private void sendContactUS(String hoten, String email, String chude, String noidung)
+            throws UnsupportedEncodingException, MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom("contact@Beecinema.com", "Beecinema");
+        helper.setTo("beecinemafpoly@gmail.com");
+
+        String subject = "Ý kiến đóng góp của Khách hàng - BeeCinema";
+        String content = "<p>Khách hàng: "+ hoten  + " </p>"
+                + "<p>Email: "+ email  + " </p>"
+                + "<p>Chủ đề: "+ chude  + " </p>"
+                + "<p>Nội dung: " + noidung + " </p>";
+
+        helper.setSubject(subject);
+        helper.setText(content, true);
+
+        mailSender.send(message);
     }
 
 }
