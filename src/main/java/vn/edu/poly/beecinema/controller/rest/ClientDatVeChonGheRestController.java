@@ -21,7 +21,6 @@ import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -366,7 +365,7 @@ public class ClientDatVeChonGheRestController {
         Veonline veonline = veonlineService.findByVeonlineID(new VeonlineID(idsuatchieu,idghe));
         String email = veonline.getTaikhoan().getEmail();
         String tenphim = veonline.getSuatchieu().getPhim().getTen();
-        String ngaychieu = String.valueOf(veonline.getSuatchieu().getNgaychieu());
+        String ngaychieu = String.valueOf(veonline.getSuatchieu().getNgaychieu().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         String khunggio = veonline.getSuatchieu().getKhunggio().getBatdau() + " - " + veonline.getSuatchieu().getKhunggio().getKetthuc();
         String ghe = tenghe.replace("-",", ");
         try {
@@ -385,10 +384,10 @@ public class ClientDatVeChonGheRestController {
 
         String subject = "Đặt Vé Thành Công - BeeCinema";
         String content = "<p>Cảm ơn bạn đã đặt vé tại BeeCinema</p>"
-                + "<p>Phim: "+ tenphim  + " </p>"
-                + "<p>Thời gian: " + ngaychieu + " " + khunggio +" </p>"
-                + "<p>Ghế: "+ ghe  + " </p>"
-                + "<p>Lưu ý: xin vui lòng đến trước 30p để lấy vé, nếu sau 30p bạn không lấy vé sẽ tự động hủy. </p>"
+                + "<p>Phim: <b>"+ tenphim  + "</b> </p>"
+                + "<p>Thời gian: <b>" + ngaychieu + "</b> <b>" + khunggio +"</b> </p>"
+                + "<p>Ghế: <b>"+ ghe  + "</b> </p>"
+                + "<p><b>Lưu ý:</b> xin vui lòng đến trước 30p để lấy vé, nếu sau 30p bạn không lấy vé sẽ tự động hủy. </p>"
                 + "<p>Xin cảm ơn !</p>";
 
         helper.setSubject(subject);
