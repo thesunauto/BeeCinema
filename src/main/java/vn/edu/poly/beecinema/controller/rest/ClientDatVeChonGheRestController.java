@@ -360,15 +360,15 @@ public class ClientDatVeChonGheRestController {
 
        return ResponseEntity.notFound().build();
     }
-    @GetMapping("/sendMailTicket/{idsuatchieu}|{idghe}")
-    public void sendMailTicket(@PathVariable Integer idsuatchieu, @PathVariable Integer idghe,
+    @GetMapping("/sendMailTicket/{idsuatchieu}|{idghe}|{tenghe}")
+    public void sendMailTicket(@PathVariable Integer idsuatchieu, @PathVariable Integer idghe, @PathVariable String tenghe,
                            Authentication authentication, Model model){
         Veonline veonline = veonlineService.findByVeonlineID(new VeonlineID(idsuatchieu,idghe));
         String email = veonline.getTaikhoan().getEmail();
         String tenphim = veonline.getSuatchieu().getPhim().getTen();
         String ngaychieu = String.valueOf(veonline.getSuatchieu().getNgaychieu());
         String khunggio = veonline.getSuatchieu().getKhunggio().getBatdau() + " - " + veonline.getSuatchieu().getKhunggio().getKetthuc();
-        String ghe = veonline.getGhe().getDayghe().getTen() +  String.valueOf(veonline.getGhe().getCol());
+        String ghe = tenghe.replace("-",", ");
         try {
             sendMailTicket(email, tenphim, ngaychieu, khunggio, ghe);
         } catch (UnsupportedEncodingException | MessagingException e) {
