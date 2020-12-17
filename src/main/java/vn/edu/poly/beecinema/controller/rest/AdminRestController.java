@@ -37,6 +37,27 @@ public class AdminRestController {
     @Autowired
     private KhungGioService khungGioService;
 
+    @Autowired private GheService gheService;
+    @Autowired private DayGheService dayGheService;
+
+    @PostMapping("/loadghebyphong={idphong}")
+    public ResponseEntity loadGhe(@PathVariable String idphong) {
+        List<DayGheResponse> gheResponses = new ArrayList<>();
+
+        dayGheService.findDayGheByPhong(idphong).forEach(dayghe -> {
+            List<GheResponse> gheResponses1 = new ArrayList<>();
+            gheService.findByPhongAndDayGhe(idphong, dayghe.getId()).forEach(ghe -> {
+                Integer stt = ghe.getTrangthai();
+                if (ghe.getTrangthai() == 1) {
+                    stt = 4;
+                }
+                gheResponses1.add(new GheResponse(ghe.getId(), ghe.getCol(), ghe.getPhong().getId(), ghe.getDayghe().getId(), ghe.getDayghe().getTen(), ghe.getLoaighe().getId(), stt));
+            });
+            gheResponses.add(new DayGheResponse(dayghe.getId(), dayghe.getTen(), gheResponses1));
+        });
+        return ResponseEntity.ok().body(gheResponses);
+    }
+
     @PostMapping("/listSuatChieu")
     public ResponseEntity listSuatchieu(@RequestParam String date) {
         List<PhongResponse> phongResponses = new ArrayList<>();

@@ -38,6 +38,12 @@ public class SeatController {
         return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
+
+    @GetMapping("/show-seat-v2")
+    public String showSeatV2(Model model){
+        return "admin/seat/show-seat-v2";
+    }
+
     @GetMapping("/page/{pageNumber}")
     public String listByPage(Model model ,
                              @PathVariable("pageNumber") int currentPage,
