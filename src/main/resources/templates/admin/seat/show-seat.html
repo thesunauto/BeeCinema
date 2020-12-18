@@ -18,21 +18,30 @@
 
         <div class="card card-cascade narrower z-depth-1">
 
-          <div class="row view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
-            <div class="col-sm-12 col-md-4  d-flex align-items-center">
+          <div class="view view-cascade gradient-card-header blue-gradient narrower py-4 mx-4 mb-3 d-flex justify-content-between align-items-center">
+            <div >
               <a th:href="@{/admin/seat/add-seat}" class="btn btn-outline-white btn-rounded btn-sm px-2 m-1"><i class="fas fa-plus-circle"></i></a>
             </div>
-            <div class="col-sm-12 col-md-4 d-flex justify-content-center"><h3 class="white-text text-center font-weight-bold" th:text="#{one-hundred-and-FourtyfourWord}"></h3></div>
-            <div class="col-sm-12 col-md-4 d-flex justify-content-end">
-              <form th:action="@{/admin/seat/page/1}"  class="form-inline md-form m-2">
-                <input type="hidden" name="sortField" th:value="${sortField}"/>
-                <input type="hidden" name="sortDir" th:value="${sortDir}"/>
-                <input class="form-control text-white mb-3" type="text" name="keyword" id="keyword" th:value="${keyword}" required>
-                <button type="submit" class="btn btn-outline-white btn-rounded btn-sm px-2 m-1"><i class="fas fa-search"></i></i> </button>
-                <a th:href="@{/admin/seat/show-seat}" class="btn btn-outline-white btn-rounded btn-sm px-2 m-1"><i class="fas fa-eraser" title=""></i></a>
+            <div ><h3 class="white-text text-center font-weight-bold" th:text="#{one-hundred-and-FourtyfourWord}"></h3></div>
+            <div >
+              <form th:action="@{/admin/seat/page/1}" >
+              <div class="row">
 
-              </form>
+                  <div class="col-8">
+                    <input type="hidden" name="sortField" th:value="${sortField}"/>
+                    <input type="hidden" name="sortDir" th:value="${sortDir}"/>
+                    <div></div><select  name="keyword" class="browser-default custom-select">
+                    <option th:each="phong : ${@phongServiceImpl.getAllPhong()}" th:value="${phong.id}" th:text="${phong.ten}" ></option>
+                  </select>
+                  </div>
+                <div class="col-4">
+                  <button type="submit" class="btn btn-outline-white btn-rounded btn-sm px-2 "><i class="fas fa-search"></i> </button>
+                </div>
+              </div>
+
+            </form>
             </div>
+
 
           </div>
 
@@ -52,19 +61,20 @@
                     <th >
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtyfiveWord}"> <i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtyfiveWord}"> <i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=phong.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtysixWord}"><i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=phong.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtysixWord}"><i class="fas fa-sort ml-1"></i></a>
+                    </th>
+                    <th ><a class="font-weight-bold" th:text="#{mot13}"></a></th>
+                    <th >
+                      <a class="font-weight-bold" th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=col&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtysevenWord }"> <i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=col&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtysevenWord }"> <i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=dayghe.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtyeightWord}"> <i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=dayghe.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtyeightWord}"> <i class="fas fa-sort ml-1"></i></a>
-                    </th>
-                    <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=loaighe.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtynineWord}"> <i class="fas fa-sort ml-1"></i></a>
+                      <a class="font-weight-bold" th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=loaighe.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtynineWord}"> <i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-FivetyWord}"></a></th>
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-FivetyoneWord}"></a></th>
@@ -81,6 +91,7 @@
                     </td>
                     <td th:text="${ghe1.id}"></td>
                     <td th:text="${ghe1.phong.ten}"></td>
+                    <td th:text="${ghe1.dayghe.ten+ghe1.col}"></td>
                     <td th:text="${ghe1.col}"></td>
                     <td th:text="${ghe1.dayghe.ten}"></td>
                     <td th:text="${ghe1.loaighe.ten}"></td>

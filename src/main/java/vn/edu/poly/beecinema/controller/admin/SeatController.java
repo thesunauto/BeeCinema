@@ -35,7 +35,7 @@ public class SeatController {
     @GetMapping("/show-seat")
     public String showSeat(Model model){
         String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword, null);
+        return listByPage(model, 1, "id", "asc", "1", null);
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -80,7 +80,7 @@ public class SeatController {
             ghe.setLoaighe(loaiGheService.findLoaiGheById(ghe.getLoaighe().getId()).get());
             ghe.setNgaytao(LocalDateTime.now());
             gheService.saveGhe(ghe);
-            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
+            return listByPage(model, 1, "id", "asc", "1", "themThanhCong");
         }
         return "admin/seat/add-seat";
     }
@@ -99,7 +99,7 @@ public class SeatController {
 
         }else{
             gheService.saveGhe(ghe);
-            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
+            return listByPage(model, 1, "id", "asc", "1", "suaThanhCong");
         }
         return "admin/seat/update-seat";
     }
@@ -107,11 +107,8 @@ public class SeatController {
     @GetMapping("/delete-seat/{id}")
     public  String deleteSeat (@PathVariable(value = "id") int id,  Model model){
         gheService.deleteGhe(id);
-        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        return listByPage(model, 1, "id", "asc", "1", "xoaThanhCong");
     }
-
-
-
 
 }
 
