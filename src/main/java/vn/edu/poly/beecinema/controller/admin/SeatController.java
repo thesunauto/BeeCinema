@@ -49,6 +49,9 @@ public class SeatController {
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
         List<Ghe> ghe = page.getContent();
+        if(totalItem ==0){
+            currentPage = 0;
+        }
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalItem", totalItem);
         model.addAttribute("totalPages", totalPages);

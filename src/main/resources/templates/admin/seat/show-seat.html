@@ -31,7 +31,7 @@
                     <input type="hidden" name="sortField" th:value="${sortField}"/>
                     <input type="hidden" name="sortDir" th:value="${sortDir}"/>
                     <div></div><select  name="keyword" class="browser-default custom-select">
-                    <option th:each="phong : ${@phongServiceImpl.getAllPhong()}" th:value="${phong.id}" th:text="${phong.ten}" ></option>
+                    <option th:each="phong : ${@phongServiceImpl.getAllPhong()}" th:value="${phong.id}" th:text="${phong.ten}" th:selected="(${phong.id} == ${keyword})" ></option>
                   </select>
                   </div>
                 <div class="col-4">
@@ -134,13 +134,12 @@
 
                   <!-- Numbers -->
                   <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a></li>-->
-                  <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                      <li class="page-item  clearfix d-none d-md-inline-block"><a class="page-link" th:if="${currentPage != i}" th:href="@{'/admin/seat/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a></li>
-                        <span th:unless="${i != currentPage}">
-                          <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">[[${i}]]</a></li>
+                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                          <li class="page-item clearfix d-none d-md-inline-block"><a class="page-link" th:if="${currentPage != i}" th:href="@{'/admin/seat/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a></li>
+                            <span th:unless="${i != currentPage}">
+                              <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">[[${i}]]</a></li>
+                            </span>
                         </span>
-                        &nbsp;&nbsp;
-                    </span>
                   <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a>-->
 
                   <!--                    </li>-->
