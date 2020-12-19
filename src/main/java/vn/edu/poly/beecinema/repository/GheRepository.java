@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import vn.edu.poly.beecinema.entity.Dayghe;
 import vn.edu.poly.beecinema.entity.Ghe;
 import vn.edu.poly.beecinema.entity.LoaiPhim;
@@ -17,6 +18,7 @@ public interface GheRepository extends JpaRepository<Ghe, Integer>, JpaSpecifica
     List<Ghe> findByPhong(Phong phong);
     List<Ghe> findByPhongAndDayghe(Phong phong, Dayghe dayghe);
     List<Ghe> findByPhongAndDaygheOrderByCol(Phong phong, Dayghe dayghe);
-    @Query("SELECT p FROM Ghe p WHERE CONCAT(p.id, ' ',p.phong.ten, ' ', p.col,' ', p.dayghe.ten, ' ',p.loaighe.ten) LIKE %?1%")
-    public Page<Ghe> findAll(String keyword, Pageable pageable);
+    @Query("SELECT p FROM Ghe p WHERE p.phong.id = :keyword ")
+    public Page<Ghe> findAll(@Param("keyword") String keyword, Pageable pageable);
+
 }
