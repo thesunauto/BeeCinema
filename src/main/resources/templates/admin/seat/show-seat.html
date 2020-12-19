@@ -178,41 +178,66 @@
                   <button
                           type="button"
                           class="btn btn-primary"
-                          data-mdb-toggle="modal"
-                          data-mdb-target="#exampleModal"
+                          data-toggle="modal" data-target="#basicExampleModal"
                   >
                       Launch demo modal
                   </button>
 
                   <!-- Modal -->
-                  <div
-                          class="modal fade"
-                          id="exampleModal"
-                          tabindex="-1"
-                          aria-labelledby="exampleModalLabel"
-                          aria-hidden="true"
-                  >
-                      <div class="modal-dialog">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                  <button
-                                          type="button"
-                                          class="btn-close"
-                                          data-mdb-dismiss="modal"
-                                          aria-label="Close"
-                                  ></button>
-                              </div>
-                              <div class="modal-body">...</div>
-                              <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                                      Close
-                                  </button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
-                              </div>
-                          </div>
+                <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Suất chiếu</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
                       </div>
+                      <form action="#" id="addSC">
+                        <input id="idphong" type="hidden" name="idphong">
+                        <input id="ngaychieu" type="hidden" name="ngaychieu">
+                        <div class="modal-body">
+                          <select class="mdb-select md-form" searchable="Search here.." id="idphim" name="idphim">
+                            <option value="none" disabled selected>Choose film</option>
+                            <option th:each="df : ${@phimServiceImpl.getAllPhimAlive()}"
+                                    th:value="${df.getId()}"
+                                    th:text="${df.getTen()}"></option>
+                          </select><label class="mdb-main-label active">Phim</label>
+                          <div class="md-form md-outline">
+                            <i class="fas fa-money-bill prefix"></i>
+                            <input type="number" name="dongia" placeholder="Đơn Giá" id="form31232" class="form-control" min="0"
+                                   value="50000" step="5000">
+                            <label for="form31232" class="active">Đơn Giá</label>
+                          </div>
+                          <div class="md-form md-outline">
+                            <i class="fas fa-money-bill prefix"></i>
+                            <input type="number" id="form33" value="10" placeholder="Phút Hủy Online" class="form-control" name="phuthuyonline">
+                            <label for="form33" class="active">Phút Hủy Online</label>
+                          </div>
+
+                          <select id="idkhunggio" class="mdb-select md-form" searchable="Search here.." name="idkhunggio">
+                            <option value="none" disabled selected>Choose time</option>
+                            <option th:each="khunggio : ${@khungGioServiceImpl.getAllKhungGio()}"
+                                    th:value="${khunggio.id}"
+                                    th:text="${khunggio.getId()} +' | '+${khunggio.batdau} + ' - ' + ${khunggio.ketthuc}"></option>
+                            <label class="mdb-main-label active">Khung Giờ</label>
+                          </select><label class="mdb-main-label active">Khung giờ</label>
+                          <select id="tthai" class="mdb-select md-form colorful-select dropdown-primary initialized"
+                                  name="trangthai">
+                            <option th:value="'0'" th:text="Hiện"></option>
+                            <option th:value="'1'" th:text="Ẩn"></option>
+                          </select><label class="mdb-main-label active">Trạng thái</label>
+                        </div>
+                        <div id="actionModal" class="modal-footer">
+
+                        </div>
+                      </form>
+                      <input type="hidden" id="idsuatchieucurrent">
+                    </div>
                   </div>
+                </div>
               </div>
             </div>
           </div>

@@ -147,4 +147,40 @@ public class SuatChieuServiceImpl implements SuatChieuService {
         return suatchieuRepository.findAllByPhongAndNgaychieu(phong,ngaychieu);
     }
 
+    @Override
+    public List<Suatchieu> findAllByPhimAndDate(String idPhim, LocalDate batdau, LocalDate ketthuc) {
+        try {
+            List<Suatchieu> suatchieus = suatchieuRepository.findAllByPhim(phimRepository.findById(idPhim).get());
+
+            for(Iterator<Suatchieu> sc = suatchieus.iterator(); sc.hasNext();){
+                Suatchieu ss = sc.next();
+                if (ss.getNgaychieu().compareTo(batdau)<0||ss.getNgaychieu().compareTo(ketthuc)>0) {
+                    sc.remove();
+                }
+            }
+            return suatchieus;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Suatchieu> findAllByDate(LocalDate batdau, LocalDate ketthuc) {
+        try {
+            List<Suatchieu> suatchieus = suatchieuRepository.findAll();
+
+            for(Iterator<Suatchieu> sc = suatchieus.iterator(); sc.hasNext();){
+                Suatchieu ss = sc.next();
+                if (ss.getNgaychieu().compareTo(batdau)<0||ss.getNgaychieu().compareTo(ketthuc)>0) {
+                    sc.remove();
+                }
+            }
+            return suatchieus;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
 }

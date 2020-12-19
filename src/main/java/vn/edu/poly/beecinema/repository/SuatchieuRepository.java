@@ -19,4 +19,6 @@ public interface SuatchieuRepository extends JpaRepository<Suatchieu, Integer>, 
 
     List<Suatchieu> findAllByPhongAndNgaychieuAndTrangthai(Phong phong, LocalDate ngaychieu, Integer trangthai);
     List<Suatchieu> findAllByPhongAndNgaychieu(Phong phong, LocalDate ngaychieu);
+
+    List<Suatchieu> findAllByPhim(Phim phim);
 }

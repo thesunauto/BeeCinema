@@ -163,4 +163,62 @@ public class AdminRestController {
 
         return ResponseEntity.ok().body(false);
     }
+
+    @PostMapping("/getListTongTien")
+    public ResponseEntity getListTongTien(@RequestParam String bd,@RequestParam String kt){
+        LocalDate batdau = LocalDate.parse(bd,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        LocalDate ketthuc = LocalDate.parse(kt,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        List<TKVe> tkVes = new ArrayList<>();
+        for(Phim phim:phimService.getAllPhim()){
+            TKVe tkVe = new TKVe();
+            tkVe.setIdphim(phim.getId());
+            tkVe.setTenPhim(phim.getTen());
+            int sove = 0;
+            float tong = 0;
+           List<Suatchieu> suatchieu = suatChieuService.findAllByPhimAndDate(phim.getId(),batdau,ketthuc);
+
+            for(Suatchieu suatchieu1 : suatchieu){
+
+                for(Ve ve:suatchieu1.getVes()){
+                    sove++;
+                    tong+=ve.getSuatchieu().getDongia()+ve.getGhe().getDayghe().getGia()+ve.getGhe().getLoaighe().getGia();
+                    if(ve.getSukien()!=null){
+                        tong-=ve.getSukien().getGiam();
+                    }
+                }
+            }
+            tkVe.setSove(sove);
+            tkVe.setTongtien(tong);
+            tkVes.add(tkVe);
+        }
+        return ResponseEntity.ok().body(tkVes);
+    }
+
+    @PostMapping("/getListVeThongKe")
+    public ResponseEntity getListVeThongKe(@RequestParam String bd,@RequestParam String kt){
+        LocalDate batdau = LocalDate.parse(bd,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        LocalDate ketthuc = LocalDate.parse(kt,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        List<TKVe2> tkVe2s = new ArrayList<>();
+        for(Suatchieu suatchieu : suatChieuService.findAllByDate(batdau,ketthuc)){
+            for(Ve ve : suatchieu.getVes()){
+                float sukien = 0;
+                String sukienName = "";
+                if(ve.getSukien()!=null){
+                    sukienName+=ve.getSukien().getTen();
+                    sukien +=ve.getSukien().getGiam();
+                }
+                tkVe2s.add(TKVe2.builder()
+                        .tenphim(ve.getSuatchieu().getPhim().getTen())
+                        .khunggio(ve.getSuatchieu().getKhunggio().getBatdau().format(dateTimeFormatter)+" - "+ve.getSuatchieu().getKhunggio().getKetthuc().format(dateTimeFormatter))
+                        .gia(ve.getSuatchieu().getDongia()+ve.getGhe().getLoaighe().getGia()+ve.getGhe().getDayghe().getGia()-sukien)
+                        .ngaychieu(ve.getSuatchieu().getNgaychieu().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                        .phong(ve.getSuatchieu().getPhong().getTen())
+                        .sukien(sukienName)
+                        .tenghe(ve.getGhe().getDayghe().getTen()+ve.getGhe().getCol())
+                        .build());
+            }
+        }
+        return ResponseEntity.ok().body(tkVe2s);
+    }
 }
