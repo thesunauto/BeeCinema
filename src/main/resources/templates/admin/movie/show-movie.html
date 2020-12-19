@@ -71,6 +71,7 @@
                       </th>
                       <th ><a class="font-weight-bold" th:text="#{sixty-FourthWord}" ></a></th>
                       <th ><a class="font-weight-bold" th:text="#{sixty-FifthWord}"></a></th>
+                      <th ><a class="font-weight-bold" th:text="#{sixty-FifthWord2}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{sixty-SixthWord}"></a></th>
                       <th >
                         <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngaybatdau&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{sixty-SeventhWord}"><i class="fas fa-sort ml-1"></i></a>
@@ -104,6 +105,7 @@
                         <span th:case="*"><img id="blah" th:src="@{'/getImage/'+ ${phim2.hinhanh}}" alt="User Photo" class="z-depth-1 " style="height: 50px; width: 50px;" /></span>
                       </td>
                       <td th:text="${phim2.dodai}"></td>
+                      <td th:text="${phim2.linktrailer}"></td>
                       <td th:text="${phim2.mota}"></td>
                       <td th:text="${#temporals.format(phim2.ngaybatdau, 'dd-MM-yyyy | HH:mm:ss')}"></td>
                       <td th:text="${#temporals.format(phim2.ngayketthuc, 'dd-MM-yyyy | HH:mm:ss')}"></td>
