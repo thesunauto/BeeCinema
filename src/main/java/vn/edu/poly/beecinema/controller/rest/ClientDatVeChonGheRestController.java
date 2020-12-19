@@ -3,19 +3,22 @@ package vn.edu.poly.beecinema.controller.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.commons.*;
 import vn.edu.poly.beecinema.config.HttpSessionConfig;
-import vn.edu.poly.beecinema.entity.Ghe;
-import vn.edu.poly.beecinema.entity.Phim;
-import vn.edu.poly.beecinema.entity.Suatchieu;
-import vn.edu.poly.beecinema.entity.VeonlineID;
+import vn.edu.poly.beecinema.entity.*;
 import vn.edu.poly.beecinema.repository.VeonlineRepository;
 import vn.edu.poly.beecinema.service.*;
 import vn.edu.poly.beecinema.storage.StorageService;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -46,6 +49,8 @@ public class ClientDatVeChonGheRestController {
     private SukienService sukienService;
     @Autowired
     private TaikhoanService taikhoanService;
+    @Autowired
+    private JavaMailSender mailSender;
 
     public ClientDatVeChonGheRestController(StorageService storageService) {
         this.storageService = storageService;
@@ -354,5 +359,41 @@ public class ClientDatVeChonGheRestController {
         }
 
        return ResponseEntity.notFound().build();
+    }
+    @GetMapping("/sendMailTicket/{idsuatchieu}|{idghe}")
+    public void sendMailTicket(@PathVariable Integer idsuatchieu, @PathVariable Integer idghe,
+                           Authentication authentication, Model model){
+        Veonline veonline = veonlineService.findByVeonlineID(new VeonlineID(idsuatchieu,idghe));
+        String email = veonline.getTaikhoan().getEmail();
+        String tenphim = veonline.getSuatchieu().getPhim().getTen();
+        String ngaychieu = String.valueOf(veonline.getSuatchieu().getNgaychieu());
+        String khunggio = veonline.getSuatchieu().getKhunggio().getBatdau() + " - " + veonline.getSuatchieu().getKhunggio().getKetthuc();
+        String ghe = veonline.getGhe().getDayghe().getTen() +  String.valueOf(veonline.getGhe().getCol());
+        try {
+            sendMailTicket(email, tenphim, ngaychieu, khunggio, ghe);
+        } catch (UnsupportedEncodingException | MessagingException e) {
+            model.addAttribute("error", "Lỗi khi gửi email");
+        }
+    }
+    private void sendMailTicket(String email, String tenphim, String ngaychieu, String khunggio, String ghe)
+            throws UnsupportedEncodingException, MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom("contact@Beecinema.com", "Beecinema");
+        helper.setTo(email);
+
+        String subject = "Đặt Vé Thành Công - BeeCinema";
+        String content = "<p>Cảm ơn bạn đã đặt vé tại BeeCinema</p>"
+                + "<p>Phim: "+ tenphim  + " </p>"
+                + "<p>Thời gian: " + ngaychieu + " " + khunggio +" </p>"
+                + "<p>Ghế: "+ ghe  + " </p>"
+                + "<p>Lưu ý: xin vui lòng đến trước 30p để lấy vé, nếu sau 30p bạn không lấy vé sẽ tự động hủy. </p>"
+                + "<p>Xin cảm ơn !</p>";
+
+        helper.setSubject(subject);
+        helper.setText(content, true);
+
+        mailSender.send(message);
     }
 }
