@@ -18,8 +18,7 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -54,6 +53,12 @@ public class AdminRestController {
                 gheResponses1.add(new GheResponse(ghe.getId(), ghe.getCol(), ghe.getPhong().getId(), ghe.getDayghe().getId(), ghe.getDayghe().getTen(), ghe.getLoaighe().getId(), stt));
             });
             gheResponses.add(new DayGheResponse(dayghe.getId(), dayghe.getTen(), gheResponses1));
+        });
+        Collections.sort(gheResponses, new Comparator<DayGheResponse>() {
+            @Override
+            public int compare(DayGheResponse o1, DayGheResponse o2) {
+                return o1.getTen().compareToIgnoreCase(o2.getTen());
+            }
         });
         return ResponseEntity.ok().body(gheResponses);
     }

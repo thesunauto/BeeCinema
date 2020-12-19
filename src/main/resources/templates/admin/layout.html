@@ -315,43 +315,6 @@
     });
 
     // Material Select Initialization
-    $(document).ready(function () {
-        $('.mdb-select').materialSelect();
-
-        var user = {};
-
-        function loadUser() {
-            $.ajax({
-                url: '/api/employee/getuser',
-                type: 'POST',
-                dataType: 'JSON',
-                success: function (data) {
-                    user = data;
-                },
-                complete: function () {
-                    $("#usernamenav").html(user.ten);
-
-                    $('#username').val(user.username);
-                    $('#password').val(user.password);
-                    $('#ten').val(user.ten);
-                    $('#gioitinh').val(user.gioitinh);
-                    $('#ngaysinh').val(user.ngaysinh);
-                    $('#sdt').val(user.sdt);
-                    $('#email').val(user.email);
-                    $('#image').val(user.image);
-                    $('#blah123').attr('src', '/api/employee/getResourse/'+user.image);
-                }
-            })
-        }
-
-        $('body').ready(loadUser());
-    });
-
-    $(window).on('beforeunload', function () {
-        $.ajax({
-            url: '/api/employee/close'
-        });
-    })
 
 </script>
 <th:block layout:fragment="optional" />

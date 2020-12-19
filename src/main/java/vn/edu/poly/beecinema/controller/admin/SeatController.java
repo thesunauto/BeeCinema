@@ -75,6 +75,7 @@ public class SeatController {
         Ghe ghe = new Ghe();
         model.addAttribute("seat",ghe);
         return "admin/seat/add-seat";
+
     }
 
     @PostMapping("/add-seat")
