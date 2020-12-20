@@ -54,9 +54,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-10 rgba-white-strong p-2 d-flex justify-content-center rounded">
-                                <img th:src="@{/img/giaithich.png}" alt="">
+                        <div class="row pt-2">
+                            <div class="col-10 rgba-white-light p-2 d-flex justify-content-center rounded">
+                                <img th:src="@{/img/giaithich.png}" alt="" style="width: 100%;">
                             </div>
                             <div class="col-2 d-flex justify-content-center">
                                 <button id="btnthanhtoan" class="float-right btn purple-gradient" data-toggle="modal"
@@ -111,7 +111,7 @@
 
 
                     </div>
-                    <div class="modal-footer d-flex justify-content-center">
+                    <div class="modal-footer d-flex justify-content-center" id="acction">
                         <button id="submitdatve" class="btn btn-unique">Xác nhận <i
                                 class="fas fa-paper-plane-o ml-1"></i></button>
                     </div>
@@ -122,6 +122,7 @@
     <!-- Mega menu -->
 </main>
 <th:block layout:fragment="optional">
+    <script th:src="@{/js/sweetalert2.js}"></script>
     <script>
         $(document).ready(function () {
 
@@ -250,16 +251,39 @@
                     dataType: 'JSON',
                     contentType: 'application/json',
                     processData: false,
+                    beforeSend: function(){
+                        $('#acction').html('<div class="d-flex justify-content-center align-items-center preloader-wrapper big active">\n' +
+                            '  <div class="spinner-layer spinner-red-only">\n' +
+                            '    <div class="circle-clipper left">\n' +
+                            '      <div class="circle"></div>\n' +
+                            '    </div>\n' +
+                            '    <div class="gap-patch">\n' +
+                            '      <div class="circle"></div>\n' +
+                            '    </div>\n' +
+                            '    <div class="circle-clipper right">\n' +
+                            '      <div class="circle"></div>\n' +
+                            '    </div>\n' +
+                            '  </div>\n' +
+                            '</div>');
+                    },
                     success: function (data) {
                         var bo = data;
                         if (bo) {
-                            toastr.success('Đặt vé thành công', '', {positionClass: 'md-toast-top-right'});
+                            Swal.fire({
+                                title: 'Đặt vé thành công!',
+                                text: 'Quý khách phải đến trước HH:mm để nhận vé nếu qua khoảng thời gian này vé đặt online sẽ mất hiệu lực',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            })
                         } else {
                             toastr.error('Đặt vé thất bại', 'Có thể bạn đã vượt quá giới hạn vé đặt', {positionClass: 'md-toast-top-right'});
                         }
                     },
                     complete: function () {
-                        $('#modalContactForm').modal('toggle');
+                        $('#acction').html(' <button id="submitdatve" class="btn btn-unique">Xác nhận <i\n' +
+                            '                                class="fas fa-paper-plane-o ml-1"></i></button>\n' +
+                            '                  ');
+                        $('#modalContactForm').modal('close');
                         listGhefocus = [];
                         loadGhe();
                     }

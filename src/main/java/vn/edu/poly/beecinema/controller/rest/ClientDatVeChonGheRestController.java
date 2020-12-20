@@ -267,11 +267,20 @@ public class ClientDatVeChonGheRestController {
         try {
             List<VeResponse> veResponsesCurent = (List<VeResponse>) session.getAttribute("veresponse");
             if ((veResponsesCurent.size() + veonlineRepository.findAllBySuatchieuAndTaikhoan(suatChieuService.findById(veResponsesCurent.get(0).getIdsuatchieu()), taikhoanService.findTaikhoanById(authentication.getName()).get()).size()) <= 4) {
+                String ghemail = "";
                 for (VeResponse veResponse : veResponsesCurent) {
                     if (!veonlineService.insert(veResponsesCurent.get(0).getIdsuatchieu(), veResponse.getIdghe(), idsukien, authentication.getName())) {
                         session.setAttribute("veresponse", new ArrayList<VeResponse>());
                         return ResponseEntity.ok().body(false);
                     }
+                    Ghe ghe = gheService.findGheById(veResponse.getIdghe()).get();
+                    ghemail += ghe.getDayghe().getTen()+ghe.getCol()+" ";
+                }
+                try {
+                    Suatchieu suatchieu = suatChieuService.findById(veResponsesCurent.get(0).getIdsuatchieu());
+                    sendMailTicket(taikhoanService.findTaikhoanById(authentication.getName()).get().getEmail(), suatchieu.getPhim().getTen(), suatchieu.getNgaychieu().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), suatchieu.getKhunggio().getBatdau().format(DateTimeFormatter.ofPattern("HH:mm"))+"-"+suatchieu.getKhunggio().getKetthuc().format(DateTimeFormatter.ofPattern("HH:mm")),String.valueOf(suatchieu.getPhuthuyonline()), ghemail);
+                } catch (UnsupportedEncodingException | MessagingException e) {
+                   e.printStackTrace();
                 }
                 session.setAttribute("veresponse", new ArrayList<VeResponse>());
                 return ResponseEntity.ok().body(true);
@@ -359,22 +368,10 @@ public class ClientDatVeChonGheRestController {
 
        return ResponseEntity.notFound().build();
     }
-    @GetMapping("/sendMailTicket/{idsuatchieu}|{idghe}|{tenghe}")
-    public void sendMailTicket(@PathVariable Integer idsuatchieu, @PathVariable Integer idghe, @PathVariable String tenghe,
-                           Authentication authentication, Model model){
-        Veonline veonline = veonlineService.findByVeonlineID(new VeonlineID(idsuatchieu,idghe));
-        String email = veonline.getTaikhoan().getEmail();
-        String tenphim = veonline.getSuatchieu().getPhim().getTen();
-        String ngaychieu = String.valueOf(veonline.getSuatchieu().getNgaychieu().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        String khunggio = veonline.getSuatchieu().getKhunggio().getBatdau() + " - " + veonline.getSuatchieu().getKhunggio().getKetthuc();
-        String ghe = tenghe.replace("-",", ");
-        try {
-            sendMailTicket(email, tenphim, ngaychieu, khunggio, ghe);
-        } catch (UnsupportedEncodingException | MessagingException e) {
-            model.addAttribute("error", "Lỗi khi gửi email");
-        }
-    }
-    private void sendMailTicket(String email, String tenphim, String ngaychieu, String khunggio, String ghe)
+
+
+
+    private void sendMailTicket(String email, String tenphim, String ngaychieu, String khunggio,String phuthuy, String ghe)
             throws UnsupportedEncodingException, MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -387,7 +384,7 @@ public class ClientDatVeChonGheRestController {
                 + "<p>Phim: <b>"+ tenphim  + "</b> </p>"
                 + "<p>Thời gian: <b>" + ngaychieu + "</b> <b>" + khunggio +"</b> </p>"
                 + "<p>Ghế: <b>"+ ghe  + "</b> </p>"
-                + "<p><b>Lưu ý:</b> xin vui lòng đến trước 30p để lấy vé, nếu sau 30p bạn không lấy vé sẽ tự động hủy. </p>"
+                + "<p><b>Lưu ý:</b> xin vui lòng đến trước "+phuthuy+"p để lấy vé, nếu sau "+phuthuy+"p bạn không lấy vé sẽ tự động hủy. </p>"
                 + "<p>Xin cảm ơn !</p>";
 
         helper.setSubject(subject);
