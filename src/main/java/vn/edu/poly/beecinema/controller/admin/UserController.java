@@ -30,22 +30,24 @@ public class UserController {
     private TaikhoanService taikhoanService;
 
     @GetMapping("/show-user")
-    public String showUser(Model model){
+    public String showUser(Model model,Authentication authentication){
         String keyword = null;
-        return listByPage(model, 1, "username", "asc", keyword, null);
+        return listByPage(model,authentication, 1, "username", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
-    public String listByPage(Model model ,
+    public String listByPage(Model model , Authentication authentication,
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
                              @Param("keyword") String keyword,
                              String messages) {
-        Page<Taikhoan> page = taikhoanService.listAll(currentPage, sortField, sortDir, keyword);
+        String username = authentication.getName();
+        Page<Taikhoan> page = taikhoanService.listAll(username,currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
         List<Taikhoan> taikhoans = page.getContent();
+
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalItem", totalItem);
         model.addAttribute("totalPages", totalPages);
@@ -93,13 +95,13 @@ public class UserController {
                 }
             }
             taikhoanService.saveTaikhoan(taikhoan);
-            return listByPage(model, 1, "username", "asc", null, "themThanhCong");
+            return listByPage(model,authentication, 1, "username", "asc", null, "themThanhCong");
         }
         return "admin/account/add-account";
     }
 
     @PostMapping(value = "/edit")
-    public String updateUser(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan ,
+    public String updateUser(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan ,Authentication authentication,
                               BindingResult bindingResult, Model model,
                              @RequestParam("images") MultipartFile images){
         if(bindingResult.hasErrors()){
@@ -117,15 +119,15 @@ public class UserController {
                 }
             }
             taikhoanService.saveTaikhoan(taikhoan);
-            return listByPage(model, 1, "username", "asc", null, "suaThanhCong");
+            return listByPage(model,authentication, 1, "username", "asc", null, "suaThanhCong");
         }
         return "admin/account/update-account";
     }
 
     @RequestMapping(value = "/delete" )
-    public String deleteUser(@RequestParam("id") String taikhoanId, Model model) {
+    public String deleteUser(@RequestParam("id") String taikhoanId, Model model,Authentication authentication) {
         taikhoanService.deleteTaikhoan(taikhoanId);
-        return listByPage(model, 1, "username", "asc", null, "xoaThanhCong");
+        return listByPage(model,authentication, 1, "username", "asc", null, "xoaThanhCong");
     }
 
 

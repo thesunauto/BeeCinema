@@ -104,5 +104,17 @@ public class TaikhoanServiceimpl implements TaikhoanService {
         return taikhoanRepository.findByUsername(id);
     }
 
+    @Override
+    public Page<Taikhoan> listAll(String username, int currentPage, String sortField, String sortDir, String keyword) {
+        Pageable pageable = PageRequest.of(currentPage - 1, 3,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending()
+                        : Sort.by(sortField).descending()
+        );
+        if (keyword != null) {
+            return taikhoanRepository.findAll(keyword,username, pageable);
+        }
+        return  taikhoanRepository.findAll1(username,pageable);
+    }
+
 
 }
