@@ -4,7 +4,7 @@
       layout:decorate="~{admin/layout}">
 
 <head>
-  <title>Cập nhật phim</title>
+  <title>Phim</title>
 </head>
 
 <body>
@@ -103,7 +103,7 @@
                 </div>
               </div>
 
-              <div class="col-md-4 mb-4">
+              <div class="col-md-3 mb-4">
                 <div class="md-form md-outline">
                   <i class="fas fa-calendar-day prefix"></i>
                   <input  type="datetime-local" th:field="*{ngayketthuc}" id="form31" class="form-control">
@@ -111,8 +111,15 @@
                   <p th:if="${#fields.hasErrors('ngayketthuc')}" th:errors="*{ngayketthuc}" class="text-danger text-center"></p>
                 </div>
               </div>
+              <div class="col-md-3 mb-4">
+                <div class="md-form md-outline">
+                  <i class="fas fa-user-plus prefix"></i>
+                  <input type="text" th:field="*{taikhoan.username}" id="form31" class="form-control" readonly>
+                  <label for="form31" class="active">Người Tạo</label>
+                </div>
 
-              <div class="col-md-4 mb-6">
+              </div>
+              <div class="col-md-2 mb-6">
                 <!-- Name -->
                 <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
                   <option th:value="'0'" th:text="Hiện" ></option>
@@ -120,6 +127,7 @@
                 </select><label class="mdb-main-label active">Trạng thái</label>
 
               </div>
+
 
             </div>
 
@@ -131,60 +139,15 @@
                   <textarea type="textarea" th:field="*{mota}" id="form31" class="form-control"></textarea>
                   <label for="form31" class="active">Mô tả</label>
                 </div>
-  
-            </div>
-          </div>
-          
-          <div class="row">
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-user-plus prefix"></i>
-                <input type="text" th:field="*{taikhoan.username}" id="form31" class="form-control" readonly>
-                <label for="form31" class="active">Người Tạo</label>
-              </div>
 
             </div>
-            <!-- Grid column -->
 
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-calendar-plus prefix"></i>
-                <input type="date" id="form31" class="form-control" readonly>
-                <label for="form31" class="active">Ngày Tạo</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-user-edit prefix"></i>
-                <input type="text" id="form31" class="form-control" readonly>
-                <label for="form31" class="active">Người Sửa</label>
-              </div>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-4">
-              <div class="md-form md-outline">
-                <i class="fas fa-calendar-alt prefix"></i>
-                <input type="date" id="form31" class="form-control" readonly>
-                <label for="form31" class="active">Ngày Sửa</label>
-              </div>
-
-            </div>
             <!-- Grid column -->
 
 
 
           </div>
-          
+
           <!-- Grid row -->
           <hr>
           <div class="row">
