@@ -20,6 +20,7 @@ import vn.edu.poly.beecinema.service.VeonlineService;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -108,7 +109,7 @@ public class EmployeeXacNhanVeOnlineRestController {
                 .email(tk.getEmail())
                 .gioitinh(tk.getGioitinh())
                 .image(tk.getHinhanh())
-                .ngaysinh(new SimpleDateFormat("dd/MM/yyyy").format(tk.getNgaysinh()))
+                .ngaysinh(new SimpleDateFormat("dd/MM/yyyy").format(tk.getNgaysinh()==null?new Date(2000,01,01) :tk.getNgaysinh()))
                 .password(tk.getMatkhau())
                 .sdt(tk.getSodienthoai())
                 .ten(tk.getTen())
