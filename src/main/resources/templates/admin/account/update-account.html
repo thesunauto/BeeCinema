@@ -33,7 +33,7 @@
             <div class="col-md-3 mb-4">
               <div class="file-field">
                 <div class="z-depth-1-half mb-4">
-                  <img id="blah" th:src="@{'/getImage/'+ ${taikhoan.hinhanh}}"  class="img-fluid"  alt="Không có ảnh" style="height: 153px; min-width: 100%"/>
+                  <img id="blah" th:src="@{'/getImage/'+ ${taikhoan.hinhanh}}"  class="img-fluid"  alt="Không có ảnh"  style="object-fit: cover;  object-position: center;  width: 100%;  height: 153px;"/>
                   <input type="hidden" th:field="*{hinhanh}" id="form36" class="form-control">
                 </div>
                 <div class="d-flex justify-content-center">
@@ -131,15 +131,7 @@
 
             </div>
 
-            <div class="col-md-3 mb-4">
 
-              <!-- Name -->
-              <select th:field="*{trangthai}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option th:value="'0'" th:text="Hiện" ></option>
-                <option th:value="'1'" th:text="Ẩn"></option>
-              </select><label class="mdb-main-label active">Trạng thái</label>
-
-            </div>
 
             <div class="col-md-3 mb-4">
               <div class="md-form md-outline">

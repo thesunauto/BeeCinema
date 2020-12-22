@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.entity.Taikhoan;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
@@ -26,9 +27,18 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
+    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
     @Autowired
     private TaikhoanService taikhoanService;
 
+    public UserController(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
+        this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
+    }
+    @GetMapping("/dashboard")
+    public String indexdashboard() {
+
+        return "admin/dashboards/dashboards";
+    }
     @GetMapping("/show-user")
     public String showUser(Model model,Authentication authentication){
         String keyword = null;
@@ -94,7 +104,10 @@ public class UserController {
                     e.printStackTrace();
                 }
             }
+            taikhoan.setTrangthai(0);
             taikhoanService.saveTaikhoan(taikhoan);
+            inMemoryUserDetailsManager.createUser(User.withDefaultPasswordEncoder().username(taikhoan.getUsername()).password(taikhoan.getMatkhau()).roles(taikhoan.getQuyen().getTen()).build());
+
             return listByPage(model,authentication, 1, "username", "asc", null, "themThanhCong");
         }
         return "admin/account/add-account";
@@ -104,6 +117,7 @@ public class UserController {
     public String updateUser(@Valid @ModelAttribute("taikhoan") Taikhoan taikhoan ,Authentication authentication,
                               BindingResult bindingResult, Model model,
                              @RequestParam("images") MultipartFile images){
+        taikhoan.setTrangthai(0);
         if(bindingResult.hasErrors()){
 
         }else{
@@ -119,6 +133,9 @@ public class UserController {
                 }
             }
             taikhoanService.saveTaikhoan(taikhoan);
+            inMemoryUserDetailsManager.deleteUser(taikhoan.getUsername());
+            inMemoryUserDetailsManager.createUser(User.withDefaultPasswordEncoder().username(taikhoan.getUsername()).password(taikhoan.getMatkhau()).roles(taikhoan.getQuyen().getTen()).build());
+
             return listByPage(model,authentication, 1, "username", "asc", null, "suaThanhCong");
         }
         return "admin/account/update-account";

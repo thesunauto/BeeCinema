@@ -65,7 +65,7 @@ public class MainController {
                 .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
         boolean hasEMPRole = authentication.getAuthorities().stream()
                 .anyMatch(r -> r.getAuthority().equals("ROLE_EMP"));
-        if(hasADMINRole){path= "redirect:/admin/user/show-user";};
+        if(hasADMINRole){path= "redirect:/admin/user/dashboard";};
         if(hasEMPRole) {path=  "redirect:/employee/chonphim";};
         if(hasUSERRole){path=  "redirect:/";};
         return path;
@@ -107,7 +107,7 @@ public class MainController {
                     return "client/UserHomePage";
                 }
                 if(authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))){
-                    return "redirect:/admin/user/show-user";
+                    return "redirect:/admin/user/dashboard";
                 }
                 if(authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_EMP"))){
                     return "redirect:/employee/chonphim";

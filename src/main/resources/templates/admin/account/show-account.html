@@ -69,7 +69,6 @@
                       <th ><a class="font-weight-bold" th:text="#{fiftiethWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{fifty-FirstWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{fifty-SecondWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{fifty-SixthWord}"></a></th>
                     </tr>
                   </thead>
                   <!-- Table head -->
@@ -95,7 +94,6 @@
                         <span th:case="*"><img id="blah" th:src="@{'/getImage/'+ ${taikhoan.hinhanh}}" alt="User Photo" class="z-depth-1 " style="height: 50px; width: 50px;" /></span>
                       </td>
                       <td th:text="${#temporals.format(taikhoan.ngaytao, 'dd-MM-yyyy HH:mm:ss')}"></td>
-                      <td th:switch="${taikhoan.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</td>
                     </tr>
                   </tbody>
                   <!-- Table body -->

@@ -37,7 +37,7 @@
            <div class="col-md-3 mb-4">
                 <div class="file-field">
                   <div class="z-depth-1-half mb-4">
-                    <img id="blah" th:src="@{'/getImage/'+ ${sukien.hinhanh}}"  class="img-fluid"  alt="Chưa có ảnh" style="height: 153px; width: 230px;"/>
+                    <img id="blah" th:src="@{'/getImage/'+ ${sukien.hinhanh}}"  class="img-fluid"  alt="Chưa có ảnh"  style="object-fit: cover;  object-position: center;  width: 100%;  height: 153px;"/>
                     <input type="hidden" th:field="*{hinhanh}" id="form36" class="form-control">
                   </div>
                   <div class="d-flex justify-content-center">

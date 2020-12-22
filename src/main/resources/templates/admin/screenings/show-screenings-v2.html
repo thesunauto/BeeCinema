@@ -150,6 +150,26 @@
             picker.set('select', date);
             $('body').ready(loadSuatChieu());
 
+            $('#idphim').change(function () {
+                var content ='';
+                var listKG = [];
+                $.ajax({
+                    url:'/api/admin/getKhungGio?idphim='+$(this).val(),
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        listKG = data;
+                        console.log(listKG.length)
+                        content+='<option value="none" disabled selected>Choose time</option>';
+                        for (var i = 0; i < listKG.length; i++) {
+                            content+='<option value="'+listKG[i].id+'">'+listKG[i].time+'</option>'
+                        }
+                        $('#idkhunggio').html(content);
+                    }
+                });
+            });
+
+
             function loadSuatChieu() {
                 console.log($input.val());
                 $.ajax({
@@ -324,6 +344,10 @@
                     }
                 })
             });
+
+
+
+
 
             $(document).on('click', '#subdelSC', function () {
                 $.ajax({
