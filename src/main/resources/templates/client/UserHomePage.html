@@ -48,21 +48,21 @@
 
                                 <div class="view overlay zoom">
                                     <img th:src="@{${(phim1.getHinhanh()==''||phim1.getHinhanh()=='null')?'/img/MOBG.jpg':('/api/employee/getResourse/'+phim1.getHinhanh())}}"
-                                         style="object-fit: cover;  object-position: center;  width: 100%;  height: 300px;"
+                                         style="object-fit: cover;  object-position: center;  width: 100%;  height: 350px;"
                                          class="img-fluid" alt="smaple image">
                                     <div class="mask rgba-black-strong py-5 text-center justify-content-center">
                                         <h6 class="amber-text "><i class="fas fa-users p-1"></i><strong
                                                 th:text=" ${phim1.dotuoi.ten}"> </strong></h6>
-                                        <h3 class="card-title white-text pt-4 pb-3 font-weight-bold text-uppercase"
+                                        <h3 class="card-title white-text pt-4 font-weight-bold text-uppercase"
                                             th:text="${phim1.ten}"></h3>
                                         <div class="row">
 
                                             <div class="col-sm p-0">
-                                              <a class="btn btn-outline-white waves-effect float-right"
+                                              <a class="btn btn-outline-white waves-effect"
                                                                           th:href="@{${'/client/detail-film/'+phim1.id}}" th:text="#{banam}"></a>
                                             </div>
                                             <div class="col-sm p-0">
-                                                <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-outline-white waves-effect float-left">Trailer</a>
+                                                <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-outline-white waves-effect ">Trailer</a>
                                             </div>
 
                                         </div>
@@ -89,11 +89,11 @@
                                             th:text="${phim12.ten}"></h3>
                                         <div class="row">
                                             <div class="col-sm p-0">
-                                                <a class="btn btn-outline-white waves-effect float-right"
+                                                <a class="btn btn-outline-white waves-effect"
                                                    th:href="@{${'/client/detail-film/'+phim12.id}}" th:text="#{banam}"></a>
                                             </div>
                                             <div class="col-sm p-0">
-                                                <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-outline-white waves-effect float-left">Trailer</a>
+                                                <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-outline-white waves-effect ">Trailer</a>
                                             </div>
                                         </div>
                                     </div>
