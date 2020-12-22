@@ -7,17 +7,17 @@
   <title>Giới thiệu</title>
 </head>
 
-<body th:style="'background-image:url(' + @{/img/neon-cinema-logos.jpg} + ');background-repeat: repeat; background-size: contain; background-position: center center;background-attachment: fixed;'">
+<body th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
 
 <main layout:fragment="content" style="padding: 0;">
   <div class="container pt-5 mt-5">
 
     <!-- Section: Blog v.2 -->
-    <section class="wow fadeIn rgba-stylish-strong" data-wow-delay="0.3s" th:style="'background-image:url(' + @{/img/frame.png} + ');background-repeat: no-repeat;  background-size: 100% 100%;'">
+    <section class="wow fadeIn rgba-stylish-strong" data-wow-delay="0.3s">
       <h2 class="text-center amber-text font-weight-bold my-3 pt-3 h1">Bee cinema team</h2>
 
       <!-- Section description -->
-      <p class="text-center mb-5 w-responsive mx-auto white-text" th:text="#{bonbon}"></p>
+      <p class="text-center mb-5 w-responsive mx-auto white-text">Bee Cinema Team được thành lập bởi năm thành viên. Mỗi thành viên có những tính cách riêng được gắn kết với nhau bằng niềm đam mê. Chúng tôi bù trừ cho nhau để lập nên một hệ thống rạp chiếu phim nhằm mang lại những giây phút trải nghiệm thư giãn nhất cho các bạn!</p>
 
       <!-- Grid row -->
       <div class="row mb-lg-4 text-center text-md-left">
@@ -27,22 +27,16 @@
 
           <div class="col-md-6 float-left">
             <div class="avatar mx-auto">
-              <img th:src="@{/img/avt/thaykhoa.jpg}" width="100%" height="240px" class="z-depth-1" alt="First sample avatar image">
+              <img th:src="@{/img/avt/thaykhoa.jpg}" width="100%" height="300px" class="z-depth-1" alt="First sample avatar image">
             </div>
           </div>
 
           <div class="col-md-6 float-right">
             <h4 class="mt-md-0 mt-4 amber-text"><strong>Nguyễn Đỗ Anh Khoa</strong></h4>
             <h6 class="font-weight-bold white-text mb-4" th:text="#{bonnam}"></h6>
-            <p class="white-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-              tenetur.</p>
+            <p class="white-text">Thầy đã tư vấn và định hướng cho team những nghiệp vụ cần thiết. Đồng thời, thầy luôn hỗ trợ và giải đáp thắc mắc cho team khi dự án gặp vấn đề.</p>
 
-            <!-- Facebook -->
-            <a class="p-2 m-2 fa-lg fb-ic"><i class="fab fa-facebook-f"> </i></a>
-            <!-- Twitter -->
-            <a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-twitter"> </i></a>
-            <!-- Dribbble -->
-            <a class="p-2 m-2 fa-lg dribbble-ic"><i class="fab fa-dribbble"> </i></a>
+
           </div>
 
         </div>
@@ -51,22 +45,14 @@
 
           <div class="col-md-6 float-left">
             <div class="avatar mx-auto">
-              <img th:src="@{/img/avt/Nhan.jpg}" width="100%" height="240px" class="z-depth-1" alt="First sample avatar image">
+              <img th:src="@{/img/avt/Nhan.jpg}" width="100%" height="300px" class="z-depth-1" alt="First sample avatar image">
             </div>
           </div>
 
           <div class="col-md-6 float-right">
             <h4 class="mt-md-0 mt-4 amber-text"><strong>Phạm Thành Nhân</strong></h4>
             <h6 class="font-weight-bold white-text mb-4" th:text="#{bonsau}"></h6>
-            <p class="white-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-              tenetur.</p>
-
-            <!-- Facebook -->
-            <a class="p-2 m-2 fa-lg fb-ic"><i class="fab fa-facebook-f"> </i></a>
-            <!-- YouTube -->
-            <a class="p-2 m-2 fa-lg yt-ic"><i class="fab fa-youtube"> </i></a>
-            <!-- Instagram -->
-            <a class="p-2 m-2 fa-lg ins-ic"><i class="fab fa-instagram"> </i></a>
+            <p class="white-text">Giữ vai trò là trưởng nhóm. Nhân đã hoàn thành layout Employee, đăng nhập, Spring Security, đặt vé, xác nhận vé, lịch sử vé tại trang Employee và trang Client.</p>
           </div>
 
         </div>
@@ -81,22 +67,17 @@
           <div class="col-md-6 float-left">
             <div class="avatar mx-auto">
 
-              <img th:src="@{/img/avt/huu.jpg}" width="100%" height="240px" class="z-depth-1" alt="First sample avatar image">
+              <img th:src="@{/img/avt/huu.jpg}" width="100%" height="300px" class="z-depth-1" alt="First sample avatar image">
             </div>
           </div>
 
           <div class="col-md-6 float-right">
             <h4 class="mt-md-0 mt-4 amber-text"><strong>Nguyễn Tín Hữu</strong></h4>
             <h6 class="font-weight-bold white-text mb-4" th:text="#{bonbay}"></h6>
-            <p class="white-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-              tenetur.</p>
+            <p class="white-text">Là thành viên của team. Hữu đã làm giao diện client, chức năng quản lý của bảng phòng, ghế, loại ghế, dãy ghế, hiển thi phim, sự kiện, liên hệ trang client và deploy trang web.
+            </p>
 
-            <!-- Facebook -->
-            <a class="p-2 m-2 fa-lg fb-ic"><i class="fab fa-facebook-f"> </i></a>
-            <!-- Twitter -->
-            <a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-twitter"> </i></a>
-            <!-- Dribbble -->
-            <a class="p-2 m-2 fa-lg dribbble-ic"><i class="fab fa-dribbble"> </i></a>
+
           </div>
 
         </div>
@@ -107,22 +88,17 @@
 
           <div class="col-md-6 float-left">
             <div class="avatar mx-auto">
-              <img th:src="@{/img/avt/Chau.jpg}" width="100%" height="240px" class="z-depth-1" alt="First sample avatar image">
+              <img th:src="@{/img/avt/Chau.jpg}" width="100%" height="300px" class="z-depth-1" alt="First sample avatar image">
             </div>
           </div>
 
           <div class="col-md-6 float-right">
             <h4 class="mt-md-0 mt-4 amber-text"><strong>Nguyễn Đình Châu</strong></h4>
             <h6 class="font-weight-bold white-text mb-4" th:text="#{bonbay}"></h6>
-            <p class="white-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-              tenetur.</p>
+            <p class="white-text">Với vai trò là thành viên của team. Châu đã đảm nhiệm giao diện Admin, chức năng quản lý của bảng suất chiếu và khung giờ, phân trang tìm kiếm trang admin, cập nhật thông tin trang admin và chức năng đăng ký trang client.
+            </p>
 
-            <!-- Facebook -->
-            <a class="p-2 m-2 fa-lg fb-ic"><i class="fab fa-facebook-f"> </i></a>
-            <!-- YouTube -->
-            <a class="p-2 m-2 fa-lg yt-ic"><i class="fab fa-youtube"> </i></a>
-            <!-- Instagram -->
-            <a class="p-2 m-2 fa-lg ins-ic"><i class="fab fa-instagram"> </i></a>
+
           </div>
 
         </div>
@@ -139,22 +115,15 @@
 
           <div class="col-md-6 float-left">
             <div class="avatar mx-auto">
-              <img th:src="@{/img/avt/ngan.jpg}" width="100%" height="240px" class="z-depth-1" alt="Fourth sample avatar image">
+              <img th:src="@{/img/avt/ngan.jpg}" width="100%" height="300px" class="z-depth-1" alt="Fourth sample avatar image">
             </div>
           </div>
 
           <div class="col-md-6 float-right">
             <h4 class="mt-md-0 mt-4 amber-text"><strong>Đặng Thị Kim Ngân</strong></h4>
             <h6 class="font-weight-bold white-text mb-4" th:text="#{bonbay}"></h6>
-            <p class="white-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-              tenetur.</p>
-
-            <!-- Facebook -->
-            <a class="p-2 m-2 fa-lg fb-ic"><i class="fab fa-facebook-f"> </i></a>
-            <!-- Twitter -->
-            <a class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-twitter"> </i></a>
-            <!-- GitHub -->
-            <a class="p-2 m-2 fa-lg git-ic"><i class="fab fa-github"> </i></a>
+            <p class="white-text"> Ngân đã làm giao diện employee, chức năng quản của bảng loại phim, độ tuổi, ngôn ngữ, đa ngôn ngữ trang admin, định dạng dữ liệu table trang admin và thông báo trang admin.
+            </p>
           </div>
 
         </div>
@@ -164,22 +133,17 @@
         <div class="col-lg-6 col-md-12">
           <div class="col-md-6 float-left">
             <div class="avatar mx-auto">
-              <img th:src="@{/img/avt/HoangAnh.jpg}" width="100%" height="240px" class="z-depth-1" alt="First sample avatar image">
+              <img th:src="@{/img/avt/HoangAnh.jpg}" width="100%" height="300px" class="z-depth-1" alt="First sample avatar image">
             </div>
           </div>
 
           <div class="col-md-6 float-right">
             <h4 class="mt-md-0 mt-4 amber-text"><strong>Phạm Nguyễn Hoàng Anh</strong></h4>
             <h6 class="font-weight-bold white-text mb-4" th:text="#{bonbay}"></h6>
-            <p class="white-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
-              tenetur.</p>
+            <p class="white-text">Hoàng anh là thành viên cuối của team. Anh đã hoàn thành giao diện admin, chức năng quản lý của bảng tài khoản, phim, sự kiện; cập nhật thông tin trang employee, phân trang tìm kiếm trang admin, đa ngôn ngữ và quên mật khẩu trang client.
+            </p>
 
-            <!-- Google + -->
-            <a class="p-2 m-2 fa-lg gplus-ic"><i class="fab fa-google-plus-g"> </i></a>
-            <!-- LinkedIn -->
-            <a class="p-2 m-2 fa-lg li-ic"><i class="fab fa-linkedin-in"> </i></a>
-            <!-- Email -->
-            <a class="p-2 m-2 fa-lg email-ic"><i class="fas fa-envelope"> </i></a>
+
           </div>
 
         </div>
