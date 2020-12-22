@@ -13,6 +13,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.11.2/css/all.css}">
     <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link th:href="@{/css/mdb.min.css}" rel="stylesheet">
@@ -44,6 +45,7 @@
 </head>
 
 <body th:class="${#httpServletRequest.requestURI=='/'}?'about-page'">
+<div id="loading" style="width: 100%;"></div>
 <!-- Main Navigation -->
 <header th:style="${#httpServletRequest.requestURI!='/'}?'width:0;'">
 

@@ -56,7 +56,7 @@
                         </div>
                         <div class="row">
                             <div class="col-10 rgba-white-strong p-2 d-flex justify-content-center rounded">
-                                <img th:src="@{/img/giaithich.png}" alt="">
+                                <img th:src="@{/img/giaithich.png}" alt="" style="width: 100%;">
                             </div>
                             <div class="col-2">
                                 <button id="btnthanhtoan" class="float-right btn purple-gradient" data-toggle="modal"
@@ -109,7 +109,7 @@
 
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
-                        <button id="submitdatve" class="btn btn-unique" th:text="#{chinsau}">  <i class="fas fa-paper-plane-o ml-1"></i></button>
+                        <button id="submitdatve" class="btn btn-default" th:text="#{chinsau}">  <i class="fas fa-paper-plane-o ml-1"></i></button>
                     </div>
                 </div>
             </div>
@@ -227,7 +227,7 @@
                         });
                     },
                     error: function () {
-                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+
                     }
                 });
             }
@@ -380,7 +380,8 @@
                 idSuatChieu = $(this).val();
                 loadGhe();
             });
-            $('#btnthanhtoan').click(function () {
+
+            $(document).on('click','#btnthanhtoan',function () {
 
                 $('#thanhtoanSukien').val('noevent');
                 idSukien = 'noevent';
@@ -433,13 +434,18 @@
                 loadTongCong(idSukien);
             });
 
-            $('#submitdatve').click(function () {
+            var content = '';
+            $(document).on('click','#submitdatve',function () {
                 $.ajax({
                     url: '/api/employee/saveTicket?idsukien=' + idSukien,
                     type: 'POST',
                     dataType: 'JSON',
                     contentType: 'application/json',
                     processData: false,
+                    beforeSend: function (){
+                        $('#modalContactForm').modal('hide');
+                        $('#loading').html('<div class="parent-p"><div class="spinner"></div></div>');
+                    },
                     success: function (data) {
                         var nbo = data;
                         if(nbo.minScrollbarLength!=0){
@@ -451,12 +457,18 @@
 
                         }else {
                             toastr.error('Xuất vé thất bại', '', {positionClass: 'md-toast-top-right'});
+
                         }
                     },
                     complete: function () {
-                        $('#modalContactForm').modal('toggle');
+                        $('#loading').html('');
+                        $('#modalContactForm').modal('hide');
                         listGhefocus = [];
                         loadGhe();
+                        $.ajax({
+                            url: '/api/employee/clearsession',
+                            type: 'GET'
+                        });
                     }
                 });
             });

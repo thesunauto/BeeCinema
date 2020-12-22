@@ -192,11 +192,11 @@
                 idSuatChieu = $(this).val();
                 loadGhe();
             });
+            var suatchieu = {};
             $('#btnthanhtoan').click(function () {
 
                 $('#thanhtoanSukien').val('noevent');
                 idSukien = 'noevent';
-                var suatchieu = {};
                 var gheChoosen = [];
                 $.ajax({
                     url: '/api/datve/getSuatChieu/' + idSuatChieu,
@@ -244,7 +244,9 @@
                 idSukien = $(this).val();
                 loadTongCong(idSukien);
             });
-            $('#submitdatve').click(function () {
+
+
+            $(document).on('click','#submitdatve',function () {
                 $.ajax({
                     url: '/api/datve/saveTicket?idsukien=' + idSukien,
                     type: 'POST',
@@ -252,26 +254,15 @@
                     contentType: 'application/json',
                     processData: false,
                     beforeSend: function(){
-                        $('#acction').html('<div class="d-flex justify-content-center align-items-center preloader-wrapper big active">\n' +
-                            '  <div class="spinner-layer spinner-red-only">\n' +
-                            '    <div class="circle-clipper left">\n' +
-                            '      <div class="circle"></div>\n' +
-                            '    </div>\n' +
-                            '    <div class="gap-patch">\n' +
-                            '      <div class="circle"></div>\n' +
-                            '    </div>\n' +
-                            '    <div class="circle-clipper right">\n' +
-                            '      <div class="circle"></div>\n' +
-                            '    </div>\n' +
-                            '  </div>\n' +
-                            '</div>');
+                        $('#modalContactForm').modal('hide');
+                        $('#loading').html('<div class="parent-p"><div class="spinner"></div></div>');
                     },
                     success: function (data) {
                         var bo = data;
                         if (bo) {
                             Swal.fire({
                                 title: 'Đặt vé thành công!',
-                                text: 'Quý khách phải đến trước HH:mm để nhận vé nếu qua khoảng thời gian này vé đặt online sẽ mất hiệu lực',
+                                text: 'Quý khách phải đến trước '+suatchieu.ngaychieu+' để nhận vé nếu qua khoảng thời gian này vé đặt online sẽ mất hiệu lực.',
                                 icon: 'success',
                                 confirmButtonText: 'OK'
                             })
@@ -280,12 +271,15 @@
                         }
                     },
                     complete: function () {
-                        $('#acction').html(' <button id="submitdatve" class="btn btn-unique">Xác nhận <i\n' +
-                            '                                class="fas fa-paper-plane-o ml-1"></i></button>\n' +
-                            '                  ');
-                        $('#modalContactForm').modal('close');
+                        $('#loading').html('');
+                        $('#modalContactForm').modal('hide');
                         listGhefocus = [];
+                        $.ajax({
+                            url: '/api/datve/clearsession',
+                            type: 'GET'
+                        });
                         loadGhe();
+
                     }
                 });
             });
@@ -294,10 +288,7 @@
                     url: '/api/datve/clearsession',
                     type: 'GET'
                 });
-                $.ajax({
-                    url: '/api/datve/close',
-                    type: 'GET'
-                });
+
                 listGhefocus = [];
                 idSuatChieu = -1;
                 loadGhe();
@@ -434,7 +425,7 @@
                         });
                     },
                     error: function () {
-                        toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                        console.log('load Stt fail');
                     }
                 });
             };

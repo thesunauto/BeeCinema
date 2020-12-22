@@ -218,104 +218,7 @@
                             </button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Thêm dãy</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form th:action="@{/admin/seat/addDayghe}" id="addDayghe" method="post">
-                                            <input type="hidden" name="currentlink"
-                                                   th:value="${#request.getRequestURI()+'?sortField=id&sortDir=asc&keyword='+keyword}">
-                                            <input type="hidden" name="idphong" th:value="${keyword}">
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <select class="mdb-select md-form"
-                                                                searchable="Search here.." id="iddayghe"
-                                                                name="iddayghe" required>
-                                                            <option th:each="df : ${@dayGheServiceImpl.getAllDayGhe()}"
-                                                                    th:value="${df.getId()}"
-                                                                    th:text="${df.getTen()}"
-                                                                    th:if="${!@dayGheServiceImpl.findDayGheByPhong(keyword).contains(df)}"></option>
-                                                        </select><label class="mdb-main-label active">Dãy</label>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="md-form md-outline">
-                                                            <i class="fas fa-chair prefix"></i>
-                                                            <input type="number" id="soghe" value="10"
-                                                                   placeholder="Phút Hủy Online" class="form-control"
-                                                                   name="soghe">
-                                                            <label for="soghe" class="active">Số ghế</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <select id="loaighe"
-                                                                class="mdb-select md-form colorful-select dropdown-primary initialized"
-                                                                name="loaighe">
-                                                            <option th:each="lg : ${@loaiGheServiceImpl.getAllLoaiGhe()}"
-                                                                    th:value="${lg.getId()}"
-                                                                    th:text="${lg.getTen()}"></option>
-                                                        </select><label class="mdb-main-label active">Loại ghế</label>
-                                                    </div>
-                                                </div>
 
-
-                                            </div>
-                                            <div id="actionModal" class="modal-footer">
-                                                <button type="submit" class="btn btn-default">Thêm</button>
-                                            </div>
-                                        </form>
-                                        <input type="hidden" id="idsuatchieucurrent">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel2">Thêm dãy</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form th:action="@{/admin/seat/delDayghe}" id="addDayghe1" method="post">
-                                            <input type="hidden" name="currentlink"
-                                                   th:value="${#request.getRequestURI()+'?sortField=id&sortDir=asc&keyword='+keyword}">
-                                            <input type="hidden" name="idphong" th:value="${keyword}">
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <select class="mdb-select md-form"
-                                                                searchable="Search here.." id="iddayghe2"
-                                                                name="iddayghe" required>
-                                                            <option th:each="df : ${@dayGheServiceImpl.getAllDayGhe()}"
-                                                                    th:value="${df.getId()}"
-                                                                    th:text="${df.getTen()}"
-                                                                    th:if="${@dayGheServiceImpl.findDayGheByPhong(keyword).contains(df)}"></option>
-                                                        </select><label class="mdb-main-label active">Dãy</label>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div id="actionModal1" class="modal-footer">
-                                                <button type="submit" class="btn btn-default">Xóa</button>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
@@ -342,6 +245,104 @@
             </div>
 
         </section>
+        <section><div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm dãy</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form th:action="@{/admin/seat/addDayghe}" id="addDayghe" method="post">
+                        <input type="hidden" name="currentlink"
+                               th:value="${#request.getRequestURI()+'?sortField=id&sortDir=asc&keyword='+keyword}">
+                        <input type="hidden" name="idphong" th:value="${keyword}">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="mdb-select md-form"
+                                            searchable="Search here.." id="iddayghe"
+                                            name="iddayghe" required>
+                                        <option th:each="df : ${@dayGheServiceImpl.getAllDayGhe()}"
+                                                th:value="${df.getId()}"
+                                                th:text="${df.getTen()}"
+                                                th:if="${!@dayGheServiceImpl.findDayGheByPhong(keyword).contains(df)}"></option>
+                                    </select><label class="mdb-main-label active">Dãy</label>
+                                </div>
+                                <div class="col-6">
+                                    <div class="md-form md-outline">
+                                        <i class="fas fa-chair prefix"></i>
+                                        <input type="number" id="soghe" value="10"
+                                               placeholder="Phút Hủy Online" class="form-control"
+                                               name="soghe">
+                                        <label for="soghe" class="active">Số ghế</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <select id="loaighe"
+                                            class="mdb-select md-form colorful-select dropdown-primary initialized"
+                                            name="loaighe">
+                                        <option th:each="lg : ${@loaiGheServiceImpl.getAllLoaiGhe()}"
+                                                th:value="${lg.getId()}"
+                                                th:text="${lg.getTen()}"></option>
+                                    </select><label class="mdb-main-label active">Loại ghế</label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div id="actionModal" class="modal-footer">
+                            <button type="submit" class="btn btn-default">Thêm</button>
+                        </div>
+                    </form>
+                    <input type="hidden" id="idsuatchieucurrent">
+                </div>
+            </div>
+        </div>
+            <div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel2">Thêm dãy</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{/admin/seat/delDayghe}" id="addDayghe1" method="post">
+                            <input type="hidden" name="currentlink"
+                                   th:value="${#request.getRequestURI()+'?sortField=id&sortDir=asc&keyword='+keyword}">
+                            <input type="hidden" name="idphong" th:value="${keyword}">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <select class="mdb-select md-form"
+                                                searchable="Search here.." id="iddayghe2"
+                                                name="iddayghe" required>
+                                            <option th:each="df : ${@dayGheServiceImpl.getAllDayGhe()}"
+                                                    th:value="${df.getId()}"
+                                                    th:text="${df.getTen()}"
+                                                    th:if="${@dayGheServiceImpl.findDayGheByPhong(keyword).contains(df)}"></option>
+                                        </select><label class="mdb-main-label active">Dãy</label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div id="actionModal1" class="modal-footer">
+                                <button type="submit" class="btn btn-default">Xóa</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div></section>
     </div>
 </main>
 <!-- Main layout -->

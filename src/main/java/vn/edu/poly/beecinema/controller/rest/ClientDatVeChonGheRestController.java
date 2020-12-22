@@ -222,6 +222,7 @@ public class ClientDatVeChonGheRestController {
         return ResponseEntity.ok().body(SuatChieuResponse.builder()
                 .id(suatchieu.getId())
                 .idphim(suatchieu.getPhim().getTen())
+                .ngaychieu(suatchieu.getKhunggio().getBatdau().minusMinutes(suatchieu.getPhuthuyonline()).format(dateTimeFormatter)+" | "+ suatchieu.getNgaychieu().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .batdau(suatchieu.getKhunggio().getBatdau().format(dateTimeFormatter))
                 .ketthuc(suatchieu.getKhunggio().getKetthuc().format(dateTimeFormatter))
                 .dongia(Double.valueOf(suatchieu.getDongia()))

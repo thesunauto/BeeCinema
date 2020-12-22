@@ -100,24 +100,28 @@
                                 </select><label class="mdb-main-label active">Phim</label>
                                 <div class="md-form md-outline">
                                     <i class="fas fa-money-bill prefix"></i>
-                                    <input type="number" name="dongia" placeholder="Đơn Giá" id="form31232" class="form-control" min="0"
-                                          value="50000" step="5000">
+                                    <input type="number" name="dongia" placeholder="Đơn Giá" id="form31232"
+                                           class="form-control" min="0"
+                                           value="50000" step="5000">
                                     <label for="form31232" class="active">Đơn Giá</label>
                                 </div>
                                 <div class="md-form md-outline">
                                     <i class="fas fa-money-bill prefix"></i>
-                                    <input type="number" id="form33" value="10" placeholder="Phút Hủy Online" class="form-control" name="phuthuyonline">
+                                    <input type="number" id="form33" value="10" placeholder="Phút Hủy Online"
+                                           class="form-control" name="phuthuyonline">
                                     <label for="form33" class="active">Phút Hủy Online</label>
                                 </div>
 
-                                <select id="idkhunggio" class="mdb-select md-form" searchable="Search here.." name="idkhunggio">
+                                <select id="idkhunggio" class="mdb-select md-form" searchable="Search here.."
+                                        name="idkhunggio">
                                     <option value="none" disabled selected>Choose time</option>
                                     <option th:each="khunggio : ${@khungGioServiceImpl.getAllKhungGio()}"
                                             th:value="${khunggio.id}"
                                             th:text="${khunggio.getId()} +' | '+${khunggio.batdau} + ' - ' + ${khunggio.ketthuc}"></option>
                                     <label class="mdb-main-label active">Khung Giờ</label>
                                 </select><label class="mdb-main-label active">Khung giờ</label>
-                                <select id="tthai" class="mdb-select md-form colorful-select dropdown-primary initialized"
+                                <select id="tthai"
+                                        class="mdb-select md-form colorful-select dropdown-primary initialized"
                                         name="trangthai">
                                     <option th:value="'0'" th:text="Hiện"></option>
                                     <option th:value="'1'" th:text="Ẩn"></option>
@@ -142,6 +146,7 @@
             let picker = $input.pickadate('picker');
             let date = new Date();
             var listSC = [];
+            var content = '';
             picker.set('select', date);
             $('body').ready(loadSuatChieu());
 
@@ -151,6 +156,21 @@
                     url: '/api/admin/listSuatChieu?date=' + $input.val(),
                     type: 'POST',
                     dataType: 'JSON',
+                    beforeSend: function () {
+                        $('#dataSC').html('<div class="d-flex justify-content-center align-items-center preloader-wrapper big active">\n' +
+                            '  <div class="spinner-layer spinner-red-only">\n' +
+                            '    <div class="circle-clipper left">\n' +
+                            '      <div class="circle"></div>\n' +
+                            '    </div>\n' +
+                            '    <div class="gap-patch">\n' +
+                            '      <div class="circle"></div>\n' +
+                            '    </div>\n' +
+                            '    <div class="circle-clipper right">\n' +
+                            '      <div class="circle"></div>\n' +
+                            '    </div>\n' +
+                            '  </div>\n' +
+                            '</div>');
+                    },
                     success: function (data) {
                         listSC = data;
                     },
@@ -167,7 +187,7 @@
                         '                        <div class="col-6 text-right my-auto p-0">' + listSC[i].ten + '</div><div class="col-6 p-0"><option value="' + listSC[i].id + '" class="btn-floating btn-sm btn-secondary d-flex align-items-center justify-content-center addSC"  data-toggle="modal" data-target="#basicExampleModal">+</option></div>'
                     for (var ii = 0; ii < listSC[i].suatChieuResponses.length; ii++) {
                         container += '                        <div class="col-2 d-flex justify-content-center">\n' +
-                            '                            <option data-toggle="modal" data-target="#basicExampleModal" value="'+listSC[i].suatChieuResponses[ii].id+'" class="btn btn-warning btn-sm editSC">' + listSC[i].suatChieuResponses[ii].batdau + '-' + listSC[i].suatChieuResponses[ii].ketthuc + '</option>\n' +
+                            '                            <option data-toggle="modal" data-target="#basicExampleModal" value="' + listSC[i].suatChieuResponses[ii].id + '" class="btn btn-warning btn-sm editSC">' + listSC[i].suatChieuResponses[ii].batdau + '-' + listSC[i].suatChieuResponses[ii].ketthuc + '</option>\n' +
                             '                        </div>\n'
                     }
                     container += '</div>'
@@ -203,7 +223,7 @@
                 return o;
             };
 
-            $(document).on('click','#subaddSC',function () {
+            $(document).on('click', '#subaddSC', function () {
                 var dataform = $('#addSC').serializeObject();
                 console.log(dataform);
                 $.ajax({
@@ -213,46 +233,34 @@
                     dataType: 'JSON',
                     processData: false,
                     contentType: "application/json; charset=utf-8",
-                    beforeSend:function () {
-                        $('#actionModal').html('<div class="d-flex justify-content-center align-items-center preloader-wrapper big active">\n' +
-                            '  <div class="spinner-layer spinner-red-only">\n' +
-                            '    <div class="circle-clipper left">\n' +
-                            '      <div class="circle"></div>\n' +
-                            '    </div>\n' +
-                            '    <div class="gap-patch">\n' +
-                            '      <div class="circle"></div>\n' +
-                            '    </div>\n' +
-                            '    <div class="circle-clipper right">\n' +
-                            '      <div class="circle"></div>\n' +
-                            '    </div>\n' +
-                            '  </div>\n' +
-                            '</div>');
+                    beforeSend: function () {
+                        $('#basicExampleModal').modal('hide');
+                        $('#loading').html('<div class="parent-p"><div class="spinner"></div></div>');
                     },
                     success: function (chk) {
                         var bo = chk;
                         console.log(bo);
-                        if(bo){
+                        if (bo) {
                             toastr.success('Thêm thành công', '', {positionClass: 'md-toast-top-right'});
-                        }else {
+                        } else {
                             toastr.error('Thêm thất bại', '', {positionClass: 'md-toast-top-right'});
                         }
 
                         loadSuatChieu();
-                       clearModal();
+                        clearModal();
                     },
-                    error:function () {
+                    error: function () {
                         toastr.error('Thêm thất bại', '', {positionClass: 'md-toast-top-right'});
                         loadSuatChieu();
-                       clearModal();
+                        clearModal();
                     },
                     complete: function () {
-                        $('#actionModal').html(' <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>\n' +
-                            '                                <button type="button" id="subaddSC" data-dismiss="modal" class="btn btn-primary">Thêm</button>')
+                        $('#loading').html('');
                     }
                 })
             });
 
-            function clearModal(){
+            function clearModal() {
                 $("#idphim").val('none');
                 $('#form31232').val(50000);
                 $('#form33').val(10);
@@ -260,11 +268,11 @@
                 $('#tthai').val('0');
             }
 
-            $(document).on('click','option.editSC',function () {
+            $(document).on('click', 'option.editSC', function () {
                 console.log($(this).val());
-                for(var i = 0;i<listSC.length;i++){
-                    for(var ii = 0;ii<listSC[i].suatChieuResponses.length;ii++){
-                        if(listSC[i].suatChieuResponses[ii].id == $(this).val()){
+                for (var i = 0; i < listSC.length; i++) {
+                    for (var ii = 0; ii < listSC[i].suatChieuResponses.length; ii++) {
+                        if (listSC[i].suatChieuResponses[ii].id == $(this).val()) {
                             $('#idsuatchieucurrent').val($(this).val());
                             $('#idphong').val(listSC[i].suatChieuResponses[ii].idphong);
                             $('#ngaychieu').val(listSC[i].suatChieuResponses[ii].ngaychieu);
@@ -281,48 +289,60 @@
                 }
             });
 
-            $(document).on('click','#subeditSC',function () {
+            $(document).on('click', '#subeditSC', function () {
                 var dataform = $('#addSC').serializeObject();
                 console.log(dataform);
                 $.ajax({
-                    url: '/api/admin/editSC?idsuatchieu='+$('#idsuatchieucurrent').val(),
+                    url: '/api/admin/editSC?idsuatchieu=' + $('#idsuatchieucurrent').val(),
                     type: 'POST',
                     data: JSON.stringify(dataform),
                     dataType: 'JSON',
                     processData: false,
                     contentType: "application/json; charset=utf-8",
+                    beforeSend: function () {
+                        $('#basicExampleModal').modal('hide');
+                        $('#loading').html('<div class="parent-p"><div class="spinner"></div></div>');
+                    },
                     success: function (chk) {
                         var bo = chk;
                         console.log(bo);
-                        if(bo){
+                        if (bo) {
                             toastr.success('Sửa thành công', '', {positionClass: 'md-toast-top-right'});
-                        }else {
+                        } else {
                             toastr.error('Sửa thất bại suất chiếu đã có vé hoặc đã xãy ra xung đột', '', {positionClass: 'md-toast-top-right'});
                         }
 
                         loadSuatChieu();
-                       clearModal();
+                        clearModal();
                     },
-                    error:function () {
+                    error: function () {
                         toastr.error('Sửa thất bại', '', {positionClass: 'md-toast-top-right'});
                         loadSuatChieu();
-                       clearModal();
+                        clearModal();
+                    },complete: function () {
+                        $('#loading').html('');
                     }
                 })
             });
 
-            $(document).on('click','#subdelSC',function () {
+            $(document).on('click', '#subdelSC', function () {
                 $.ajax({
-                    url:'/api/admin/delSC?idsuatchieu='+$('#idsuatchieucurrent').val(),
-                    type:'POST',
+                    url: '/api/admin/delSC?idsuatchieu=' + $('#idsuatchieucurrent').val(),
+                    type: 'POST',
+                    beforeSend: function (){
+                        $('#basicExampleModal').modal('hide');
+                        $('#loading').html('<div class="parent-p"><div class="spinner"></div></div>');
+                    },
                     success: function () {
                         toastr.success('Xóa thành công', '', {positionClass: 'md-toast-top-right'});
                         loadSuatChieu();
-                       clearModal();
+                        clearModal();
                     },
                     error: function () {
                         toastr.error('Xóa thất bại suất này đã có vé', '', {positionClass: 'md-toast-top-right'});
-                       clearModal();
+                        clearModal();
+                    },complete: function () {
+                        $('#loading').html('');
                     }
                 })
             });

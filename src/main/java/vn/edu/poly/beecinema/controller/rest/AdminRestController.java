@@ -135,11 +135,13 @@ public class AdminRestController {
                 List<Suatchieu> suatchieus = suatChieuService.findAllByNgayChieuAndPhong(suatChieu.getNgaychieu(),suatChieu.getPhong());
                 Khunggio kh = khungGioService.findKhungGioById(suatChieuResponse.getIdkhunggio()).get();
                 for (Suatchieu sc1 : suatchieus) {
-                    if (sc1.getPhong().getId().equals(suatChieuResponse.getIdphong())) {
-                        if (!(kh.getKetthuc().compareTo(sc1.getKhunggio().getBatdau()) <= 0
-                                || kh.getBatdau().compareTo(sc1.getKhunggio().getKetthuc()) >= 0)
-                        ) {
-                            return ResponseEntity.ok().body(false);
+                    if(!suatChieu.getId().equals(sc1.getId())){
+                        if (sc1.getPhong().getId().equals(suatChieuResponse.getIdphong())) {
+                            if (!(kh.getKetthuc().compareTo(sc1.getKhunggio().getBatdau()) <= 0
+                                    || kh.getBatdau().compareTo(sc1.getKhunggio().getKetthuc()) >= 0)
+                            ) {
+                                return ResponseEntity.ok().body(false);
+                            }
                         }
                     }
 
