@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import vn.edu.poly.beecinema.entity.*;
 
 import java.time.LocalDate;
@@ -34,5 +35,8 @@ public interface VeRepository extends JpaRepository<Ve, String>, JpaSpecificatio
             "and\ts.idphim = p.id\n" +
             "and v.ngaytao BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW() and v.trangthai = 0", nativeQuery = true)
     public Long countDoanhThuTheoThang();
+
+    @Query(value = "select p.ten, count(v.idghe) from ve v, Suatchieu sc, phim p where v.idsuatchieu = sc.id and sc.idphim = p.id and v.ngaytao between :startdate and :enddate and v.trangthai = 0 group by p.ten", nativeQuery = true)
+    public List<Object[]> listTopPhim(@Param("startdate") String startdate, @Param("enddate") String enddate);
 
 }

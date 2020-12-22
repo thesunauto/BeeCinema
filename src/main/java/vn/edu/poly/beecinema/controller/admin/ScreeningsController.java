@@ -16,6 +16,7 @@ import vn.edu.poly.beecinema.service.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,7 +88,7 @@ public class ScreeningsController {
             suatChieu.setPhim(phimService.findPhimById(suatChieu.getPhim().getId()).get());
             suatChieu.setPhong(phongService.findPhongById(suatChieu.getPhong().getId()).get());
             suatChieu.setKhunggio(khungGioService.findKhungGioById(suatChieu.getKhunggio().getId()).get());
-            suatChieu.setNgaytao(LocalDate.now());
+            suatChieu.setNgaytao(LocalDateTime.now());
             suatChieu.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
 
 

@@ -30,4 +30,6 @@ public interface TaikhoanRepository extends PagingAndSortingRepository<Taikhoan,
 
     Taikhoan findTaikhoanByUsernameAndEmail(String username, String email);
 
+    List<Taikhoan> findByQuyenId(String idquyen);
+
 }

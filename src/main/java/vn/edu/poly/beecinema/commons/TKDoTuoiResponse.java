@@ -9,8 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TKVeByPhim {
-    String tenphim;
-    String soluongve;
-    String tongtien;
+public class TKDoTuoiResponse {
+    String tendotuoi;
+    Integer soluongve;
+    Float tongtien;
+    String iddotuoi;
+
+
 }

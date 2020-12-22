@@ -96,5 +96,10 @@ public class TaikhoanServiceimpl implements TaikhoanService {
         return taikhoanRepository.findTaikhoanByUsernameAndEmail(username, email);
     }
 
+    @Override
+    public List<Taikhoan> getAllTaikhoanByQuyen() {
+        return (List<Taikhoan>) taikhoanRepository.findByQuyenId("3");
+    }
+
 
 }

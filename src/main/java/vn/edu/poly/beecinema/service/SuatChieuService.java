@@ -29,4 +29,6 @@ public interface SuatChieuService {
     Page<Suatchieu> listAll(int pageNumber, String sortField, String sortDir, String keyword);
 
     List<Suatchieu> findAllByPhimAndDate(String idPhim,LocalDate ngayChieu);
+
+
 }
