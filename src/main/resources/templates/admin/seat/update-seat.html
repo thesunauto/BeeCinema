@@ -12,7 +12,7 @@
   <!-- Main layout -->
   <main layout:fragment="content">
     <form th:action="@{/admin/seat/update-seat/}" th:object="${seat}" method="post">
-      <input type="text" th:field="*{id}" readonly>
+<!--      <input type="text" th:field="*{id}" readonly>-->
       <div class="container-fluid">
         <!-- Section: Inputs -->
         <section >
@@ -95,10 +95,10 @@
 
                 <!-- Grid row -->
 
-                <div class="row">
+                <div class="row col-10 m-auto" >
 
                   <!-- Grid column -->
-                  <div class="col-md-3 mb-4">
+                  <div class="col-md-4 mb-4">
                     <div class="md-form md-outline">
                       <i class="fas fa-user-plus prefix"></i>
                       <input type="text" th:field="*{taikhoan.username}" id="form31" class="form-control" readonly>
@@ -109,7 +109,7 @@
                   <!-- Grid column -->
 
                   <!-- Grid column -->
-                  <div class="col-md-3 mb-4">
+                  <div class="col-md-4 mb-4">
                     <div class="md-form md-outline">
                       <i class="fas fa-calendar-plus prefix"></i>
                       <input type="datetime-local" th:field="*{ngaytao}" id="form31" class="form-control" readonly>
@@ -120,25 +120,25 @@
                   <!-- Grid column -->
 
                   <!-- Grid column -->
-                  <div class="col-md-3 mb-4">
-                    <div class="md-form md-outline">
-                      <i class="fas fa-user-edit prefix"></i>
-                      <input type="text" id="form31" class="form-control" readonly>
-                      <label for="form31" class="active">Người Sửa</label>
-                    </div>
+<!--                  <div class="col-md-3 mb-4">-->
+<!--                    <div class="md-form md-outline">-->
+<!--                      <i class="fas fa-user-edit prefix"></i>-->
+<!--                      <input type="text" id="form31" class="form-control" readonly>-->
+<!--                      <label for="form31" class="active">Người Sửa</label>-->
+<!--                    </div>-->
 
-                  </div>
-                  <!-- Grid column -->
+<!--                  </div>-->
+<!--                  &lt;!&ndash; Grid column &ndash;&gt;-->
 
-                  <!-- Grid column -->
-                  <div class="col-md-3 mb-4">
-                    <div class="md-form md-outline">
-                      <i class="fas fa-calendar-alt prefix"></i>
-                      <input type="date" id="form31" class="form-control" readonly>
-                      <label for="form31" class="active">Ngày Sửa</label>
-                    </div>
+<!--                  &lt;!&ndash; Grid column &ndash;&gt;-->
+<!--                  <div class="col-md-3 mb-4">-->
+<!--                    <div class="md-form md-outline">-->
+<!--                      <i class="fas fa-calendar-alt prefix"></i>-->
+<!--                      <input type="date" id="form31" class="form-control" readonly>-->
+<!--                      <label for="form31" class="active">Ngày Sửa</label>-->
+<!--                    </div>-->
 
-                  </div>
+<!--                  </div>-->
                   <!-- Grid column -->
 
                 </div>

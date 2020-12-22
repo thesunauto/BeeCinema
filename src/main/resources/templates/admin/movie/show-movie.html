@@ -80,9 +80,6 @@
                         <a class="font-weight-bold" th:href="@{'/admin/movie/page/' + ${currentPage} + '?sortField=ngayketthuc&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{sixty-EighthWord}" ><i class="fas fa-sort ml-1"></i></a>
                       </th>
                       <th ><a class="font-weight-bold" th:text="#{sixty-NinthWord}" ></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{seventiethWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{seventy-FirstWord }"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{seventy-SecondWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{seventy-ThirdWord}"></a></th>
                     </tr>
                   </thead>
@@ -110,9 +107,6 @@
                       <td th:text="${#temporals.format(phim2.ngaybatdau, 'dd-MM-yyyy | HH:mm:ss')}"></td>
                       <td th:text="${#temporals.format(phim2.ngayketthuc, 'dd-MM-yyyy | HH:mm:ss')}"></td>
                       <td th:text="${phim2.taikhoan.ten}"></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
                       <td th:switch="${phim2.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
                     </tr>
                   </tbody>

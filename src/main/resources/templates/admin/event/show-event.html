@@ -66,8 +66,6 @@
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-nineWord}"></a></th>
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-tenWord}"></a></th>
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-elevenWord}"></a></th>
-                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twelveWord}"></a></th>
-                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-thirteenWord}"></a></th>
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-fourteenWord}"> </a></th>
                   </tr>
                 </thead>
@@ -90,8 +88,6 @@
                     <td th:text="${sukien.taikhoan.ten}"></td>
                     <td th:text="${#temporals.format(sukien.ngaybatdau, 'dd-MM-yyyy | HH:mm:ss')}"></td>
                     <td th:text="${#temporals.format(sukien.ngayketthuc, 'dd-MM-yyyy | HH:mm:ss')}"></td>
-                    <td>empty</td>
-                    <td>empty</td>
                     <td th:switch="${sukien.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
                   </tr>
                 </tbody>

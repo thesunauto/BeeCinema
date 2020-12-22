@@ -80,10 +80,8 @@
                       <td th:text="${dotuoi.id}"></td>
                       <td th:text="${dotuoi.ten}"></td>
                       <td th:text="${dotuoi.mota}"></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td th:text="${dotuoi.taikhoan.ten}"></td>
+                      <td th:text="${dotuoi.ngaytao}"></td>
                       <td th:switch="${dotuoi.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
                     </tr>
                   </tbody>

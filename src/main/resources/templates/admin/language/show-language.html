@@ -64,8 +64,6 @@
                       <th ><a class="font-weight-bold" th:text="#{eighty-SeventhWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{eighty-EighthWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{eighty-NinthWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{ninetiethWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{ninety-FirstWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{ninety-SecondWord}"></a></th>
                     </tr>
                   </thead>
@@ -82,8 +80,6 @@
                       <td th:text="${ngonngu.mota}"></td>
                       <td th:text="${ngonngu.taikhoan.ten}"></td>
                       <td th:text="${#temporals.format(ngonngu.ngaytao, 'dd-MM-yyyy | HH:mm:ss')}"></td>
-                      <td ></td>
-                      <td></td>
                       <td th:switch="${ngonngu.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
                     </tr>
                   </tbody>
