@@ -99,7 +99,6 @@ public class TaikhoanServiceimpl implements TaikhoanService {
         return taikhoanRepository.findTaikhoanByUsernameAndEmail(username, email);
     }
 
-    @Override
     public Taikhoan findTaikhoanByUsername(String id) {
         return taikhoanRepository.findByUsername(id);
     }
@@ -114,6 +113,11 @@ public class TaikhoanServiceimpl implements TaikhoanService {
             return taikhoanRepository.findAll(keyword,username, pageable);
         }
         return  taikhoanRepository.findAll1(username,pageable);
+    }
+
+    @Override
+    public List<Taikhoan> getAllTaikhoanByQuyen() {
+        return (List<Taikhoan>) taikhoanRepository.findByQuyenId("3");
     }
 
 

@@ -88,7 +88,7 @@ public class AdminRestController {
         suatChieu.setNgaychieu(LocalDate.parse(suatChieuResponse.getNgaychieu(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         suatChieu.setPhong(phongService.findPhongById(suatChieuResponse.getIdphong()).get());
         suatChieu.setKhunggio(khungGioService.findKhungGioById(suatChieuResponse.getIdkhunggio()).get());
-        suatChieu.setNgaytao(LocalDate.now());
+        suatChieu.setNgaytao(LocalDateTime.now());
         suatChieu.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
         suatChieu.setDongia(suatChieuResponse.getDongia().floatValue());
         suatChieu.setPhuthuyonline(suatChieuResponse.getPhuthuyonline().intValue());
@@ -152,7 +152,7 @@ public class AdminRestController {
             suatChieu.setNgaychieu(LocalDate.parse(suatChieuResponse.getNgaychieu(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             suatChieu.setPhong(phongService.findPhongById(suatChieuResponse.getIdphong()).get());
             suatChieu.setKhunggio(khungGioService.findKhungGioById(suatChieuResponse.getIdkhunggio()).get());
-            suatChieu.setNgaytao(LocalDate.now());
+            suatChieu.setNgaytao(LocalDateTime.now());
             suatChieu.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
             suatChieu.setDongia(suatChieuResponse.getDongia().floatValue());
             suatChieu.setPhuthuyonline(suatChieuResponse.getPhuthuyonline().intValue());

@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -48,8 +49,8 @@ public class Suatchieu implements Serializable {
     private Khunggio khunggio;
 
     @Column(name = "ngaytao", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate ngaytao;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime ngaytao;
 
     @NotNull(message = "Vui lòng chọn Ngày chiếu")
     @Column(name = "ngaychieu", nullable = false)

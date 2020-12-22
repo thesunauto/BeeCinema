@@ -32,9 +32,11 @@ public interface SuatChieuService {
 
     List<Suatchieu> findAllByPhimAndDate(String idPhim,LocalDate ngayChieu);
 
+
     List<SuatChieuResponse> findAllByPhongAndNgayChieu(Phong phong, LocalDate ngaychieu);
     List<Suatchieu> findAllByNgayChieuAndPhong(LocalDate ngaychieu,Phong phong);
 
     List<Suatchieu> findAllByPhimAndDate(String idPhim, LocalDate batdau, LocalDate ketthuc);
     List<Suatchieu> findAllByDate(LocalDate batdau, LocalDate ketthuc);
+
 }

@@ -31,4 +31,6 @@ public interface TaikhoanService {
     Taikhoan findTaikhoanByUsername(String id);
 
     Page<Taikhoan> listAll(String username, int currentPage, String sortField, String sortDir, String keyword);
+
+    List<Taikhoan> getAllTaikhoanByQuyen();
 }
