@@ -28,6 +28,9 @@ public interface TaikhoanService {
 
     Taikhoan findTaikhoanByUsernameAndEmail(String username, String email);
 
-    List<Taikhoan> getAllTaikhoanByQuyen();
+    Taikhoan findTaikhoanByUsername(String id);
 
+    Page<Taikhoan> listAll(String username, int currentPage, String sortField, String sortDir, String keyword);
+
+    List<Taikhoan> getAllTaikhoanByQuyen();
 }

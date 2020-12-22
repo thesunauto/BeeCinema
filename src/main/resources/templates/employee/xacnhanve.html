@@ -19,7 +19,8 @@
 
                     <!-- Card image -->
                     <div class="view view-cascade overlay">
-                        <img class="card-img-top" th:src="@{/img/images/onlinesticket.png}"  style="object-fit: cover;  object-position: center;  width: 100%;  max-height: 200px;">
+                        <img class="card-img-top" th:src="@{/img/images/onlinesticket.png}"
+                             style="object-fit: cover;  object-position: center;  width: 100%;  max-height: 200px;">
                         <a href="#!">
                             <div class="mask waves-effect waves-light"></div>
                         </a>
@@ -28,25 +29,22 @@
 
                     <!-- Card content -->
                     <div class="card-body card-body-cascade">
-                        <section><form action="#">
-                            <div class="row">
-                                <div class="col-md-4 mb-4">
+                        <section>
+                                <div class="row">
+                                    <div class="col-md-4 mb-4">
 
 
                                         <div class="md-form">
                                             <i class="fas fa-search prefix"></i>
                                             <input type="text" id="form1" class="form-control">
-                                            <label for="form1" class="">Tìm kiếm</label>
+                                            <label for="form1" class="" th:text="#{mot1}"></label>
 
                                         </div>
 
 
+                                    </div>
                                 </div>
-                                <div class="col-md-4 mb-4 pt-3">
-                                    <button class="btn btn-warning"><i class="fas fa-sync-alt"></i></button>
-                                </div>
-                            </div>
-                        </form></section>
+                        </section>
 
                         <section>
 
@@ -59,14 +57,14 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Tên khách hàng</th>
-                                            <th>Số điện thoại</th>
-                                            <th>Phim</th>
-                                            <th>Suất chiếu</th>
-                                            <th>Đặt vào lúc</th>
-                                            <th>Hết hạn vào lúc</th>
-                                            <th>Trạng thái</th>
-                                            <th>Chức năng</th>
+                                            <th th:text="#{mot2}"></th>
+                                            <th th:text="#{baychin}"></th>
+                                            <th th:text="#{tamnam}"></th>
+                                            <th th:text="#{tammot}"></th>
+                                            <th th:text="#{mot3}"></th>
+                                            <th th:text="#{mot4}"></th>
+                                            <th th:text="#{tamtam}"></th>
+                                            <th th:text="#{tamchin}"></th>
                                         </tr>
                                         </thead>
 
@@ -104,7 +102,7 @@
                         Chắc chắn rằng muốn xác nhận vé này
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                         <button type="button" class="xacnhanveMD btn btn-primary" data-dismiss="modal">Xác nhận</button>
                     </div>
                 </div>
@@ -121,17 +119,20 @@
 
             var listVeon = [];
 
+            $('#form1').keyup(function () {
+                loadVeonline();
+            });
 
             function loadVeonline() {
                 $.ajax({
-                    url:'/api/employee/getlistveonline',
-                    type:'POST',
-                    dataType:'JSON',
-                    success:function (data) {
+                    url: '/api/employee/getlistveonline?key='+$('#form1').val(),
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
                         listVeon = data;
 
                     }
-                    ,complete: function () {
+                    , complete: function () {
                         fillVEON();
                     }
                 })
@@ -139,46 +140,55 @@
 
             function fillVEON() {
                 var content = '';
-                for(var i = 0;i<listVeon.length;i++){
-                   content+='<tr>\n' +
-                       '<th scope="row">'+(i+1)+'</th>\n' +
-                       '<td>'+listVeon[i].tenkhachhang+'</td>\n' +
-                       '<td>'+listVeon[i].sdt+'</td>\n' +
-                       '<td>'+listVeon[i].tenphim+'</td>\n' +
-                       '<td>'+listVeon[i].suatchieu+'</td>\n' +
-                       '<td>'+listVeon[i].ngaytao+'</td>\n' +
-                       '<td>'+listVeon[i].hethan+'</td>\n' +
-                       '<td>'+(listVeon[i].trangthai==0?'Chưa XN':listVeon[i].trangthai==1?'Đã XN':'Hết hạn')+'</td>\n' +
-                       '<td>\n' +
-                       '<option data-toggle="modal" data-target="#basicExampleModal" '+(listVeon[i].trangthai==0?'':'disabled')+' value="'+listVeon[i].idsuatchieughe+'" type="button" class="xacnhanVE btn btn-teal btn-rounded btn-sm m-0">Xác nhận</option>\n' +
-                       '</td>\n' +
-                       '</tr>'
+                if (listVeon.length == 0) {
+                    content += '<tr>' +
+                        '<th class="text-center h3" colspan="9"> Hôm nay chưa có vé cần xác nhận </th>' +
+                        '</tr>'
+                }
+                for (var i = 0; i < listVeon.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + listVeon[i].tenkhachhang + '</td>\n' +
+                        '<td>' + listVeon[i].sdt + '</td>\n' +
+                        '<td>' + listVeon[i].tenphim + '</td>\n' +
+                        '<td>' + listVeon[i].suatchieu + '</td>\n' +
+                        '<td>' + listVeon[i].ngaytao + '</td>\n' +
+                        '<td>' + listVeon[i].hethan + '</td>\n' +
+                        '<td>' + (listVeon[i].trangthai == 0 ? 'Chưa XN' : listVeon[i].trangthai == 1 ? 'Đã XN' : 'Hết hạn') + '</td>\n' +
+                        '<td>\n' +
+                        '<option data-toggle="modal" data-target="#basicExampleModal" ' + (listVeon[i].trangthai == 0 ? '' : 'disabled') + ' value="' + listVeon[i].idsuatchieughe + '" type="button" class="xacnhanVE btn btn-teal btn-rounded btn-sm m-0">Xác nhận</option>\n' +
+                        '</td>\n' +
+                        '</tr>'
                 }
                 $('#dataVEON').html(content);
             }
+
             var idveon = '';
-            $(document).on('click','option.xacnhanVE',function () {
+            $(document).on('click', 'option.xacnhanVE', function () {
                 idveon = $(this).val()
             });
             $('button.xacnhanveMD').click(function () {
                 $.ajax({
-                    url:'/api/employee/xacnhanve'+idveon,
-                    type:'POST',
-                    dataType:'JSON',
-                    success:function (data) {
+                    url: '/api/employee/xacnhanve' + idveon,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    beforeSend: function () {
+                        $('#loading').html('<div class="parent-p"><div class="spinner"></div></div>');
+                    },
+                    success: function (data) {
                         var nbo = data;
-                        console.log(nbo)
-                        if(nbo.minScrollbarLength!=0){
+                        if (nbo.minScrollbarLength != 0) {
                             toastr.success('xác nhận hoàn tất', '', {positionClass: 'md-toast-top-right'});
-                            window.open('/employee/xuatve/'+nbo[1]+'|'+nbo[0]);
-                        }else{
+                            window.open('/employee/xuatve/' + nbo[1] + '|' + nbo[0]);
+                        } else {
                             toastr.error('xác nhận thất bại', '', {positionClass: 'md-toast-top-right'});
                         }
                     },
-                    error:function () {
+                    error: function () {
                         toastr.error('xác nhận thất bại', '', {positionClass: 'md-toast-top-right'});
                     }
-                    ,complete: function () {
+                    , complete: function () {
+                        $('#loading').html('');
                         loadVeonline();
                     }
                 })

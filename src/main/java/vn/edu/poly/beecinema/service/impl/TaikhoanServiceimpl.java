@@ -5,7 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 import vn.edu.poly.beecinema.entity.Taikhoan;
 import vn.edu.poly.beecinema.repository.TaikhoanRepository;
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 @Service
 public class TaikhoanServiceimpl implements TaikhoanService {
+
     @Autowired private TaikhoanRepository taikhoanRepository;
     @Override
     public List<Taikhoan> getAllTaikhoan() {
@@ -94,6 +97,22 @@ public class TaikhoanServiceimpl implements TaikhoanService {
     @Override
     public Taikhoan findTaikhoanByUsernameAndEmail(String username, String email) {
         return taikhoanRepository.findTaikhoanByUsernameAndEmail(username, email);
+    }
+
+    public Taikhoan findTaikhoanByUsername(String id) {
+        return taikhoanRepository.findByUsername(id);
+    }
+
+    @Override
+    public Page<Taikhoan> listAll(String username, int currentPage, String sortField, String sortDir, String keyword) {
+        Pageable pageable = PageRequest.of(currentPage - 1, 3,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending()
+                        : Sort.by(sortField).descending()
+        );
+        if (keyword != null) {
+            return taikhoanRepository.findAll(keyword,username, pageable);
+        }
+        return  taikhoanRepository.findAll1(username,pageable);
     }
 
     @Override

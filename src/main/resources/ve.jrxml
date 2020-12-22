@@ -47,7 +47,7 @@
             <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
             <image>
                 <reportElement x="50" y="-8" width="160" height="70" uuid="a99ca527-ea7f-4851-9c5a-7e55ae326eea"/>
-                <imageExpression><![CDATA["http://localhost:8080/img/logo80x160noBG.png"]]></imageExpression>
+                <imageExpression><![CDATA["http://localhost:8081/img/logo80x160noBG.png"]]></imageExpression>
             </image>
             <staticText>
                 <reportElement x="0" y="70" width="70" height="20" uuid="762fda9d-1806-4192-95d9-9a3b909409d2"/>

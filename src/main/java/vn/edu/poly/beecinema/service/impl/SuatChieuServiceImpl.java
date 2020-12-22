@@ -10,20 +10,20 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.DateUtils;
 import vn.edu.poly.beecinema.commons.SuatChieuResponse;
 import vn.edu.poly.beecinema.entity.Khunggio;
+import vn.edu.poly.beecinema.entity.Phong;
 import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.entity.Sukien;
 import vn.edu.poly.beecinema.repository.PhimRepository;
 import vn.edu.poly.beecinema.repository.SuatchieuRepository;
+import vn.edu.poly.beecinema.service.KhungGioService;
 import vn.edu.poly.beecinema.service.PhimService;
 import vn.edu.poly.beecinema.service.SuatChieuService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Service
 public class SuatChieuServiceImpl implements SuatChieuService {
@@ -33,7 +33,7 @@ public class SuatChieuServiceImpl implements SuatChieuService {
     private PhimService phimService;
     @Autowired
     private PhimRepository phimRepository;
-
+@Autowired private KhungGioService khungGioService;
     @Override
     public Suatchieu findById(Integer id) {
         return Optional.ofNullable(id).map(integer -> suatchieuRepository.getOne(id)).orElse(null);
@@ -111,6 +111,76 @@ public class SuatChieuServiceImpl implements SuatChieuService {
             return new ArrayList<>();
         }
 
+    }
+
+    @Override
+    public List<SuatChieuResponse> findAllByPhongAndNgayChieu(Phong phong, LocalDate ngaychieu) {
+        List<SuatChieuResponse> suatChieuResponses = new ArrayList<>();
+        suatchieuRepository.findAllByPhongAndNgaychieu(phong,ngaychieu).forEach(suatchieu -> {
+            suatChieuResponses.add(SuatChieuResponse.builder()
+                    .id(suatchieu.getId())
+                    .tenphong(suatchieu.getPhong().getTen())
+                    .idphong(suatchieu.getPhong().getId())
+                    .idphim(suatchieu.getPhim().getId())
+                    .dongia(Double.valueOf(suatchieu.getDongia()))
+                    .ketthuc(suatchieu.getKhunggio().getKetthuc().format(DateTimeFormatter.ofPattern("HH:mm")))
+                    .batdau(suatchieu.getKhunggio().getBatdau().format(DateTimeFormatter.ofPattern("HH:mm")))
+                    .ngaychieu(suatchieu.getNgaychieu().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                    .idkhunggio(suatchieu.getKhunggio().getId())
+                    .phuthuyonline(suatchieu.getPhuthuyonline().doubleValue())
+                    .trangthai(suatchieu.getTrangthai().toString())
+                    .build());
+        });
+        Collections.sort(suatChieuResponses, new Comparator<SuatChieuResponse>() {
+            @Override
+            public int compare(SuatChieuResponse o1, SuatChieuResponse o2) {
+
+
+                return khungGioService.findKhungGioById(o1.getIdkhunggio()).get().getBatdau().compareTo(khungGioService.findKhungGioById(o2.getIdkhunggio()).get().getBatdau());
+            }
+        });
+        return suatChieuResponses;
+    }
+
+    @Override
+    public List<Suatchieu> findAllByNgayChieuAndPhong(LocalDate ngaychieu, Phong phong) {
+        return suatchieuRepository.findAllByPhongAndNgaychieu(phong,ngaychieu);
+    }
+
+    @Override
+    public List<Suatchieu> findAllByPhimAndDate(String idPhim, LocalDate batdau, LocalDate ketthuc) {
+        try {
+            List<Suatchieu> suatchieus = suatchieuRepository.findAllByPhim(phimRepository.findById(idPhim).get());
+
+            for(Iterator<Suatchieu> sc = suatchieus.iterator(); sc.hasNext();){
+                Suatchieu ss = sc.next();
+                if (ss.getNgaychieu().compareTo(batdau)<0||ss.getNgaychieu().compareTo(ketthuc)>0) {
+                    sc.remove();
+                }
+            }
+            return suatchieus;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Suatchieu> findAllByDate(LocalDate batdau, LocalDate ketthuc) {
+        try {
+            List<Suatchieu> suatchieus = suatchieuRepository.findAll();
+
+            for(Iterator<Suatchieu> sc = suatchieus.iterator(); sc.hasNext();){
+                Suatchieu ss = sc.next();
+                if (ss.getNgaychieu().compareTo(batdau)<0||ss.getNgaychieu().compareTo(ketthuc)>0) {
+                    sc.remove();
+                }
+            }
+            return suatchieus;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
 }

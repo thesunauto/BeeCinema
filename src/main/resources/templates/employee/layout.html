@@ -12,17 +12,18 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">BEECINEMA</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
     <!-- Bootstrap core CSS -->
+    <link rel="icon" th:href="@{/img/icon/logo80x80noBG.png}">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link th:href="@{/css/mdb.min.css}" rel="stylesheet">
 
-
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 
 <body class="about-page">
-
+<div id="loading" style="width: 100%;"></div>
 <!-- Navigation -->
 <header>
 
@@ -39,25 +40,24 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"
                         th:classappend="${#httpServletRequest.requestURI=='/employee/chonphim'} ? active">
-                        <a class="nav-link" th:href="@{/employee/chonphim}">Bán vé </a>
+                        <a class="nav-link" th:href="@{/employee/chonphim}" th:text="#{chinmot}"> </a>
                     </li>
                     <li class="nav-item"
                         th:classappend="${#httpServletRequest.requestURI=='/employee/xacnhanve'} ? active">
-                        <a class="nav-link" th:href="@{/employee/xacnhanve}" data-offset="60">Xác nhận vé online </a>
+                        <a class="nav-link" th:href="@{/employee/xacnhanve}" data-offset="60" th:text="#{chinhai}"> </a>
                     </li>
                     <li class="nav-item"
                         th:classappend="${#httpServletRequest.requestURI=='/employee/lichsu'} ? active">
-                        <a class="nav-link" th:href="@{/employee/lichsu}" data-offset="60">Lịch sử </a>
+                        <a class="nav-link" th:href="@{/employee/lichsu}" data-offset="60" th:text="#{chinba}"> </a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto nav-flex-icons">
-                    <li class="nav-item">
-                        <form class="form-inline">
-                            <div class="md-form my-0">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search"
-                                       aria-label="Search">
-                            </div>
-                        </form>
+                    <li class="nav-item d-flex align-items-center m-1">
+                        <a th:href="@{${#httpServletRequest.requestURI+'?lang=vi'}}"><img style="height: 20px;"
+                                                                                          th:src="@{/img/icon/vietnam-flag-icon-free-download.jpg}" alt="VN"></a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center m-1">
+                        <a th:href="@{${#httpServletRequest.requestURI+'?lang=en'}}"><img style="height: 20px;" th:src="@{/img/icon/icon-english.png}" alt="EN"></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
@@ -67,8 +67,9 @@
                         </a>
                         <div class="dropdown-menu  dropdown-menu-right dropdown-danger w-75"
                              aria-labelledby="navbarDropdownMenuLink-333">
-                            <a class="dropdown-item" th:href="@{/employee/update-profile}">Thông tin</a>
-                            <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
+                            <a class="dropdown-item" th:href="@{/employee/update-profile}" th:text="#{chinbon}"></a>
+                            <a class="dropdown-item" th:href="@{/employee/change-pass}" th:text="#{mot7}"></a>
+                            <a class="dropdown-item" th:href="@{/logout}" th:text="#{chinnam}"></a>
                         </div>
                     </li>
                 </ul>

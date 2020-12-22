@@ -8,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import vn.edu.poly.beecinema.entity.Dayghe;
-import vn.edu.poly.beecinema.entity.Ghe;
-import vn.edu.poly.beecinema.entity.LoaiPhim;
+import vn.edu.poly.beecinema.entity.*;
 import vn.edu.poly.beecinema.service.*;
 
 import javax.validation.Valid;
@@ -34,8 +32,47 @@ public class SeatController {
 
     @GetMapping("/show-seat")
     public String showSeat(Model model){
-        String keyword = null;
-        return listByPage(model, 1, "id", "asc", keyword, null);
+        return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword="+phongService.getAllPhong().get(0).getId();
+    }
+
+
+    @PostMapping("/addDayghe")
+    public String showSeatV2(Model model, Authentication authentication,
+                             @RequestParam String currentlink,
+                             @RequestParam String idphong,
+                             @RequestParam String iddayghe,
+                             @RequestParam Integer soghe,
+                             @RequestParam String loaighe
+                             ){
+        Dayghe dayghe = dayGheService.findDayGheByID(iddayghe).get();
+        Loaighe loaighe1 =loaiGheService.findLoaiGheById(loaighe).get();
+        Phong phong = phongService.findPhongById(idphong).get();
+        Taikhoan taikhoan = taikhoanService.findTaikhoanById(authentication.getName()).get();
+        for (int i = 1; i <= soghe; i++) {
+            Ghe ghe = new Ghe();
+            ghe.setDayghe(dayghe);
+            ghe.setLoaighe(loaighe1);
+            ghe.setNgaytao(LocalDateTime.now());
+            ghe.setTaikhoan(taikhoan);
+            ghe.setPhong(phong);
+            ghe.setCol(i);
+            ghe.setTrangthai(0);
+            gheService.saveGhe(ghe);
+        }
+
+        return "redirect:"+currentlink;
+    }
+
+    @PostMapping("/delDayghe")
+    public String delDayghe(Model model, Authentication authentication,
+                            @RequestParam String currentlink,
+                            @RequestParam String idphong,
+                            @RequestParam String iddayghe){
+        List<Ghe> ghes = gheService.findByPhongAndDayGhe(idphong,iddayghe);
+        for(Ghe ghe : ghes){
+            gheService.deleteGhe(ghe.getId());
+        }
+        return "redirect:"+currentlink;
     }
 
     @GetMapping("/page/{pageNumber}")
@@ -49,6 +86,9 @@ public class SeatController {
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
         List<Ghe> ghe = page.getContent();
+        if(totalItem ==0){
+            currentPage = 0;
+        }
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalItem", totalItem);
         model.addAttribute("totalPages", totalPages);
@@ -66,6 +106,7 @@ public class SeatController {
         Ghe ghe = new Ghe();
         model.addAttribute("seat",ghe);
         return "admin/seat/add-seat";
+
     }
 
     @PostMapping("/add-seat")
@@ -80,7 +121,7 @@ public class SeatController {
             ghe.setLoaighe(loaiGheService.findLoaiGheById(ghe.getLoaighe().getId()).get());
             ghe.setNgaytao(LocalDateTime.now());
             gheService.saveGhe(ghe);
-            return listByPage(model, 1, "id", "asc", null, "themThanhCong");
+            return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword="+ghe.getPhong().getId()+"&messages=themThanhCong";
         }
         return "admin/seat/add-seat";
     }
@@ -99,19 +140,19 @@ public class SeatController {
 
         }else{
             gheService.saveGhe(ghe);
-            return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
+            return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword="+ghe.getPhong().getId()+"&messages=suaThanhCong";
+
+
         }
         return "admin/seat/update-seat";
     }
 
     @GetMapping("/delete-seat/{id}")
     public  String deleteSeat (@PathVariable(value = "id") int id,  Model model){
+        Ghe ghe = gheService.findGheById(id).get();
         gheService.deleteGhe(id);
-        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword="+ghe.getPhong().getId()+"&messages=xoaThanhCong";
     }
-
-
-
 
 }
 

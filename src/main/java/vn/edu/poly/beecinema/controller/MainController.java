@@ -81,6 +81,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String userHomePage(Authentication authentication, Model model) {
+
         List <Phim> phim = phimService.getAllPhim();
         List <Phim> phim_sap_chieu =  new ArrayList<Phim>();
         List <Phim> phim_dang_chieu =  new ArrayList<Phim>();
@@ -100,6 +101,19 @@ public class MainController {
         model.addAttribute("phim", phim);
         String trang = setLayout(authentication);
         model.addAttribute("trang", trang);
+        if(authentication!=null){
+            if(authentication.isAuthenticated()){
+                if(authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_USER"))){
+                    return "client/UserHomePage";
+                }
+                if(authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))){
+                    return "redirect:/admin/user/show-user";
+                }
+                if(authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_EMP"))){
+                    return "redirect:/employee/chonphim";
+                }
+            }
+        }
         return "client/UserHomePage";
     }
 
@@ -185,5 +199,14 @@ public class MainController {
     @ResponseBody
     public String currentUserName(Authentication authentication) {
         return authentication.getName();
+    }
+
+    @PostMapping("/changePassword")
+    public String changepassword(@RequestParam String path,@RequestParam String pass,Authentication authentication){
+       Taikhoan taikhoan = taikhoanService.findTaikhoanById(authentication.getName()).get();
+       taikhoanService.updatePassword(taikhoan,pass);
+        inMemoryUserDetailsManager.deleteUser(taikhoan.getUsername());
+        inMemoryUserDetailsManager.createUser(User.withDefaultPasswordEncoder().username(taikhoan.getUsername()).password(pass).roles(taikhoan.getQuyen().getTen()).build());
+        return "redirect:/"+path;
     }
 }

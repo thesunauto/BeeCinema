@@ -4,7 +4,7 @@
       layout:decorate="~{admin/layout}">
 
 <head>
-  <title>Thêm phim</title>
+  <title>Phim</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
             <div class="col-md-3 mb-4">
               <div class="file-field">
                 <div class="z-depth-1-half mb-4">
-                  <img id="blah" th:src="@{'/getImage/placeholder.jpg'}"  class="img-fluid"  alt="example placeholder" style="height: 153px; min-width: 100%"/>
+                  <img id="blah" th:src="@{'/getImage/placeholder.jpg'}"  class="img-fluid"  alt="example placeholder" style="object-fit: cover;  object-position: center;  width: 100%;  height: 250px;"/>
                 </div>
                 <div class="d-flex justify-content-center">
                   <div class="btn btn-mdb-color btn-rounded float-left">
@@ -124,8 +124,21 @@
 
           </div>
 
+            <div class="row">
+              <div class="col-md-12 mb-6">
+
+                <div class="md-form md-outline">
+                  <i class="fas fa-clipboard prefix"></i>
+                  <input type="text"  th:field="*{linktrailer}" id="form34" class="form-control">
+                  <label for="form34" class="active">Trailer</label>
+                </div>
+
+              </div>
+            </div>
+
+
           <div class="row">
-            <div class="col-md-12 mb-12">
+            <div class="col-md-12 mb-6">
 
                 <div class="md-form md-outline">
                   <i class="fas fa-clipboard prefix"></i>

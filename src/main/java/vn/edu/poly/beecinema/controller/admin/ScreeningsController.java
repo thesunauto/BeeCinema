@@ -34,6 +34,11 @@ public class ScreeningsController {
     @Autowired
     private KhungGioService khungGioService;
 
+    @GetMapping("/show-screenings-v2")
+    public String showScreeningsV2(Model model) {
+        return "admin/screenings/show-screenings-v2";
+    }
+
     @GetMapping("/show-screenings")
     public String showScreenings(Model model) {
         String keyword = null;
@@ -81,9 +86,7 @@ public class ScreeningsController {
     @PostMapping("/add-screenings")
     public String saveScreenings(@Valid @ModelAttribute("suatChieu") Suatchieu suatChieu, BindingResult bindingResult,
                                  Model model, Authentication authentication) {
-        System.out.println("-P-  /add-screenings");
         if (bindingResult.hasErrors()) {
-            System.out.println("-P-hasErrors  /add-screenings");
         } else {
             suatChieu.setPhim(phimService.findPhimById(suatChieu.getPhim().getId()).get());
             suatChieu.setPhong(phongService.findPhongById(suatChieu.getPhong().getId()).get());
@@ -95,12 +98,6 @@ public class ScreeningsController {
             List<Suatchieu> suatchieus = suatChieuService.findAllByPhimAndDate(suatChieu.getPhim().getId(), suatChieu.getNgaychieu());
             System.out.println("Star check lenght: " + suatchieus.size());
             for (Suatchieu sc1 : suatchieus) {
-                System.out.println("---");
-                System.out.println(sc1.getKhunggio().getBatdau().compareTo(suatChieu.getKhunggio().getBatdau()));
-                System.out.println(sc1.getKhunggio().getKetthuc().compareTo(suatChieu.getKhunggio().getBatdau()));
-                System.out.println(sc1.getKhunggio().getBatdau().compareTo(suatChieu.getKhunggio().getKetthuc()));
-                System.out.println(sc1.getKhunggio().getKetthuc().compareTo(suatChieu.getKhunggio().getKetthuc()));
-                System.out.println("----");
                 if (sc1.getPhong().getId().equals(suatChieu.getPhong().getId())) {
                     if (!(suatChieu.getKhunggio().getKetthuc().compareTo(sc1.getKhunggio().getBatdau()) <= 0
                             || suatChieu.getKhunggio().getBatdau().compareTo(sc1.getKhunggio().getKetthuc()) >= 0)

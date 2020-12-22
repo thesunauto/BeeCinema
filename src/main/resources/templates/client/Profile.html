@@ -4,7 +4,7 @@
       layout:decorate="~{${trang}}">
 
 <head>
-    <title>Sign in</title>
+    <title>Tài khoản</title>
 </head>
 
 <body th:attr="onload=${message}"
@@ -94,14 +94,14 @@
                                         <div class="md-form mb-0">
                                             <input type="text" th:field="*{username}" id="form32" class="form-control "
                                                    readonly>
-                                            <label for="form32">ID</label>
+                                            <label for="form32" th:text="#{bayhai}">ID</label>
                                         </div>
                                     </div>
                                     <!-- Second column -->
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <input type="text" th:field="*{ten}" id="form21" class="form-control">
-                                            <label for="form21">Họ Tên</label>
+                                            <label for="form21" th:text="#{bayba}">Họ Tên</label>
                                             <p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}"
                                                class="text-danger text-center"></p>
                                         </div>
@@ -118,7 +118,7 @@
                                                 <input type="radio" th:field="*{gioitinh}" value="0"
                                                        class="form-check-input" id="materialInline1"
                                                        name="inlineMaterialRadiosExample" checked>
-                                                <label class="form-check-label" for="materialInline1">Nam</label>
+                                                <label class="form-check-label" for="materialInline1" th:text="#{baysau}">Nam</label>
                                             </div>
 
                                             <!-- Material inline 2 -->
@@ -126,9 +126,9 @@
                                                 <input type="radio" th:field="*{gioitinh}" value="1"
                                                        class="form-check-input" id="materialInline2"
                                                        name="inlineMaterialRadiosExample">
-                                                <label class="form-check-label" for="materialInline2">Nữ</label>
+                                                <label class="form-check-label" for="materialInline2" th:text="#{baybay}">Nữ</label>
                                             </div>
-                                            <label for="materialInline2" data-error="wrong" data-success="right">Giới
+                                            <label for="materialInline2" data-error="wrong" data-success="right" th:text="#{baynam}">Giới
                                                 tính:</label>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
                                             <input type="date" th:field="*{ngaysinh}" id="form82" class="form-control ">
-                                            <label for="form82">Ngày sinh</label>
+                                            <label for="form82" th:text="#{baytam}">Ngày sinh</label>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
                                         <div class="md-form mb-0">
                                             <input type="text" th:field="*{sodienthoai}" id="form77"
                                                    class="form-control">
-                                            <label for="form77">Điện thoại</label>
+                                            <label for="form77" th:text="#{baychin}">Điện thoại</label>
                                             <p th:if="${#fields.hasErrors('sodienthoai')}" th:errors="*{sodienthoai}"
                                                class="text-danger text-center"></p>
                                         </div>
@@ -177,7 +177,7 @@
                                         <div class="md-form mb-0">
                                             <textarea type="text" th:field="*{diachi}" id="form78"
                                                       class="md-textarea form-control" rows="3"></textarea>
-                                            <label for="form78">Địa chỉ</label>
+                                            <label for="form78" th:text="#{mot5}">Địa chỉ</label>
                                         </div>
                                     </div>
                                     <!-- Second column -->
@@ -186,7 +186,7 @@
                                         <div class="md-form mb-0">
                                             <textarea type="text" th:field="*{mota}" id="form78"
                                                       class="md-textarea form-control" rows="3"></textarea>
-                                            <label for="form78">Mô tả</label>
+                                            <label for="form78" th:text="#{mot6}">Mô tả</label>
                                         </div>
                                     </div>
                                 </div>

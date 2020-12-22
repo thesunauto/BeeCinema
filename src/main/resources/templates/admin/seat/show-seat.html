@@ -4,232 +4,441 @@
       layout:decorate="~{admin/layout}">
 
 <head>
-  <title>Danh sách ghế</title>
+    <title>Danh sách ghế</title>
 </head>
 
 <body>
 
-  <!-- Main layout -->
-  <main layout:fragment="content">
+<!-- Main layout -->
+<main layout:fragment="content">
     <div class="container-fluid">
 
-      <!-- Section: Basic examples -->
-      <section>
+        <!-- Section: Basic examples -->
+        <section>
 
-        
+            <div class="card card-cascade narrower z-depth-1">
 
-        <!-- Top Table UI -->
-        <div class="card p-2 mb-5">
+                <div class="view view-cascade gradient-card-header blue-gradient narrower py-4 mx-4 mb-3 d-flex justify-content-between align-items-center">
+                    <div>
+                        <a th:href="@{/admin/seat/add-seat}"
+                           class="btn btn-outline-white btn-rounded btn-sm px-2 m-1"><i class="fas fa-plus-circle"></i></a>
+                    </div>
+                    <div><h3 class="white-text text-center font-weight-bold"
+                             th:text="#{one-hundred-and-FourtyfourWord}"></h3></div>
+                    <div>
+                        <form th:action="@{/admin/seat/page/1}">
+                            <div class="row">
 
-          <!-- Grid row -->
-          <div class="row">
+                                <div class="col-8">
+                                    <input type="hidden" name="sortField" th:value="${sortField}"/>
+                                    <input type="hidden" name="sortDir" th:value="${sortDir}"/>
+                                    <div></div>
+                                    <select id="phongcurrent" name="keyword" class="browser-default custom-select">
+                                        <option th:each="phong : ${@phongServiceImpl.getAllPhong()}"
+                                                th:value="${phong.id}" th:text="${phong.ten}"
+                                                th:selected="(${phong.id} == ${keyword})"></option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-outline-white btn-rounded btn-sm px-2 "><i
+                                            class="fas fas fa-sign-in-alt"></i></button>
+                                </div>
+                            </div>
 
-            <!-- Grid column -->
-            <div class="col-lg-2 col-md-12">
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-lg-3 col-md-6">
-
-              <!-- Blue select -->
-              <select class="mdb-select colorful-select dropdown-primary mx-2 md-form mt-3 md-dropdown">
-                <option value="" disabled selected>Show only</option>
-                <option value="1">All <span> (2000)</span></option>
-                <option value="2">Never opened <span> (200)</span></option>
-                <option value="3">Opened but unanswered <span> (1800)</span></option>
-                <option value="4">Answered <span> (200)</span></option>
-                <option value="5">Unsunscribed <span> (50)</span></option>
-              </select>
-              <!-- /Blue select -->
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-lg-3 col-md-6">
-
-              <!-- Blue select -->
-              <select class="mdb-select colorful-select dropdown-primary mx-2 md-form mt-3 md-dropdown">
-                <option value="" disabled selected>Filter segments</option>
-                <option value="1">Contacts in no segments <span> (100)</span></option>
-                <option value="1">Segment 1 <span> (2000)</span></option>
-                <option value="2">Segment 2 <span> (1000)</span></option>
-                <option value="3">Segment 3 <span> (4000)</span></option>
-              </select>
-              <!-- /Blue select -->
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-lg-4 col-md-6">
-
-              <form th:action="@{/admin/seat/page/1}" class="form-inline md-form mt-2 ml-2">
-                <input type="hidden" name="sortField" th:value="${sortField}"/>
-                <input type="hidden" name="sortDir" th:value="${sortDir}"/>
-                <input class="form-control mt-2" type="text" name="keyword" id="keyword" th:value="${keyword}" required>
-                <button type="submit" class="btn btn-sm btn-primary ml-2 px-1"><i class="fas fa-search"></i> </button>
-                <a th:href="@{/admin/seat/show-seat}" class="btn btn-sm btn-primary ml-2 px-1" ><i class="fas fa-eraser"></i></a>
-              </form>
-
-            </div>
-            <!-- Grid column -->
-
-          </div>
-          <!-- Grid row -->
-
-        </div>
-        <!-- Top Table UI -->
-
-        <div class="card card-cascade narrower z-depth-1">
-
-          <!-- Card image -->
-          <div>
-
-          </div>
-          <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+                        </form>
+                    </div>
 
 
+                </div>
 
-            <h4 class="white-text font-weight-bold" th:text="#{one-hundred-and-FourtyfourWord}"></h4>
+                <div class="px-4">
+                    <div th:switch="${messages}">
+                        <p th:case="'themThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
+                        <p th:case="'suaThanhCong'" class="alert alert-success" role="alert">Sửa thành công!</p>
+                        <p th:case="'xoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+                    </div>
+                    <div class="table-responsive text-nowrap" style="height:350px">
+                        <!-- Table -->
+                        <table class="table table-hover mb-0">
 
-            <div>
-              <a  class="btn btn-outline-white btn-rounded btn-sm px-2" th:href="@{/admin/seat/add-seat}"><i class="fas fa-plus-circle"></i></a>
-              </div>
+                            <!-- Table head -->
+                            <thead>
+                            <tr>
+                                <th>
+                                </th>
+                                <th>
+                                    <a class="font-weight-bold"
+                                       th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"
+                                       th:text="#{one-hundred-and-FourtyfiveWord}"> <i class="fas fa-sort ml-1"></i></a>
+                                </th>
+                                <th>
+                                    <a class="font-weight-bold"
+                                       th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=phong.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"
+                                       th:text="#{one-hundred-and-FourtysixWord}"><i class="fas fa-sort ml-1"></i></a>
+                                </th>
+                                <th><a class="font-weight-bold" th:text="#{mot13}"></a></th>
+                                <th>
+                                    <a class="font-weight-bold"
+                                       th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=col&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"
+                                       th:text="#{one-hundred-and-FourtysevenWord }"> <i
+                                            class="fas fa-sort ml-1"></i></a>
+                                </th>
+                                <th>
+                                    <a class="font-weight-bold"
+                                       th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=dayghe.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"
+                                       th:text="#{one-hundred-and-FourtyeightWord}"> <i
+                                            class="fas fa-sort ml-1"></i></a>
+                                </th>
+                                <th>
+                                    <a class="font-weight-bold"
+                                       th:href="@{'/admin/seat/page/' + ${currentPage} + '?sortField=loaighe.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"
+                                       th:text="#{one-hundred-and-FourtynineWord}"> <i class="fas fa-sort ml-1"></i></a>
+                                </th>
+                                <th><a class="font-weight-bold" th:text="#{one-hundred-and-FivetyWord}"></a></th>
+                                <th><a class="font-weight-bold" th:text="#{one-hundred-and-FivetyoneWord}"></a></th>
+                                <th><a class="font-weight-bold" th:text="#{one-hundred-and-FivetytwoWord}"> </a></th>
+                            </tr>
+                            </thead>
+                            <!-- Table head -->
 
-          </div>
-          <!-- /Card image -->
+                            <!-- Table body -->
+                            <tbody th:each="ghe1: ${ghe}">
+                            <tr>
+                                <td>
+                                    <a th:href="@{${'/admin/seat/update-seat/'+ghe1.id}}"> <i
+                                            class="fas fa-edit text-primary" th:title="Sửa"></i></a> <a
+                                        th:href="@{${'/admin/seat/delete-seat/'+ghe1.id}}"> <i
+                                        class="fas fa-trash ml-3 text-danger" th:title="Xóa"></i></a>
+                                </td>
+                                <td th:text="${ghe1.id}"></td>
+                                <td th:text="${ghe1.phong.ten}"></td>
+                                <td th:text="${ghe1.dayghe.ten+ghe1.col}"></td>
+                                <td th:text="${ghe1.col}"></td>
+                                <td th:text="${ghe1.dayghe.ten}"></td>
+                                <td th:text="${ghe1.loaighe.ten}"></td>
+                                <td th:text="${ghe1.taikhoan.ten}"></td>
+                                <td th:text="${#temporals.format(ghe1.ngaytao, 'dd-MM-yyyy | HH:mm:ss')}"></td>
+                                <td th:switch="${ghe1.trangthai}"><span th:case="0">Hiện</span> <span
+                                        th:case="1">Ẩn</span></td>
+                            </tr>
 
-          <div class="px-4">
-            <div th:switch="${messages}" >
-              <p th:case="'themThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
-              <p th:case="'suaThanhCong'" class="alert alert-success" role="alert">Sửa thành công!</p>
-              <p th:case="'xoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
-            </div>
-            <div class="table-responsive text-nowrap" style="height:350px">
-              <!-- Table -->
-              <table class="table table-hover mb-0">
+                            </tbody>
+                            <!-- Table body -->
+                        </table>
+                        <!-- Table -->
+                    </div>
 
-                <!-- Table head -->
-                <thead>
-                  <tr>
-                    <th >
-                    </th>
-                    <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtyfiveWord}"> <i class="fas fa-sort ml-1"></i></a>
-                    </th>
-                    <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=phong.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtysixWord}"><i class="fas fa-sort ml-1"></i></a>
-                    </th>
-                    <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=col&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtysevenWord }"> <i class="fas fa-sort ml-1"></i></a>
-                    </th>
-                    <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=dayghe.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtyeightWord}"> <i class="fas fa-sort ml-1"></i></a>
-                    </th>
-                    <th >
-                      <a class="font-weight-bold" th:href="@{'/admin/comment/seat/' + ${currentPage} + '?sortField=loaighe.ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-FourtynineWord}"> <i class="fas fa-sort ml-1"></i></a>
-                    </th>
-                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-FivetyWord}"></a></th>
-                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-FivetyoneWord}"></a></th>
-                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-FivetytwoWord}"> </a></th>
-                  </tr>
-                </thead>
-                <!-- Table head -->
+                    <hr class="my-0">
 
-                <!-- Table body -->
-                <tbody th:each="ghe1: ${ghe}">
-                  <tr>
-                    <td>
-                      <a th:href="@{${'/admin/seat/update-seat/'+ghe1.id}}"> <i class="fas fa-edit text-primary" th:title="Sửa"></i></a> <a th:href="@{${'/admin/seat/delete-seat/'+ghe1.id}}"> <i class="fas fa-trash ml-3 text-danger" th:title="Xóa"></i></a>
-                    </td>
-                    <td th:text="${ghe1.id}"></td>
-                    <td th:text="${ghe1.phong.ten}"></td>
-                    <td th:text="${ghe1.col}"></td>
-                    <td th:text="${ghe1.dayghe.ten}"></td>
-                    <td th:text="${ghe1.loaighe.ten}"></td>
-                    <td th:text="${ghe1.taikhoan.ten}"></td>
-                    <td th:text="${#temporals.format(ghe1.ngaytao, 'dd-MM-yyyy | HH:mm:ss')}"></td>
-                    <td th:switch="${ghe1.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
-                  </tr>
+                    <!-- Bottom Table UI -->
+                    <div class="d-flex justify-content-between">
 
-                </tbody>
-                <!-- Table body -->
-              </table>
-              <!-- Table -->
-            </div>
+                        <!-- Name -->
+                        <div class="my-4">
+                            Tổng: [[${totalItem}]] | Trang [[${currentPage}]]/[[${totalPages}]]
+                        </div>
 
-            <hr class="my-0">
+                        <!-- Pagination -->
+                        <nav class="my-4">
+                            <ul class="pagination pagination-circle pg-blue mb-0">
 
-            <!-- Bottom Table UI -->
-            <div class="d-flex justify-content-between">
+                                <!-- First -->
+                                <li class="page-item clearfix d-none d-md-block">
+                                    <a class="page-link" th:if="${currentPage > 1}"
+                                       th:href="@{'/admin/seat/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
+                                    <span class="page-link" th:unless="${currentPage > 1}">First</span>
+                                </li>
 
-              <!-- Name -->
-              <div class="my-4">
-                Tổng: [[${totalItem}]] | Trang [[${currentPage}]]/[[${totalPages}]]
-              </div>
+                                <!-- Arrow left -->
+                                <li class="page-item ">
+                                    <a class="page-link" th:if="${currentPage > 1}"
+                                       th:href="@{'/admin/seat/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&laquo;</a>
+                                    <span class="page-link" th:unless="${currentPage > 1}">&laquo;</span>
+                                </li>
 
-              <!-- Pagination -->
-              <nav class="my-4">
-                <ul class="pagination pagination-circle pg-blue mb-0">
-
-                  <!-- First -->
-                  <li class="page-item clearfix d-none d-md-block">
-                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/seat/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
-                    <span  class="page-link" th:unless="${currentPage > 1}">First</span>
-                  </li>
-
-                  <!-- Arrow left -->
-                  <li class="page-item ">
-                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/seat/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&laquo;</a>
-                    <span  class="page-link" th:unless="${currentPage > 1}">&laquo;</span>
-                  </li>
-
-                  <!-- Numbers -->
-                  <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a></li>-->
-                  <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                      <li class="page-item  clearfix d-none d-md-inline-block"><a class="page-link" th:if="${currentPage != i}" th:href="@{'/admin/seat/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a></li>
-                        <span th:unless="${i != currentPage}">
-                          <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">[[${i}]]</a></li>
+                                <!-- Numbers -->
+                                <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a></li>-->
+                                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                          <li class="page-item clearfix d-none d-md-inline-block"><a class="page-link"
+                                                                                     th:if="${currentPage != i}"
+                                                                                     th:href="@{'/admin/seat/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a></li>
+                            <span th:unless="${i != currentPage}">
+                              <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">[[${i}]]</a></li>
+                            </span>
                         </span>
-                        &nbsp;&nbsp;
-                    </span>
-                  <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a>-->
+                                <!--                    <li class="page-item active clearfix d-none d-md-inline-block"><a class="page-link">5</a>-->
 
-                  <!--                    </li>-->
+                                <!--                    </li>-->
 
 
+                                <!-- Arrow right -->
+                                <li class="page-item">
+                                    <a class="page-link" th:if="${currentPage < totalPages}"
+                                       th:href="@{'/admin/seat/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&raquo;</a>
+                                    <span class="page-link" th:unless="${currentPage < totalPages}">&raquo;</span>
+                                </li>
 
-                  <!-- Arrow right -->
-                  <li class="page-item">
-                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/seat/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">&raquo;</a>
-                    <span  class="page-link" th:unless="${currentPage < totalPages}">&raquo;</span>
-                  </li>
+                                <!-- First -->
+                                <li class="page-item clearfix d-none d-md-block">
+                                    <a class="page-link" th:if="${currentPage < totalPages}"
+                                       th:href="@{'/admin/seat/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
+                                    <span class="page-link" th:unless="${currentPage < totalPages}">Last</span>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- /Pagination -->
 
-                  <!-- First -->
-                  <li class="page-item clearfix d-none d-md-block">
-                    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/admin/seat/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
-                    <span  class="page-link" th:unless="${currentPage < totalPages}">Last</span>
-                  </li>
-                </ul>
-              </nav>
-              <!-- /Pagination -->
+                    </div>
+                    <!-- Bottom Table UI -->
 
+                </div>
             </div>
-            <!-- Bottom Table UI -->
 
-          </div>
+        </section>
+        <!-- Section: Basic examples -->
+        <section>
+            <div class="row my-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Button trigger modal -->
+                            <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    data-toggle="modal" data-target="#basicExampleModal"
+                            >
+                                Thêm dãy ghế
+                            </button>
+                            <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    data-toggle="modal" data-target="#basicExampleModal2"
+                            >
+                                Xóa dãy
+                            </button>
+
+                            <!-- Modal -->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+
+            <div class="row my-3">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr class="text-center">
+                                <th class="h4" colspan="100%" th:text="#{nammot}"><i class="fas fa-desktop"></i> <i
+                                        class="fas fa-desktop"></i></th>
+                            </tr>
+                            </thead>
+                            <tbody id="dataGhe">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section><div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm dãy</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form th:action="@{/admin/seat/addDayghe}" id="addDayghe" method="post">
+                        <input type="hidden" name="currentlink"
+                               th:value="${#request.getRequestURI()+'?sortField=id&sortDir=asc&keyword='+keyword}">
+                        <input type="hidden" name="idphong" th:value="${keyword}">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="mdb-select md-form"
+                                            searchable="Search here.." id="iddayghe"
+                                            name="iddayghe" required>
+                                        <option th:each="df : ${@dayGheServiceImpl.getAllDayGhe()}"
+                                                th:value="${df.getId()}"
+                                                th:text="${df.getTen()}"
+                                                th:if="${!@dayGheServiceImpl.findDayGheByPhong(keyword).contains(df)}"></option>
+                                    </select><label class="mdb-main-label active">Dãy</label>
+                                </div>
+                                <div class="col-6">
+                                    <div class="md-form md-outline">
+                                        <i class="fas fa-chair prefix"></i>
+                                        <input type="number" id="soghe" value="10"
+                                               placeholder="Phút Hủy Online" class="form-control"
+                                               name="soghe">
+                                        <label for="soghe" class="active">Số ghế</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <select id="loaighe"
+                                            class="mdb-select md-form colorful-select dropdown-primary initialized"
+                                            name="loaighe">
+                                        <option th:each="lg : ${@loaiGheServiceImpl.getAllLoaiGhe()}"
+                                                th:value="${lg.getId()}"
+                                                th:text="${lg.getTen()}"></option>
+                                    </select><label class="mdb-main-label active">Loại ghế</label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div id="actionModal" class="modal-footer">
+                            <button type="submit" class="btn btn-default">Thêm</button>
+                        </div>
+                    </form>
+                    <input type="hidden" id="idsuatchieucurrent">
+                </div>
+            </div>
         </div>
+            <div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel2">Thêm dãy</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{/admin/seat/delDayghe}" id="addDayghe1" method="post">
+                            <input type="hidden" name="currentlink"
+                                   th:value="${#request.getRequestURI()+'?sortField=id&sortDir=asc&keyword='+keyword}">
+                            <input type="hidden" name="idphong" th:value="${keyword}">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <select class="mdb-select md-form"
+                                                searchable="Search here.." id="iddayghe2"
+                                                name="iddayghe" required>
+                                            <option th:each="df : ${@dayGheServiceImpl.getAllDayGhe()}"
+                                                    th:value="${df.getId()}"
+                                                    th:text="${df.getTen()}"
+                                                    th:if="${@dayGheServiceImpl.findDayGheByPhong(keyword).contains(df)}"></option>
+                                        </select><label class="mdb-main-label active">Dãy</label>
+                                    </div>
+                                </div>
 
-      </section>
-      <!-- Section: Basic examples -->
 
+                            </div>
+                            <div id="actionModal1" class="modal-footer">
+                                <button type="submit" class="btn btn-default">Xóa</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div></section>
     </div>
-  </main>
-  <!-- Main layout -->
+</main>
+<!-- Main layout -->
+<th:block layout:fragment="optional">
+    <script>
+        $(document).ready(function () {
+            var listDayGhe = [];
+            var idphong = '2';
+            var listGhe = [];
+            $('body').ready(loadGhe());
 
+            function loadGhe() {
+                if (idphong != null) {
+                    $.ajax({
+                        url: '/api/admin/loadghebyphong=' + $('#phongcurrent').val(),
+                        type: 'POST',
+                        dataType: 'JSON',
+                        contentType: 'application/json',
+                        processData: false,
+                        beforeSend: function () {
+                            $('#dataGhe').html('<div class="d-flex justify-content-center align-items-center preloader-wrapper big active">\n' +
+                                '  <div class="spinner-layer spinner-red-only">\n' +
+                                '    <div class="circle-clipper left">\n' +
+                                '      <div class="circle"></div>\n' +
+                                '    </div>\n' +
+                                '    <div class="gap-patch">\n' +
+                                '      <div class="circle"></div>\n' +
+                                '    </div>\n' +
+                                '    <div class="circle-clipper right">\n' +
+                                '      <div class="circle"></div>\n' +
+                                '    </div>\n' +
+                                '  </div>\n' +
+                                '</div>');
+                        },
+                        success: function (data) {
+                            listDayGhe = data;
+                        },
+                        complete: function () {
+                            fillGhe();
+                            loadStt();
+                        },
+                        error: function () {
+                            toastr.error('không load được dữ liệu từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                        }
+                    });
+                }
+            };
+
+            function fillGhe() {
+                var content = '';
+                for (var i = 0; i < listDayGhe.length; i++) {
+
+
+                    content += '<tr class="text-center">\n' +
+                        '<td>Dãy ' + listDayGhe[i].ten + '</td>\n';
+                    var listGheofDay = listDayGhe[i].gheResponses;
+
+                    for (var ii = 0; ii < listGheofDay.length; ii++) {
+                        listGhe.push(listGheofDay[ii]);
+                        content += '<td><a href="/admin/seat/update-seat/' + listGheofDay[ii].id + '"><option value="' + listGheofDay[ii].id + '" style="border-width:4px !important;" class="ActionGhe btn btn-primary text-center"><i class="fas fa-chair"></i> ' + listGheofDay[ii].tenDay + listGheofDay[ii].col + '</option></a></td>';
+                    }
+
+                    content += '<td>Dãy ' + listDayGhe[i].ten + '</td>\n' +
+                        '</tr>';
+                }
+                ;
+
+                $('#dataGhe').html(content);
+            };
+
+            function loadStt() {
+                $('option.ActionGhe').each(function () {
+                    for (var i = 0; i < listDayGhe.length; i++) {
+                        var listGhe = listDayGhe[i].gheResponses;
+                        for (var ii = 0; ii < listGhe.length; ii++) {
+                            if (listGhe[ii].id == $(this).val()) {
+                                $(this).removeClass();
+                                $(this).attr("disabled", false);
+                                if (listGhe[ii].trangthai == 0) {
+                                    $(this).addClass('ActionGhe btn text-center btn-info');
+                                }
+                                if (listGhe[ii].trangthai == 4) {
+                                    $(this).addClass('ActionGhe btn text-center btn-light');
+                                }
+                                if (listGhe[ii].idLoaiGhe == 2) {
+                                    $(this).addClass('border-bottom border-warning');
+
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</th:block>
 </body>
 
 </html>

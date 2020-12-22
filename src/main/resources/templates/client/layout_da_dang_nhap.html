@@ -8,10 +8,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="shortcut icon" th:href="@{/img/images/icon/favicon.ico}" type="image/x-icon"/>
     <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">BEECINEMA</title>
+    <link rel="icon" th:href="@{/img/icon/logo80x80noBG.png}">
     <link rel="stylesheet" th:href="@{/css/carouselStyle.css}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.11.2/css/all.css}">
+    <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
     <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link th:href="@{/css/mdb.min.css}" rel="stylesheet">
@@ -43,10 +45,11 @@
 </head>
 
 <body th:class="${#httpServletRequest.requestURI=='/'}?'about-page'">
+<div id="loading" style="width: 100%;"></div>
 <!-- Main Navigation -->
 <header th:style="${#httpServletRequest.requestURI!='/'}?'width:0;'">
 
-    <nav class="navbar navbar-expand-lg p-0 red-text fixed-top scrolling-navbar" style="background-color: #fff; border-bottom: 5px solid #ff4757;">
+    <nav class="navbar navbar-expand-lg p-0 red-text fixed-top scrolling-navbar" style="background-color: #fff;  border-bottom: 5px solid #ff4757;">
         <div class="container">
             <a class="navbar-brand" th:href="@{/}"><img th:src="@{/img/icon/logo80x160noBkg.png}" height="60" alt="mdb logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
@@ -55,23 +58,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"  th:classappend="${#httpServletRequest.requestURI=='/client/list-film'} ? active">
+                    <li class="nav-item"  th:classappend="${#httpServletRequest.requestURI=='/client/list-film'} ? 'active'">
                         <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/list-film}" th:text="#{hai}"><span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/list-event'} ? active">
+                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/list-event'} ? 'active'">
                         <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/list-event}" th:text="#{mot}"></a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/about-us'} ? active">
+                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/about-us'} ? 'active'">
                         <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/about-us}" th:text="#{ba}"></a>
                     </li>
-                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/contact-us'} ? active">
+                    <li class="nav-item" th:classappend="${#httpServletRequest.requestURI=='/client/contact-us'} ? 'active'">
                         <a class="nav-link font-weight-bold" style="color:#ff4757;" th:href="@{/client/contact-us}" th:text="#{bon}"></a>
                     </li>
                 </ul>
 
 
 
-                <ul class="navbar-nav">
+
+                <ul class="navbar-nav px-2">
                     <li class="nav-item d-flex align-items-center m-1">
                         <a th:href="@{${#httpServletRequest.requestURI+'?lang=vi'}}"><img style="height: 20px;"
                                                  th:src="@{/img/icon/vietnam-flag-icon-free-download.jpg}" alt="VN"></a>
@@ -79,19 +83,21 @@
                     <li class="nav-item d-flex align-items-center m-1">
                         <a th:href="@{${#httpServletRequest.requestURI+'?lang=en'}}"><img style="height: 20px;" th:src="@{/img/icon/icon-english.png}" alt="EN"></a>
                     </li>
+
                     <li class="nav-item active">
                         <div class="dropdown">
 
                             <!--Trigger-->
                             <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false"><img id="blahza" class="img-fluid z-depth-1 rounded-circle"
-                                                                                    style="object-fit: cover;  object-position: center;  width: 30px;  height: 30px;"> <span id="usernamenav" >Account</span></a>
+                                                                                    style="object-fit: cover;  object-position: center;  width: 30px;  height: 30px;"> <span id="usernamenav" class="font-weight-bold"> Account</span></a>
 
 
                             <!--Menu-->
                             <div class="dropdown-menu dropdown-warning">
                                 <a class="dropdown-item" th:href="@{/client/profile-client}" th:text="#{motmot}"></a>
                                 <a class="dropdown-item" th:href="@{/client/manager-ticket}" th:text="#{mothai}"></a>
+                                <a class="dropdown-item" th:href="@{/client/change-pass}" th:text="#{mot7}">Đổi mật khẩu</a>
                                 <a class="dropdown-item" th:href="@{/logout}" th:text="#{motba}"></a>
                             </div>
                         </div>
@@ -103,7 +109,7 @@
 
     <!-- Intro Section -->
     <div  th:if="${#httpServletRequest.requestURI=='/'}" class="view jarallax" data-jarallax='{"speed": 0.2}' style="margin: 0;padding: 0;"
-          th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+          th:style="'background-image:url(' + @{/img/bg-intro.png} + ');background-repeat: no-repeat; background-size: contain; background-position: center center;background-attachment: fixed;'">
         <div class="mask rgba-black-light">
             <div class="container h-100 d-flex justify-content-center align-items-center">
                 <div class="row pt-5 mt-3">
@@ -125,11 +131,11 @@
 <!-- Main Navigation -->
 
 
-<main layout:fragment="content" style="min-height: 90vh;">
+<main style="min-height: 74.5vh;">
+    <div layout:fragment="content" ></div>
 </main>
 
-<!-- Footer -->
-<footer class="page-footer rgba-black-strong font-small">
+<!-- Footer --><footer class="page-footer rgba-black-strong font-small">
 
     <!-- Footer Links -->
     <div class="container">
@@ -185,74 +191,46 @@
         <!-- Grid row-->
         <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
 
-        <!-- Grid row-->
-        <div class="row pb-3">
 
-                    <!-- Facebook -->
-                    <a class="fb-ic">
-                        <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!-- Twitter -->
-                    <a class="tw-ic">
-                        <i class="fab fa-twitter fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!-- Google +-->
-                    <a class="gplus-ic">
-                        <i class="fab fa-google-plus-g fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Linkedin -->
-                    <a class="li-ic">
-                        <i class="fab fa-linkedin-in fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Instagram-->
-                    <a class="ins-ic">
-                        <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Pinterest-->
-                    <a class="pin-ic">
-                        <i class="fab fa-pinterest fa-lg white-text"> </i>
-                    </a>
 
-                </div>
+    </div>
+    <!-- Grid column -->
+    <div class="col-md-12">
 
-            </div>
-            <!-- Grid column -->
-            <div class="col-md-12">
+        <div class="m-4 flex-center">
 
-                <div class="mb-5 flex-center">
+            <!-- Facebook -->
+            <a class="fb-ic">
+                <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
+            </a>
+            <!-- Twitter -->
+            <a class="tw-ic">
+                <i class="fab fa-twitter fa-lg white-text mr-4"> </i>
+            </a>
+            <!-- Google +-->
+            <a class="gplus-ic">
+                <i class="fab fa-google-plus-g fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Linkedin -->
+            <a class="li-ic">
+                <i class="fab fa-linkedin-in fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Instagram-->
+            <a class="ins-ic">
+                <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
+            </a>
+            <!--Pinterest-->
+            <a class="pin-ic">
+                <i class="fab fa-pinterest fa-lg white-text"> </i>
+            </a>
 
-                    <!-- Facebook -->
-                    <a class="fb-ic">
-                        <i class="fab fa-facebook-f fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!-- Twitter -->
-                    <a class="tw-ic">
-                        <i class="fab fa-twitter fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!-- Google +-->
-                    <a class="gplus-ic">
-                        <i class="fab fa-google-plus-g fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Linkedin -->
-                    <a class="li-ic">
-                        <i class="fab fa-linkedin-in fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Instagram-->
-                    <a class="ins-ic">
-                        <i class="fab fa-instagram fa-lg white-text mr-4"> </i>
-                    </a>
-                    <!--Pinterest-->
-                    <a class="pin-ic">
-                        <i class="fab fa-pinterest fa-lg white-text"> </i>
-                    </a>
+        </div>
 
-                </div>
+    </div>
+    <!-- Grid column -->
+    <div class="col-md-12">
 
-            </div>
-            <!-- Grid column -->
-            <div class="col-md-12">
-
-                <div class="mb-5 flex-center">
+        <div class="mb-5 flex-center">
 
         </div>
         <!-- Grid row-->
@@ -266,8 +244,7 @@
     </div>
     <!-- Copyright -->
 
-</footer>
-<!-- Footer -->
+</footer><!-- Footer -->
 
 <!--  SCRIPTS  -->
 

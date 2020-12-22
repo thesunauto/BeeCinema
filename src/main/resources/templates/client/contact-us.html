@@ -4,26 +4,30 @@
       layout:decorate="~{${trang}}">
 
 <head>
-  <title>Sign in</title>
+  <title>Liên Hệ</title>
 </head>
 
-<body th:style="'background-image:url(' + @{/img/images/bgEmployee.gif} + ');background-repeat: no-repeat; background-size: cover; background-position: center center;background-attachment: fixed;'">
+<body th:style="'background-image:url(' + @{/img/neon-cinema-logos.jpg} + ');background-repeat: repeat; background-size: contain; background-position: center center;background-attachment: fixed;'">
 
 <main layout:fragment="content" style="padding: 0;">
   <div class="container pt-5 mt-5">
 
     <!-- Section: Blog v.2 -->
-    <section class="wow fadeIn rgba-stylish-strong p-5 mb-4" data-wow-delay="0.3s">
+    <section class="wow fadeIn rgba-stylish-strong p-5 mb-4" data-wow-delay="0.3s" th:style="'background-image:url(' + @{/img/frame.png} + ');background-repeat: no-repeat;  background-size: 100% 100%;'">
       <h2 class="text-center amber-text my-3 h1" th:text="#{bon}"></h2>
 
       <!-- Section description -->
       <p class="text-center mb-3 w-responsive mx-auto white-text" th:text="#{babay}"></p>
 
       <div class="row">
+<!--        <div th:switch="${messages}">-->
+<!--          <p th:case="'thanhcong'" class="alert alert-success" role="alert">Đổi mật khẩu thành công!</p>-->
+<!--        </div>-->
+        <h5 class="amber-text" th:utext="${message}"></h5>
 
         <!-- Grid column -->
         <div class="col-sm-12 col-md-8 col-xl-9">
-          <form>
+          <form  th:action="@{/client/contact-us}" method="post">
 
             <!-- Grid row -->
             <div class="row">
@@ -31,14 +35,14 @@
               <!-- Grid column -->
               <div class="col-md-6">
                 <div class="md-form mb-0">
-                  <input type="text" id="contact-name" class="form-control">
+                  <input type="text" id="contact-name" name="hoten" class="form-control white-text">
                   <label for="contact-name" class="amber-text" th:text="#{batam}"></label>
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="md-form mb-0">
-                  <input type="text" id="contact-email" class="form-control">
+                  <input type="text" id="contact-email" name="email" class="form-control white-text">
                   <label for="contact-email" class="amber-text" th:text="#{bachin}"></label>
                 </div>
               </div>
@@ -51,7 +55,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="md-form mb-0">
-                  <input type="text" id="contact-Subject" class="form-control">
+                  <input type="text" id="contact-Subject" name="chude" class="form-control white-text">
                   <label for="contact-Subject" class="amber-text" th:text="#{bonmot}"></label>
                 </div>
               </div>
@@ -65,7 +69,7 @@
               <div class="col-md-12">
 
                 <div class="md-form mb-0">
-                  <textarea type="text" id="contact-message" class="md-textarea form-control" rows="3"></textarea>
+                  <textarea type="text" id="contact-message" name="noidung" class="md-textarea form-control white-text" rows="3"></textarea>
                   <label for="contact-message" class="amber-text" th:text="#{bonhai}"></label>
                 </div>
 
@@ -73,11 +77,11 @@
             </div>
             <!-- Grid row -->
 
-          </form>
 
           <div class="text-center text-md-left mb-4">
-            <a class="btn btn-amber" th:text="#{bonba}"></a>
+            <button type="submit" class="btn btn-amber" th:text="#{bonba}">GỬI</button>
           </div>
+          </form>
         </div>
         <!-- Grid column -->
 

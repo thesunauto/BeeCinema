@@ -16,8 +16,14 @@ import java.util.Optional;
 //
 //}
 public interface TaikhoanRepository extends PagingAndSortingRepository<Taikhoan, String>, JpaSpecificationExecutor<Taikhoan> {
+    @Query("SELECT p FROM Taikhoan p WHERE CONCAT(p.username, ' ',p.ten) LIKE %?1% AND p.username <> ?2")
+    public Page<Taikhoan> findAll(String keyword,String username, Pageable pageable);
+
     @Query("SELECT p FROM Taikhoan p WHERE CONCAT(p.username, ' ',p.ten) LIKE %?1%")
     public Page<Taikhoan> findAll(String keyword, Pageable pageable);
+
+    @Query("SELECT p FROM Taikhoan p WHERE  p.username <> ?1")
+    public Page<Taikhoan> findAll1(String username,Pageable pageable);
 
     @Query("SELECT p FROM Taikhoan p WHERE p.email = ?1")
 
@@ -30,6 +36,7 @@ public interface TaikhoanRepository extends PagingAndSortingRepository<Taikhoan,
 
     Taikhoan findTaikhoanByUsernameAndEmail(String username, String email);
 
-    List<Taikhoan> findByQuyenId(String idquyen);
+    Taikhoan findByUsername(String username);
 
+    List<Taikhoan> findByQuyenId(String idquyen);
 }

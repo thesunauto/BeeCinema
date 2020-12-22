@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">BEECINEMA</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" th:href="@{/css/mdb.min.css}">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body class="fixed-sn white-skin">
+<div id="loading" style="width: 100%;"></div>
 <!-- Main Navigation -->
 <header>
 
@@ -105,21 +107,6 @@
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-comment"></i><span th:text="#{fourteenthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
-                        </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <a th:href="@{/admin/comment/show-comment}" class="waves-effect" th:text="#{fifteenthWord}"></a>
-                                </li>
-<!--                                <li>-->
-<!--                                    <a th:href="@{/admin/comment/add-comment}" class="waves-effect">Thêm Comment</a>-->
-<!--                                </li>-->
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="collapsible-header waves-effect arrow-r">
                             <i class="w-fa fas fa-image"></i><span th:text="#{sixteenthWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
@@ -162,6 +149,11 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/screenings/show-screenings-v2}" class="waves-effect arrow-r">
+                            <i class="far fa-caret-square-left"></i><span th:text="#{twenty-FifthWord}"></span>
+                        </a>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
@@ -257,7 +249,7 @@
 
         <!-- Breadcrumb -->
         <div class="breadcrumb-dn mr-auto">
-            <p class="font-weight-bold">Tài Khoản</p>
+
         </div>
 
         <!-- Navbar links -->
@@ -273,11 +265,13 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Tài Khoản</span>
+                    <img id="blah123" class="img-fluid z-depth-1 rounded-circle"
+                         style="object-fit: cover;  object-position: center;  width: 30px;  height: 30px;"> <span id="usernamenav" class="clearfix d-none d-sm-inline-block">Tài Khoản</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" th:href="@{/admin/profile/update-profile}" >Cập nhật Tài khoản</a>
-                    <a class="dropdown-item" th:href="@{/logout}" >Đăng xuất</a>
+                    <a class="dropdown-item" th:href="@{/admin/profile/update-profile}" th:text="#{chinbon}">Cập nhật Tài khoản</a>
+                    <a class="dropdown-item" th:href="@{/admin/change-pass}" th:text="#{mot7}">Đổi mật khẩu</a>
+                    <a class="dropdown-item" th:href="@{/logout}" th:text="#{chinnam}">Đăng xuất</a>
                 </div>
             </li>
 
@@ -332,7 +326,41 @@
     // Material Select Initialization
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
+
+        var user = {};
+
+        function loadUser() {
+            $.ajax({
+                url: '/api/employee/getuser',
+                type: 'POST',
+                dataType: 'JSON',
+                success: function (data) {
+                    user = data;
+                },
+                complete: function () {
+                    $("#usernamenav").html(user.ten);
+
+                    $('#username').val(user.username);
+                    $('#password').val(user.password);
+                    $('#ten').val(user.ten);
+                    $('#gioitinh').val(user.gioitinh);
+                    $('#ngaysinh').val(user.ngaysinh);
+                    $('#sdt').val(user.sdt);
+                    $('#email').val(user.email);
+                    $('#image').val(user.image);
+                    $('#blah123').attr('src', '/api/employee/getResourse/'+user.image);
+                }
+            })
+        }
+
+        $('body').ready(loadUser());
     });
+
+    $(window).on('beforeunload', function () {
+        $.ajax({
+            url: '/api/employee/close'
+        });
+    })
 
 </script>
 <th:block layout:fragment="optional" />

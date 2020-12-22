@@ -17,19 +17,36 @@
 
 <main layout:fragment="content">
     <!-- Mega menu -->
-    <div class="container-fluid" style="margin: 0;padding: 0;">
-        <div id="dataFilm" class="row pt-5 wow fadeIn d-flex justify-content-center" data-wow-delay="0.9s"
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="md-form mx-5">
+                                <i class="fas fa-search prefix"></i>
+                                <input type="text" id="form1" class="form-control">
+                                <label for="form1" class="" th:text="#{mot1}"></label>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dataFilm" class="row pt-5 wow fadeIn d-flex justify-content-center" data-wow-delay="0.3s"
              style="min-height: 93vh;">
             <div class="col-10 rgba-white-strong rounded mb-4 shadow">
                 <table class="table ">
-                    <thead class="black white-text">
+                    <thead class="warning-color white-text">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Suất chiếu</th>
-                        <th scope="col">Ghế</th>
-                        <th scope="col">Sự kiện</th>
-                        <th scope="col">Loại giao dịch</th>
-                        <th scope="col">Người tạo</th>
+                        <th scope="col" th:text="#{tammot}"></th>
+                        <th scope="col" th:text="#{tambon}">Ghế</th>
+                        <th scope="col" th:text="#{mot}">Sự kiện</th>
+                        <th scope="col" th:text="#{chintam}">Loại giao dịch</th>
+                        <th scope="col" th:text="#{chinchin}">Người tạo</th>
                     </tr>
                     </thead>
                     <tbody id="dataH">
@@ -72,10 +89,14 @@
     <script>
         $(document).ready(function () {
             $('body').ready(loadHistory());
+            $('#form1').keyup(function () {
+                loadHistory();
+            });
+
             var listH = [];
             function loadHistory() {
                 $.ajax({
-                    url: '/api/employee/getHistory',
+                    url: '/api/employee/getHistory?key='+$('#form1').val(),
                     type: 'POST',
                     dataType: 'JSON',
                     success: function (data) {
@@ -92,6 +113,11 @@ fillHistory();
 
             function fillHistory() {
                 var content ='';
+                if(listH.length==0){
+                    content += '<tr>' +
+                        '<th class="text-center h3 pt-5" colspan="9"> Hôm nay chưa ghi nhận hoạt động nào từ nhân viên </th>' +
+                        '</tr>'
+                }
                 for(var i = 0;i<listH.length;i++){
                     content +='<tr>\n' +
                         '<th scope="row">'+(i+1)+'</th>\n' +
