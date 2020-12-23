@@ -45,7 +45,7 @@
                                     <!-- First column -->
                                     <div class="col-md-4">
                                         <div class="md-form mb-0">
-                                            <input type="text" th:field="*{username}" id="form2" class="form-control ">
+                                            <input type="text" th:field="*{username}" id="form2" class="form-control " required >
                                             <label for="form2" th:text="#{bayhai}"></label>
                                         </div>
                                     </div>
@@ -109,7 +109,7 @@
 
                                     <div class="col-md-6">
                                         <div class="md-form mb-0">
-                                            <input type="text" th:field="*{sodienthoai}" id="form77" class="form-control" required>
+                                            <input type="text" th:field="*{sodienthoai}" id="form77" class="form-control" required pattern="(09|03|07|08|05)+([0-9]{8})">
                                             <label for="form77" th:text="#{baychin}"></label>
                                         </div>
                                     </div>
