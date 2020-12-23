@@ -4,1854 +4,1898 @@
       layout:decorate="~{admin/layout}">
 
 <head>
-  <title>Material Design Bootstrap</title>
+    <title>Thống Kê</title>
 </head>
 
 <body>
 
-  <!-- Main layout -->
-  <main layout:fragment="content">
+<!-- Main layout -->
+<main layout:fragment="content">
     <div class="container-fluid">
 
-      <!-- Section: Intro -->
-      <section class="mt-md-2 pt-md-2 mb-5 pb-4">
+        <!-- Section: Intro -->
+        <section class="mt-md-2 pt-md-2 mb-5 pb-4">
 
-        <!-- Grid row -->
-        <div class="row mb-5">
+            <!-- Grid row -->
+            <div class="row mb-5">
 
-          <!-- Grid column -->
-          <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                <!-- Grid column -->
+                <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
 
-            <!-- Card -->
-            <div class="card card-cascade cascading-admin-card">
+                    <!-- Card -->
+                    <div class="card card-cascade cascading-admin-card">
 
-              <!-- Card Data -->
-              <div class="admin-up">
-                <i class="fas fa-film primary-color mr-3 z-depth-2"></i>
-                <div class="data">
-                  <p class="text-uppercase">Tổng</p>
-                  <h4 class="font-weight-bold dark-grey-text" id="countSlPhimTheoThang"></h4>
+                        <!-- Card Data -->
+                        <div class="admin-up">
+                            <i class="fas fa-ticket-alt warning-color mr-3 z-depth-2"></i>
+                            <div class="data">
+                                <p class="text-uppercase">Tổng</p>
+                                <h4 class="font-weight-bold dark-grey-text" id="countSLVeOnline"></h4>
+                            </div>
+                        </div>
+
+                        <!-- Card content -->
+                        <div class="card-body card-body-cascade">
+                            <div class="progress mb-3">
+                                <hr/>
+                            </div>
+                            <p class="card-text">Vé Online trong tháng</p>
+                        </div>
+
+                    </div>
+                    <!-- Card -->
+
                 </div>
-              </div>
+                <!-- Grid column -->
 
-              <!-- Card content -->
-              <div class="card-body card-body-cascade">
-                <div class="progress mb-3">
-                  <hr/>
+                <!-- Grid column -->
+                <div class="col-xl-4 col-md-6 mb-md-0 mb-4">
+
+                    <!-- Card -->
+                    <div class="card card-cascade cascading-admin-card">
+
+                        <!-- Card Data -->
+                        <div class="admin-up">
+                            <i class="fas fa-ticket-alt light-blue lighten-1 mr-3 z-depth-2"></i>
+                            <div class="data">
+                                <p class="text-uppercase">Tổng</p>
+                                <h4 class="font-weight-bold dark-grey-text" id="countVeTheoThang"></h4>
+                            </div>
+                        </div>
+
+                        <!-- Card content -->
+                        <div class="card-body card-body-cascade">
+                            <div class="progress mb-3">
+                                <hr/>
+                            </div>
+                            <p class="card-text">Vé bán trong tháng</p>
+                        </div>
+
+                    </div>
+                    <!-- Card -->
+
                 </div>
-                <p class="card-text">Phim trong tháng</p>
-              </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-xl-4 col-md-6 mb-0">
+
+                    <!-- Card -->
+                    <div class="card card-cascade cascading-admin-card">
+
+                        <!-- Card Data -->
+                        <div class="admin-up">
+                            <i class="fas fa-chart-bar red accent-2 mr-3 z-depth-2"></i>
+                            <div class="data">
+                                <p class="text-uppercase">Tổng</p>
+                                <h4 class="font-weight-bold dark-grey-text" id="countDoanhThuTheoThang"></h4>
+                            </div>
+                        </div>
+
+                        <!-- Card content -->
+                        <div class="card-body card-body-cascade">
+                            <div class="progress mb-3">
+                                <hr/>
+                            </div>
+                            <p class="card-text">Doanh thu trong tháng</p>
+                        </div>
+
+                    </div>
+                    <!-- Card -->
+
+                </div>
+                <!-- Grid column -->
 
             </div>
-            <!-- Card -->
+            <!-- Grid row -->
 
-          </div>
-          <!-- Grid column -->
+            <!-- Top Table UI -->
 
-          <!-- Grid column -->
-          <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+            <div class="card card-cascade narrower z-depth-1 mt-5">
 
-            <!-- Card -->
-            <div class="card card-cascade cascading-admin-card">
+                <!-- Card image -->
+                <div class="view view-cascade gradient-card-header blue-gradient narrower py-4 mx-4 mb-3 d-flex justify-content-between align-items-center">
 
-              <!-- Card Data -->
-              <div class="admin-up">
-                <i class="fas fa-ticket-alt warning-color mr-3 z-depth-2"></i>
-                <div class="data">
-                  <p class="text-uppercase">Tổng</p>
-                  <h4 class="font-weight-bold dark-grey-text" id="countSlVeChuaBanTheoThang"></h4>
+                    <div class="col-12 justify-content-center">
+                        <h4 class="white-text font-weight-bold text-center">Thống kê</h4>
+                    </div>
+
                 </div>
-              </div>
+                <!-- /Card image -->
 
-              <!-- Card content -->
-              <div class="card-body card-body-cascade">
-                <div class="progress mb-3">
-                  <hr/>
+                <div class="p-2 m-2">
+
+                    <!-- Grid row -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="view overlay zoom">
+                                <div class="card orange lighten-3">
+                                    <div class="card-body m-auto pb-0">
+                                        <i class="fas fa-ticket-alt fa-3x"></i>
+                                    </div>
+                                    <hr>
+                                    <div class="card-body m-auto pt-0">
+                                        <h3 class="font-weight-bold mb-1">Vé</h3>
+                                    </div>
+                                </div>
+                                <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
+                                    <button class="btn btn-outline-white waves-effect " data-toggle="modal"
+                                            data-target="#modal1">CHI TIẾT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="view overlay zoom">
+                                <div class="card indigo lighten-3">
+                                    <div class="card-body m-auto pb-0">
+                                        <i class="fas fa-ticket-alt fa-3x"></i>
+                                    </div>
+                                    <hr>
+                                    <div class="card-body m-auto pt-0">
+                                        <h3 class="font-weight-bold mb-1">Vé Online</h3>
+                                    </div>
+                                </div>
+                                <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
+                                    <button class="btn btn-outline-white waves-effect " data-toggle="modal"
+                                            data-target="#modal2">CHI TIẾT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="view overlay zoom">
+                                <div class="card grey lighten-2">
+                                    <div class="card-body m-auto pb-0">
+                                        <i class="fas fa-film fa-3x"></i>
+                                    </div>
+                                    <hr>
+                                    <div class="card-body m-auto pt-0">
+                                        <h3 class="font-weight-bold mb-1">Phim</h3>
+                                    </div>
+                                </div>
+                                <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
+                                    <button class="btn btn-outline-white waves-effect " data-toggle="modal"
+                                            data-target="#modal3">CHI TIẾT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="view overlay zoom">
+                                <div class="card indigo white-text">
+                                    <div class="card-body m-auto pb-0">
+                                        <i class="fas fa-users fa-3x"></i>
+                                    </div>
+                                    <hr>
+                                    <div class="card-body m-auto pt-0">
+                                        <h3 class="font-weight-bold mb-1">Khách hàng</h3>
+                                    </div>
+                                </div>
+                                <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
+                                    <button class="btn btn-outline-white waves-effect " data-toggle="modal"
+                                            data-target="#modal4">CHI TIẾT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Grid row -->
+
+                    <!-- Grid row -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="view overlay zoom">
+                                <div class="card orange lighten-3">
+                                    <div class="card-body m-auto pb-0">
+                                        <i class="fas fa-calendar-alt fa-3x"></i>
+                                    </div>
+                                    <hr>
+                                    <div class="card-body m-auto pt-0">
+                                        <h3 class="font-weight-bold mb-1">Sự kiện</h3>
+                                    </div>
+                                </div>
+                                <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
+                                    <button class="btn btn-outline-white waves-effect " data-toggle="modal"
+                                            data-target="#modal1">CHI TIẾT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="view overlay zoom">
+                                <div class="card indigo lighten-3">
+                                    <div class="card-body m-auto pb-0">
+                                        <i class="fas fa-clock fa-3x"></i>
+                                    </div>
+                                    <hr>
+                                    <div class="card-body m-auto pt-0">
+                                        <h3 class="font-weight-bold mb-1">Suất Chiếu</h3>
+                                    </div>
+                                </div>
+                                <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
+                                    <button class="btn btn-outline-white waves-effect " data-toggle="modal"
+                                            data-target="#modal1">CHI TIẾT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="view overlay zoom">
+                                <div class="card grey lighten-2">
+                                    <div class="card-body m-auto pb-0">
+                                        <i class="fas fa-door-open fa-3x"></i>
+                                    </div>
+                                    <hr>
+                                    <div class="card-body m-auto pt-0">
+                                        <h3 class="font-weight-bold mb-1">Phòng</h3>
+                                    </div>
+                                </div>
+                                <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
+                                    <button class="btn btn-outline-white waves-effect " data-toggle="modal"
+                                            data-target="#modal1">CHI TIẾT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="view overlay zoom">
+                                <div class="card indigo white-text">
+                                    <div class="card-body m-auto pb-0">
+                                        <i class="fas fa-chair fa-3x"></i>
+                                    </div>
+                                    <hr>
+                                    <div class="card-body m-auto pt-0">
+                                        <h3 class="font-weight-bold mb-1">Ghế</h3>
+                                    </div>
+                                </div>
+                                <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
+                                    <button class="btn btn-outline-white waves-effect " data-toggle="modal"
+                                            data-target="#modal1">CHI TIẾT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Grid row -->
+
+
                 </div>
-                <p class="card-text">Vé chưa bán trong tháng</p>
-              </div>
-
             </div>
-            <!-- Card -->
 
-          </div>
-          <!-- Grid column -->
+            <!-- Bottom Table UI -->
 
-          <!-- Grid column -->
-          <div class="col-xl-3 col-md-6 mb-md-0 mb-4">
-
-            <!-- Card -->
-            <div class="card card-cascade cascading-admin-card">
-
-              <!-- Card Data -->
-              <div class="admin-up">
-                <i class="fas fa-ticket-alt light-blue lighten-1 mr-3 z-depth-2"></i>
-                <div class="data">
-                  <p class="text-uppercase">Tổng</p>
-                  <h4 class="font-weight-bold dark-grey-text" id="countVeTheoThang"></h4>
-                </div>
-              </div>
-
-              <!-- Card content -->
-              <div class="card-body card-body-cascade">
-                <div class="progress mb-3">
-                  <hr/>
-                </div>
-                <p class="card-text">Vé bán trong tháng</p>
-              </div>
-
-            </div>
-            <!-- Card -->
-
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-xl-3 col-md-6 mb-0">
-
-            <!-- Card -->
-            <div class="card card-cascade cascading-admin-card">
-
-              <!-- Card Data -->
-              <div class="admin-up">
-                <i class="fas fa-chart-bar red accent-2 mr-3 z-depth-2"></i>
-                <div class="data">
-                  <p class="text-uppercase">Tổng</p>
-                  <h4 class="font-weight-bold dark-grey-text" id="countDoanhThuTheoThang"></h4>
-                </div>
-              </div>
-
-              <!-- Card content -->
-              <div class="card-body card-body-cascade">
-                <div class="progress mb-3">
-                  <hr/>
-                </div>
-                <p class="card-text">Doanh thu trong tháng</p>
-              </div>
-
-            </div>
-            <!-- Card -->
-
-          </div>
-          <!-- Grid column -->
-
-        </div>
-        <!-- Grid row -->
-
-        <!-- Top Table UI -->
-
-        <div class="card card-cascade narrower z-depth-1 mt-5">
-
-          <!-- Card image -->
-          <div class="view view-cascade gradient-card-header blue-gradient narrower py-4 mx-4 mb-3 d-flex justify-content-between align-items-center">
-
-            <div class="col-12 justify-content-center">
-              <h4 class="white-text font-weight-bold text-center" >Thống kê</h4>
-            </div>
-
-          </div>
-          <!-- /Card image -->
-
-              <div class="p-2 m-2" >
-
-                <!-- Grid row -->
-                <div class="row mb-4">
-                  <div class="col-md-3">
-                    <div class="view overlay zoom">
-                      <div class="card orange lighten-3">
-                        <div class="card-body m-auto pb-0">
-                          <i class="fas fa-ticket-alt fa-3x"></i>
-                        </div>
-                        <hr>
-                        <div class="card-body m-auto pt-0">
-                          <h3 class="font-weight-bold mb-1">Vé</h3>
-                        </div>
-                      </div>
-                      <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
-                        <button class="btn btn-outline-white waves-effect "  data-toggle="modal" data-target="#modal1">CHI TIẾT</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="view overlay zoom">
-                      <div class="card indigo lighten-3">
-                        <div class="card-body m-auto pb-0">
-                          <i class="fas fa-ticket-alt fa-3x"></i>
-                        </div>
-                        <hr>
-                        <div class="card-body m-auto pt-0">
-                          <h3 class="font-weight-bold mb-1">Vé Online</h3>
-                        </div>
-                      </div>
-                      <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
-                        <button class="btn btn-outline-white waves-effect "  data-toggle="modal" data-target="#modal2">CHI TIẾT</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="view overlay zoom">
-                      <div class="card grey lighten-2">
-                        <div class="card-body m-auto pb-0">
-                          <i class="fas fa-film fa-3x"></i>
-                        </div>
-                        <hr>
-                        <div class="card-body m-auto pt-0">
-                          <h3 class="font-weight-bold mb-1">Phim</h3>
-                        </div>
-                      </div>
-                      <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
-                        <button class="btn btn-outline-white waves-effect "  data-toggle="modal" data-target="#modal3">CHI TIẾT</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="view overlay zoom">
-                      <div class="card indigo white-text">
-                        <div class="card-body m-auto pb-0">
-                          <i class="fas fa-users fa-3x"></i>
-                        </div>
-                        <hr>
-                        <div class="card-body m-auto pt-0">
-                          <h3 class="font-weight-bold mb-1">Khách hàng</h3>
-                        </div>
-                      </div>
-                      <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
-                        <button class="btn btn-outline-white waves-effect "  data-toggle="modal" data-target="#modal4">CHI TIẾT</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Grid row -->
-
-                <!-- Grid row -->
-                <div class="row mb-4">
-                  <div class="col-md-3">
-                    <div class="view overlay zoom">
-                      <div class="card orange lighten-3">
-                        <div class="card-body m-auto pb-0">
-                          <i class="fas fa-calendar-alt fa-3x"></i>
-                        </div>
-                        <hr>
-                        <div class="card-body m-auto pt-0">
-                          <h3 class="font-weight-bold mb-1">Sự kiện</h3>
-                        </div>
-                      </div>
-                      <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
-                        <button class="btn btn-outline-white waves-effect "  data-toggle="modal" data-target="#modal1">CHI TIẾT</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="view overlay zoom">
-                      <div class="card indigo lighten-3">
-                        <div class="card-body m-auto pb-0">
-                          <i class="fas fa-clock fa-3x"></i>
-                        </div>
-                        <hr>
-                        <div class="card-body m-auto pt-0">
-                          <h3 class="font-weight-bold mb-1">Suất Chiếu</h3>
-                        </div>
-                      </div>
-                      <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
-                        <button class="btn btn-outline-white waves-effect "  data-toggle="modal" data-target="#modal1">CHI TIẾT</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="view overlay zoom">
-                      <div class="card grey lighten-2">
-                        <div class="card-body m-auto pb-0">
-                          <i class="fas fa-door-open fa-3x"></i>
-                        </div>
-                        <hr>
-                        <div class="card-body m-auto pt-0">
-                          <h3 class="font-weight-bold mb-1">Phòng</h3>
-                        </div>
-                      </div>
-                      <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
-                        <button class="btn btn-outline-white waves-effect "  data-toggle="modal" data-target="#modal1">CHI TIẾT</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="view overlay zoom">
-                      <div class="card indigo white-text">
-                        <div class="card-body m-auto pb-0">
-                          <i class="fas fa-chair fa-3x"></i>
-                        </div>
-                        <hr>
-                        <div class="card-body m-auto pt-0">
-                          <h3 class="font-weight-bold mb-1">Ghế</h3>
-                        </div>
-                      </div>
-                      <div class="mask rgba-black-strong text-center d-flex align-items-center justify-content-center ">
-                        <button class="btn btn-outline-white waves-effect "  data-toggle="modal" data-target="#modal1">CHI TIẾT</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Grid row -->
-
-
-              </div>
-          </div>
-
-              <!-- Bottom Table UI -->
-
-      </section>
-      <!-- Section: Intro -->
+        </section>
+        <!-- Section: Intro -->
 
 
     </div>
-      <!--ve-->
-      <div class="modal fade bd-example-modal-xl" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-           aria-hidden="true" >
-          <div class="modal-dialog modal-xl" role="document">
-              <div class="modal-content">
-                  <div class="modal-header p-2">
-                      <h5 class="modal-title">Vé</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body table-responsive" style="height: 400px">
-                      <div class="row">
-                          <div class="col-md-3 p-2 ">
-                              <div class="list-group" id="list-tab1" role="tablist">
-                                  <a class="list-group-item list-group-item-action active"  data-toggle="list" href="#list11"
-                                     role="tab" aria-controls="home">Tất cả Vé đã bán</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list12"
-                                     role="tab" aria-controls="profile">Vé đã bán trong ngày</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list13"
-                                     role="tab" aria-controls="messages">Vé đã bán trong tháng</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list13"
-                                     role="tab" aria-controls="messages">Vé đã bán trong năm</a>
-                              </div>
-                          </div>
-                          <div class="col-md-9 p-2 ">
-                              <div class="tab-content m-0 p-0" id="nav-tabContent1">
+    <!--ve-->
+    <div class="modal fade bd-example-modal-xl" id="modal1" tabindex="-1" role="dialog"
+         aria-labelledby="myExtraLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header p-2">
+                    <h5 class="modal-title">Vé</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body table-responsive" style="height: 400px">
+                    <div class="row">
+                        <div class="col-md-3 p-2 ">
+                            <div class="list-group" id="list-tab1" role="tablist">
+                                <a class="list-group-item list-group-item-action active" data-toggle="list"
+                                   href="#list11"
+                                   role="tab" aria-controls="home">Tất cả Vé đã bán</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list12"
+                                   role="tab" aria-controls="profile">Vé đã bán trong ngày</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list13"
+                                   role="tab" aria-controls="messages">Vé đã bán trong tháng</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list13"
+                                   role="tab" aria-controls="messages">Vé đã bán trong năm</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9 p-2 ">
+                            <div class="tab-content m-0 p-0" id="nav-tabContent1">
 
-                                  <!-- Tất cả vé đã bán-->
+                                <!-- Tất cả vé đã bán-->
 
-                                  <div class="tab-pane fade show active" id="list11" role="tabpanel" aria-labelledby="list11">
-                                      <div class="row">
-                                          <div class="col-md-5 mb-1">
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlstartdate11" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlenddate11" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
-                                              <div class="md-form md-outline">
-                                                  <button id="searchdata11"><i class="fas fa-search" title="tìm kiếm"></i> </button>
-                                              </div>
+                                <div class="tab-pane fade show active" id="list11" role="tabpanel"
+                                     aria-labelledby="list11">
+                                    <div class="row">
+                                        <div class="col-md-5 mb-1">
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlstartdate11" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlenddate11" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
+                                            <div class="md-form md-outline">
+                                                <button id="searchdata11"><i class="fas fa-search" title="tìm kiếm"></i>
+                                                </button>
+                                            </div>
 
-                                          </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Phim</th>
-                                                  <th scope="col">Khung Giờ</th>
-                                                  <th scope="col">Ngày Chiếu</th>
-                                                  <th scope="col">Tên Phòng</th>
-                                                  <th scope="col">Ghế</th>
-                                                  <th scope="col">Sự kiện</th>
-                                                  <th scope="col">Giá</th>
-                                                  <th scope="col">Nhân viên</th>
-                                                  <th scope="col">Ngày mua</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data11">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe11"/> </h5> <h5>Tổng tiền: <span id="tongTienVe11"/></h5>
-                                      </div>
-                                  </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Phim</th>
+                                                <th scope="col">Khung Giờ</th>
+                                                <th scope="col">Ngày Chiếu</th>
+                                                <th scope="col">Tên Phòng</th>
+                                                <th scope="col">Ghế</th>
+                                                <th scope="col">Sự kiện</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Nhân viên</th>
+                                                <th scope="col">Ngày mua</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data11">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe11"/></h5> <h5>Tổng tiền: <span id="tongTienVe11"/>
+                                    </h5>
+                                    </div>
+                                </div>
 
-                                    <!--    Tất cả vé đã bán -->
+                                <!--    Tất cả vé đã bán -->
 
-                                  <div class="tab-pane fade" id="list12" role="tabpanel" aria-labelledby="list12">
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Phim</th>
-                                                  <th scope="col">Khung Giờ</th>
-                                                  <th scope="col">Ngày Chiếu</th>
-                                                  <th scope="col">Tên Phòng</th>
-                                                  <th scope="col">Ghế</th>
-                                                  <th scope="col">Sự kiện</th>
-                                                  <th scope="col">Giá</th>
-                                                  <th scope="col">Nhân viên</th>
-                                                  <th scope="col">Ngày mua</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data12">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe12"/> </h5> <h5>Tổng tiền: <span id="tongTienVe12"/></h5>
-                                      </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="list13" role="tabpanel" aria-labelledby="list13">
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Phim</th>
-                                                  <th scope="col">Khung Giờ</th>
-                                                  <th scope="col">Ngày Chiếu</th>
-                                                  <th scope="col">Tên Phòng</th>
-                                                  <th scope="col">Ghế</th>
-                                                  <th scope="col">Sự kiện</th>
-                                                  <th scope="col">Giá</th>
-                                                  <th scope="col">Nhân viên</th>
-                                                  <th scope="col">Ngày mua</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data13">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe13"/> </h5> <h5>Tổng tiền: <span id="tongTienVe13"/></h5>
-                                      </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="list14" role="tabpanel" aria-labelledby="list34">
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Phim</th>
-                                                  <th scope="col">Khung Giờ</th>
-                                                  <th scope="col">Ngày Chiếu</th>
-                                                  <th scope="col">Tên Phòng</th>
-                                                  <th scope="col">Ghế</th>
-                                                  <th scope="col">Sự kiện</th>
-                                                  <th scope="col">Giá</th>
-                                                  <th scope="col">Nhân viên</th>
-                                                  <th scope="col">Ngày mua</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data14">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe14"/> </h5> <h5>Tổng tiền: <span id="tongTienVe14"/></h5>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+                                <div class="tab-pane fade" id="list12" role="tabpanel" aria-labelledby="list12">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Phim</th>
+                                                <th scope="col">Khung Giờ</th>
+                                                <th scope="col">Ngày Chiếu</th>
+                                                <th scope="col">Tên Phòng</th>
+                                                <th scope="col">Ghế</th>
+                                                <th scope="col">Sự kiện</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Nhân viên</th>
+                                                <th scope="col">Ngày mua</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data12">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe12"/></h5> <h5>Tổng tiền: <span id="tongTienVe12"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list13" role="tabpanel" aria-labelledby="list13">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Phim</th>
+                                                <th scope="col">Khung Giờ</th>
+                                                <th scope="col">Ngày Chiếu</th>
+                                                <th scope="col">Tên Phòng</th>
+                                                <th scope="col">Ghế</th>
+                                                <th scope="col">Sự kiện</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Nhân viên</th>
+                                                <th scope="col">Ngày mua</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data13">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe13"/></h5> <h5>Tổng tiền: <span id="tongTienVe13"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list14" role="tabpanel" aria-labelledby="list34">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Phim</th>
+                                                <th scope="col">Khung Giờ</th>
+                                                <th scope="col">Ngày Chiếu</th>
+                                                <th scope="col">Tên Phòng</th>
+                                                <th scope="col">Ghế</th>
+                                                <th scope="col">Sự kiện</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Nhân viên</th>
+                                                <th scope="col">Ngày mua</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data14">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe14"/></h5> <h5>Tổng tiền: <span id="tongTienVe14"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!--ve-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--ve-->
 
-<!--     <veonline>-->
-      <div class="modal fade bd-example-modal-xl" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-           aria-hidden="true" >
-          <div class="modal-dialog modal-xl" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" >Vé Online</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body table-responsive" style="height: 400px">
-                      <div class="row">
-                          <div class="col-md-3 p-2 ">
-                              <div class="list-group" id="list-tab2" role="tablist">
-                                  <a class="list-group-item list-group-item-action active"  data-toggle="list" href="#list21"
-                                     role="tab" aria-controls="home">Tất cả Vé Online đã đặt</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list22"
-                                     role="tab" aria-controls="profile">Vé Online đã đặt trong ngày</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list23"
-                                     role="tab" aria-controls="messages">Vé Online đã đặt trong tháng</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list23"
-                                     role="tab" aria-controls="messages">Vé Online đã đặt trong năm</a>
-                              </div>
-                          </div>
-                          <div class="col-md-9 p-2 ">
-                              <div class="tab-content m-0 p-0" id="nav-tabContent2">
+    <!--     <veonline>-->
+    <div class="modal fade bd-example-modal-xl" id="modal2" tabindex="-1" role="dialog"
+         aria-labelledby="myExtraLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Vé Online</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body table-responsive" style="height: 400px">
+                    <div class="row">
+                        <div class="col-md-3 p-2 ">
+                            <div class="list-group" id="list-tab2" role="tablist">
+                                <a class="list-group-item list-group-item-action active" data-toggle="list"
+                                   href="#list21"
+                                   role="tab" aria-controls="home">Tất cả Vé Online đã đặt</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list22"
+                                   role="tab" aria-controls="profile">Vé Online đã đặt trong ngày</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list23"
+                                   role="tab" aria-controls="messages">Vé Online đã đặt trong tháng</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list23"
+                                   role="tab" aria-controls="messages">Vé Online đã đặt trong năm</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9 p-2 ">
+                            <div class="tab-content m-0 p-0" id="nav-tabContent2">
 
-                                  <!-- Tất cả vé online đã bán-->
+                                <!-- Tất cả vé online đã bán-->
 
-                                  <div class="tab-pane fade show active" id="list21" role="tabpanel" aria-labelledby="list21">
-                                      <div class="row">
-                                          <div class="col-md-5 mb-1">
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlstartdate21" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlenddate21" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
-                                              <div class="md-form md-outline">
-                                                  <button id="searchdata21"><i class="fas fa-search" title="tìm kiếm"></i> </button>
-                                              </div>
+                                <div class="tab-pane fade show active" id="list21" role="tabpanel"
+                                     aria-labelledby="list21">
+                                    <div class="row">
+                                        <div class="col-md-5 mb-1">
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlstartdate21" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlenddate21" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
+                                            <div class="md-form md-outline">
+                                                <button id="searchdata21"><i class="fas fa-search" title="tìm kiếm"></i>
+                                                </button>
+                                            </div>
 
-                                          </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Phim</th>
-                                                  <th scope="col">Khung Giờ</th>
-                                                  <th scope="col">Ngày Chiếu</th>
-                                                  <th scope="col">Tên Phòng</th>
-                                                  <th scope="col">Ghế</th>
-                                                  <th scope="col">Sự kiện</th>
-                                                  <th scope="col">Giá</th>
-                                                  <th scope="col">Khách hàng</th>
-                                                  <th scope="col">Ngày mua</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data21">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe21"/> </h5> <h5>Tổng tiền: <span id="tongTienVe21"/></h5>
-                                      </div>
-                                  </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Phim</th>
+                                                <th scope="col">Khung Giờ</th>
+                                                <th scope="col">Ngày Chiếu</th>
+                                                <th scope="col">Tên Phòng</th>
+                                                <th scope="col">Ghế</th>
+                                                <th scope="col">Sự kiện</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Khách hàng</th>
+                                                <th scope="col">Ngày mua</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data21">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe21"/></h5> <h5>Tổng tiền: <span id="tongTienVe21"/>
+                                    </h5>
+                                    </div>
+                                </div>
 
-                                  <!--    Tất cả vé online đã bán -->
+                                <!--    Tất cả vé online đã bán -->
 
-                                  <div class="tab-pane fade" id="list22" role="tabpanel" aria-labelledby="list22">
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Phim</th>
-                                                  <th scope="col">Khung Giờ</th>
-                                                  <th scope="col">Ngày Chiếu</th>
-                                                  <th scope="col">Tên Phòng</th>
-                                                  <th scope="col">Ghế</th>
-                                                  <th scope="col">Sự kiện</th>
-                                                  <th scope="col">Giá</th>
-                                                  <th scope="col">Khách hàng</th>
-                                                  <th scope="col">Ngày mua</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data22">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe22"/> </h5> <h5>Tổng tiền: <span id="tongTienVe22"/></h5>
-                                      </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="list23" role="tabpanel" aria-labelledby="list23">
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Phim</th>
-                                                  <th scope="col">Khung Giờ</th>
-                                                  <th scope="col">Ngày Chiếu</th>
-                                                  <th scope="col">Tên Phòng</th>
-                                                  <th scope="col">Ghế</th>
-                                                  <th scope="col">Sự kiện</th>
-                                                  <th scope="col">Giá</th>
-                                                  <th scope="col">Khách hàng</th>
-                                                  <th scope="col">Ngày mua</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data23">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe23"/> </h5> <h5>Tổng tiền: <span id="tongTienVe23"/></h5>
-                                      </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="list24" role="tabpanel" aria-labelledby="list24">
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Phim</th>
-                                                  <th scope="col">Khung Giờ</th>
-                                                  <th scope="col">Ngày Chiếu</th>
-                                                  <th scope="col">Tên Phòng</th>
-                                                  <th scope="col">Ghế</th>
-                                                  <th scope="col">Sự kiện</th>
-                                                  <th scope="col">Giá</th>
-                                                  <th scope="col">Khách hàng</th>
-                                                  <th scope="col">Ngày mua</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data24">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe24"/> </h5> <h5>Tổng tiền: <span id="tongTienVe24"/></h5>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!--     <veonline>-->
+                                <div class="tab-pane fade" id="list22" role="tabpanel" aria-labelledby="list22">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Phim</th>
+                                                <th scope="col">Khung Giờ</th>
+                                                <th scope="col">Ngày Chiếu</th>
+                                                <th scope="col">Tên Phòng</th>
+                                                <th scope="col">Ghế</th>
+                                                <th scope="col">Sự kiện</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Khách hàng</th>
+                                                <th scope="col">Ngày mua</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data22">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe22"/></h5> <h5>Tổng tiền: <span id="tongTienVe22"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list23" role="tabpanel" aria-labelledby="list23">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Phim</th>
+                                                <th scope="col">Khung Giờ</th>
+                                                <th scope="col">Ngày Chiếu</th>
+                                                <th scope="col">Tên Phòng</th>
+                                                <th scope="col">Ghế</th>
+                                                <th scope="col">Sự kiện</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Khách hàng</th>
+                                                <th scope="col">Ngày mua</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data23">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe23"/></h5> <h5>Tổng tiền: <span id="tongTienVe23"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list24" role="tabpanel" aria-labelledby="list24">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Phim</th>
+                                                <th scope="col">Khung Giờ</th>
+                                                <th scope="col">Ngày Chiếu</th>
+                                                <th scope="col">Tên Phòng</th>
+                                                <th scope="col">Ghế</th>
+                                                <th scope="col">Sự kiện</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Khách hàng</th>
+                                                <th scope="col">Ngày mua</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data24">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe24"/></h5> <h5>Tổng tiền: <span id="tongTienVe24"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     <veonline>-->
 
-      <!--     <phim>-->
-      <div class="modal fade bd-example-modal-xl" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-           aria-hidden="true" >
-          <div class="modal-dialog modal-xl" role="document">
-              <div class="modal-content">
-                  <div class="modal-header p-2">
-                      <h5 class="modal-title" >Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body table-responsive" style="height: 400px">
-                      <div class="row">
-                          <div class="col-md-3 p-2 ">
-                              <div class="list-group" id="list-tab" role="tablist">
-                                  <a class="list-group-item list-group-item-action active"  data-toggle="list" href="#list31"
-                                     role="tab" aria-controls="home">Phim xem nhiều nhất</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list32"
-                                     role="tab" aria-controls="profile">Thể loại phim xem nhiều nhất</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list33"
-                                     role="tab" aria-controls="messages">Độ tuổi phim xem nhiều nhất</a>
-                              </div>
-                          </div>
-                          <div class="col-md-9 p-2 ">
-                              <div class="tab-content m-0 p-0" id="nav-tabContent">
-                                  <!--     <phim xem nhieu nhat>-->
-                                  <div class="tab-pane fade show active" id="list31" role="tabpanel" aria-labelledby="list31">
-                                      <div class="row">
-                                          <div class="col-md-5 mb-1">
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlstartdate31" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlenddate31" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
-                                              <div class="md-form md-outline">
-                                                  <button id="searchdata31"><i class="fas fa-search" title="tìm kiếm"></i> </button>
-                                              </div>
+    <!--     <phim>-->
+    <div class="modal fade bd-example-modal-xl" id="modal3" tabindex="-1" role="dialog"
+         aria-labelledby="myExtraLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header p-2">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body table-responsive" style="height: 400px">
+                    <div class="row">
+                        <div class="col-md-3 p-2 ">
+                            <div class="list-group" id="list-tab" role="tablist">
+                                <a class="list-group-item list-group-item-action active" data-toggle="list"
+                                   href="#list31"
+                                   role="tab" aria-controls="home">Phim xem nhiều nhất</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list32"
+                                   role="tab" aria-controls="profile">Thể loại phim xem nhiều nhất</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list33"
+                                   role="tab" aria-controls="messages">Độ tuổi phim xem nhiều nhất</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9 p-2 ">
+                            <div class="tab-content m-0 p-0" id="nav-tabContent">
+                                <!--     <phim xem nhieu nhat>-->
+                                <div class="tab-pane fade show active" id="list31" role="tabpanel"
+                                     aria-labelledby="list31">
+                                    <div class="row">
+                                        <div class="col-md-5 mb-1">
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlstartdate31" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlenddate31" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
+                                            <div class="md-form md-outline">
+                                                <button id="searchdata31"><i class="fas fa-search" title="tìm kiếm"></i>
+                                                </button>
+                                            </div>
 
-                                          </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Phim</th>
-                                                  <th scope="col">Số Vé</th>
-                                                  <th scope="col">Tổng tiền</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data31">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe31"/> </h5> <h5>Tổng tiền: <span id="tongTienVe31"/></h5>
-                                      </div>
-                                  </div>
-                                  <!--     <phim xem nhieu nhat>-->
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Phim</th>
+                                                <th scope="col">Số Vé</th>
+                                                <th scope="col">Tổng tiền</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data31">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe31"/></h5> <h5>Tổng tiền: <span id="tongTienVe31"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                                <!--     <phim xem nhieu nhat>-->
 
-                                  <div class="tab-pane fade" id="list32" role="tabpanel" aria-labelledby="list32">
-                                      <div class="row">
-                                          <div class="col-md-5 mb-1">
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlstartdate32" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlenddate32" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
-                                              <div class="md-form md-outline">
-                                                  <button id="searchdata32"><i class="fas fa-search" title="tìm kiếm"></i> </button>
-                                              </div>
+                                <div class="tab-pane fade" id="list32" role="tabpanel" aria-labelledby="list32">
+                                    <div class="row">
+                                        <div class="col-md-5 mb-1">
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlstartdate32" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlenddate32" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
+                                            <div class="md-form md-outline">
+                                                <button id="searchdata32"><i class="fas fa-search" title="tìm kiếm"></i>
+                                                </button>
+                                            </div>
 
-                                          </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Loại Phim</th>
-                                                  <th scope="col">Số Vé</th>
-                                                  <th scope="col">Tổng tiền</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data32">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe32"/> </h5> <h5>Tổng tiền: <span id="tongTienVe32"/></h5>
-                                      </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="list33" role="tabpanel" aria-labelledby="list33">
-                                      <div class="row">
-                                          <div class="col-md-5 mb-1">
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlstartdate33" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlenddate33" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
-                                              <div class="md-form md-outline">
-                                                  <button id="searchdata33"><i class="fas fa-search" title="tìm kiếm"></i> </button>
-                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Loại Phim</th>
+                                                <th scope="col">Số Vé</th>
+                                                <th scope="col">Tổng tiền</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data32">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe32"/></h5> <h5>Tổng tiền: <span id="tongTienVe32"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list33" role="tabpanel" aria-labelledby="list33">
+                                    <div class="row">
+                                        <div class="col-md-5 mb-1">
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlstartdate33" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlenddate33" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
+                                            <div class="md-form md-outline">
+                                                <button id="searchdata33"><i class="fas fa-search" title="tìm kiếm"></i>
+                                                </button>
+                                            </div>
 
-                                          </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Độ Tuổi</th>
-                                                  <th scope="col">Số Vé</th>
-                                                  <th scope="col">Tổng tiền</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data33">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe33"/> </h5> <h5>Tổng tiền: <span id="tongTienVe33"/></h5>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Độ Tuổi</th>
+                                                <th scope="col">Số Vé</th>
+                                                <th scope="col">Tổng tiền</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data33">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe33"/></h5> <h5>Tổng tiền: <span id="tongTienVe33"/>
+                                    </h5>
 
-                                      </div>
-                              </div>
-                          </div>
-                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-      </div>
-      <!--     <phim>-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     <phim>-->
 
-      <!--     <khachhang>-->
-      <div class="modal fade bd-example-modal-xl" id="modal4" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-           aria-hidden="true" >
-          <div class="modal-dialog modal-xl" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" >Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                  </div>
-                  <div class="modal-body table-responsive" style="height: 400px">
-                      <div class="row">
-                          <div class="col-md-3 p-2 ">
-                              <div class="list-group" id="list-tab3" role="tablist">
-                                  <a class="list-group-item list-group-item-action active"  data-toggle="list" href="#list41"
-                                     role="tab" aria-controls="home">Tất cả Khách hàng đã đặt vé</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list42"
-                                     role="tab" aria-controls="profile">Khách hàng đặt vé trong ngày</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list43"
-                                     role="tab" aria-controls="messages">Khách hàng đặt vé trong tháng</a>
-                                  <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list44"
-                                     role="tab" aria-controls="messages">Khách hàng đặt vé trong năm</a>
-                              </div>
-                          </div>
-                          <div class="col-md-9 p-2 ">
-                              <div class="tab-content m-0 p-0" id="nav-tabContent3">
+    <!--     <khachhang>-->
+    <div class="modal fade bd-example-modal-xl" id="modal4" tabindex="-1" role="dialog"
+         aria-labelledby="myExtraLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body table-responsive" style="height: 400px">
+                    <div class="row">
+                        <div class="col-md-3 p-2 ">
+                            <div class="list-group" id="list-tab3" role="tablist">
+                                <a class="list-group-item list-group-item-action active" data-toggle="list"
+                                   href="#list41"
+                                   role="tab" aria-controls="home">Tất cả Khách hàng đã đặt vé</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list42"
+                                   role="tab" aria-controls="profile">Khách hàng đặt vé trong ngày</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list43"
+                                   role="tab" aria-controls="messages">Khách hàng đặt vé trong tháng</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list44"
+                                   role="tab" aria-controls="messages">Khách hàng đặt vé trong năm</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9 p-2 ">
+                            <div class="tab-content m-0 p-0" id="nav-tabContent3">
 
-                                  <!-- Tất cả vé online đã bán-->
+                                <!-- Tất cả vé online đã bán-->
 
-                                  <div class="tab-pane fade show active" id="list41" role="tabpanel" aria-labelledby="list41">
-                                      <div class="row">
-                                          <div class="col-md-5 mb-1">
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlstartdate41" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-3 mb-1">
-                                              <div class="md-form md-outline datepicker">
-                                                  <i class="fas fa-calendar-alt prefix"></i>
-                                                  <input type="date" id="vlenddate41" class="form-control" >
-                                              </div>
-                                          </div>
-                                          <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
-                                              <div class="md-form md-outline">
-                                                  <button id="searchdata41"><i class="fas fa-search" title="tìm kiếm"></i> </button>
-                                              </div>
+                                <div class="tab-pane fade show active" id="list41" role="tabpanel"
+                                     aria-labelledby="list41">
+                                    <div class="row">
+                                        <div class="col-md-5 mb-1">
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlstartdate41" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-1">
+                                            <div class="md-form md-outline datepicker">
+                                                <i class="fas fa-calendar-alt prefix"></i>
+                                                <input type="date" id="vlenddate41" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mb-1 pl-0 d-flex align-items-center">
+                                            <div class="md-form md-outline">
+                                                <button id="searchdata41"><i class="fas fa-search" title="tìm kiếm"></i>
+                                                </button>
+                                            </div>
 
-                                          </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Khách Hàng</th>
-                                                  <th scope="col">Tổng Vé</th>
-                                                  <th scope="col">Tổng Tiền</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data41">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe41"/> </h5> <h5>Tổng tiền: <span id="tongTienVe41"/></h5>
-                                      </div>
-                                  </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Khách Hàng</th>
+                                                <th scope="col">Tổng Vé</th>
+                                                <th scope="col">Tổng Tiền</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data41">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe41"/></h5> <h5>Tổng tiền: <span id="tongTienVe41"/>
+                                    </h5>
+                                    </div>
+                                </div>
 
-                                  <!--    Tất cả vé online đã bán -->
+                                <!--    Tất cả vé online đã bán -->
 
-                                  <div class="tab-pane fade" id="list42" role="tabpanel" aria-labelledby="list42">
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Khách Hàng</th>
-                                                  <th scope="col">Tổng Vé</th>
-                                                  <th scope="col">Tổng Tiền</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data42">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe42"/> </h5> <h5>Tổng tiền: <span id="tongTienVe42"/></h5>
-                                      </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="list43" role="tabpanel" aria-labelledby="list43">
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Khách Hàng</th>
-                                                  <th scope="col">Tổng Vé</th>
-                                                  <th scope="col">Tổng Tiền</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data43">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe43"/> </h5> <h5>Tổng tiền: <span id="tongTienVe43"/></h5>
-                                      </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="list44" role="tabpanel" aria-labelledby="list44">
-                                      <div class="table-responsive">
-                                          <table class="table" >
-                                              <thead class="black white-text">
-                                              <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Khách Hàng</th>
-                                                  <th scope="col">Tổng Vé</th>
-                                                  <th scope="col">Tổng Tiền</th>
-                                              </tr>
-                                              </thead>
-                                              <tbody id="data44">
-                                              </tbody>
-                                          </table>
-                                          <h5>Tổng vé: <span id="tongVe44"/> </h5> <h5>Tổng tiền: <span id="tongTienVe44"/></h5>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!--     <khachhang>-->
-      </div>
+                                <div class="tab-pane fade" id="list42" role="tabpanel" aria-labelledby="list42">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Khách Hàng</th>
+                                                <th scope="col">Tổng Vé</th>
+                                                <th scope="col">Tổng Tiền</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data42">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe42"/></h5> <h5>Tổng tiền: <span id="tongTienVe42"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list43" role="tabpanel" aria-labelledby="list43">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Khách Hàng</th>
+                                                <th scope="col">Tổng Vé</th>
+                                                <th scope="col">Tổng Tiền</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data43">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe43"/></h5> <h5>Tổng tiền: <span id="tongTienVe43"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="list44" role="tabpanel" aria-labelledby="list44">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="black white-text">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Khách Hàng</th>
+                                                <th scope="col">Tổng Vé</th>
+                                                <th scope="col">Tổng Tiền</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="data44">
+                                            </tbody>
+                                        </table>
+                                        <h5>Tổng vé: <span id="tongVe44"/></h5> <h5>Tổng tiền: <span id="tongTienVe44"/>
+                                    </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     <khachhang>-->
+    </div>
 
 
-
-  </main>
-  <!-- Main layout -->
-  <th:block layout:fragment="optional">
+</main>
+<!-- Main layout -->
+<th:block layout:fragment="optional">
     <script>
-      $(document).ready(function () {
-        $('body').ready(countSlPhimTheoThang());
-        $('body').ready(countSlVeChuaBanTheoThang());
-        $('body').ready(loadListAllVe());
-        $('body').ready(loadListAllVeTheoNgay());
-        $('body').ready(loadListAllVeTheoThang());
-        $('body').ready(loadListAllVeTheoNam());
-        $('body').ready(loadListAllPhim());
-        $('body').ready(loadListAllVeOnline());
-        $('body').ready(loadListAllVeOnlineTheoNgay());
-        $('body').ready(loadListAllVeOnlineTheoThang());
-        $('body').ready(loadListAllVeOnlineTheoNam());
-        $('body').ready(loadListAllLoaiPhim());
-        $('body').ready(loadListAllDoTuoi());
-        $('body').ready(loadListAllTaiKhoan());
-        $('body').ready(loadListAllTaiKhoanTheoNgay());
-        $('body').ready(loadListAllTaiKhoanTheoThang());
-        $('body').ready(loadListAllTaiKhoanTheoNam());
+        $(document).ready(function () {
+            $('body').ready(loadListAllVe());
+            $('body').ready(loadListAllVeTheoNgay());
+            $('body').ready(loadListAllVeTheoThang());
+            $('body').ready(loadListAllVeTheoNam());
+            $('body').ready(loadListAllPhim());
+            $('body').ready(loadListAllVeOnline());
+            $('body').ready(loadListAllVeOnlineTheoNgay());
+            $('body').ready(loadListAllVeOnlineTheoThang());
+            $('body').ready(loadListAllVeOnlineTheoNam());
+            $('body').ready(loadListAllLoaiPhim());
+            $('body').ready(loadListAllDoTuoi());
+            $('body').ready(loadListAllTaiKhoan());
+            $('body').ready(loadListAllTaiKhoanTheoNgay());
+            $('body').ready(loadListAllTaiKhoanTheoThang());
+            $('body').ready(loadListAllTaiKhoanTheoNam());
+            $('body').ready(vedataiquay());
 
 
-        function countSlPhimTheoThang() {
-          $.ajax({
-            url: '/api/dashboards/countSlPhimTheoThang',
-            type: 'POST',
-            dataType: 'JSON',
-            contentType: 'application/json',
-            processData: false,
-            success: function (data) {
-              $('#countSlPhimTheoThang').text(data);
-            },
-            complete: function () {
 
-            },
-            error: function () {
-              toastr.error('không load được dữ liệu tong cong từ máy chủ', '', {positionClass: 'md-toast-top-right'});
-            }
-          });
-        };
+            function countSlPhimTheoThang() {
+                $.ajax({
+                    url: '/api/dashboards/countSlPhimTheoThang',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (data) {
+                        $('#countSlPhimTheoThang').text(data);
+                    },
+                    complete: function () {
 
-        function countSlVeChuaBanTheoThang() {
-          $.ajax({
-            url: '/api/dashboards/countSlVeChuaBanTheoThang',
-            type: 'POST',
-            dataType: 'JSON',
-            contentType: 'application/json',
-            processData: false,
-            success: function (data) {
-              $('#countSlVeChuaBanTheoThang').text(data);
-            },
-            complete: function () {
+                    },
+                    error: function () {
+                        toastr.error('không load được dữ liệu tong cong từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+            };
 
-            },
-            error: function () {
-              toastr.error('không load được dữ liệu tong cong từ máy chủ', '', {positionClass: 'md-toast-top-right'});
-            }
-          });
-        };
+            function countSlVeChuaBanTheoThang() {
+                $.ajax({
+                    url: '/api/dashboards/countSlVeChuaBanTheoThang',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json',
+                    processData: false,
+                    success: function (data) {
+                        $('#countSlVeChuaBanTheoThang').text(data);
+                    },
+                    complete: function () {
 
-          // <---TK ve--->
+                    },
+                    error: function () {
+                        toastr.error('không load được dữ liệu tong cong từ máy chủ', '', {positionClass: 'md-toast-top-right'});
+                    }
+                });
+            };
 
-                // <---TK tat ca ve--->
-          var data11 = [];
-          function loadListAllVe() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = '2020-01-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopVe/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data11 = data;
-                  },
-                  complete: function () {
-                      listAllVe();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
+            // <---TK ve--->
 
-          $('#searchdata11').click(function () {
-              var startdate = $('#vlstartdate11').val();
-              var enddate = $('#vlenddate11').val();
-              $.ajax({
-                  url: '/api/dashboards/listTopVe/'+startdate+'|'+enddate,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data11 = data;
-                  },
-                  complete: function () {
-                      listAllVe();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
+            // <---TK tat ca ve--->
+            var data11 = [];
 
+            function loadListAllVe() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = '2020-01-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopVe/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data11 = data;
+                    },
+                    complete: function () {
+                        listAllVe();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
 
-          });
-
-          function listAllVe() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data11.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data11[i].tenphim+'</td>\n' +
-                      '<td>'+data11[i].khunggio+'</td>\n' +
-                      '<td>'+data11[i].ngaychieu+'</td>\n' +
-                      '<td>'+data11[i].phong+'</td>\n' +
-                      '<td>'+data11[i].tenghe+'</td>\n' +
-                      '<td>'+data11[i].sukien+'</td>\n' +
-                      '<td>'+data11[i].tongtien+'</td>\n' +
-                      '<td>'+data11[i].nhanvien+'</td>\n' +
-                      '<td>'+data11[i].ngaymua+'</td>\n' +
-                      '</tr>';
-                  tongtien += data11[i].tongtien;
-                  tongve++;
-              }
-              $('#data11').html(content);
-              $('#tongTienVe11').text(tongtien);
-              $('#tongVe11').text(tongve);
-          };
-          // <---TK tat ca ve--->
-
-          // <---TK ve theo ngay--->
-          var data12 = [];
-          function loadListAllVeTheoNgay() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = y+'-'+m+'-'+d;
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopVe/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data12 = data;
-                  },
-                  complete: function () {
-                      listAllVeTheoNgay();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          function listAllVeTheoNgay() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data12.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data12[i].tenphim+'</td>\n' +
-                      '<td>'+data12[i].khunggio+'</td>\n' +
-                      '<td>'+data12[i].ngaychieu+'</td>\n' +
-                      '<td>'+data12[i].phong+'</td>\n' +
-                      '<td>'+data12[i].tenghe+'</td>\n' +
-                      '<td>'+data12[i].sukien+'</td>\n' +
-                      '<td>'+data12[i].tongtien+'</td>\n' +
-                      '<td>'+data12[i].nhanvien+'</td>\n' +
-                      '<td>'+data12[i].ngaymua+'</td>\n' +
-                      '</tr>';
-                  tongtien += data12[i].tongtien;
-                  tongve++;
-              }
-              $('#data12').html(content);
-              $('#tongTienVe12').text(tongtien);
-              $('#tongVe12').text(tongve);
-          };
-          // <---TK ve theo ngay--->
-
-          // <---TK ve theo thang--->
-          var data13 = [];
-          function loadListAllVeTheoThang() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = y+'-'+m+'-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopVe/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data13 = data;
-                  },
-                  complete: function () {
-                      listAllVeTheoThang();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          function listAllVeTheoThang() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data13.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data13[i].tenphim+'</td>\n' +
-                      '<td>'+data13[i].khunggio+'</td>\n' +
-                      '<td>'+data13[i].ngaychieu+'</td>\n' +
-                      '<td>'+data13[i].phong+'</td>\n' +
-                      '<td>'+data13[i].tenghe+'</td>\n' +
-                      '<td>'+data13[i].sukien+'</td>\n' +
-                      '<td>'+data13[i].tongtien+'</td>\n' +
-                      '<td>'+data13[i].nhanvien+'</td>\n' +
-                      '<td>'+data13[i].ngaymua+'</td>\n' +
-                      '</tr>';
-                  tongtien += data13[i].tongtien;
-                  tongve++;
-              }
-              $('#data13').html(content);
-              $('#tongTienVe13').text(tongtien);
-              $('#tongVe13').text(tongve);
-              $('#countDoanhThuTheoThang').text(tongtien);
-              $('#countVeTheoThang').text(tongve);
-          };
-          // <---TK ve theo thang--->
-
-          // <---TK ve theo nam--->
-          var data14 = [];
-          function loadListAllVeTheoNam() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = y+'-01'+'-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopVe/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data14 = data;
-                  },
-                  complete: function () {
-                      listAllVeTheoNam();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          function listAllVeTheoNam() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data14.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data14[i].tenphim+'</td>\n' +
-                      '<td>'+data14[i].khunggio+'</td>\n' +
-                      '<td>'+data14[i].ngaychieu+'</td>\n' +
-                      '<td>'+data14[i].phong+'</td>\n' +
-                      '<td>'+data14[i].tenghe+'</td>\n' +
-                      '<td>'+data14[i].sukien+'</td>\n' +
-                      '<td>'+data14[i].tongtien+'</td>\n' +
-                      '<td>'+data14[i].nhanvien+'</td>\n' +
-                      '<td>'+data14[i].ngaymua+'</td>\n' +
-                      '</tr>';
-                  tongtien += data14[i].tongtien;
-                  tongve++;
-              }
-              $('#data14').html(content);
-              $('#tongTienVe14').text(tongtien);
-              $('#tongVe14').text(tongve);
-          };
-              // <---TK ve theo nam--->
-          // <---TK ve--->
-
-          // <---TK veOnline--->
-          // <---TK tat ca veOnline--->
-          var data21 = [];
-          function loadListAllVeOnline() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = '2020-01-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopVeOnline/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data21 = data;
-                  },
-                  complete: function () {
-                      listAllVeOnline();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          $('#searchdata21').click(function () {
-              var startdate = $('#vlstartdate21').val();
-              var enddate = $('#vlenddate21').val();
-              $.ajax({
-                  url: '/api/dashboards/listTopVeOnline/'+startdate+'|'+enddate,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data21 = data;
-                  },
-                  complete: function () {
-                      listAllVeOnline();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
+            $('#searchdata11').click(function () {
+                var startdate = $('#vlstartdate11').val();
+                var enddate = $('#vlenddate11').val();
+                $.ajax({
+                    url: '/api/dashboards/listTopVe/' + startdate + '|' + enddate,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data11 = data;
+                    },
+                    complete: function () {
+                        listAllVe();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
 
 
-          });
+            });
 
-          function listAllVeOnline() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data21.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data21[i].tenphim+'</td>\n' +
-                      '<td>'+data21[i].khunggio+'</td>\n' +
-                      '<td>'+data21[i].ngaychieu+'</td>\n' +
-                      '<td>'+data21[i].phong+'</td>\n' +
-                      '<td>'+data21[i].tenghe+'</td>\n' +
-                      '<td>'+data21[i].sukien+'</td>\n' +
-                      '<td>'+data21[i].tongtien+'</td>\n' +
-                      '<td>'+data21[i].khachhang+'</td>\n' +
-                      '<td>'+data21[i].ngaymua+'</td>\n' +
-                      '</tr>';
-                  tongtien += data21[i].tongtien;
-                  tongve++;
-              }
-              $('#data21').html(content);
-              $('#tongTienVe21').text(tongtien);
-              $('#tongVe21').text(tongve);
-          };
-          // <---TK tat ca veOnline--->
+            function listAllVe() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data11.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data11[i].tenphim + '</td>\n' +
+                        '<td>' + data11[i].khunggio + '</td>\n' +
+                        '<td>' + data11[i].ngaychieu + '</td>\n' +
+                        '<td>' + data11[i].phong + '</td>\n' +
+                        '<td>' + data11[i].tenghe + '</td>\n' +
+                        '<td>' + data11[i].sukien + '</td>\n' +
+                        '<td>' + data11[i].tongtien + '</td>\n' +
+                        '<td>' + data11[i].nhanvien + '</td>\n' +
+                        '<td>' + data11[i].ngaymua + '</td>\n' +
+                        '</tr>';
+                    tongtien += data11[i].tongtien;
+                    tongve++;
+                }
+                $('#data11').html(content);
+                $('#tongTienVe11').text(tongtien);
+                $('#tongVe11').text(tongve);
+            };
+            // <---TK tat ca ve--->
 
-          // <---TK veOnline theo ngay--->
-          var data22 = [];
-          function loadListAllVeOnlineTheoNgay() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = y+'-'+m+'-'+d;
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopVeOnline/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data22 = data;
-                  },
-                  complete: function () {
-                      listAllVeOnlineTheoNgay();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
+            // <---TK ve theo ngay--->
+            var data12 = [];
 
-          function listAllVeOnlineTheoNgay() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data22.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data22[i].tenphim+'</td>\n' +
-                      '<td>'+data22[i].khunggio+'</td>\n' +
-                      '<td>'+data22[i].ngaychieu+'</td>\n' +
-                      '<td>'+data22[i].phong+'</td>\n' +
-                      '<td>'+data22[i].tenghe+'</td>\n' +
-                      '<td>'+data22[i].sukien+'</td>\n' +
-                      '<td>'+data22[i].tongtien+'</td>\n' +
-                      '<td>'+data22[i].khachhang+'</td>\n' +
-                      '<td>'+data22[i].ngaymua+'</td>\n' +
-                      '</tr>';
-                  tongtien += data22[i].tongtien;
-                  tongve++;
-              }
-              $('#data22').html(content);
-              $('#tongTienVe22').text(tongtien);
-              $('#tongVe22').text(tongve);
-          };
-          // <---TK veOnline theo ngay--->
-
-          // <---TK veOnline theo thang--->
-          var data23 = [];
-          function loadListAllVeOnlineTheoThang() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = y+'-'+m+'-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopVeOnline/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data23 = data;
-                  },
-                  complete: function () {
-                      listAllVeOnlineTheoThang();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          function listAllVeOnlineTheoThang() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data23.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data23[i].tenphim+'</td>\n' +
-                      '<td>'+data23[i].khunggio+'</td>\n' +
-                      '<td>'+data23[i].ngaychieu+'</td>\n' +
-                      '<td>'+data23[i].phong+'</td>\n' +
-                      '<td>'+data23[i].tenghe+'</td>\n' +
-                      '<td>'+data23[i].sukien+'</td>\n' +
-                      '<td>'+data23[i].tongtien+'</td>\n' +
-                      '<td>'+data23[i].khachhang+'</td>\n' +
-                      '<td>'+data23[i].ngaymua+'</td>\n' +
-                      '</tr>';
-                  tongtien += data23[i].tongtien;
-                  tongve++;
-              }
-              $('#data23').html(content);
-              $('#tongTienVe23').text(tongtien);
-              $('#tongVe23').text(tongve);
-          };
-          // <---TK veOnline theo thang--->
-
-          // <---TK veOnline theo nam--->
-          var data24 = [];
-          function loadListAllVeOnlineTheoNam() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = y+'-01'+'-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopVeOnline/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data24 = data;
-                  },
-                  complete: function () {
-                      listAllVeOnlineTheoNam();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          function listAllVeOnlineTheoNam() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data24.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data24[i].tenphim+'</td>\n' +
-                      '<td>'+data24[i].khunggio+'</td>\n' +
-                      '<td>'+data24[i].ngaychieu+'</td>\n' +
-                      '<td>'+data24[i].phong+'</td>\n' +
-                      '<td>'+data24[i].tenghe+'</td>\n' +
-                      '<td>'+data24[i].sukien+'</td>\n' +
-                      '<td>'+data24[i].tongtien+'</td>\n' +
-                      '<td>'+data24[i].khachhang+'</td>\n' +
-                      '<td>'+data24[i].ngaymua+'</td>\n' +
-                      '</tr>';
-                  tongtien += data24[i].tongtien;
-                  tongve++;
-              }
-              $('#data24').html(content);
-              $('#tongTienVe24').text(tongtien);
-              $('#tongVe24').text(tongve);
-          };
-          // <---TK veOnline theo nam--->
-          // <---TK veOnline--->
-
-          // <---TK Phim--->
-                // <---TK Phim Xem Nhieu Nhat--->
-          var data31 = [];
-          function loadListAllPhim() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = '2020-01-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopPhim?startdate=2020-01-01&enddate=2021-01-01',
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data31 = data;
-                  },
-                  complete: function () {
-                      listAllPhim();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          $('#searchdata31').click(function () {
-              var startdate = $('#vlstartdate31').val();
-              var enddate = $('#vlenddate31').val();
-              $.ajax({
-                  url: '/api/dashboards/listTopPhim?startdate='+startdate+'&enddate='+enddate,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data31 = data;
-                  },
-                  complete: function () {
-                      listAllPhim();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-
-
-          });
-
-          function listAllPhim() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data31.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data31[i].tenphim+'</td>\n' +
-                      '<td>'+data31[i].soluongve+'</td>\n' +
-                      '<td>'+data31[i].tongtien+'</td>\n' +
-                      '</tr>';
-                  tongtien += data31[i].tongtien;
-                  tongve += data31[i].soluongve;
-              }
-              $('#data31').html(content);
-              $('#tongTienVe31').text(tongtien);
-              $('#tongVe31').text(tongve);
-          };
-                // <---TK Phim Xem Nhieu Nhat--->
-
-          // <---TK Loại Phim Xem Nhieu Nhat--->
-          var data32 = [];
-          function loadListAllLoaiPhim() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = '2020-01-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopLoaiPhim?startdate=2020-01-01&enddate=2021-01-01',
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data32 = data;
-                  },
-                  complete: function () {
-                      listAllLoaiPhim();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          $('#searchdata32').click(function () {
-              var startdate = $('#vlstartdate32').val();
-              var enddate = $('#vlenddate32').val();
-              $.ajax({
-                  url: '/api/dashboards/listTopLoaiPhim?startdate='+startdate+'&enddate='+enddate,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data32 = data;
-                  },
-                  complete: function () {
-                      listAllLoaiPhim();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-
-
-          });
-
-          function listAllLoaiPhim() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data32.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data32[i].tenloaiphim+'</td>\n' +
-                      '<td>'+data32[i].soluongve+'</td>\n' +
-                      '<td>'+data32[i].tongtien+'</td>\n' +
-                      '</tr>';
-                  tongtien += data32[i].tongtien;
-                  tongve += data32[i].soluongve;
-              }
-              $('#data32').html(content);
-              $('#tongTienVe32').text(tongtien);
-              $('#tongVe32').text(tongve);
-          };
-          // <---TK Loại Phim Xem Nhieu Nhat--->
-
-          // <---TK Loại Phim Xem Nhieu Nhat--->
-          var data33 = [];
-          function loadListAllDoTuoi() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = '2020-01-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTopDoTuoi?startdate=2020-01-01&enddate=2021-01-01',
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data33 = data;
-                  },
-                  complete: function () {
-                      listAllDoTuoi();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          $('#searchdata33').click(function () {
-              var startdate = $('#vlstartdate33').val();
-              var enddate = $('#vlenddate33').val();
-              $.ajax({
-                  url: '/api/dashboards/listTopDoTuoi?startdate='+startdate+'&enddate='+enddate,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data33 = data;
-                  },
-                  complete: function () {
-                      listAllDoTuoi();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-
-
-          });
-
-          function listAllDoTuoi() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data33.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data33[i].tendotuoi+'</td>\n' +
-                      '<td>'+data33[i].soluongve+'</td>\n' +
-                      '<td>'+data33[i].tongtien+'</td>\n' +
-                      '</tr>';
-                  tongtien += data33[i].tongtien;
-                  tongve += data33[i].soluongve;
-              }
-              $('#data33').html(content);
-              $('#tongTienVe33').text(tongtien);
-              $('#tongVe33').text(tongve);
-          };
-          // <---TK Phim Xem Nhieu Nhat--->
-          // <---TK Phim--->
-
-          // <---TK TaiKhoan--->
-          // <---TK tat ca TaiKhoan--->
-          var data41 = [];
-          function loadListAllTaiKhoan() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = '2020-01-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTaiKhoanThongKe/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data41 = data;
-                  },
-                  complete: function () {
-                      listAllTaiKhoan();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          $('#searchdata41').click(function () {
-              var startdate = $('#vlstartdate41').val();
-              var enddate = $('#vlenddate41').val();
-              $.ajax({
-                  url: '/api/dashboards/listTaiKhoanThongKe/'+startdate+'|'+enddate,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data41 = data;
-                  },
-                  complete: function () {
-                      listAllTaiKhoan();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-
-
-          });
-
-          function listAllTaiKhoan() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data41.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data41[i].tentaikhoan+'</td>\n' +
-                      '<td>'+data41[i].soluongve+'</td>\n' +
-                      '<td>'+data41[i].tongtien+'</td>\n' +
-                      '</tr>';
-                  tongtien += data41[i].tongtien;
-                  tongve += data41[i].soluongve;
-              }
-              $('#data41').html(content);
-              $('#tongTienVe41').text(tongtien);
-              $('#tongVe41').text(tongve);
-          };
-          // <---TK tat ca TaiKhoan--->
-
-          // <---TK TaiKhoan theo ngay--->
-          var data42 = [];
-          function loadListAllTaiKhoanTheoNgay() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = y+'-'+m+'-'+d;
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTaiKhoanThongKe/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data22 = data;
-                  },
-                  complete: function () {
-                      listAllTaiKhoanTheoNgay();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          function listAllTaiKhoanTheoNgay() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data42.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data42[i].tentaikhoan+'</td>\n' +
-                      '<td>'+data42[i].soluongve+'</td>\n' +
-                      '<td>'+data42[i].tongtien+'</td>\n' +
-                      '</tr>';
-                  tongtien += data42[i].tongtien;
-                  tongve += data42[i].soluongve;
-              }
-              $('#data42').html(content);
-              $('#tongTienVe42').text(tongtien);
-              $('#tongVe42').text(tongve);
-          };
-          // <---TK TaiKhoan theo ngay--->
-
-          // <---TK TaiKhoan theo thang--->
-          var data43 = [];
-          function loadListAllTaiKhoanTheoThang() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = y+'-'+m+'-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTaiKhoanThongKe/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data43 = data;
-                  },
-                  complete: function () {
-                      listAllTaiKhoanTheoThang();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          function listAllTaiKhoanTheoThang() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data43.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data43[i].tentaikhoan+'</td>\n' +
-                      '<td>'+data43[i].soluongve+'</td>\n' +
-                      '<td>'+data43[i].tongtien+'</td>\n' +
-                      '</tr>';
-                  tongtien += data43[i].tongtien;
-                  tongve += data43[i].soluongve;
-              }
-              $('#data43').html(content);
-              $('#tongTienVe43').text(tongtien);
-              $('#tongVe43').text(tongve);
-          };
-          // <---TK TaiKhoan theo thang--->
-
-          // <---TK TaiKhoan theo nam--->
-          var data44 = [];
-          function loadListAllTaiKhoanTheoNam() {
-              var date = new Date();
-              var d = date.getDate();
-              var m = date.getMonth()+1;
-              var y = date.getFullYear();
-              var bd = y+'-01'+'-01';
-              var kt = y+'-'+m+'-'+d;
-              $.ajax({
-                  url: '/api/dashboards/listTaiKhoanThongKe/'+bd+'|'+kt,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  success: function (data) {
-                      data44 = data;
-                  },
-                  complete: function () {
-                      listAllTaiKhoanTheoNam();
-                  },
-                  error: function () {
-                      toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
-                  }
-              })
-          };
-
-          function listAllTaiKhoanTheoNam() {
-              var content ='';
-              var tongve =0;
-              var tongtien =0;
-              for(var i = 0;i<data44.length;i++){
-                  content +='<tr>\n' +
-                      '<th scope="row">'+(i+1)+'</th>\n' +
-                      '<td>'+data44[i].tentaikhoan+'</td>\n' +
-                      '<td>'+data44[i].soluongve+'</td>\n' +
-                      '<td>'+data44[i].tongtien+'</td>\n' +
-
-                      '</tr>';
-                  tongtien += data44[i].tongtien;
-                  tongve += data44[i].soluongve;
-              }
-              $('#data44').html(content);
-              $('#tongTienVe44').text(tongtien);
-              $('#tongVe44').text(tongve);
-          };
-          // <---TK TaiKhoan theo nam--->
-          // <---TK TaiKhoan--->
+            function loadListAllVeTheoNgay() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = y + '-' + m + '-' + d;
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopVe/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data12 = data;
+                    },
+                    complete: function () {
+                        listAllVeTheoNgay();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+            var tongtatcave = 0;
+            var tongveonline = 0
+            var tongvedattaiquay = 0
 
 
 
 
-      });
+            function listAllVeTheoNgay() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data12.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data12[i].tenphim + '</td>\n' +
+                        '<td>' + data12[i].khunggio + '</td>\n' +
+                        '<td>' + data12[i].ngaychieu + '</td>\n' +
+                        '<td>' + data12[i].phong + '</td>\n' +
+                        '<td>' + data12[i].tenghe + '</td>\n' +
+                        '<td>' + data12[i].sukien + '</td>\n' +
+                        '<td>' + data12[i].tongtien + '</td>\n' +
+                        '<td>' + data12[i].nhanvien + '</td>\n' +
+                        '<td>' + data12[i].ngaymua + '</td>\n' +
+                        '</tr>';
+                    tongtien += data12[i].tongtien;
+                    tongve++;
+                }
+                $('#data12').html(content);
+                $('#tongTienVe12').text(tongtien);
+                $('#tongVe12').text(tongve);
+            };
+            // <---TK ve theo ngay--->
+
+            // <---TK ve theo thang--->
+            var data13 = [];
+
+            function loadListAllVeTheoThang() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = y + '-' + m + '-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopVe/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data13 = data;
+                    },
+                    complete: function () {
+                        listAllVeTheoThang();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            function listAllVeTheoThang() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data13.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data13[i].tenphim + '</td>\n' +
+                        '<td>' + data13[i].khunggio + '</td>\n' +
+                        '<td>' + data13[i].ngaychieu + '</td>\n' +
+                        '<td>' + data13[i].phong + '</td>\n' +
+                        '<td>' + data13[i].tenghe + '</td>\n' +
+                        '<td>' + data13[i].sukien + '</td>\n' +
+                        '<td>' + data13[i].tongtien + '</td>\n' +
+                        '<td>' + data13[i].nhanvien + '</td>\n' +
+                        '<td>' + data13[i].ngaymua + '</td>\n' +
+                        '</tr>';
+                    tongtien += data13[i].tongtien;
+                    tongve++;
+                }
+
+                tongtatcave = tongve;
+
+                $('#data13').html(content);
+                $('#tongTienVe13').text(tongtien);
+                $('#tongVe13').text(tongve);
+                $('#countDoanhThuTheoThang').text(tongtien);
+                $('#countVeTheoThang').text(tongve);
+            };
+            // <---TK ve theo thang--->
+
+            // <---TK ve theo nam--->
+            var data14 = [];
+
+            function loadListAllVeTheoNam() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = y + '-01' + '-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopVe/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data14 = data;
+                    },
+                    complete: function () {
+                        listAllVeTheoNam();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            function listAllVeTheoNam() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data14.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data14[i].tenphim + '</td>\n' +
+                        '<td>' + data14[i].khunggio + '</td>\n' +
+                        '<td>' + data14[i].ngaychieu + '</td>\n' +
+                        '<td>' + data14[i].phong + '</td>\n' +
+                        '<td>' + data14[i].tenghe + '</td>\n' +
+                        '<td>' + data14[i].sukien + '</td>\n' +
+                        '<td>' + data14[i].tongtien + '</td>\n' +
+                        '<td>' + data14[i].nhanvien + '</td>\n' +
+                        '<td>' + data14[i].ngaymua + '</td>\n' +
+                        '</tr>';
+                    tongtien += data14[i].tongtien;
+                    tongve++;
+                }
+                $('#data14').html(content);
+                $('#tongTienVe14').text(tongtien);
+                $('#tongVe14').text(tongve);
+            };
+            // <---TK ve theo nam--->
+            // <---TK ve--->
+
+            // <---TK veOnline--->
+            // <---TK tat ca veOnline--->
+            var data21 = [];
+
+            function loadListAllVeOnline() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = '2020-01-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopVeOnline/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data21 = data;
+                    },
+                    complete: function () {
+                        listAllVeOnline();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            $('#searchdata21').click(function () {
+                var startdate = $('#vlstartdate21').val();
+                var enddate = $('#vlenddate21').val();
+                $.ajax({
+                    url: '/api/dashboards/listTopVeOnline/' + startdate + '|' + enddate,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data21 = data;
+                    },
+                    complete: function () {
+                        listAllVeOnline();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+
+
+            });
+
+            function listAllVeOnline() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data21.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data21[i].tenphim + '</td>\n' +
+                        '<td>' + data21[i].khunggio + '</td>\n' +
+                        '<td>' + data21[i].ngaychieu + '</td>\n' +
+                        '<td>' + data21[i].phong + '</td>\n' +
+                        '<td>' + data21[i].tenghe + '</td>\n' +
+                        '<td>' + data21[i].sukien + '</td>\n' +
+                        '<td>' + data21[i].tongtien + '</td>\n' +
+                        '<td>' + data21[i].khachhang + '</td>\n' +
+                        '<td>' + data21[i].ngaymua + '</td>\n' +
+                        '</tr>';
+                    tongtien += data21[i].tongtien;
+                    tongve++;
+                }
+                $('#data21').html(content);
+                $('#tongTienVe21').text(tongtien);
+                $('#tongVe21').text(tongve);
+            };
+            // <---TK tat ca veOnline--->
+
+            // <---TK veOnline theo ngay--->
+            var data22 = [];
+
+            function loadListAllVeOnlineTheoNgay() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = y + '-' + m + '-' + d;
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopVeOnline/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data22 = data;
+                    },
+                    complete: function () {
+                        listAllVeOnlineTheoNgay();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            function listAllVeOnlineTheoNgay() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data22.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data22[i].tenphim + '</td>\n' +
+                        '<td>' + data22[i].khunggio + '</td>\n' +
+                        '<td>' + data22[i].ngaychieu + '</td>\n' +
+                        '<td>' + data22[i].phong + '</td>\n' +
+                        '<td>' + data22[i].tenghe + '</td>\n' +
+                        '<td>' + data22[i].sukien + '</td>\n' +
+                        '<td>' + data22[i].tongtien + '</td>\n' +
+                        '<td>' + data22[i].khachhang + '</td>\n' +
+                        '<td>' + data22[i].ngaymua + '</td>\n' +
+                        '</tr>';
+                    tongtien += data22[i].tongtien;
+                    tongve++;
+                }
+                $('#data22').html(content);
+                $('#tongTienVe22').text(tongtien);
+                $('#tongVe22').text(tongve);
+            };
+            // <---TK veOnline theo ngay--->
+
+            // <---TK veOnline theo thang--->
+            var data23 = [];
+
+            function loadListAllVeOnlineTheoThang() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = y + '-' + m + '-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopVeOnline/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data23 = data;
+                    },
+                    complete: function () {
+                        listAllVeOnlineTheoThang();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            function listAllVeOnlineTheoThang() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data23.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data23[i].tenphim + '</td>\n' +
+                        '<td>' + data23[i].khunggio + '</td>\n' +
+                        '<td>' + data23[i].ngaychieu + '</td>\n' +
+                        '<td>' + data23[i].phong + '</td>\n' +
+                        '<td>' + data23[i].tenghe + '</td>\n' +
+                        '<td>' + data23[i].sukien + '</td>\n' +
+                        '<td>' + data23[i].tongtien + '</td>\n' +
+                        '<td>' + data23[i].khachhang + '</td>\n' +
+                        '<td>' + data23[i].ngaymua + '</td>\n' +
+                        '</tr>';
+                    tongtien += data23[i].tongtien;
+                    tongve++;
+                }
+                tongveonline = tongve;
+                $('#data23').html(content);
+                $('#tongTienVe23').text(tongtien);
+                $('#tongVe23').text(tongve);
+                $('#countSLVeOnline').text(tongve);
+                $('#countSLVeOnline1').text(tongve);
+            };
+            // <---TK veOnline theo thang--->
+
+            // <---TK veOnline theo nam--->
+            var data24 = [];
+
+            function loadListAllVeOnlineTheoNam() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = y + '-01' + '-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopVeOnline/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data24 = data;
+                    },
+                    complete: function () {
+                        listAllVeOnlineTheoNam();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            function listAllVeOnlineTheoNam() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data24.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data24[i].tenphim + '</td>\n' +
+                        '<td>' + data24[i].khunggio + '</td>\n' +
+                        '<td>' + data24[i].ngaychieu + '</td>\n' +
+                        '<td>' + data24[i].phong + '</td>\n' +
+                        '<td>' + data24[i].tenghe + '</td>\n' +
+                        '<td>' + data24[i].sukien + '</td>\n' +
+                        '<td>' + data24[i].tongtien + '</td>\n' +
+                        '<td>' + data24[i].khachhang + '</td>\n' +
+                        '<td>' + data24[i].ngaymua + '</td>\n' +
+                        '</tr>';
+                    tongtien += data24[i].tongtien;
+                    tongve++;
+                }
+                $('#data24').html(content);
+                $('#tongTienVe24').text(tongtien);
+                $('#tongVe24').text(tongve);
+            };
+            // <---TK veOnline theo nam--->
+            // <---TK veOnline--->
+
+            // <---TK Phim--->
+            // <---TK Phim Xem Nhieu Nhat--->
+            var data31 = [];
+
+            function loadListAllPhim() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = '2020-01-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopPhim?startdate=2020-01-01&enddate=2021-01-01',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data31 = data;
+                    },
+                    complete: function () {
+                        listAllPhim();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            $('#searchdata31').click(function () {
+                var startdate = $('#vlstartdate31').val();
+                var enddate = $('#vlenddate31').val();
+                $.ajax({
+                    url: '/api/dashboards/listTopPhim?startdate=' + startdate + '&enddate=' + enddate,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data31 = data;
+                    },
+                    complete: function () {
+                        listAllPhim();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+
+
+            });
+
+            function listAllPhim() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data31.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data31[i].tenphim + '</td>\n' +
+                        '<td>' + data31[i].soluongve + '</td>\n' +
+                        '<td>' + data31[i].tongtien + '</td>\n' +
+                        '</tr>';
+                    tongtien += data31[i].tongtien;
+                    tongve += data31[i].soluongve;
+                }
+                $('#data31').html(content);
+                $('#tongTienVe31').text(tongtien);
+                $('#tongVe31').text(tongve);
+            };
+            // <---TK Phim Xem Nhieu Nhat--->
+
+            // <---TK Loại Phim Xem Nhieu Nhat--->
+            var data32 = [];
+
+            function loadListAllLoaiPhim() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = '2020-01-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopLoaiPhim?startdate=2020-01-01&enddate=2021-01-01',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data32 = data;
+                    },
+                    complete: function () {
+                        listAllLoaiPhim();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            $('#searchdata32').click(function () {
+                var startdate = $('#vlstartdate32').val();
+                var enddate = $('#vlenddate32').val();
+                $.ajax({
+                    url: '/api/dashboards/listTopLoaiPhim?startdate=' + startdate + '&enddate=' + enddate,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data32 = data;
+                    },
+                    complete: function () {
+                        listAllLoaiPhim();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+
+
+            });
+
+            function listAllLoaiPhim() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data32.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data32[i].tenloaiphim + '</td>\n' +
+                        '<td>' + data32[i].soluongve + '</td>\n' +
+                        '<td>' + data32[i].tongtien + '</td>\n' +
+                        '</tr>';
+                    tongtien += data32[i].tongtien;
+                    tongve += data32[i].soluongve;
+                }
+                $('#data32').html(content);
+                $('#tongTienVe32').text(tongtien);
+                $('#tongVe32').text(tongve);
+            };
+            // <---TK Loại Phim Xem Nhieu Nhat--->
+
+            // <---TK Loại Phim Xem Nhieu Nhat--->
+            var data33 = [];
+
+            function loadListAllDoTuoi() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = '2020-01-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTopDoTuoi?startdate=2020-01-01&enddate=2021-01-01',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data33 = data;
+                    },
+                    complete: function () {
+                        listAllDoTuoi();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            $('#searchdata33').click(function () {
+                var startdate = $('#vlstartdate33').val();
+                var enddate = $('#vlenddate33').val();
+                $.ajax({
+                    url: '/api/dashboards/listTopDoTuoi?startdate=' + startdate + '&enddate=' + enddate,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data33 = data;
+                    },
+                    complete: function () {
+                        listAllDoTuoi();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+
+
+            });
+
+            function listAllDoTuoi() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data33.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data33[i].tendotuoi + '</td>\n' +
+                        '<td>' + data33[i].soluongve + '</td>\n' +
+                        '<td>' + data33[i].tongtien + '</td>\n' +
+                        '</tr>';
+                    tongtien += data33[i].tongtien;
+                    tongve += data33[i].soluongve;
+                }
+                $('#data33').html(content);
+                $('#tongTienVe33').text(tongtien);
+                $('#tongVe33').text(tongve);
+            };
+            // <---TK Phim Xem Nhieu Nhat--->
+            // <---TK Phim--->
+
+            // <---TK TaiKhoan--->
+            // <---TK tat ca TaiKhoan--->
+            var data41 = [];
+
+            function loadListAllTaiKhoan() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = '2020-01-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTaiKhoanThongKe/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data41 = data;
+                    },
+                    complete: function () {
+                        listAllTaiKhoan();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            $('#searchdata41').click(function () {
+                var startdate = $('#vlstartdate41').val();
+                var enddate = $('#vlenddate41').val();
+                $.ajax({
+                    url: '/api/dashboards/listTaiKhoanThongKe/' + startdate + '|' + enddate,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data41 = data;
+                    },
+                    complete: function () {
+                        listAllTaiKhoan();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+
+
+            });
+
+            function listAllTaiKhoan() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data41.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data41[i].tentaikhoan + '</td>\n' +
+                        '<td>' + data41[i].soluongve + '</td>\n' +
+                        '<td>' + data41[i].tongtien + '</td>\n' +
+                        '</tr>';
+                    tongtien += data41[i].tongtien;
+                    tongve += data41[i].soluongve;
+                }
+                $('#data41').html(content);
+                $('#tongTienVe41').text(tongtien);
+                $('#tongVe41').text(tongve);
+            };
+            // <---TK tat ca TaiKhoan--->
+
+            // <---TK TaiKhoan theo ngay--->
+            var data42 = [];
+
+            function loadListAllTaiKhoanTheoNgay() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = y + '-' + m + '-' + d;
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTaiKhoanThongKe/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data22 = data;
+                    },
+                    complete: function () {
+                        listAllTaiKhoanTheoNgay();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            function listAllTaiKhoanTheoNgay() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data42.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data42[i].tentaikhoan + '</td>\n' +
+                        '<td>' + data42[i].soluongve + '</td>\n' +
+                        '<td>' + data42[i].tongtien + '</td>\n' +
+                        '</tr>';
+                    tongtien += data42[i].tongtien;
+                    tongve += data42[i].soluongve;
+                }
+                $('#data42').html(content);
+                $('#tongTienVe42').text(tongtien);
+                $('#tongVe42').text(tongve);
+            };
+            // <---TK TaiKhoan theo ngay--->
+
+            // <---TK TaiKhoan theo thang--->
+            var data43 = [];
+
+            function loadListAllTaiKhoanTheoThang() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = y + '-' + m + '-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTaiKhoanThongKe/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data43 = data;
+                    },
+                    complete: function () {
+                        listAllTaiKhoanTheoThang();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            function listAllTaiKhoanTheoThang() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data43.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data43[i].tentaikhoan + '</td>\n' +
+                        '<td>' + data43[i].soluongve + '</td>\n' +
+                        '<td>' + data43[i].tongtien + '</td>\n' +
+                        '</tr>';
+                    tongtien += data43[i].tongtien;
+                    tongve += data43[i].soluongve;
+                }
+                $('#data43').html(content);
+                $('#tongTienVe43').text(tongtien);
+                $('#tongVe43').text(tongve);
+            };
+            // <---TK TaiKhoan theo thang--->
+
+            // <---TK TaiKhoan theo nam--->
+            var data44 = [];
+
+            function loadListAllTaiKhoanTheoNam() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth() + 1;
+                var y = date.getFullYear();
+                var bd = y + '-01' + '-01';
+                var kt = y + '-' + m + '-' + d;
+                $.ajax({
+                    url: '/api/dashboards/listTaiKhoanThongKe/' + bd + '|' + kt,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (data) {
+                        data44 = data;
+                    },
+                    complete: function () {
+                        listAllTaiKhoanTheoNam();
+                    },
+                    error: function () {
+                        toastr.error('tải thất bại', '', {positionClass: 'md-toast-top-right'});
+                    }
+                })
+            };
+
+            function listAllTaiKhoanTheoNam() {
+                var content = '';
+                var tongve = 0;
+                var tongtien = 0;
+                for (var i = 0; i < data44.length; i++) {
+                    content += '<tr>\n' +
+                        '<th scope="row">' + (i + 1) + '</th>\n' +
+                        '<td>' + data44[i].tentaikhoan + '</td>\n' +
+                        '<td>' + data44[i].soluongve + '</td>\n' +
+                        '<td>' + data44[i].tongtien + '</td>\n' +
+
+                        '</tr>';
+                    tongtien += data44[i].tongtien;
+                    tongve += data44[i].soluongve;
+                }
+                $('#data44').html(content);
+                $('#tongTienVe44').text(tongtien);
+                $('#tongVe44').text(tongve);
+            };
+            // <---TK TaiKhoan theo nam--->
+            // <---TK TaiKhoan--->
+
+
+        });
     </script>
-  </th:block>
+</th:block>
 </body>
 
 </html>
