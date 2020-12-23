@@ -86,11 +86,13 @@ public class ClientController {
         List <Phim> phim_sap_chieu =  new ArrayList<Phim>();
         List <Phim> phim_dang_chieu =  new ArrayList<Phim>();
         for ( Phim pm : phim) {
-            if(LocalDateTime.now().isBefore(pm.getNgaybatdau())){
-                phim_sap_chieu.add(pm);
-            }
-            else if(LocalDateTime.now().isBefore(pm.getNgayketthuc())){
-                phim_dang_chieu.add(pm);
+            if(pm.getTrangthai()==0){
+                if(LocalDateTime.now().isBefore(pm.getNgaybatdau())){
+                    phim_sap_chieu.add(pm);
+                }
+                else if(LocalDateTime.now().isBefore(pm.getNgayketthuc())){
+                    phim_dang_chieu.add(pm);
+                }
             }
         }
         System.out.println(phim_sap_chieu);
@@ -121,7 +123,7 @@ public class ClientController {
     }
     @GetMapping("/list-event")
     public String envent(Model model, Authentication authentication){
-        List <Sukien> suKien = suKienService.getAllSukien();
+        List <Sukien> suKien = suKienService.getAllSuKienActive();
         String trang = setLayout(authentication);
         model.addAttribute("trang", trang);
         model.addAttribute("suKien", suKien);

@@ -23,6 +23,7 @@ public class SukienServiceimpl implements SukienService {
         return (List<Sukien>) sukienRepository.findAll();
     }
 
+
     @Override
     public void saveSukien(Sukien sukien) {
         sukienRepository.save(sukien);
@@ -54,7 +55,10 @@ public class SukienServiceimpl implements SukienService {
         List<Sukien> sukiens = new ArrayList<>();
         sukienRepository.findAll().forEach(sukien -> {
             if(sukien.getNgaybatdau().compareTo(LocalDateTime.now())<0&&sukien.getNgayketthuc().compareTo(LocalDateTime.now())>0){
-                sukiens.add(sukien);
+                if(sukien.getTrangthai()==0){
+                    sukiens.add(sukien);
+                }
+
             }
         });
         return sukiens;

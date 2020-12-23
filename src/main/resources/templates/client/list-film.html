@@ -43,11 +43,11 @@
                   <div class="row">
 
                     <div class="col-sm p-0">
-                      <a class="btn btn-outline-white waves-effect "
+                      <a class="btn btn-outline-white waves-effect float-lg-right"
                          th:href="@{${'/client/detail-film/'+phim1.id}}" th:text="#{banam}"></a>
                     </div>
                     <div class="col-sm p-0">
-                      <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-outline-white waves-effect ">Trailer</a>
+                      <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim1.id}" class="btn btn-outline-white waves-effect float-lg-left">Trailer</a>
                     </div>
 
                   </div>
@@ -91,11 +91,11 @@
                         th:text="${phim12.ten}"></h3>
                     <div class="row">
                       <div class="col-sm p-0">
-                        <a class="btn btn-outline-white waves-effect"
+                        <a class="btn btn-outline-white waves-effect float-lg-right"
                            th:href="@{${'/client/detail-film/'+phim12.id}}" th:text="#{banam}"></a>
                       </div>
                       <div class="col-sm p-0">
-                        <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-outline-white waves-effect">Trailer</a>
+                        <a href="#" data-toggle="modal" th:attr="data-target='#filmModal'+${phim12.id}" class="btn btn-outline-white waves-effect float-lg-left">Trailer</a>
                       </div>
                     </div>
                   </div>

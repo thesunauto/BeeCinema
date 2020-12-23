@@ -36,6 +36,13 @@
               <h3 class="text-center font-weight-bold amber-text text-uppercase" th:text="#{baymot}"></h3>
               <h6 th:text="${phim.mota}">
               </h6>
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe  class="embed-responsive-item"
+                        th:src="${phim.linktrailer}"
+                        title="YouTube video"
+                        allowfullscreen
+                ></iframe>
+              </div>
             </div>
           </div>
         </div></div>

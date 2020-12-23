@@ -23,17 +23,19 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin/language")
 public class LanguageController {
-    @Autowired private NgonNguService ngonNguService;
-    @Autowired private TaikhoanService taikhoanService;
+    @Autowired
+    private NgonNguService ngonNguService;
+    @Autowired
+    private TaikhoanService taikhoanService;
 
     @GetMapping("/show-language")
-    public String showLanguage(Model model){
+    public String showLanguage(Model model) {
         String keyword = null;
         return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
-    public String listByPage(Model model ,
+    public String listByPage(Model model,
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
@@ -56,52 +58,58 @@ public class LanguageController {
     }
 
     @RequestMapping("/add-language")
-    public String addLanguage(Model model){
-    model.addAttribute("ngonNgu" , new NgonNgu());
+    public String addLanguage(Model model) {
+        model.addAttribute("ngonNgu", new NgonNgu());
         return "admin/language/add-language";
     }
 
     @RequestMapping(value = "/edit")
-    public String editLannguage (Model model , @RequestParam ("id") String laguageID){
+    public String editLannguage(Model model, @RequestParam("id") String laguageID) {
         Optional<NgonNgu> ngonNguEdit = ngonNguService.findNgonNguById(laguageID);
-        ngonNguEdit .ifPresent(ngonNgu -> model.addAttribute("ngonNgu" , ngonNgu));
-          return "admin/language/update-language";
+        ngonNguEdit.ifPresent(ngonNgu -> model.addAttribute("ngonNgu", ngonNgu));
+        return "admin/language/update-language";
     }
-    @PostMapping ("/add-language")
-    public String saveLanguage (@Valid @ModelAttribute ("ngonNgu") NgonNgu ngonNgu , BindingResult bindingResult,
-                                @ModelAttribute ("id") String idNgonNgu,
-                                Model model ,  Authentication authentication){
-        if (bindingResult.hasErrors()){
 
-        }else if(ngonNguService.findNgonNguById(idNgonNgu).isPresent()){
-            model.addAttribute("messages" , "TrungID");
-        }else {
+    @PostMapping("/add-language")
+    public String saveLanguage(@Valid @ModelAttribute("ngonNgu") NgonNgu ngonNgu, BindingResult bindingResult,
+                               @ModelAttribute("id") String idNgonNgu,
+                               Model model, Authentication authentication) {
+        if (bindingResult.hasErrors()) {
+
+        } else if (ngonNguService.findNgonNguById(idNgonNgu).isPresent()) {
+            model.addAttribute("messages", "TrungID");
+        } else {
             ngonNgu.setNgaytao(LocalDateTime.now());
             ngonNgu.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
+            ngonNgu.setTrangthai(0);
             ngonNguService.saveNgonNgu(ngonNgu);
             return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
         return "admin/language/add-language";
     }
 
-    @PostMapping (value = "/edit")
-    public String updateLanguage (@Valid @ModelAttribute ("ngonNgu") NgonNgu ngonNgu,
-                                    BindingResult bindingResult , Model model , Authentication authentication){
-        if (bindingResult.hasErrors()){
+    @PostMapping(value = "/edit")
+    public String updateLanguage(@Valid @ModelAttribute("ngonNgu") NgonNgu ngonNgu,
+                                 BindingResult bindingResult, Model model, Authentication authentication) {
+        if (bindingResult.hasErrors()) {
 
-        }else{
+        } else {
+            ngonNgu.setTrangthai(0);
             ngonNguService.saveNgonNgu(ngonNgu);
             return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
         return "admin/language/update-language";
     }
 
-    @RequestMapping (value = "/delete")
-    public  String deleteUser (@RequestParam("id") String ngonNguID, Model model ){
-        ngonNguService.deleteNgonNgu(ngonNguID);
-        List<NgonNgu> ngonNgu = ngonNguService.getAllNgonNgu();
-        model.addAttribute("ngonNgu" , ngonNgu);
-        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+    @RequestMapping(value = "/delete")
+    public String deleteUser(@RequestParam("id") String ngonNguID, Model model) {
+        NgonNgu ngonNgu = ngonNguService.findNgonNguById(ngonNguID).get();
+        if (ngonNgu.getPhims().isEmpty()) {
+            ngonNguService.deleteNgonNgu(ngonNguID);
+            return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        } else {
+            return listByPage(model, 1, "id", "asc", null, "dacophim");
+        }
     }
 
 }

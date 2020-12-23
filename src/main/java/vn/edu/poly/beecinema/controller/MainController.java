@@ -86,16 +86,18 @@ public class MainController {
         List <Phim> phim_sap_chieu =  new ArrayList<Phim>();
         List <Phim> phim_dang_chieu =  new ArrayList<Phim>();
         for ( Phim pm : phim) {
-            if(LocalDateTime.now().isBefore(pm.getNgaybatdau())){
-                phim_sap_chieu.add(pm);
-            }
-            else if(LocalDateTime.now().isBefore(pm.getNgayketthuc())){
-                phim_dang_chieu.add(pm);
+            if(pm.getTrangthai()==0){
+                if(LocalDateTime.now().isBefore(pm.getNgaybatdau())){
+                    phim_sap_chieu.add(pm);
+                }
+                else if(LocalDateTime.now().isBefore(pm.getNgayketthuc())){
+                    phim_dang_chieu.add(pm);
+                }
             }
         }
         model.addAttribute("phimDangChieu", phim_dang_chieu);
         model.addAttribute("phimSapchieu", phim_sap_chieu);
-        List <Sukien> suKien = suKienService.getAllSukien();
+        List <Sukien> suKien = suKienService.getAllSuKienActive();
         model.addAttribute("suKien", suKien);
         model.addAttribute("authentication", authentication);
         model.addAttribute("phim", phim);

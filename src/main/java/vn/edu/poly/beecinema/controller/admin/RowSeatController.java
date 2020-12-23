@@ -76,7 +76,13 @@ public class RowSeatController {
     }
     @GetMapping("/update-row-seat/{id}")
     public String findrowseat(Model model, @PathVariable(value = "id") String id){
+        for(Ghe ghe : dayGheService.findDayGheByID(id).get().getGhes()){
+            if(!ghe.getVeonlines().isEmpty() || !ghe.getVes().isEmpty()){
+                return listByPage(model, 1, "id", "asc", null, "dacove");
+            }
+        }
         Dayghe dayghe = dayGheService.findDayGheByID(id).get();
+
         model.addAttribute("rowSeat",dayghe);
         return "admin/row-seat/update-row-seat";
     }
@@ -96,6 +102,11 @@ public class RowSeatController {
 
     @GetMapping("/delete-row-seat/{id}")
     public  String deleteRowSeat (@PathVariable(value = "id") String id, Model model){
+        for(Ghe ghe : dayGheService.findDayGheByID(id).get().getGhes()){
+            if(!ghe.getVeonlines().isEmpty() || !ghe.getVes().isEmpty()){
+                return listByPage(model, 1, "id", "asc", null, "dacove");
+            }
+        }
         dayGheService.deleteDayGhe(id);
         return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
     }

@@ -67,11 +67,14 @@ public class AdminRestController {
     public ResponseEntity listSuatchieu(@RequestParam String date) {
         List<PhongResponse> phongResponses = new ArrayList<>();
         phongService.getAllPhong().forEach(phong -> {
-            phongResponses.add(PhongResponse.builder()
-                    .id(phong.getId())
-                    .ten(phong.getTen())
-                    .suatChieuResponses(suatChieuService.findAllByPhongAndNgayChieu(phong, LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"))))
-                    .build());
+            if(phong.getTrangthai()==0){
+                phongResponses.add(PhongResponse.builder()
+                        .id(phong.getId())
+                        .ten(phong.getTen())
+                        .suatChieuResponses(suatChieuService.findAllByPhongAndNgayChieu(phong, LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"))))
+                        .build());
+            }
+
         });
 
         return ResponseEntity.ok().body(phongResponses);
