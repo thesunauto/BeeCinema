@@ -78,10 +78,6 @@ public class Taikhoan implements Serializable {
     @ToString.Exclude
     private Collection<DoTuoi> dotuois;
 
-    @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Collection<Binhluan> binhluans;
 
 
     @OneToMany(mappedBy = "taikhoan",cascade = CascadeType.ALL)

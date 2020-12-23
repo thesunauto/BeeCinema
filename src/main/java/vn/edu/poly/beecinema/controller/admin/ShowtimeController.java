@@ -9,16 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.poly.beecinema.entity.Khunggio;
-import vn.edu.poly.beecinema.entity.LoaiPhim;
-import vn.edu.poly.beecinema.entity.Suatchieu;
 import vn.edu.poly.beecinema.service.KhungGioService;
-import vn.edu.poly.beecinema.service.LoaiPhimService;
 import vn.edu.poly.beecinema.service.TaikhoanService;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Controller
 @RequestMapping("/admin/showtime")
@@ -63,9 +60,14 @@ public class ShowtimeController {
 
     @GetMapping(value = "/edit")
     public String editShowtime(Model model, @RequestParam("id") String khungGioId){
-        Optional<Khunggio> khungGioEdit = khungGioService.findKhungGioById(khungGioId);
-        khungGioEdit.ifPresent(khungGio -> model.addAttribute("khungGio", khungGio));
-        return "admin/showtime/update-showtime";
+        Khunggio khunggio = khungGioService.findKhungGioById(khungGioId).get();
+        if(khunggio.getSuatchieus().isEmpty()){
+            model.addAttribute("khungGio", khunggio);
+            return "admin/showtime/update-showtime";
+        }else{
+            return listByPage(model, 1, "id", "asc", null, "khongthesua");
+        }
+
     }
 
     @PostMapping("/add-showtime")
@@ -98,8 +100,15 @@ public class ShowtimeController {
 
     @RequestMapping(value = "/delete" )
     public String deleteShowtime(@RequestParam("id") String khungGioId, Model model) {
-        khungGioService.deleteKhungGio(khungGioId);
-        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        Khunggio khunggio = khungGioService.findKhungGioById(khungGioId).get();
+        if(khunggio.getSuatchieus().isEmpty()){
+            khungGioService.deleteKhungGio(khungGioId);
+            return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        }else{
+            return listByPage(model, 1, "id", "asc", null, "khongthexoa");
+        }
+
+
     }
 
 

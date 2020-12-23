@@ -45,6 +45,7 @@
                 <p th:case="'themThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
                 <p th:case="'suaThanhCong'" class="alert alert-success" role="alert">Sửa thành công!</p>
                 <p th:case="'xoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+                <p th:case="'dacophim'" class="alert alert-danger" role="alert">Đã có phim thuộc độ tuổi này!</p>
               </div>
               <div class="table-responsive text-nowrap">
                 <!-- Table -->
@@ -64,9 +65,6 @@
                       <th ><a class="font-weight-bold" th:text="#{ninety-SeventhWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{ninety-EighthWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{ninety-NinthWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{one-hundredthWord }"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{one-hundred-and-oneWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{one-hundred-and-twoWord}"></a></th>
                     </tr>
                   </thead>
                   <!-- Table head -->
@@ -80,11 +78,8 @@
                       <td th:text="${dotuoi.id}"></td>
                       <td th:text="${dotuoi.ten}"></td>
                       <td th:text="${dotuoi.mota}"></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td th:switch="${dotuoi.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
+                      <td th:text="${dotuoi.taikhoan.ten}"></td>
+                      <td th:text="${dotuoi.ngaytao}"></td>
                     </tr>
                   </tbody>
                   <!-- Table body -->

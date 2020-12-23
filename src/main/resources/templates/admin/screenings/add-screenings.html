@@ -55,7 +55,7 @@
 
               <!-- Name -->
               <select th:field="*{phong}" class="mdb-select md-form colorful-select dropdown-primary initialized">
-                <option th:each="phong : ${@phongServiceImpl.getAllPhong()}" th:value="${phong.id}" th:text="${phong.ten}"></option>
+                <option th:each="phong : ${@phongServiceImpl.getAllPhong()}" th:if="${phong.trangthai==0}" th:value="${phong.id}" th:text="${phong.ten}"></option>
               </select><label class="mdb-main-label active">Tên Phòng</label>
 
             </div>

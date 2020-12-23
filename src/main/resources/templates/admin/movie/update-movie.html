@@ -29,7 +29,7 @@
               <div class="col-md-3 mb-4">
                 <div class="file-field">
                   <div class="z-depth-1-half mb-4">
-                    <img id="blah" th:src="@{'/getImage/'+ ${phim.hinhanh}}"  class="img-fluid"  alt="Không có ảnh"  style="object-fit: cover;  object-position: center;  width: 100%;  height: 250px;"/>
+                    <img id="blah" th:src="@{'/getImage/'+ ${phim.hinhanh}}"  class="img-fluid"  alt="Không có ảnh"   style="object-fit: cover;  object-position: center;  width: 100%;  height: 153px;"/>
                     <input type="hidden" th:field="*{hinhanh}" id="form36" class="form-control">
                   </div>
                   <div class="d-flex justify-content-center">
@@ -103,7 +103,7 @@
                 </div>
               </div>
 
-              <div class="col-md-3 mb-4">
+              <div class="col-md-4 mb-4">
                 <div class="md-form md-outline">
                   <i class="fas fa-calendar-day prefix"></i>
                   <input  type="datetime-local" th:field="*{ngayketthuc}" id="form31" class="form-control">
@@ -111,7 +111,7 @@
                   <p th:if="${#fields.hasErrors('ngayketthuc')}" th:errors="*{ngayketthuc}" class="text-danger text-center"></p>
                 </div>
               </div>
-              <div class="col-md-3 mb-4">
+              <div class="col-md-2 mb-4">
                 <div class="md-form md-outline">
                   <i class="fas fa-user-plus prefix"></i>
                   <input type="text" th:field="*{taikhoan.username}" id="form31" class="form-control" readonly>

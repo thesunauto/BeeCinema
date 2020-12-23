@@ -67,11 +67,14 @@ public class AdminRestController {
     public ResponseEntity listSuatchieu(@RequestParam String date) {
         List<PhongResponse> phongResponses = new ArrayList<>();
         phongService.getAllPhong().forEach(phong -> {
-            phongResponses.add(PhongResponse.builder()
-                    .id(phong.getId())
-                    .ten(phong.getTen())
-                    .suatChieuResponses(suatChieuService.findAllByPhongAndNgayChieu(phong, LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"))))
-                    .build());
+            if(phong.getTrangthai()==0){
+                phongResponses.add(PhongResponse.builder()
+                        .id(phong.getId())
+                        .ten(phong.getTen())
+                        .suatChieuResponses(suatChieuService.findAllByPhongAndNgayChieu(phong, LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"))))
+                        .build());
+            }
+
         });
 
         return ResponseEntity.ok().body(phongResponses);
@@ -222,5 +225,19 @@ public class AdminRestController {
             }
         }
         return ResponseEntity.ok().body(tkVe2s);
+    }
+
+    @PostMapping("/getKhungGio")
+    public ResponseEntity getKhungGio(@RequestParam String idphim){
+        List<KhungGioResponse> khungGioResponses = new ArrayList<>();
+        Phim phim = phimService.findPhimById(idphim).get();
+        for(Khunggio khunggio:khungGioService.getAllKhungGio()){
+            int i = (khunggio.getKetthuc().toSecondOfDay() - khunggio.getBatdau().toSecondOfDay())/60;
+            System.out.println(i + " - "+phim.getDodai()+" = "+(i-phim.getDodai()));
+            if((i-phim.getDodai())>=0){
+                khungGioResponses.add(KhungGioResponse.builder().id(khunggio.getId()).time(khunggio.getId() +" | "+khunggio.getBatdau() + " - " + khunggio.getKetthuc()).build());
+            }
+        }
+        return ResponseEntity.ok().body(khungGioResponses);
     }
 }

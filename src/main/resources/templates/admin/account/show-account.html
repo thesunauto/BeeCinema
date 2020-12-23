@@ -4,7 +4,7 @@
       layout:decorate="~{admin/layout}">
 
 <head>
-  <title>Material Design Bootstrap</title>
+  <title>Tài Khoản</title>
 </head>
 
 <body>
@@ -56,7 +56,7 @@
                       <th >
                         <a class="font-weight-bold" th:href="@{'/admin/user/page/' + ${currentPage} + '?sortField=username&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{forty-FirstWord}"> <i class="fas fa-sort ml-1"></i></a>
                       </th>
-                      <th ><a class="font-weight-bold" th:text="#{forty-SecondWord}"></a></th>
+
                       <th ><a class="font-weight-bold" th:text="#{forty-ThirdWord}"></a></th>
                       <th >
                         <a class="font-weight-bold" th:href="@{'/admin/user/page/' + ${currentPage} + '?sortField=ten&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{forty-FourthWord}"> <i class="fas fa-sort ml-1"></i></a>
@@ -69,10 +69,6 @@
                       <th ><a class="font-weight-bold" th:text="#{fiftiethWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{fifty-FirstWord}"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{fifty-SecondWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{fifty-ThirdWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{fifty-FourthWord }"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{fifty-FifthWord }"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{fifty-SixthWord}"></a></th>
                     </tr>
                   </thead>
                   <!-- Table head -->
@@ -84,7 +80,7 @@
                         <a th:href="@{/admin/user/edit?id={id}(id=${taikhoan.username})}" class="fas fa-edit text-primary" th:title="Sửa"></a> <a th:href="@{/admin/user/delete?id={id}(id=${taikhoan.username})}" class="fas fa-trash ml-3 text-danger" th:title="Xóa"></a>
                       </td>
                       <td th:text="${taikhoan.username}"></td>
-                      <td th:text="${taikhoan.matkhau}"></td>
+
                       <td th:text="${taikhoan.quyen.ten}"></td>
                       <td th:text="${taikhoan.ten}"></td>
                       <td th:switch="${taikhoan.gioitinh}"><span th:case="0">Nam</span> <span th:case="1">Nữ</td>
@@ -98,10 +94,6 @@
                         <span th:case="*"><img id="blah" th:src="@{'/getImage/'+ ${taikhoan.hinhanh}}" alt="User Photo" class="z-depth-1 " style="height: 50px; width: 50px;" /></span>
                       </td>
                       <td th:text="${#temporals.format(taikhoan.ngaytao, 'dd-MM-yyyy HH:mm:ss')}"></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td th:switch="${taikhoan.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</td>
                     </tr>
                   </tbody>
                   <!-- Table body -->

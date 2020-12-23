@@ -43,6 +43,7 @@
                 <p th:case="'themThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
                 <p th:case="'suaThanhCong'" class="alert alert-success" role="alert">Sửa thành công!</p>
                 <p th:case="'xoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+                <p th:case="'dachuaphim'" class="alert alert-danger" role="alert">Đã có phim trong loại phim này!</p>
               </div>
               <div class="table-responsive text-nowrap" style="height:350px">
                 <!-- Table -->
@@ -62,9 +63,7 @@
                       <th ><a class="font-weight-bold" th:text="#{seventy-SeventhWord}" ></a></th>
                       <th ><a class="font-weight-bold" th:text="#{seventy-EighthWord }"></a></th>
                       <th ><a class="font-weight-bold" th:text="#{seventy-NinthWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{eightiethWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{eighty-FirstWord}"></a></th>
-                      <th ><a class="font-weight-bold" th:text="#{eighty-SecondWord}"></a></th>
+
                     </tr>
                   </thead>
                   <!-- Table head -->
@@ -80,9 +79,7 @@
                       <td th:text="${loaiphim.mota}"></td>
                       <td th:text="${loaiphim.taikhoan.ten}"></td>
                       <td th:text="${#temporals.format(loaiphim.ngaytao, 'dd-MM-yyyy | HH:mm:ss')}"></td>
-                      <td ></td>
-                      <td></td>
-                      <td th:switch="${loaiphim.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
+
                     </tr>
                   </tbody>
                   <!-- Table body -->

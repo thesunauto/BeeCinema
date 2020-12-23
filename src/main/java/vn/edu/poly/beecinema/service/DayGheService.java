@@ -1,7 +1,6 @@
 package vn.edu.poly.beecinema.service;
 
 import org.springframework.data.domain.Page;
-import vn.edu.poly.beecinema.entity.Binhluan;
 import vn.edu.poly.beecinema.entity.Dayghe;
 
 import java.util.List;

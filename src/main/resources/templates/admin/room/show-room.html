@@ -35,7 +35,6 @@
                 <input class="form-control text-white mb-3" type="text" name="keyword" id="keyword" th:value="${keyword}" required>
                 <button type="submit" class="btn btn-outline-white btn-rounded btn-sm px-2 m-1"><i class="fas fa-search"></i></i> </button>
                 <a th:href="@{/admin/room/show-room}"  class="btn btn-outline-white btn-rounded btn-sm px-2 m-1"><i class="fas fa-eraser" title=""></i></a>
-
               </form>
             </div>
 
@@ -46,6 +45,7 @@
               <p th:case="'themThanhCong'" class="alert alert-success" role="alert">Thêm thành công!</p>
               <p th:case="'suaThanhCong'" class="alert alert-success" role="alert">Sửa thành công!</p>
               <p th:case="'xoaThanhCong'" class="alert alert-success" role="alert">Xóa thành công!</p>
+              <p th:case="'dacosuatchieu'" class="alert alert-danger" role="alert">Đã có suất chiếu sử dụng phòng này!</p>
             </div>
             <div class="table-responsive text-nowrap" style="height:350px">
               <!-- Table -->

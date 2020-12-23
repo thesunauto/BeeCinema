@@ -19,23 +19,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/movie")
 public class MovieController {
-    @Autowired private PhimService phimService;
-    @Autowired private TaikhoanService taikhoanService;
+    @Autowired
+    private PhimService phimService;
+    @Autowired
+    private TaikhoanService taikhoanService;
 
     @GetMapping("/show-movie")
-    public String showMovie(Model model){
+    public String showMovie(Model model) {
         String keyword = null;
         return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
-    public String listByPage(Model model ,
+    public String listByPage(Model model,
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
@@ -44,7 +47,11 @@ public class MovieController {
         Page<Phim> page = phimService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
-        List<Phim> phim = page.getContent();
+        List<Phim> phim = new ArrayList<>();
+        for(Phim phim1 : page.getContent()){
+            phim1.setMota(phim1.getMota().length()>40?phim1.getMota().substring(0,40)+"...":phim1.getMota());
+            phim.add(phim1);
+        }
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalItem", totalItem);
         model.addAttribute("totalPages", totalPages);
@@ -58,13 +65,13 @@ public class MovieController {
     }
 
     @RequestMapping("/add-movie")
-    public String addMovie(Model model){
+    public String addMovie(Model model) {
         model.addAttribute("phim", new Phim());
         return "admin/movie/add-movie";
     }
 
     @GetMapping(value = "/edit")
-    public String editMovie(Model model, @RequestParam("id") String phimId){
+    public String editMovie(Model model, @RequestParam("id") String phimId) {
         Optional<Phim> phimEdit = phimService.findPhimById(phimId);
         phimEdit.ifPresent(phim -> model.addAttribute("phim", phim));
         return "admin/movie/update-movie";
@@ -73,15 +80,15 @@ public class MovieController {
     @PostMapping("/add-movie")
     public String saveMovie(@Valid @ModelAttribute("phim") Phim phim, BindingResult bindingResult,
                             @ModelAttribute("id") String idPhim, @RequestParam("images") MultipartFile images,
-                            Model model, Authentication authentication){
-        if(bindingResult.hasErrors()){
+                            Model model, Authentication authentication) {
+        if (bindingResult.hasErrors()) {
 
-        }else if(phimService.findPhimById(idPhim).isPresent()){
+        } else if (phimService.findPhimById(idPhim).isPresent()) {
             model.addAttribute("messages", "trungid");
-        }else{
+        } else {
             phim.setHinhanh("null");
             phim.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
-            if(!images.isEmpty()) {
+            if (!images.isEmpty()) {
                 Path path = Paths.get("uploads/");
                 try {
                     InputStream inputStream = images.getInputStream();
@@ -99,13 +106,13 @@ public class MovieController {
     }
 
     @PostMapping(value = "/edit")
-    public String updateMovie(@Valid @ModelAttribute("phim") Phim phim ,
-                              BindingResult bindingResult, Model model,  Authentication authentication,
-                              @RequestParam("images") MultipartFile images){
-        if(bindingResult.hasErrors()){
+    public String updateMovie(@Valid @ModelAttribute("phim") Phim phim,
+                              BindingResult bindingResult, Model model, Authentication authentication,
+                              @RequestParam("images") MultipartFile images) {
+        if (bindingResult.hasErrors()) {
 
-        }else{
-            if(!images.isEmpty()) {
+        } else {
+            if (!images.isEmpty()) {
                 Path path = Paths.get("uploads/");
                 try {
                     InputStream inputStream = images.getInputStream();
@@ -122,12 +129,16 @@ public class MovieController {
         return "admin/movie/update-movie";
     }
 
-    @RequestMapping(value = "/delete" )
+    @RequestMapping(value = "/delete")
     public String deleteMovie(@RequestParam("id") String phimId, Model model) {
-        phimService.deletePhim(phimId);
-        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        Phim phim = phimService.findPhimById(phimId).get();
+        if (phim.getSuatchieus().isEmpty()) {
+            phimService.deletePhim(phimId);
+            return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        } else {
+            return listByPage(model, 1, "id", "asc", null, "phimdacosuatchieu");
+        }
     }
-
 
 
 }

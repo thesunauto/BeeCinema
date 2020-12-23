@@ -24,15 +24,20 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin/seat")
 public class SeatController {
-    @Autowired private GheService gheService;
-    @Autowired private PhongService phongService;
-    @Autowired private DayGheService dayGheService;
-    @Autowired private LoaiGheService loaiGheService;
-    @Autowired private TaikhoanService taikhoanService;
+    @Autowired
+    private GheService gheService;
+    @Autowired
+    private PhongService phongService;
+    @Autowired
+    private DayGheService dayGheService;
+    @Autowired
+    private LoaiGheService loaiGheService;
+    @Autowired
+    private TaikhoanService taikhoanService;
 
     @GetMapping("/show-seat")
-    public String showSeat(Model model){
-        return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword="+phongService.getAllPhong().get(0).getId();
+    public String showSeat(Model model) {
+        return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword=" + phongService.getAllPhong().get(0).getId();
     }
 
 
@@ -43,9 +48,9 @@ public class SeatController {
                              @RequestParam String iddayghe,
                              @RequestParam Integer soghe,
                              @RequestParam String loaighe
-                             ){
+    ) {
         Dayghe dayghe = dayGheService.findDayGheByID(iddayghe).get();
-        Loaighe loaighe1 =loaiGheService.findLoaiGheById(loaighe).get();
+        Loaighe loaighe1 = loaiGheService.findLoaiGheById(loaighe).get();
         Phong phong = phongService.findPhongById(idphong).get();
         Taikhoan taikhoan = taikhoanService.findTaikhoanById(authentication.getName()).get();
         for (int i = 1; i <= soghe; i++) {
@@ -60,23 +65,28 @@ public class SeatController {
             gheService.saveGhe(ghe);
         }
 
-        return "redirect:"+currentlink;
+        return "redirect:" + currentlink+ "&messages=themThanhCong";
     }
 
     @PostMapping("/delDayghe")
     public String delDayghe(Model model, Authentication authentication,
                             @RequestParam String currentlink,
                             @RequestParam String idphong,
-                            @RequestParam String iddayghe){
-        List<Ghe> ghes = gheService.findByPhongAndDayGhe(idphong,iddayghe);
-        for(Ghe ghe : ghes){
+                            @RequestParam String iddayghe) {
+        List<Ghe> ghes = gheService.findByPhongAndDayGhe(idphong, iddayghe);
+        for (Ghe ghe : ghes) {
+            if(!ghe.getVes().isEmpty() || !ghe.getVeonlines().isEmpty()){
+                return "redirect:" + currentlink +"&messages=dacove";
+            }
+        }
+        for (Ghe ghe : ghes) {
             gheService.deleteGhe(ghe.getId());
         }
-        return "redirect:"+currentlink;
+        return "redirect:" + currentlink+ "&messages=xoaThanhCong";
     }
 
     @GetMapping("/page/{pageNumber}")
-    public String listByPage(Model model ,
+    public String listByPage(Model model,
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
@@ -86,7 +96,7 @@ public class SeatController {
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
         List<Ghe> ghe = page.getContent();
-        if(totalItem ==0){
+        if (totalItem == 0) {
             currentPage = 0;
         }
         model.addAttribute("currentPage", currentPage);
@@ -102,45 +112,49 @@ public class SeatController {
     }
 
     @GetMapping("/add-seat")
-    public String addSeat(Model model){
+    public String addSeat(Model model) {
         Ghe ghe = new Ghe();
-        model.addAttribute("seat",ghe);
+        model.addAttribute("seat", ghe);
         return "admin/seat/add-seat";
 
     }
 
     @PostMapping("/add-seat")
     public String saveSeat(@Valid @ModelAttribute(value = "seat") Ghe ghe, BindingResult bindingResult,
-                           Authentication authentication, Model model){
-        if(bindingResult.hasErrors()){
+                           Authentication authentication, Model model) {
+        if (bindingResult.hasErrors()) {
 
-        }else{
+        } else {
             ghe.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
             ghe.setPhong(phongService.findPhongById(ghe.getPhong().getId()).get());
             ghe.setDayghe(dayGheService.findDayGheByID(ghe.getDayghe().getId()).get());
             ghe.setLoaighe(loaiGheService.findLoaiGheById(ghe.getLoaighe().getId()).get());
             ghe.setNgaytao(LocalDateTime.now());
             gheService.saveGhe(ghe);
-            return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword="+ghe.getPhong().getId()+"&messages=themThanhCong";
+            return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword=" + ghe.getPhong().getId() + "&messages=themThanhCong";
         }
         return "admin/seat/add-seat";
     }
 
     @GetMapping("/update-seat/{id}")
-    public String findSeat(Model model, @PathVariable(value = "id") int id){
-        Ghe ghe =  gheService.findGheById(id).get();
-        model.addAttribute("seat",ghe);
-        return "admin/seat/update-seat";
+    public String findSeat(Model model, @PathVariable(value = "id") int id) {
+        Ghe ghe = gheService.findGheById(id).get();
+        if (ghe.getVeonlines().isEmpty() && ghe.getVes().isEmpty()) {
+
+        model.addAttribute("seat", ghe);
+        return "admin/seat/update-seat";} else {
+            return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword=" + ghe.getPhong().getId() + "&messages=dacove";
+        }
     }
 
     @PostMapping("/update-seat")
     public String updateSeat(@Valid @ModelAttribute(value = "seat") Ghe ghe, BindingResult bindingResult,
-                             Authentication authentication, Model model){
-        if(bindingResult.hasErrors()){
+                             Authentication authentication, Model model) {
+        if (bindingResult.hasErrors()) {
 
-        }else{
+        } else {
             gheService.saveGhe(ghe);
-            return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword="+ghe.getPhong().getId()+"&messages=suaThanhCong";
+            return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword=" + ghe.getPhong().getId() + "&messages=suaThanhCong";
 
 
         }
@@ -148,10 +162,14 @@ public class SeatController {
     }
 
     @GetMapping("/delete-seat/{id}")
-    public  String deleteSeat (@PathVariable(value = "id") int id,  Model model){
+    public String deleteSeat(@PathVariable(value = "id") int id, Model model) {
         Ghe ghe = gheService.findGheById(id).get();
-        gheService.deleteGhe(id);
-        return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword="+ghe.getPhong().getId()+"&messages=xoaThanhCong";
+        if (ghe.getVeonlines().isEmpty() && ghe.getVes().isEmpty()) {
+            gheService.deleteGhe(id);
+            return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword=" + ghe.getPhong().getId() + "&messages=xoaThanhCong";
+        } else {
+            return "redirect:/admin/seat/page/1?sortField=id&sortDir=asc&keyword=" + ghe.getPhong().getId() + "&messages=dacove";
+        }
     }
 
 }

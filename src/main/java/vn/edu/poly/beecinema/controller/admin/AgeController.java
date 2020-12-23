@@ -21,8 +21,10 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin/age")
 public class AgeController {
-    @Autowired private DoTuoiService doTuoiService;
-    @Autowired private TaikhoanService taikhoanService;
+    @Autowired
+    private DoTuoiService doTuoiService;
+    @Autowired
+    private TaikhoanService taikhoanService;
 
 //    @GetMapping("/show-age")
 //    public String showAge(Model model){
@@ -32,13 +34,13 @@ public class AgeController {
 //    }
 
     @GetMapping("/show-age")
-    public String showAge(Model model){
+    public String showAge(Model model) {
         String keyword = null;
         return listByPage(model, 1, "id", "asc", keyword, null);
     }
 
     @GetMapping("/page/{pageNumber}")
-    public String listByPage(Model model ,
+    public String listByPage(Model model,
                              @PathVariable("pageNumber") int currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
@@ -61,51 +63,57 @@ public class AgeController {
     }
 
     @RequestMapping("/add-age")
-    public String addAge(Model model){
-    model. addAttribute("doTuoi",new DoTuoi());
+    public String addAge(Model model) {
+        model.addAttribute("doTuoi", new DoTuoi());
         return "admin/age/add-age";
     }
 
-    @GetMapping (value = "/edit")
-    public String editAge(Model model , @RequestParam ("id") String doTuoiID){
+    @GetMapping(value = "/edit")
+    public String editAge(Model model, @RequestParam("id") String doTuoiID) {
         Optional<DoTuoi> DoTuoiEdit = doTuoiService.findDoTuoiById(doTuoiID);
         DoTuoiEdit.ifPresent(doTuoi -> model.addAttribute("doTuoi", doTuoi));
         return "admin/age/update-age";
     }
-    @PostMapping("/add-age")
-    public String saveAge(@Valid @ModelAttribute ("doTuoi") DoTuoi doTuoi , BindingResult bindingResult,
-                          @ModelAttribute ("id") String idDoTuoi,
-                          Model model, Authentication authentication){
-        if (bindingResult.hasErrors()){
 
-        }else if(doTuoiService.findDoTuoiById(idDoTuoi).isPresent()){
-            model.addAttribute("messages" ,"TrungID" );
-        }else{
+    @PostMapping("/add-age")
+    public String saveAge(@Valid @ModelAttribute("doTuoi") DoTuoi doTuoi, BindingResult bindingResult,
+                          @ModelAttribute("id") String idDoTuoi,
+                          Model model, Authentication authentication) {
+        if (bindingResult.hasErrors()) {
+
+        } else if (doTuoiService.findDoTuoiById(idDoTuoi).isPresent()) {
+            model.addAttribute("messages", "TrungID");
+        } else {
             doTuoi.setNgaytao(LocalDateTime.now());
             doTuoi.setTaikhoan(taikhoanService.findTaikhoanById(authentication.getName()).get());
+            doTuoi.setTrangthai(0);
             doTuoiService.saveDoTuoi(doTuoi);
             return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
         return "/admin/age/add-age";
     }
 
-    @PostMapping (value = "/edit")
-    public String updateAge(@Valid @ModelAttribute ("doTuoi") DoTuoi doTuoi,
-                            BindingResult bindingResult, Model model, Authentication authentication){
-        if (bindingResult.hasErrors()){
+    @PostMapping(value = "/edit")
+    public String updateAge(@Valid @ModelAttribute("doTuoi") DoTuoi doTuoi,
+                            BindingResult bindingResult, Model model, Authentication authentication) {
+        if (bindingResult.hasErrors()) {
 
-        }else {
+        } else {
+            doTuoi.setTrangthai(0);
             doTuoiService.saveDoTuoi(doTuoi);
             return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
         return "/admin/age/update-age";
     }
 
-    @RequestMapping (value = "/delete")
-    public String deleteUser (@RequestParam("id") String doTuoiID, Model model){
-        doTuoiService.deleteDoTuoi(doTuoiID);
-        List<DoTuoi> doTuoi =  doTuoiService.getAllDoTuoi();
-        model.addAttribute("doTuoi" , doTuoi);
-        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+    @RequestMapping(value = "/delete")
+    public String deleteUser(@RequestParam("id") String doTuoiID, Model model) {
+        DoTuoi doTuoi = doTuoiService.findDoTuoiById(doTuoiID).get();
+        if (doTuoi.getPhims().isEmpty()) {
+            doTuoiService.deleteDoTuoi(doTuoiID);
+            return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        } else {
+            return listByPage(model, 1, "id", "asc", null, "dacophim");
+        }
     }
 }

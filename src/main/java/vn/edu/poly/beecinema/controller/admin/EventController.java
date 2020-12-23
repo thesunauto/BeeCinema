@@ -126,8 +126,14 @@ public class EventController {
 
     @RequestMapping(value = "/delete" )
     public String deleteEvent(@RequestParam("id") String sukienId, Model model) {
-        sukienService.deleteSukien(sukienId);
-        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        Sukien sukien = sukienService.findSukienById(sukienId).get();
+        if(sukien.getVeonlines().isEmpty()&&sukien.getVes().isEmpty()){
+            sukienService.deleteSukien(sukienId);
+            return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        }else {
+            return listByPage(model, 1, "id", "asc", null, "dacove");
+        }
+
     }
 
 

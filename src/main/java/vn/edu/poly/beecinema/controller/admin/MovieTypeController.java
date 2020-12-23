@@ -14,6 +14,7 @@ import vn.edu.poly.beecinema.service.TaikhoanService;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +40,11 @@ public class MovieTypeController {
         Page<LoaiPhim> page = loaiPhimService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
-        List<LoaiPhim> loaiPhim = page.getContent();
+        List<LoaiPhim> loaiPhim = new ArrayList<>();
+        for(LoaiPhim loaiPhim1: page.getContent()){
+            loaiPhim1.setMota((loaiPhim1.getMota().length()>60)?loaiPhim1.getMota().substring(0,60)+"...":loaiPhim1.getMota());
+            loaiPhim.add(loaiPhim1);
+        }
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalItem", totalItem);
         model.addAttribute("totalPages", totalPages);
@@ -76,6 +81,7 @@ public class MovieTypeController {
         }else{
             loaiPhim.setNgaytao(LocalDateTime.now());
             loaiPhim.setTaikhoan(taiKhoanService.findTaikhoanById(authentication.getName()).get());
+            loaiPhim.setTrangthai(0);
             loaiPhimService.saveLoaiPhim(loaiPhim);
             return listByPage(model, 1, "id", "asc", null, "themThanhCong");
         }
@@ -88,6 +94,7 @@ public class MovieTypeController {
         if(bindingResult.hasErrors()){
 
         }else{
+            loaiPhim.setTrangthai(0);
             loaiPhimService.saveLoaiPhim(loaiPhim);
             return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }
@@ -96,10 +103,17 @@ public class MovieTypeController {
 
     @RequestMapping(value = "/delete" )
     public String deleteUser(@RequestParam("id") String loaiPhimId, Model model) {
-        loaiPhimService.deleteLoaiPhim(loaiPhimId);
-        List<LoaiPhim> loaiPhim = loaiPhimService.getAllLoaiPhim();
-        model.addAttribute("loaiPhim", loaiPhim);
-        return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        LoaiPhim loaiPhim = loaiPhimService.findLoaiPhimById(loaiPhimId).get();
+        if(loaiPhim.getPhims().isEmpty()){
+            loaiPhimService.deleteLoaiPhim(loaiPhimId);
+            return listByPage(model, 1, "id", "asc", null, "xoaThanhCong");
+        }else {
+            return listByPage(model, 1, "id", "asc", null, "dachuaphim");
+        }
+
+
+
+
     }
 
 

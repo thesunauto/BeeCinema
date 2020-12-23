@@ -34,16 +34,9 @@
             <li>
                 <ul class="collapsible collapsible-accordion">
                     <li>
-                        <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-tachometer-alt"></i><span th:text="#{thirty-SeventhWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
+                        <a class="collapsible-header waves-effect arrow-r"  th:href="@{/admin/user/dashboard}" >
+                            <i class="w-fa fas fa-tachometer-alt"></i><span th:text="#{thirty-EighthWord1}"></span>
                         </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <a th:href="@{/api/dashboards/index}" class="waves-effect" th:text="#{thirty-EighthWord}"></a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
@@ -216,19 +209,9 @@
                         </div>
                     </li>
                     <li>
-                        <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-wheelchair"></i><span th:text="#{thirty-SeventhWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
+                        <a class="collapsible-header waves-effect arrow-r" th:href="@{/admin/seat-type/show-seat-type}">
+                            <i class="fas fa-wheelchair"></i><span th:text="#{thirty-SeventhWord}"></span>
                         </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <a th:href="@{/admin/seat-type/show-seat-type}" class="waves-effect" th:text="#{thirty-EighthWord}"></a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/admin/seat-type/add-seat-type}" class="waves-effect" th:text="#{thirty-NinthWord}"></a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                 </ul>
             </li>
@@ -293,7 +276,7 @@
     <!-- Copyright -->
     <div class="footer-copyright py-3 text-center">
         <div class="container-fluid">
-            © 2020 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> BeeCinema.com </a>
+            © 2020 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> beecinema.ml </a>
 
         </div>
     </div>
