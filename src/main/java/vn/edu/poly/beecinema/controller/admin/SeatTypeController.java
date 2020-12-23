@@ -86,6 +86,7 @@ public class SeatTypeController {
         if(bindingResult.hasErrors()){
 
         }else{
+            loaighe.setTrangthai(0);
             loaiGheService.saveLoaiGhe(loaighe);
             return listByPage(model, 1, "id", "asc", null, "suaThanhCong");
         }

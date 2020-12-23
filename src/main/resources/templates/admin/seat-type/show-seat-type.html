@@ -63,7 +63,7 @@
                       <a class="font-weight-bold" th:href="@{'/admin/seat-type/page/' + ${currentPage} + '?sortField=gia&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="#{one-hundred-and-SixtytwoWord}"><i class="fas fa-sort ml-1"></i></a>
                     </th>
                     <th ><a class="font-weight-bold" th:text="#{one-hundred-and-SixtythreeWord}"></a></th>
-                    <th ><a class="font-weight-bold" th:text="#{one-hundred-and-SixtyfourWord}"> </a> </th>
+
                   </tr>
                 </thead>
                 <!-- Table head -->
@@ -72,13 +72,13 @@
                 <tbody>
                   <tr th:each="loaiGhe:${loaiGhe}">
                     <td>
-                      <a th:href="@{${'/admin/seat-type/update-seat-type/'+loaiGhe.id}}"> <i class="fas fa-edit text-primary"></i></a> <a th:href="@{${'/admin/seat-type/delete-seat-type/'+loaiGhe.id}}"> <i class="fas fa-trash ml-3 text-danger"></i></a>
+                      <a th:href="@{${'/admin/seat-type/update-seat-type/'+loaiGhe.id}}"> <i class="fas fa-edit text-primary"></i></a>
                     </td>
                     <td th:text="${loaiGhe.id}"></td>
                     <td th:text="${loaiGhe.ten}"></td>
                     <td th:text="${loaiGhe.gia}"></td>
                     <td th:text="${#temporals.format(loaiGhe.ngaytao, 'dd-MM-yyyy | HH:mm:ss')}"></td>
-                    <td th:switch="${loaiGhe.trangthai}"><span th:case="0">Hiện</span> <span th:case="1">Ẩn</span></td>
+
 
                   </tr>
                 </tbody>

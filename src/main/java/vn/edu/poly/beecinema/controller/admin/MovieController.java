@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,11 @@ public class MovieController {
         Page<Phim> page = phimService.listAll(currentPage, sortField, sortDir, keyword);
         long totalItem = page.getTotalElements();
         int totalPages = page.getTotalPages();
-        List<Phim> phim = page.getContent();
+        List<Phim> phim = new ArrayList<>();
+        for(Phim phim1 : page.getContent()){
+            phim1.setMota(phim1.getMota().length()>40?phim1.getMota().substring(0,40)+"...":phim1.getMota());
+            phim.add(phim1);
+        }
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalItem", totalItem);
         model.addAttribute("totalPages", totalPages);

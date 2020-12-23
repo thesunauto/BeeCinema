@@ -209,19 +209,9 @@
                         </div>
                     </li>
                     <li>
-                        <a class="collapsible-header waves-effect arrow-r">
-                            <i class="fas fa-wheelchair"></i><span th:text="#{thirty-SeventhWord}"></span><i class="fas fa-angle-down rotate-icon"></i>
+                        <a class="collapsible-header waves-effect arrow-r" th:href="@{/admin/seat-type/show-seat-type}">
+                            <i class="fas fa-wheelchair"></i><span th:text="#{thirty-SeventhWord}"></span>
                         </a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <a th:href="@{/admin/seat-type/show-seat-type}" class="waves-effect" th:text="#{thirty-EighthWord}"></a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/admin/seat-type/add-seat-type}" class="waves-effect" th:text="#{thirty-NinthWord}"></a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                 </ul>
             </li>
